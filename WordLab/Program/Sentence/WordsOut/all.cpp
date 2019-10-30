@@ -1,0 +1,7 @@
+#include "GetChinese\\all.cpp"
+#include "Term\\all.cpp"
+#include "WordCutter\\all.cpp"
+#include "SmartTrans.cpp"
+#include "Phrase\\all.cpp"
+#include "Framework\\wlocore.cpp"
+#include "Framework\\wlo.cpp"

@@ -1,0 +1,50 @@
+msg:          message
+auto:         automatic
+loadmsg:      load message
+msg win:      message window
+app swi:      app switcher
+settings:     system settings
+say:          say a msg
+sayfile:      say a msg in a file
+randsay:      say a msg in a file randomly
+askchar:      system message
+pre:          prestuff
+verify:       verification
+config:       configuration
+rectim:       record time
+launch:       developer zone
+findinfile:   find msg in a file
+findstrict:   find msg in a file strictly
+findinfolder: find msg in files in a folder
+folderdir:    get all filenames in a folder
+libra:        english library
+trans:        chinese library
+contri:       library contributer
+V L:          Verification Lock
+W L:          Word Links
+A L:          Scan Engine Lock
+B L:          Search Engine Lock
+C L:          Add New Engine Lock
+Ctype:        Add New Engine type
+D L:          Affix Engine Lock
+E L:          Similar Engine Lock
+S L:          Similar Engine Lock
+W O C:        Word Order Checker
+W O C:        Word Order Change
+S W S:        Special Word Spot
+S T S:        Sentence Translating System
+SmartTrans:   Smart Translater
+PreTrans:     Pretranslater
+nprev(np):    Number Previous
+n p l:        Number per line
+N O L:        Number of Lines
+H E R:        virtual assistant
+M T C:        multithread center
+N C:          Notification Center
+R S:          Reverse Search
+E D:          English Dictionary
+sort:         word sort
+sortEX:       word sort experimental
+findnoun:     find the next noun
+findnounEX:   find the next noun experimental
+findverb:     find the next verb

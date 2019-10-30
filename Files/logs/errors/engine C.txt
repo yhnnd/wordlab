@@ -1,0 +1,4 @@
+add trans add sort bugs: cannot automatically recognize word sort.
+添加單詞漢譯添加詞性有漏洞: 無法智能識別新加單詞的詞性.
+add trans framework bugs: should write trans after loading all trans.
+添加單詞漢譯框架模式有漏洞: 應該在添加多個義項之後最終一併加入詞庫.

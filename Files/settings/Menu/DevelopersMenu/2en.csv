@@ -1,0 +1,5 @@
+Word Tool Kit,menu,search();
+Word Sort Check,launch,wordsortcheck();
+Reverse Search,launch,searchreverse();
+Similar Search,launch,searchsimilar();
+Exit,menu,quit();

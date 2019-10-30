@@ -1,0 +1,5 @@
+#include "Pointer\\all.cpp"
+#include "Roller\\all.cpp"
+#include "Search\\all.cpp"
+#include "LoopLock.cpp"
+#include "Switch.cpp"

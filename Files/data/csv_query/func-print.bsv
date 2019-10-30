@@ -1,0 +1,10 @@
+<-wte>(function print <"system info"><blu-wte>(go back);
+<-gry>(;
+<-wte>(calling method 1;
+<-gry>(print msg;
+<-wte>(calling method 2;
+<-gry>(print\(msg\);
+<-wte>(;
+<-gry>(;
+<-wte>(;
+<-gry>(;

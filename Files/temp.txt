@@ -1,0 +1,27 @@
+#linesize 256
+#color.text.content=#blu-wte
+#color.text.background=-gry
+#color.padding.content=#cyn-cyn
+#color.padding.background=-cyn
+-------------------------------------------------------------------------------
+syntax of ch.csv of skyside database
+
+
+old: word ,/sort./@def;,/syn/@syn_word;
+new: word ,/class="def" sort="sort" syn="syn_word"/@def;
+{"word":[{"sort":"n.","ch":"×Ö"},{"sort":"n.","ch":"µ¥´Ê"}]},
+{"dark":[{"sort":"adj.","ch":"°µµÄ"}]}
+-------------------------------------------------------------------------------
+bsv designer
+
+bsvLinesEnter(main.bsv) on the top
+window.editor(main.bsv) on the left
+window.editor(main.js) on the right
+-------------------------------------------------------------------------------
+script designer
+
+scriptShell(main.js) on the top
+SyntaxChecker(main.js) on the left
+ObjectViewer(main.js) in the right
+-------------------------------------------------------------------------------
+#done;

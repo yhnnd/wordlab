@@ -1,0 +1,5 @@
+2015/07/01 Dayan China
+Events:
+Add MessageBlocks of AppSwitcher
+Add AppSwitcher
+modify WL B Chinese Engine

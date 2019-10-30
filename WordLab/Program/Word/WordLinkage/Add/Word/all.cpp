@@ -1,0 +1,6 @@
+#include "Indicator.cpp"
+#include "Security.cpp"
+#include "WordSort\\all.cpp"
+#include "AddTranslation.cpp"
+#include "Core.cpp"
+#include "Framework.cpp"

@@ -1,0 +1,2 @@
+improved prerequisites::Askchar(msg)
+update C function source codes to C++ template function

@@ -1,0 +1,14 @@
+n=0  word=chats            lth=5  x=1  y=0  zx=2  zy=2  xd=1  yd=0  type=normal   def=Informal_conversations           defr=NULL                            
+n=1  word=clare            lth=5  x=1  y=0  zx=2  zy=2  xd=0  yd=1  type=normal   def=Irish_county                     defr=NULL                            
+n=2  word=homed            lth=5  x=2  y=0  zx=2  zy=2  xd=0  yd=1  type=normal   def=Aimed                            defr=NULL                            
+n=3  word=aorta            lth=5  x=3  y=0  zx=2  zy=2  xd=0  yd=1  type=normal   def=Major_blood_vessel               defr=NULL                            
+n=4  word=those            lth=5  x=4  y=0  zx=2  zy=2  xd=0  yd=1  type=normal   def=Plural_of_that                   defr=NULL                            
+n=5  word=scour            lth=5  x=5  y=0  zx=2  zy=2  xd=0  yd=1  type=normal   def=Clean_thoroughly                 defr=NULL                            
+n=6  word=dreaded          lth=7  x=6  y=4  zx=2  zy=2  xd=-1 yd=0  type=normal   def=Feared                           defr=NULL                            
+n=7  word=austere          lth=7  x=6  y=3  zx=2  zy=2  xd=-1 yd=0  type=normal   def=Spartan                          defr=NULL                            
+n=8  word=doorman          lth=7  x=6  y=2  zx=2  zy=2  xd=-1 yd=0  type=normal   def=Hotel_employee                   defr=NULL                            
+n=9  word=schools          lth=7  x=6  y=1  zx=2  zy=2  xd=-1 yd=0  type=normal   def=Groups_of_fish                   defr=NULL                            
+n=10 word=dads             lth=4  x=6  y=4  zx=2  zy=2  xd=0  yd=-1 type=normal   def=Some_parents                     defr=NULL                            
+n=11 word=dens             lth=4  x=0  y=4  zx=2  zy=2  xd=0  yd=-1 type=normal   def=Hideaways                        defr=NULL                            
+Thu Oct 31 00:27:47 2019
+

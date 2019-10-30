@@ -1,0 +1,7 @@
+#include "find.cpp"
+#include "removebrackets.cpp"
+#include "getname.cpp"
+#include "getvalue.cpp"
+#include "getparam.cpp"
+#include "getparamsparse.cpp"
+#include "getparams.cpp"

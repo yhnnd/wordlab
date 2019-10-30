@@ -1,0 +1,10 @@
+#include "load.cpp"
+#include "save.cpp"
+#include "applysettings.cpp"
+#include "scrollbar.cpp"
+#include "reader.cpp"
+#include "editor.cpp"
+#include "clear.cpp"
+#include "alloc.cpp"
+#include "constructor.cpp"
+

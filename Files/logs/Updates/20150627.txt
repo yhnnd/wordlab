@@ -1,0 +1,4 @@
+2015/06/27 Dayan China
+EVENTS:
+define loadmsg.
+add personal virtual assistant HER.

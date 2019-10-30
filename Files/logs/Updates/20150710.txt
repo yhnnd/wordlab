@@ -1,0 +1,10 @@
+2015/07/10 Dayan China
+EVENTS:
+Improved Reverse Search
+Improved Load Menu
+Improved Message Window Switch Roller
+Improved Message Window Search
+Improved WL Settings
+Simplified STS Sort
+Add      B Similar to WL
+Add      B Similar Core using Notification Center

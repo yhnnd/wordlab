@@ -1,0 +1,10 @@
+Thomas 22 Male y 30000 0 2017 1 1
+Jane 23 Female y 30000 0 2017 1 1
+William 21 Male m 0 4000 2014 5 1
+Michael 30 female y 80000 0 2005 9 20
+Samuel 28 Male m 0 5000 2008 8 2
+Christopher 25 Male y 60000 0 2014 10 9
+Daniel 37 Male y 100000 0 2004 1 1
+George 40 Male y 300000 0 2016 1 1
+Robert 30 Male y 300000 0 2016 2 1
+Sally 28 Female m 0 5000 2009 3 2

@@ -1,0 +1,5 @@
+单词工具箱,menu,search();
+詞性查詢,launch,wordsortcheck();
+反向檢索,launch,searchreverse();
+近似檢索,launch,searchsimilar();
+退出,menu,quit();

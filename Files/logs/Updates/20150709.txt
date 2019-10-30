@@ -1,0 +1,8 @@
+2015/07/09  Dayan China
+EVENTS:
+STS WordsOut:
+Simplify Word Cutter
+Simplify Smart Translater
+STS WordsOrder:
+Simplify Special Word List
+Simplify SWS 2 Action

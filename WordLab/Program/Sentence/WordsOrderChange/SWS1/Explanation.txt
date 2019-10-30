@@ -1,0 +1,43 @@
+// WL 1.2.5.3 STANDARD AUTHORIZED VERSION
+// Attention: ONLY suit for STS PRO
+//5: what (adj.) n. aux. n. v. (n.)?
+//   what (adj.) n. v. n. ?
+//6: v.(!n.)+who/where+v.
+//7: is this n. ...? -> this n. is ...?
+//   are you ...? you are ...?
+//8: whose ... n2. v. this ... n1.?     ->  this ... n1. (be)v.(by) whose ... n2.?
+//   of which ... n2. v. this ... n1.?  ->  this ... n1. (be)v.(by) of which ... n2.?
+//   of whom ... n2. v. this ... n1.?   ->  this ... n1. (be)v.(by) of whom ... n2.?
+/******************************************************************************/
+//全新疑问句型检测器 5
+// 2015/06/13
+/*(wh.)+(n./ad.)+(v./aux./be)+(n.)
+  what adj. n. aux. n. v. n.?
+  what(adj. n.) v. n. ?
+  how are you?
+*/
+// 2015/06/15
+/*what color is this pen...?
+   r0   r1   r2      r3
+  what color does he like most?
+   r0   r1   r2            r3
+  what n. can i do(adv.) for you to ...?
+   r0  r1         r2         r3
+  what n. can i do(adv.) to help you ...?
+   r0  r1         r2 r3
+*/
+/******************************************************************************/
+//全新疑问句型检测器 6
+//Pattern:        who    is    the    guy    who   stole   my   car?
+//Pattern: can    i    know    who  (do you think)  is ...? ->  can i know (you do think) ... is who?
+//Pattern: who is your father?
+/******************************************************************************/
+//全新疑问句型检测器 7
+//Pattern: is this n. ...? -> this n. is ...? //Updated 2015.05.31
+//exception:is this yours? -> this is yours? //Updated 2015/06/29
+/******************************************************************************/
+//全新疑问句型检测器 8
+//Pattern: whose ... n2. v. this ... n1.?     ->  this ... n1. (be)v.(by) whose ... n2.?
+//Pattern: of which ... n2. v. this ... n1.?  ->  this ... n1. (be)v.(by) of which ... n2.?
+//Pattern: of whom ... n2. v. this ... n1.?   ->  this ... n1. (be)v.(by) of whom ... n2.?
+

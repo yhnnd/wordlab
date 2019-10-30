@@ -1,0 +1,11 @@
+2015/07/06  DaYan China
+EVENTS:
+add    autoin & autoout file of her.
+add    auto think to her.
+add    settings to her.
+modify randsay of her.
+trim   all functions of STS
+trim   WordsOut of STS
+modify Volume engine of WL
+modify A engine of WL
+modify WL settings

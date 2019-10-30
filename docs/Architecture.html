@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel='stylesheet' type='text/css' href='css/font-awesome.min.css'>
+</head>
+
+<body>
+    <script src="js/dark_mode_start.js"></script>
+    <style>
+        [class*="warning"] em {
+            margin-left: 5px;
+            border-left: 3px solid #8a6d3b;
+            padding: 3px;
+            text-align: center;
+            font-weight: bold;
+            background: transparent;
+            color: #8a6d3b;
+        }
+
+        [class*="danger"] em {
+            margin-left: 5px;
+            border-left: 3px solid #a94442;
+            padding: 3px;
+            text-align: center;
+            font-weight: bold;
+            background: transparent;
+            color: #a94442;
+        }
+        
+        .caption {
+            padding-left: 10px;
+        }
+        .caption.caption-primary {
+            border-left: 3px solid #337ab7;
+        }
+        .caption.caption-warning {
+            border-left: 3px solid #8a6d3b;
+        }
+        .caption.caption-danger {
+            border-left: 3px solid #a94442;
+        }
+        .caption>p {
+            font-size: 16px;
+            font-style: italic;
+        }
+        .badge.badge-danger {
+            background-color: firebrick;
+        }
+    </style>
+    <div class="container">
+        <div class="page-header">
+            <h2>
+                Architecture of WordLab
+                <a href="#" class="pull-right" onclick="toggle_dark_mode({'class':'style-mode-name','true':'dark','false':'light'})">
+                    <small>
+                        <small>
+                            <span class="style-mode-name">dark</span>&nbsp;mode&nbsp;&nbsp;
+                            <span class="glyphicon glyphicon-blackboard" aria-hidden="true" style="position:relative;top:2px;"></span>
+                        </small>
+                    </small>
+                </a>
+            </h2>
+        </div>
+        <div class="jumbotron">
+            <div class="well">
+                <div class="row">
+                    <div class="col col-sm-12 col-md-6 col-lg-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-md-6 text-justify">
+                                            <b><big><big>BSV</big></big></b>
+                                        </div>
+                                        <div class="col col-sm-12 col-md-6 text-right">
+                                            <span class="label label-default">Display BSV File</span>
+                                            <span class="label label-warning">Requires Script</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-info">
+                                    <span class="badge"></span>
+                                    <a href="cpp-lib-src/prerequisites-bsvline.cpp.html" target='_blank'>
+                                        BSVline
+                                    </a>
+                                </li>
+                                <li class="list-group-item list-group-item-danger"><span class="badge badge-danger">1</span>BSVlines</li>
+                                <li class="list-group-item list-group-item-danger"><span class="badge badge-danger">1</span>BSVlabel</li>
+                                <li class="list-group-item list-group-item-danger"><span class="badge badge-danger">1</span>BSVlabelEnter</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='col col-sm-12 col-md-6 col-lg-6'>
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-info">
+                                <span class='glyphicon glyphicon-file' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Docs</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-question-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Versions</small>
+                            </a>
+                            <a href="cpp-lib-src/prerequisites-bsvline.cpp.html" target='_blank' class="btn btn-sm btn-md btn-lg btn-primary">
+                                <i style='font-size:20px;' class="fa fa-puzzle-piece"></i>
+                                <br/>
+                                <small>Src</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-book' style='font-size:20px;'></span>
+                                <br/>
+                                <small>WordLab</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-info-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>About</small>
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col col-sm-12 col-md-6'>
+                        <div class='panel panel-primary'>
+                            <div class='panel-body'>
+                                <div class='row'>
+                                    <div class='col col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                                        <div class="thumbnail">
+                                            <img src="img/screenshot-bsv.jpg" alt="...">
+                                        </div>
+                                    </div>
+                                    <div class='col col-xs-10 col-sm-9 col-md-9 col-lg-9'>
+                                        <div class='caption caption-danger'>
+                                            <p class='text-danger'>
+                                                <span class='glyphicon glyphicon-remove'></span>&nbsp;
+                                                <b>3</b> components of <b>BSV</b> have <b>serious functional flaws</b>
+                                            </p>
+                                            <ul class='list-group'>
+                                                <li class='list-group-item list-group-item-danger'>
+                                                    <span class="badge badge-danger"><b>3</b></span>
+                                                    no word or page wrap
+                                                </li>
+                                                <li class='list-group-item list-group-item-danger'>
+                                                    <span class="badge badge-danger"><b>3</b></span>
+                                                    no horizontal or<wbr> vertical scroll bar
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <div class="row">
+                    <div class="col col-sm-12 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-md-6 text-justify">
+                                            <b><big><big>MessageWindow</big></big></b>
+                                        </div>
+                                        <div class="col col-sm-12 col-md-6 text-right">
+                                            <span class="label label-default">Display Menu</span>
+                                            <span class="label label-warning">Requires BSVline</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-info">
+                                    <span class="badge"></span>
+                                    <a href='cpp-lib-src/prerequisites-messagewindow-frame.cpp.html' target='_blank'>
+                                        Frame
+                                    </a>
+                                </li>
+                                <li class="list-group-item list-group-item-info"><span class="badge"></span>ListSwitch</li>
+                                <li class="list-group-item list-group-item-warning"><span class="badge">1</span>ConfirmSwitch</li>
+                                <li class="list-group-item list-group-item-info"><span class="badge"></span>Confirm</li>
+                                <li class="list-group-item list-group-item-info"><span class="badge"></span>Switch</li>
+                                <li class="list-group-item list-group-item-info"><span class="badge"></span>Alert</li>
+                                <li class="list-group-item list-group-item-danger">
+                                    <span class="badge badge-danger">2</span>
+                                    <a href='cpp-lib-src/prerequisites-messagewindow-bsvviewer.cpp.html' target='_blank'>BSVViewer</a>
+                                    <em>&nbsp;with no page wrap and scroll bar&nbsp;</em>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='col col-sm-12 col-md-6'>
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-info">
+                                <span class='glyphicon glyphicon-file' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Docs</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-question-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Versions</small>
+                            </a>
+                            <a href="cpp-lib-src/prerequisites-messagewindow-api.cpp.html" target='_blank' class="btn btn-sm btn-md btn-lg btn-primary">
+                                <i style='font-size:20px;' class="fa fa-puzzle-piece"></i>
+                                <br/>
+                                <small>Src</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-book' style='font-size:20px;'></span>
+                                <br/>
+                                <small><small>WordLab</small></small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-info-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>About</small>
+                            </a>
+                        </div>
+                    </div>
+                    <div class='col col-sm-12 col-md-6'>
+                        <div class='panel panel-primary'>
+                            <div class='panel-body'>
+                                <div class='row'>
+                                    <div class='col col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                                        <div class='thumbnail'>
+                                            <img src="img/screenshot-messagewindow.jpg" alt="...">
+                                        </div>
+                                    </div>
+                                    <div class='col col-xs-10 col-sm-9 col-md-9 col-lg-9'>
+                                        <div class='caption caption-danger'>
+                                            <p class='text-warning'>
+                                                <span class='glyphicon glyphicon-exclamation-sign'></span> one component<wbr/>(BSVViewer) of <b>MessageWindow</b> requires <b>BSVline</b>
+                                            </p>
+                                            <p class='text-danger'>
+                                                <span class='glyphicon glyphicon-remove'></span> one component<wbr/>(BSVViewer) of <b>MessageWindow</b> has <b>serious functional flaws</b>
+                                            </p>
+                                            <ul class='list-group'>
+                                                <li class='list-group-item list-group-item-danger'>
+                                                    <span class="badge badge-danger"><b>2</b></span>
+                                                    no word or page wrap
+                                                </li>
+                                                <li class='list-group-item list-group-item-danger'>
+                                                    <span class="badge badge-danger"><b>2</b></span>
+                                                    no horizontal or<wbr> vertical scroll bar
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--row-->
+            </div><!--well-->
+            <div class="well">
+                <div class="row">
+                    <div class="col col-sm-12 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-md-4 text-justify">
+                                            <b><big><big>Table</big></big></b>
+                                        </div>
+                                        <div class="col col-sm-12 col-md-8 text-right">
+                                            <span class="label label-default">Read and Edit Table</span>
+                                            <span class="label label-danger">Extends <var>MessageWindow</var></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-info">
+                                    <span class="badge"></span>
+                                    Scroll
+                                </li>
+                                <li class="list-group-item list-group-item-warning">
+                                    <span class="badge">1</span>
+                                    Panel <em>&nbsp;Extends MessageWindow&nbsp;</em>
+                                </li>
+                                <li class="list-group-item list-group-item-warning">
+                                    <span class="badge">1</span>
+                                    Table
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-info">
+                                <span class='glyphicon glyphicon-file' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Docs</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-question-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Versions</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <i style='font-size:20px;' class="fa fa-puzzle-piece"></i>
+                                <br/>
+                                <small>Src</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-book' style='font-size:20px;'></span>
+                                <br/>
+                                <small><small>WordLab</small></small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-info-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>About</small>
+                            </a>
+                        </div>
+                        <div class='panel panel-primary'>
+                            <div class='panel-body'>
+                                <div class='row'>
+                                    <div class='col col-xs-3 col-sm-3 col-md-3'>
+                                        <div class='thumbnail'>
+                                            <img src="img/screenshot-messagewindow-table.jpg" alt="...">
+                                        </div>
+                                    </div>
+                                    <div class='col col-xs-9 col-sm-9 col-md-9'>
+                                        <div class='caption caption-warning'>
+                                            <p class='text-warning'>
+                                                <span class='glyphicon glyphicon-exclamation-sign'></span> one component<wbr/>(Panel) of <b>Message<wbr/>Window<wbr/>Table</b> requires <b>MessageWindow</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-12 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-md-4 text-justify">
+                                            <b><big><big>MessageBlock</big></big></b>
+                                        </div>
+                                        <div class="col col-sm-12 col-md-8 text-right">
+                                            <span class="label label-default">Display Menu</span>
+                                            <span class="label label-danger">Extends <var>MessageWindow</var></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-warning">
+                                    <span class="badge">1</span>
+                                    Adjust <em>&nbsp;Extends MessageWindow&nbsp;</em>
+                                </li>
+                                <li class="list-group-item list-group-item-info">
+                                    <span class="badge"></span>
+                                    Fillall
+                                </li>
+                                <li class="list-group-item list-group-item-warning">
+                                    <span class="badge"></span>
+                                    <a href='cpp-lib-src/prerequisites-messagewindowblock-switcher.cpp.html' target='_blank'>
+                                        Switcher
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-info">
+                                <span class='glyphicon glyphicon-file' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Docs</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-question-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Versions</small>
+                            </a>
+                            <a href='cpp-lib-src/prerequisites-messagewindowblock-switcher.cpp.html' target='_blank' class="btn btn-sm btn-md btn-lg btn-primary">
+                                <i style='font-size:20px;' class="fa fa-puzzle-piece"></i>
+                                <br/>
+                                <small>Src</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-book' style='font-size:20px;'></span>
+                                <br/>
+                                <small><small>WordLab</small></small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-info-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>About</small>
+                            </a>
+                        </div>
+                        <div class='panel panel-primary'>
+                            <div class='panel-body'>
+                                <div class='row'>
+                                    <div class='col col-xs-3 col-sm-3 col-md-3'>
+                                        <div class='thumbnail'>
+                                            <img src="img/screenshot-messagewindow-block.jpg" alt="...">
+                                        </div>
+                                    </div>
+                                    <div class='col col-xs-9 col-sm-9 col-md-9'>
+                                        <div class='caption caption-warning'>
+                                            <p class='text-warning'>
+                                                <span class='glyphicon glyphicon-exclamation-sign'></span> one component<wbr/>(Adjust) of <b>MessageBlock</b>                                requires <b>MessageWindow</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--well-->
+            <div class="well">
+                <div class="row">
+                    <div class="col col-sm-12 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-md-4 text-justify">
+                                            <b><big><big>Window</big></big></b>
+                                        </div>
+                                        <div class="col col-sm-12 col-md-8 text-right">
+                                            <span class="label label-default">Read and Edit File</span>
+                                            <span class="label label-success">Independent</span>
+                                            <span class="label label-info">struct</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-info">
+                                    <span class="badge"></span>
+                                    <a href='cpp-lib-src/prerequisites-window-reader.cpp.html' target='_blank'>
+                                        Reader
+                                    </a>
+                                </li>
+                                <li class="list-group-item list-group-item-info">
+                                    <span class="badge"></span>
+                                    <a href='cpp-lib-src/prerequisites-window-editor.cpp.html' target='_blank'>
+                                        Editor
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-info">
+                                <span class='glyphicon glyphicon-file' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Docs</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-question-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Versions</small>
+                            </a>
+                            <a href="cpp-lib-src/prerequisites-window-api.cpp.html" target='_blank' class="btn btn-sm btn-md btn-lg btn-primary">
+                                <i style='font-size:20px;' class="fa fa-puzzle-piece"></i>
+                                <br/>
+                                <small>Src</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-book' style='font-size:20px;'></span>
+                                <br/>
+                                <small><small>WordLab</small></small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-info-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>About</small>
+                            </a>
+                        </div>
+                        <div class='panel panel-primary'>
+                            <div class='panel-body'>
+                                <div class='row'>
+                                    <div class='col col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                                        <div class="thumbnail">
+                                            <img src="img/screenshot-window.jpg" alt="...">
+                                        </div>
+                                    </div>
+                                    <div class='col col-xs-9 col-sm-9 col-md-9 col-lg-9'>
+                                        <div class='caption caption-primary'>
+                                            <p class='text-primary'>
+                                                <span class='glyphicon glyphicon-ok'></span> the structure of <b>window</b> is independent from any <b>MessageWindow</b> classes
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-12 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <div class="row">
+                                        <div class="col col-sm-12 col-md-4 text-justify">
+                                            <b><big><big>_Table</big></big></b>
+                                        </div>
+                                        <div class="col col-sm-12 col-md-8 text-right">
+                                            <span class="label label-default">Read and Edit Table</span>
+                                            <span class="label label-success">Independent</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-info">
+                                    <span class="badge"></span>
+                                    <a href='cpp-lib-src/prerequisites-table-reader.cpp.html' target='_blank'>
+                                        Reader
+                                    </a>
+                                </li>
+                                <li class="list-group-item list-group-item-info">
+                                    <span class="badge"></span>
+                                    <a href='cpp-lib-src/prerequisites-table-editor.cpp.html' target='_blank'>
+                                        Editor
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-info">
+                                <span class='glyphicon glyphicon-file' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Docs</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-question-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>Versions</small>
+                            </a>
+                            <a href="cpp-lib-src/prerequisites-table-api.cpp.html" target='_blank' class="btn btn-sm btn-md btn-lg btn-primary">
+                                <i style='font-size:20px;' class="fa fa-puzzle-piece"></i>
+                                <br/>
+                                <small>Src</small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-book' style='font-size:20px;'></span>
+                                <br/>
+                                <small><small>WordLab</small></small>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-md btn-lg btn-primary">
+                                <span class='glyphicon glyphicon-info-sign' style='font-size:20px;'></span>
+                                <br/>
+                                <small>About</small>
+                            </a>
+                        </div>
+                        <div class='panel panel-primary'>
+                            <div class='panel-body'>
+                                <div class='row'>
+                                    <div class='col col-xs-3 col-sm-3 col-md-3 col-lg-3'>
+                                        <div class="thumbnail">
+                                            <img src="img/screenshot-table.jpg" alt="...">
+                                        </div>
+                                    </div>
+                                    <div class='col col-xs-9 col-sm-9 col-md-9 col-lg-9'>
+                                        <div class='caption caption-primary'>
+                                            <p class='text-primary'>
+                                                <span class='glyphicon glyphicon-ok'></span> the structure of <b>_Table</b> is independent from any <b>MessageWindow</b> classes
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--well-->
+        </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/dark_mode.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+" Menu",
+" Add    New  Items",
+" Save   All  Items",
+" Search Item Name",
+" Search Item Number",
+" Adjust Window",
+" Report Problems",
+" Quit"

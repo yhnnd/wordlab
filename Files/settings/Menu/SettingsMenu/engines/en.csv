@@ -1,0 +1,15 @@
+<#blu-wte>(M E N U;
+<-gry>(Scanning Engine \(AL\);
+<#blu-wte>(Search Engine \(BL\);
+<-gry>(Fuzzy Engine \(SL\);
+<#blu-wte>(Affix Engine \(DL\);
+<-gry>(Adding Engine \(CL\);
+<#blu-wte>(Adding Engine Type\(Ctype\);
+<-gry>(Index Engine \(IL\);
+<#blu-wte>(Color Lock \(ColorL\);
+<-gry>(Language \(LANG\);
+<#blu-wte>(GUI \(version\);
+<-gry>(Messages \(Show\);
+<#blu-wte>(Color \(CLRL\);
+<-gry>(Monitors \(ML\);
+<ylw-red>(Exit;

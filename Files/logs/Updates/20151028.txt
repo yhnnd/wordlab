@@ -1,0 +1,4 @@
+2015/10/28 Wednesday
+將相似單詞引擎嵌入Word Links的相關單詞模塊中
+用Unicode重新編碼詞庫使之可以在其他語言的系統下運行
+在word links中植入短語搜索引擎和短語添加引擎

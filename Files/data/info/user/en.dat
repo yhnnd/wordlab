@@ -1,0 +1,54 @@
+Default screen size: width 80;height 35.
+Default system language: AmE;ChT.
+Default file route:  files\.
+Software version: Left corner on the top.
+Library volume:   Left corner on the top.
+Library volume:   go to "More" in Main Menu.
+Turn on System Message: go to "More" in Main Menu.
+Disable System Message: go to "More" in Main Menu.
+Change UI style: go to "UI Style" on Main Menu.
+Disable Menu Roller in OLD UI: press "L".
+Switch options in OLD UI: press "W"or"E" up.
+Switch options in OLD UI: press "S"or"D" down.
+Search options in OLD UI: switch to "Menu" option.
+Quit any Menu in OLD UI: double tap "Menu" option.
+Switch options in NEW UI: press "W","A","S","D".
+Refresh Main Menu in NEW UI:  press "R".
+pop-up appears?  press [enter] to agree.
+pop-up appears?  press [C] to decline.
+pop-up appears?  please respond or ignore.
+pop-up default:  normal pop-up stays for 1 second.
+Change Word Links result word color:  go to "More".
+Clear search history: go to "More" in Main Menu.
+Check security: go to "Check Safety" on "More".
+Check if there are same words: Check Same in "More".
+About Check Same: unnecessary in normal case.
+About Check Same: caution! time-spending.
+Unable to search word? library wrecked, need repair.
+Check library damage: go to "A Engine" in "More".
+Quit A Engine: enter "0".
+Check bugs of database: "Woodpecker".
+Lock Add New Engine? go to "More" in Main Menu.
+Lock Affix Engine?   go to "More" in Main Menu.
+Lock Similar Engine? go to "More" in Main Menu.
+Search a word faster: use Quick Search.
+Change settings:      say "settings" to HER.
+Translate a sentence? say "translate" to HER.
+Search a word?        say "search" to HER.
+Search Chinese?       say "Chinese Search" to HER.
+Quit HER:             say "Goodbye".
+Quit HER:             press "backspace".
+Quit Quick Search:    press "backspace".
+Quit Word Links:      press "backspace".
+Quit Sentence Translater: enter "0".
+Problem in word searching? check it out in "Normal".
+Error Translating?  turn on System Message.
+Error Translating?  disable "Automatic Handle".
+Error Translating?  change punctuation in the end.
+Error Translating?  disable "Order Adjustment".
+Error Translating?  change checkers sequence.
+Error Translating?  no punctuations in sentence.
+Error Translating?  add punctuation after sentence.
+Error Translating?  cut affixes on words.
+Error Translating?  use Translater Professional.
+Error Translating?  change word order and retry.

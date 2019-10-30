@@ -1,0 +1,9 @@
+M E N U,menu,search();
+Learn Word,launch,practices();
+Search Word,launch,wordlinkage();
+Translater,launch,translater();
+Translater PRO,launch,translaterpro();
+Developer Zone,menu,new_menu(Settings\Menu\DevelopersMenu\);
+User Launch,menu,new_menu(Settings\Menu\UsersMenu\);
+More Options,menu,new_menu(Settings\Menu\SettingsMenu\);
+Exit =>,menu,quit();

@@ -1,0 +1,9 @@
+2015/07/08
+modify system settings to change Ask char and system version(styles)
+add    system settings setbool and setboolcore
+add    confirm on the contrary of quit
+add    setversion
+modify notification centre
+modify settings of her to change Ask char(Show Info)(Message Bar)
+modify Load
+modify multithread centre(wait)

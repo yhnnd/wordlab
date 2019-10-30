@@ -1,0 +1,9 @@
+#define MainMenuRoute   _data_dir"settings\\menu\\"
+//Settings Menu Engines
+#define SetEnginesRoute _data_dir"settings\\menu\\SettingsMenu\\engines\\"
+//Settings Menu History
+#define SetHistoryRoute _data_dir"settings\\menu\\SettingsMenu\\history\\"
+//Settings Menu System
+#define SetSystemRoute  _data_dir"settings\\menu\\SettingsMenu\\system\\"
+//Settings Menu Values
+#define SetValuesRoute  _data_dir"settings\\menu\\SettingsMenu\\values\\"

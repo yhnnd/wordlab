@@ -1,0 +1,6 @@
+選單,menu,search();
+系統,launch,settings.system();
+歷史,launch,settings.history();
+引擎,launch,settings.engines();
+參數,launch,settings.values();
+退出,menu,quit();

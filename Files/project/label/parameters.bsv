@@ -1,0 +1,10 @@
+<-wte>(function parameters <"main"><blu-wte>(go back);
+<-gry>(;
+<-wte>(single parameter;
+<-gry>(print\(msg\);
+<-wte>(multiple parameters;
+<-gry>(print\(msg1,msg2,...\);
+<-wte>(JSON parameter;
+<-gry>({name1:value1,name2:value2,...};
+<-wte>(;
+<-gry>(;

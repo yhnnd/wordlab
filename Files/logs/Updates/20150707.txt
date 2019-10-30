@@ -1,0 +1,10 @@
+2015/07/07
+modify WordsOrder of STS
+modify settings of WordsOrder(choose tools)
+modify Banner(menu) of STS
+modify Message Window Switch(to record last choice)
+modify Message Window Switch Pointer
+modify Message Window Frame Roller
+modify B Chinese of WL
+add    ask char lock "_show"
+add    system settings to control ask char

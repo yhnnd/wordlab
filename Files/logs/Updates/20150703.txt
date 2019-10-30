@@ -1,0 +1,9 @@
+2015/07/03  Dayan China
+EVENTS:
+Add App Switcher New(ASN)(viewmsg)
+Add system folder in disc D
+Add multitask to system folder
+Add Notification Center(supplied by Multithread Center)
+Remove routes.h&library to System folder
+Modify C Engine(Add New)
+Modify Volume Engine

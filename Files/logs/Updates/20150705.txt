@@ -1,0 +1,8 @@
+2015/07/05  DaYan China
+EVENTS:
+add filedir to readfile(of prerequisites)
+modify find of her.
+modify findall of her.
+modify think of her.
+modify say of her.
+modify randsay of her.

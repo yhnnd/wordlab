@@ -1,0 +1,9 @@
+#include "find\\all.cpp"
+#include "Clause\\ClauseCheck.cpp"
+#include "Conj\\ConjCheck.cpp"
+#include "WOC1\\all.cpp"//’Z–Ú
+#include "SWS1\\all.cpp"//“…Üñ
+#include "SWS2\\all.cpp"//ΩÈ‘~
+#include "SWS3\\all.cpp"//†Ó’Z
+#include "Framework\\all.cpp"
+#include "Framework.cpp"

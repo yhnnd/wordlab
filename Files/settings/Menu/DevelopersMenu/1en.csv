@@ -1,0 +1,6 @@
+Shells,menu,search();
+Query,launch,query();
+Add New data,launch,addnew();
+Add New Word,launch,addword();
+Add New Phrase,launch,addphrase();
+back,menu,quit();

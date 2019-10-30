@@ -1,0 +1,10 @@
+<-wte>(function <"system info"><blu-wte>(go back);
+<-gry>(;
+<-wte>(select;
+<-gry>(select from to where sort= lth= index= begin= end=;
+<-wte>(print;
+<-gry>(print msg print\(msg\);
+<-wte>(system;
+<-gry>(system info;
+<-wte>(;
+<-gry>(;

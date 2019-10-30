@@ -1,0 +1,7 @@
+2015/07/29  Dayan China
+EVENTS:
+Improve STS Chinese.
+Add     Chinese to Core files.
+Create  Similar Engine Based on Chinese & Reverse Search.
+Modify  Find Reverse Show.
+Add     Find Reverse Show Found.

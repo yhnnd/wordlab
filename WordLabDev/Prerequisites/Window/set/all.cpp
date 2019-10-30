@@ -1,0 +1,6 @@
+#include "filename.cpp"
+#include "window.cpp"
+#include "margin.cpp"
+#include "padding.cpp"
+#include "color[0].cpp"
+#include "color[1].cpp"

@@ -1,0 +1,3 @@
+chart::~chart(){
+	delete [] data;
+}

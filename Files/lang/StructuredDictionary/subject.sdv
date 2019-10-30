@@ -1,0 +1,42 @@
+#comments: Structured Dictionary Values;
+
+<word>
+value = "subject";
+
+<sort[1]>
+value = "n."
+<sort[1].def[1]>
+English = "the thing you are talking about or considering in a conversation, discussion, book, film etc";
+Chinese = "";
+<sort[1].def[2]>
+English = "an area of knowledge that you study at a school or university";
+Chinese = "";
+<sort[1].def[3]>
+English = "the thing or person that you show when you paint a picture, take a photograph etc";
+Chinese = "";
+<sort[1].def[4]>
+English = "a person or animal that is used in a test or experiment";
+Chinese = "";
+<sort[1].def[5]>
+English = "a noun, noun phrase, or pronoun that usually comes before a main verb and represents the person or thing that performs the action of the verb, or about which something is stated";
+Chinese = "";
+<sort[1].def[6]>
+English = "someone who was born in a country that has a king or queen, or someone who has a right to live there";
+Chinese = "";
+<sort[1].def[6].also[1]>
+value = "citizen";
+
+<sort[2]>
+value = "adj.";
+<sort[2].def[1]>
+English = "used to say that something is affected, or can be affected, by something";
+Chinese = "";
+<sort[2].def[2]>
+English = "dependent on something else";
+Chinese = "";
+
+<sort[3]>
+value = "vt.";
+<sort[3].def[1]>
+English = "to force a country or group of people to be ruled by you, and control them very strictly";
+Chinese = "";

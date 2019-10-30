@@ -1,0 +1,5 @@
+2015.02.21  Mordalga, China
+Improvements:
+STS_Word Cutter (adding -or, -ist, -ism)
+STS_Words Order Change( SWS1 SWS2 WOC )
+STS_Framework (Simplified)

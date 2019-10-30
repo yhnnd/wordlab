@@ -1,0 +1,6 @@
+MENU,menu,search();
+System,launch,settings.system();
+History,launch,settings.history();
+Engines,launch,settings.engines();
+Values,launch,settings.values();
+EXIT,menu,quit();

@@ -1,0 +1,9 @@
+主選單,menu,search();
+單詞學習,launch,practices();
+單詞查找,launch,wordlinkage();
+文本翻譯,launch,translater();
+專業翻譯,launch,translaterpro();
+開發者區,menu,new_menu(Settings\Menu\DevelopersMenu\);
+用戶登錄,menu,new_menu(Settings\Menu\UsersMenu\);
+其他選項,menu,new_menu(Settings\Menu\SettingsMenu\);
+退出系統,menu,quit();

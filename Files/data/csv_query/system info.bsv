@@ -1,0 +1,10 @@
+<-wte>(csv query;
+<#blu-gry>(developed by skyside inc.;
+<-wte>(function calling method;
+<"function"><#blu-gry>(function )<"parameters"><#cyn-gry>(parameters)<ylw-gry>( or )<blu-gry>(function\()<cyn-gry>(parameters)<blu-gry>(\);
+<-wte>(functions;
+<-gry>(<"func-select"><#grn-gry>(select\(\)) <"func-print"><#grn-gry>(print\(\)) <"func-system"><#grn-gry>(system\(\));
+<-wte>(<"attr"><-wte>(attributes);
+<#blu-gry>(attribute: )<#red-gry>(6)<blu-gry>(*)<ylw-gry>(char[)<#red-gry>(32)<ylw-gry>(]<#pnk-gry>(name/self/from/to: )<ylw-gry>(char[)<#red-gry>(16)<ylw-gry>(];
+<-wte>(<"cmd"><-wte>(commands);
+<#blu-gry>(commands: )<#red-gry>(16)<blu-gry>(*)<ylw-gry>(char[)<#red-gry>(16)<ylw-gry>(]<#pnk-gry>(order by/group by/print/system: )<ylw-gry>(char[)<#red-gry>(16)<ylw-gry>(];

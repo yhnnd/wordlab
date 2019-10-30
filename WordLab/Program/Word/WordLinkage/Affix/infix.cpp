@@ -1,0 +1,18 @@
+int infix(int lth,string word) {
+	int i;
+	colorset(light|purple);
+	for(i = lth / 2; i <= lth; i++) {
+		if(i > 1 && Search(word.c_str(),i)) {
+			for(int j = 0; j < i; j++) cout<<word[j];
+			break;
+		}
+	}
+	if (i <= lth && lth) {
+		if(i < lth) cout<<" + ";
+		return infix(lth - i, word.substr(i));
+	}
+	colorset(light|blue);
+	cout<<word;
+	colorreset(white);
+	return lth;
+}

@@ -1,0 +1,13 @@
+n=0  word=crave            lth=5  x=3  y=4  zx=2  zy=2  xd=0  yd=-1 type=normal   def=Hunger_for                       defr=NULL                            
+n=1  word=karen            lth=5  x=4  y=4  zx=2  zy=2  xd=0  yd=-1 type=normal   def=Name_related_to_Katherine        defr=NULL                            
+n=2  word=scans            lth=5  x=5  y=4  zx=2  zy=2  xd=0  yd=-1 type=normal   def=looks_over                       defr=NULL                            
+n=3  word=dozens           lth=6  x=0  y=0  zx=2  zy=2  xd=1  yd=0  type=normal   def=sets_of_twelve                   defr=NULL                            
+n=4  word=uneven           lth=6  x=0  y=1  zx=2  zy=2  xd=1  yd=0  type=normal   def=Irregular                        defr=NULL                            
+n=5  word=snacks           lth=6  x=0  y=4  zx=2  zy=2  xd=1  yd=0  type=normal   def=light_meals                      defr=NULL                            
+n=6  word=zebra            lth=5  x=2  y=0  zx=2  zy=2  xd=0  yd=1  type=normal   def=Stripped_animal                  defr=NULL                            
+n=7  word=onion            lth=5  x=1  y=0  zx=2  zy=2  xd=0  yd=1  type=normal   def=Edible_bulb                      defr=NULL                            
+n=8  word=ducts            lth=5  x=0  y=0  zx=2  zy=2  xd=0  yd=1  type=normal   def=Pipes                            defr=NULL                            
+n=9  word=carrot           lth=6  x=5  y=3  zx=2  zy=2  xd=-1 yd=0  type=normal   def=Orange_vegetable                 defr=NULL                            
+n=10 word=arabic           lth=6  x=5  y=2  zx=2  zy=2  xd=-1 yd=0  type=normal   def=Middle_East_language             defr=NULL                            
+Thu Oct 31 00:27:34 2019
+

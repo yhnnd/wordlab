@@ -1,0 +1,9 @@
+2015/07/11  Dayan China
+EVENTS:
+Modify  B Similar of WL
+Modify  WL Framework
+Modify  Message Window
+Modify  Message Window Frame
+Modify  Notification Center
+Modify  Word Cutter of STS
+Modify  SWS2 of STS

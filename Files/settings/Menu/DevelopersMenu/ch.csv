@@ -1,0 +1,5 @@
+開發者區,menu,search();
+脚本程序,menu,new_menu(Settings\Menu\DevelopersMenu\1);
+工具箱,menu,new_menu(Settings\Menu\DevelopersMenu\2);
+游戏,menu,new_menu(Settings\Menu\DevelopersMenu\3);
+退出,menu,quit();

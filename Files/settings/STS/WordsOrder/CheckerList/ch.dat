@@ -1,0 +1,8 @@
+    Checker List
+ CLAUSE :  從句分析器;
+ C O N J: 連詞處理器;
+ S W S 1: 疑問句;
+ W O C 1: 順序調整器一;
+ S W S 2: 介詞處理器(prep);
+ S W S 3: 特殊單詞提前&置後;
+ 空;

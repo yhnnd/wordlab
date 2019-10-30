@@ -1,0 +1,6 @@
+選單,menu,search();
+用戶登錄,launch,user.login();
+用戶助手,launch,her();
+圖形界面,launch,settings.version();
+用戶指導,launch,help();
+退出,menu,quit();

@@ -1,0 +1,6 @@
+#include "ChangeColorCore.cpp"
+#include "ChangeColor.cpp"
+#include "Color.cpp"
+#include "Core.cpp"
+#include "Chinese.cpp"
+#include "SetColor.cpp"

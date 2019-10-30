@@ -1,0 +1,1022 @@
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>var k=1
+<log>getting name (k)
+<script>var k=1
+<log>getting value (1)
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var name
+<log>getting name (name)
+<script>var name
+<error>variable <name> has no value
+<script>print("input name")
+<log>getting param "input name"
+<script>name=gets()
+<log>getting name (name)
+<script>print("input number")
+<log>getting param "input number"
+<script>gets(number)
+<log>getting param number
+<script>print("creating object...\n")
+<log>getting param "creating object...\n"
+<script>print("object.name=")
+<log>getting param "object.name="
+<script>print(object.name)
+<log>getting param object.name
+<script>print("\nobject.number=")
+<log>getting param "\nobject.number="
+<script>print(object.number)
+<log>getting param object.number
+<script>getch()
+<log>getting name (getch())
+<script>var another_object=object
+<log>getting name (another_object)
+<script>var another_object=object
+<log>getting value (object)
+<script>print("1"+1)
+<log>getting param "1"+1
+<script>print(1+1)
+<log>getting param 1+1
+<script>print('1'+1)
+<log>getting param '1'+1
+<script>print("1"+1+1)
+<log>getting param "1"+1+1
+<script>print("1"+1)
+<log>getting param "1"+1
+<script>print(1+1)
+<log>getting param 1+1
+<script>print('1'+1)
+<log>getting param '1'+1
+<script>print("1"+1+1)
+<log>getting param "1"+1+1
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>getting name (s[2][3])
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>getting value ({1,2,3,4,5,6})
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][0]=1>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][1]=2>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][2]=3>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][0]=4>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][1]=5>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][2]=6>
+<script>print("s = ")
+<log>getting param "s = "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>getting name (s[2][3])
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>getting value ({1,2,3,4,5,6})
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][0]=1>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][1]=2>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][2]=3>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][0]=4>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][1]=5>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][2]=6>
+<script>print("s = ")
+<log>getting param "s = "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>getting name (s[2][3])
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>getting value ({1,2,3,4,5,6})
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][0]=1>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][1]=2>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][2]=3>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][0]=4>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][1]=5>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][2]=6>
+<script>print("s = ")
+<log>getting param "s = "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>var k=1
+<log>getting name (k)
+<script>var k=1
+<log>getting value (1)
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var object="object"
+<log>getting name (object)
+<script>var object="object"
+<log>getting value ("object")
+<script>var object.name=name
+<log>getting name (object.name)
+<script>var object.name=name
+<log>getting value (name)
+<script>var object.number=number
+<log>getting name (object.number)
+<script>var object.number=number
+<log>getting value (number)
+<script>var another_object=object
+<log>getting name (another_object)
+<script>var another_object=object
+<log>getting value (object)
+<script>var name
+<log>getting name (name)
+<script>var name
+<error>variable <name> has no value
+<script>print("input name")
+<log>getting param "input name"
+<script>name=gets()
+<log>getting name (name)
+<script>print("input number")
+<log>getting param "input number"
+<script>gets(number)
+<log>getting param number
+<script>print("creating object...\n")
+<log>getting param "creating object...\n"
+<script>print("object.name=")
+<log>getting param "object.name="
+<script>print(object.name)
+<log>getting param object.name
+<script>print("\nobject.number=")
+<log>getting param "\nobject.number="
+<script>print(object.number)
+<log>getting param object.number
+<script>getch()
+<log>getting name (getch())
+<script>print("1"+1)
+<log>getting param "1"+1
+<script>print(1+1)
+<log>getting param 1+1
+<script>print('1'+1)
+<log>getting param '1'+1
+<script>print("1"+1+1)
+<log>getting param "1"+1+1
+<script>print("1"+1)
+<log>getting param "1"+1
+<script>print(1+1)
+<log>getting param 1+1
+<script>print('1'+1)
+<log>getting param '1'+1
+<script>print("1"+1+1)
+<log>getting param "1"+1+1
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>var k=1
+<log>getting name (k)
+<script>var k=1
+<log>getting value (1)
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>getting name (s[2][3])
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>getting value ({1,2,3,4,5,6})
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][0]=1>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][1]=2>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[0][2]=3>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][0]=4>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][1]=5>
+<script>var s[2][3]={1,2,3,4,5,6}
+<log>init array element <s[1][2]=6>
+<script>print("s = ")
+<log>getting param "s = "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(s[i][j])
+<log>getting param s[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>var k=1
+<log>getting name (k)
+<script>var k=1
+<log>getting value (1)
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>var k=1
+<log>getting name (k)
+<script>var k=1
+<log>getting value (1)
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>var k=1
+<log>getting name (k)
+<script>var k=1
+<log>getting value (1)
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>var k=1
+<log>getting name (k)
+<script>var k=1
+<log>getting value (1)
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>var k=1
+<log>getting name (k)
+<script>var k=1
+<log>getting value (1)
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>var k=1
+<log>getting name (k)
+<script>var k=1
+<log>getting value (1)
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var arr[2][3]
+<log>getting name (arr[2][3])
+<script>var arr[2][3]
+<log>init array element <arr[0][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[0][2]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][0]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][1]=0>
+<script>var arr[2][3]
+<log>init array element <arr[1][2]=0>
+<script>print("arr = ")
+<log>getting param "arr = "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>print(arr[i][j])
+<log>getting param arr[i][j]
+<script>print(" ")
+<log>getting param " "
+<script>getch()
+<log>getting name (getch())
+<script>var object="object"
+<log>getting name (object)
+<script>var object="object"
+<log>getting value ("object")
+<script>var object.name=name
+<log>getting name (object.name)
+<script>var object.name=name
+<log>getting value (name)
+<script>var object.number=number
+<log>getting name (object.number)
+<script>var object.number=number
+<log>getting value (number)

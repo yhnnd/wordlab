@@ -1,0 +1,3 @@
+Games,menu,search();
+Crossword,launch,crossword();
+back,menu,quit();

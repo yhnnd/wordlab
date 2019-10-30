@@ -1,0 +1,10 @@
+<-wte>(function system <"main"><blu-wte>(go back);
+<-gry>(;
+<-wte>(;
+<-gry>(;
+<-wte>(;
+<-gry>(;
+<-wte>(;
+<-gry>(;
+<-wte>(;
+<-gry>(;

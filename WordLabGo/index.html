@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Lab</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css">
+</head>
+
+<body style="background: #000;">
+    <style>
+        .br-0 {
+            border-radius: 0;
+        }
+
+        .overflow-hidden {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .hover-underline {
+            cursor: pointer;
+        }
+
+        .hover-underline:hover {
+            text-decoration: underline;
+        }
+
+        .word-sort:hover {
+            transform: scale(1.1)!important;
+            cursor: pointer!important;
+        }
+
+        .word-def:hover {
+            background: darkolivegreen!important;
+            color: lightgoldenrodyellow!important;
+            text-decoration: underline!important;
+            cursor: pointer!important;
+        }
+
+        .def-text:hover {
+            background: lightgoldenrodyellow!important;
+            color: darkolivegreen!important;
+            cursor: pointer!important;
+        }
+
+        .click-to-refresh {
+            cursor: pointer;
+        }
+
+        .click-to-refresh:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <div class="jumbotron fixed-top br-0" style="z-index: 0; margin-top: 2rem;min-height: 38rem;">
+
+    </div>
+    <div class="row">
+        <div class="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 bg-light mt-sm-3 mb-3">
+            <div class="mx-0 mx-md-4 mx-lg-5 pt-5 px-5" style="min-height: 40rem;">
+                <div class="row">
+                    <div class="col">
+                        <div class="display-4 text-muted">
+                            WordLab
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <input class="d-inline-block form-control form-control-sm br-0" type="text" id="search-word">
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col">
+                        <div id="suggestions"></div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <span id="search-result-message"></span>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col">
+                        <div id="search-result"></div>
+                    </div>
+                </div>
+                <div class="row w-100" style="position: absolute; bottom: 2rem; left: 1rem;">
+                    <div class="col-10 col-md-8 mx-auto text-center">
+                        <a class="mx-1" href="#" data-toggle="modal" data-target="#modal-sign-in">Sign In</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="text-muted hover-underline">
+                &copy; Skyside Inc. 2014 - 2019
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="modal-sign-in">
+        <div class="modal-dialog">
+            <div class="modal-content br-0">
+                <div class="modal-header">
+                    <h5 class="modal-title overflow-hidden">
+                        Sign In Using ChatRoom Account
+                    </h5>
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Username</label>
+                            <input type="text" class="form-control br-0" id="login-username">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Password</label>
+                            <input type="password" class="form-control br-0" id="login-password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary br-0" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary br-0">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script>
+        function clearResults() {
+            $("#suggestions").empty()
+            $("#search-result-message").empty()
+            $("#search-result").empty()
+        }
+
+        const maxInterval = 100;
+        let prevTime = new Date().getTime();
+
+        function printSuggestions(data) {
+            $(".jumbotron").removeClass("alert-danger").addClass("alert-success");
+            clearResults()
+            let field = $("#suggestions")
+            let n = 0
+            for (let i in data["prefix-suggestions"]) {
+                if (++n > 10) break;
+                let word = {
+                    "text": data["prefix-suggestions"][i]
+                };
+                let row = $("<div class='d-flex align-items-center mt-1'>")
+                row.append("<span class='word-sort badge badge-success mx-1'>prefix</span>")
+                row.append("<span class='word-def px-1'>" + word.text + "</span>")
+                row.append("<small class='def-text ml-auto px-1 text-muted'>" + word.text + "</small>")
+                row.click(function () {
+                    $('#search-word').val(word.text).focus()
+                    searchWord(word.text)
+                })
+                field.append(row)
+            }
+            for (let i in data["subseq-suggestions"]) {
+                if (++n > 10) break;
+                let word = {
+                    "text": data["subseq-suggestions"][i]
+                };
+                let row = $("<div class='d-flex align-items-center mt-1'>")
+                row.append("<span class='word-sort badge badge-info mx-1'>subseq</span>")
+                row.append("<span class='word-def px-1'>" + word.text + "</span>")
+                row.append("<small class='def-text ml-auto px-1 text-muted'>" + word.text + "</small>")
+                row.click(function () {
+                    $('#search-word').val(word.text).focus()
+                    searchWord(word.text)
+                })
+                field.append(row)
+            }
+        }
+
+        function requireSuggestions(word) {
+            let url = "http://localhost:8000/suggestions?word=" + word;
+            $.ajax({
+                url: url,
+                dataType: 'jsonp',
+                jsonpCallback: "printSuggestions",
+                type: 'get',
+                success: function (data) {
+                    console.log(data)
+                },
+                error: function () {
+                    $(".jumbotron").removeClass("alert-success").addClass("alert-danger");
+                    clearResults()
+                    $("#search-result-message").html("<span class='bg-danger text-white px-1 click-to-refresh'>suggestion: cannot connect to server</span>")
+                    $(".click-to-refresh").click(function () {
+                        window.location.reload()
+                    })
+                }
+            });
+        }
+
+        $('#search-word').on("input", function () {
+            let word = $(this).val();
+            if (new Date().getTime() - prevTime > maxInterval) {
+                prevTime = new Date().getTime();
+                requireSuggestions(word);
+            }
+        });
+
+
+
+        function printResult(data) {
+            $(".jumbotron").removeClass("alert-danger").addClass("alert-success");
+            clearResults()
+            $("#search-result-message").text(data.message)
+            let field = $("#search-result")
+            for (let i in data.defs) {
+                let def = data.defs[i]
+                let row = $("<div class='d-flex align-items-center mt-1'>")
+                row.append("<span class='word-sort badge badge-secondary mx-1'>" + def.sort + "</span>")
+                row.append("<span class='word-def px-1'>" + def.chinese + "</span>")
+                row.append("<small class='def-text ml-auto px-1 text-muted'>" + def.text + "</small>")
+                field.append(row)
+            }
+        }
+
+        function searchWord(word) {
+            let url = "http://localhost:8000/translate?word=" + word;
+            $.ajax({
+                url: url,
+                dataType: 'jsonp',
+                jsonpCallback: "printResult",
+                type: 'get',
+                success: function (data) {
+                    console.log(data)
+                },
+                error: function () {
+                    $(".jumbotron").removeClass("alert-success").addClass("alert-danger");
+                    clearResults()
+                    $("#search-result-message").html("<span class='bg-danger text-white px-1 click-to-refresh'>translate: cannot connect to server</span>")
+                    $(".click-to-refresh").click(function () {
+                        window.location.reload()
+                    })
+                }
+            });
+        }
+
+        $('#search-word').keypress(function (event) {
+            if (event.keyCode == 13) {
+                let word = $(this).val();
+                searchWord(word);
+            }
+        });
+
+        $('#search-word').val("").focus()
+    </script>
+</body>
+
+</html>

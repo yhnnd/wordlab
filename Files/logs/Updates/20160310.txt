@@ -1,0 +1,2 @@
+improved WL A engine adding new feature that can sort words with alphabetical order.
+improved WL A engine to allow 25 words per page.

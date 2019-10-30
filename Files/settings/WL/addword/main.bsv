@@ -1,0 +1,10 @@
+<-gry>(<#red-gry>(Add Word                                                   );
+<-gry>(<button="Word"><-wte>(word)<gry-wte>( word to add)<-wte>(                                           );
+<-gry>(<#red-gry>(Add Definition                                             );
+<-gry>(<button="Sort"><-wte>(sort)<gry-wte>( word sort)<-wte>(                                             );
+<-gry>(<button="Trans"><-wte>(definition)<gry-wte>( translation)<-wte>(                                     );
+<-gry>(<button="AddDef"><-ylw>(  add  )<button="Reset"><ylw-red>( reset )<gry-wte>(                                             );
+<-gry>(<#red-gry>(Save All Definitions                                       );
+<-gry>(<button="AddAllDef"><-ylw>( save  )<button="ResetAll"><ylw-red>( reset )<gry-wte>(                                             );
+<-gry>(<button="PrintAllDef"><gry-wte>( print )<gry-wte>(                                                    );
+<-gry>(<button="PrintAllData"><-cyn>( print all data )<#blu-wte>( developed by skyside inc. 2016/12/09      );

@@ -1,0 +1,5 @@
+#include "Search.cpp"
+#include "ChineseRedirect.cpp"
+#include "Chinese.cpp"
+#include "Translate.cpp"
+#include "GetWord.cpp"

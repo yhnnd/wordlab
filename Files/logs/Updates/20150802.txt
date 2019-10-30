@@ -1,0 +1,2 @@
+Add  MsgWinChange.cpp to change sequence of a menu.
+Add  WriteMsgCompact  to writefile in prerequisites.

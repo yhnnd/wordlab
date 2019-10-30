@@ -1,0 +1,14 @@
+2015.02.22  Mordalga, China
+Improvements:
+STS_Sort (Failed to define unknown words)
+STS_SortEX (Simplified)
+WL_A (Accomplished)
+WL_A_Core (Adding WL_A_DivideIntoPages)
+WL_Chinese.cpp (Chinese Sort Verification)
+WL_FrameworkSettings.cpp (Adding "goto" syntax to get out completely)
+STS_Addons (Simplified)
+TradeMark.cpp (Newly Added) 
+Load_MainMenu.cpp (Adding TradeMark to indicate version)
+WL_C.cpp (Simplified)
+WL_C_Core_LoadFile.cpp (Amplified)
+WL_C_Core_AddTranslaton_WordSortSelect.cpp (Simplified)
