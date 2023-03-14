@@ -15,4 +15,5 @@ int WLscan(){
 	        fclose(fp1);
 	    }
 	}
+    return 0;
 }

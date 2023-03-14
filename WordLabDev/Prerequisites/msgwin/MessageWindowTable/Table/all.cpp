@@ -2,5 +2,5 @@
 #include "Load.cpp"
 #include "Title.cpp"
 #include "ShowAll.cpp"
-#include "Panel\\all.cpp"
+#include "Panel/all.cpp"
 #include "Framework.cpp"

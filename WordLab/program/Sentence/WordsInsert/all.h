@@ -1,3 +1,3 @@
-#include "WordSwitch.cpp"//µ÷»»Á½¸öµ¥´Ê.
-#include "WordInsert\\all.h"//ÒÆ„ÓÒ»¸öµ¥´Ê(Ë«Ïò).
-#include "ClauseMove.cpp"//×ªÒÆÒ»¸ö´Ó¾ä(×óÏò).
+#include "WordSwitch.cpp"//è°ƒæ¢ä¸¤ä¸ªå•è¯.
+#include "WordInsert/all.h"//ç§»å‹•ä¸€ä¸ªå•è¯(åŒå‘).
+#include "ClauseMove.cpp"//è½¬ç§»ä¸€ä¸ªä»å¥(å·¦å‘).

@@ -1,19 +1,19 @@
 void InquiryEndShow() {
 	switch(ma) {
 		case 1:
-			cout<<"Âð";
+			cout<<"å—";
 			break;
 		case 2:
-			cout<<"ÄØ";
+			cout<<"å‘¢";
 			break;
 		case 3:
-			cout<<"Ñ½";
+			cout<<"å‘€";
 			break;
 		case 4:
-			cout<<"ÄÅ";
+			cout<<"å‘";
 			break;
 		case 5:
-			cout<<"°¡";
+			cout<<"å•Š";
 			break;
 		default:
 			break;

@@ -1,4 +1,4 @@
-WoodPeckerSyntaxError(char *s){
+bool WoodPeckerSyntaxError(char *s){
 	int r;
 	for(r=0;s[r+1]!=0;r++);
 	if(s[r]=='\n'||s[r]==EOF) s[r]='\0';

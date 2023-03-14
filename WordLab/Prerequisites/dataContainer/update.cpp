@@ -9,7 +9,7 @@ int datacontainer::update(const std::string & oldname,const std::string & name,c
 	dataset[i].name = name;
 	dataset[i].value = value;
 	if(debug) { // old data updated
-		printf("update data[%d] <%s> to <%s=%s>\n",i,oldname,name,value);
+		printf("update data[%d] <%s> to <%s=%s>\n",i,oldname.c_str(),name.c_str(),value.c_str());
 	}
 	return i;
 }

@@ -16,7 +16,7 @@ if(punct=='?')
 
 		if (WOC1auxnSolution1||WOC1auxnSolution2||WOC1auxnSolution3) {
 			for(r0=r+1; r0<=rwin-1; r0++) WOC1findnoun(r0)
-				if(AskChar("WOC1-2<aux.+n.>ááÖÃ(",tostring(r),s[r].txt,")µ½(",tostring(r0),s[r0].txt,")?")==13)
+				if(AskChar("WOC1-2<aux.+n.>å¾Œç½®(",tostring(r),s[r].txt,")åˆ°(",tostring(r0),s[r0].txt,")?")==13)
 					Word_Insert("Right",r,r0);
 			break;
 		}

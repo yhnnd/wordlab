@@ -9,7 +9,7 @@ int DeleteChar(const char *route,const int n){
 		if(NOL!=n) fputc(ch,fbuf);
 		else break;
 		}
-	for(r=0;ch=fgetc(fp);r++){s[r]=ch;if(ch=='\n'||ch==EOF)break;}
+	for(r=0;(ch=fgetc(fp))!=false;r++){s[r]=ch;if(ch=='\n'||ch==EOF)break;}
 	strclr(s,r-1);
 	if(s[0]) fputc('\n',fbuf);
 	fputs(s,fbuf);

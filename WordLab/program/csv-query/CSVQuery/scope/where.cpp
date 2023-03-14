@@ -8,4 +8,5 @@ int querywhere() {
 		attr[attr_n].value.to=attr[attr_n].value.self;
 	}
 	attr_n++;
+    return 0;
 }

@@ -10,10 +10,16 @@ int Search(const char *s,int lth = 0) {
 		fseek(fp,(k-1)*(lth+2),0);
 		fread(&c,lth,1,fp);
 		rewind(fp);
+#if defined(_WIN32)
 		flag=strnicmp(s,c,lth);
-		if(flag<0) z=k;
-		else if(flag>0) a=k;
-		else {
+#else
+        flag= strncasecmp(s,c,lth);
+#endif
+		if(flag<0) {
+            z=k;
+        } else if (flag>0) {
+            a=k;
+        } else {
 			number=1;
 			break;
 		}

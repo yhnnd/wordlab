@@ -5,7 +5,7 @@ void ClauseCheck() {
 		if((WordSort(s[r].txt)==1||WordSort(s[r].txt)==8)
 		        &&(strcmp(s[r+1].txt,"that")==0||SortEX(s[r+1].txt,"wh")==0)) {
 			for(r1=r+1; r1<=rwin; r1++) if(strcmp(s[r1+1].txt,"/")==0) break;
-			if(AskChar("Clause:½«",s[r+1].txt,"µ½",s[r1].txt,"ÖÃµ½",s[r-d].txt,"Ç°?")==13)
+			if(AskChar("Clause:å°†",s[r+1].txt,"åˆ°",s[r1].txt,"ç½®åˆ°",s[r-d].txt,"å‰?")==13)
 				Words_Insert("Left",r-d,r+1,r1);
 		}
 }

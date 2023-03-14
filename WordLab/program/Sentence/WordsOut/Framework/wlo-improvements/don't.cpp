@@ -1,2 +1,2 @@
-//½â¾ö don't ÎŞ·¨·­Òë³É "²»" µÄÎÊÌâ.
-if(strcmp(s[rwout].txt,"don't")==0) strcpy(improve,"²»");
+//è§£å†³ don't æ— æ³•ç¿»è¯‘æˆ "ä¸" çš„é—®é¢˜.
+if(strcmp(s[rwout].txt,"don't")==0) strcpy(improve,"ä¸");

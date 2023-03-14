@@ -9,11 +9,20 @@ int WLSearch(string s,bool ignoreCase){
 	    fseek(fp,(k-1)*(lth+2),0);
 		fread(&c,lth,1,fp);
 		rewind(fp);
-		if( ignoreCase ) flag = strnicmp(s.c_str(),c,lth);
-		else flag = strncmp(s.c_str(),c,lth);//Xprmt'l updated 2017.03.14
-	    if( flag<0 ) z=k;
-		else if(flag>0) a=k;
-		else{
+		if( ignoreCase ) {
+#if defined(_WIN32)
+            flag = strnicmp(s.c_str(),c,lth);
+#else
+            flag = strncasecmp(s.c_str(),c,lth);
+#endif
+        } else {
+            flag = strncmp(s.c_str(),c,lth);//Xprmt'l updated 2017.03.14
+        }
+	    if( flag<0 ) {
+            z=k;
+        } else if(flag>0) {
+            a=k;
+        } else {
 			WLSearchCore(lth,n,c,k);
 			number++;
 			break;

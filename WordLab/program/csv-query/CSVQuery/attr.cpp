@@ -11,6 +11,7 @@
 				self.clear();
 				from.clear();
 				to.clear();
+                return 0;
 			}
 			string surround(int which,string br1,string br2){
 				string& p=(which==0)?self:((which==1)?from:to);
@@ -35,6 +36,7 @@
 		int clear(){
 			name.clear();
 			value.clear();
-			req=1;
+			req = 1;
+            return 0;
 		}
 	}attr[6];

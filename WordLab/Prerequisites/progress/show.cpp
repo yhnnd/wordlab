@@ -5,7 +5,7 @@ int progressbar::show(int x,int y,int thread,int n,int width,WORD back,WORD fore
     nprev[thread]=n;
     if(_AllowInterrupt){
 	    if(kbhit()){
-		    key=getch();
+		    key=wl_getch();
 			if(_AskBeforeQuit){
 			    if(MessageWindow.alert("cancel?",2,ScreenX/4,ScreenY/4,20,2,6)==1) return -1;
 				}

@@ -1,11 +1,11 @@
-#include "varIsArray.cpp"
+#include "varisArray.cpp"
 #include "varInitArray.cpp"
 #include "varInitArray_MultipleDimension.cpp"
-#include "varInitArray_GetNumofDimension.cpp"
-#include "varInitArray_GetDimensionSize.cpp"
-#include "varIsClassJson.cpp"//is json
+#include "varInitArray_getNumofDimension.cpp"
+#include "varInitArray_getDimensionSize.cpp"
+#include "varisClassJson.cpp"//is json
 #include "varInitJsonClassMember.cpp"//json
-#include "varIsClassFunct.cpp"
+#include "varisClassFunct.cpp"
 #include "varInitClassMember.cpp"
 #include "varCallClassFunct.cpp"
 #include "var.cpp"

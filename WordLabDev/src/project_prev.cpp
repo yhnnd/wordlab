@@ -9,7 +9,7 @@ template <typename T,typename T2>
 const T& project_input_with_default(bool AllowSet,T& s,const string name,const T2 default_value){
 	project_input_with_default_print_name(name,"=",AllowSet);
 	cout<<default_value;
-	if(!AllowSet||getch()==13){
+	if(!AllowSet||wl_getch()==13){
 		s = default_value;
 		cout<<endl;
 	}else{

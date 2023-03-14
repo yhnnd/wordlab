@@ -39,7 +39,7 @@ PKC labelcolor,PKC entercolor,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fie
 		}else if(labelfield&&labelchosen==labelnow){
 			std::cout<<what[r];
 		}else{
-			gotoxymove(0,1,0,0);//同行的按鈕的位置偏移 
+			gotoxymove(0,1,0,0);//鍚岃鐨勬寜閳曠殑浣嶇疆鍋忕Щ 
 		}
 	}
 	colorreset(white);

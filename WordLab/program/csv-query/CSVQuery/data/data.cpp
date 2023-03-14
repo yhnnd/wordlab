@@ -1,1 +1,3 @@
-int querydata(){}
+int querydata(){
+    return 0;
+}

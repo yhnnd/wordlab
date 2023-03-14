@@ -15,19 +15,19 @@ FindMain:
 	}
 	for(;;) {
 		if(r0>=0) {
-			if(AskChar(s[r0].txt,"žéÖ÷ÕZ?")==13) {
+			if(AskChar(s[r0].txt,"ï¿½ï¿½ï¿½ï¿½ï¿½Z?")==13) {
 				TheMain=r0;    //n.
 				break;
 			}
 		}
 		if(r1>=0) {
-			if(AskChar(s[r1].txt,"žéÖ÷ÕZ?")==13) {
+			if(AskChar(s[r1].txt,"ï¿½ï¿½ï¿½ï¿½ï¿½Z?")==13) {
 				TheMain=r1;    //pron.
 				break;
 			}
 		}
 		for(r=0; r<=rwin; r++) {
-			if(AskChar(s[r].txt,"žéÖ÷ÕZ?")==13) {
+			if(AskChar(s[r].txt,"ï¿½ï¿½ï¿½ï¿½ï¿½Z?")==13) {
 				TheMain=r;    //custom
 				break;
 			}
@@ -36,6 +36,6 @@ FindMain:
 	}
 	if(TheMain<0||TheMain>rwin) goto FindMain;
 }
-// S.T.S. Words Order - Find Main
+// S.T.S. Words Order - find Main
 //Since   2014/6/18
 //Updated 2014/6/18 17:53

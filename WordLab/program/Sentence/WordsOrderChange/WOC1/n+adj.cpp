@@ -3,6 +3,6 @@ for(r=0; r<rwin; r++) {
 	        &&WordSort(s[r+1].txt)==3
 	        &&WordSort(s[r+2].txt)!=1
 	        &&WordSort(s[r+2].txt)!=8)
-		if(AskChar("WOC1-4<n.adj.>µ÷»»(",s[r].txt,")Óë(",s[r+1].txt,")?")==13) WordSwitch(r,r+1);
+		if(AskChar("WOC1-4<n.adj.>è°ƒæ¢(",s[r].txt,")ä¸(",s[r+1].txt,")?")==13) WordSwitch(r,r+1);
 }
-//¸üĞÂÊ±¼ä 2014/6/18//n.+adj.//house big
+//æ›´æ–°æ—¶é—´ 2014/6/18//n.+adj.//house big

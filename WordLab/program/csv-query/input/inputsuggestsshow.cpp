@@ -12,4 +12,5 @@ int inputsuggestsshow(char *msg,char *keywords,int n,int lth,int maxresult,COORD
 		}
 	}
 	colorreset(color);
+    return 0;
 }

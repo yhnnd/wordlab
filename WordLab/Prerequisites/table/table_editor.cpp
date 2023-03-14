@@ -10,7 +10,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 	bool Void_Option = 0;
 	std::string temp, Error_Msg = "";
 	for(;;) {
-		// Display Table
+		// Display table
 		colorset(white);
 		this->printtable(x,y);
 		// Display Error Message
@@ -20,7 +20,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 		// Clear Error Status
 		Void_Option = 0;
 		Error_Msg = "";
-		// Select Table Item
+		// Select table Item
 		for(;;) {
 			// invalid label
 			if(this->iserror(r,c)) {
@@ -88,9 +88,9 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 			r_prev=r;
 			c_prev=c;
 			// get user response
-			key = getch();
+			key = wl_getch();
 			if(key==BIOSKEY) {
-				key=getch();
+				key=wl_getch();
 				if(key==UP) {
 					if(c>=this->getrow(r-1).getnumofcol()) {
 						if(c<this->getrow(r-2).getnumofcol()) {
@@ -145,7 +145,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 			} else if(key==13) break;
 			else if(key==8||key==27) return;
 		}
-		// Select Table Item completed
+		// Select table Item completed
 		gotoxymove(0,0,1,WindowY);
 		colorsetcmd("-ylw");
 		if(this->iserror(r,c)) { // invalid label

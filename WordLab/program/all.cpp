@@ -1,15 +1,15 @@
-#include "Base\\all.cpp"
-#include "Word\\all.cpp"//has Chinese Engine inside with Redirect
-#include "WordSort\\all.cpp"
-#include "Sentence\\all.cpp"//has Chinese Engine inside with Redirect And SelectDef
-#include "CSVquery\\all.cpp"
-#include "Crossword\\all.cpp"
+#include "Base/all.cpp"
+#include "Word/all.cpp"//has chinese Engine inside with Redirect
+#include "WordSort/all.cpp"
+#include "Sentence/all.cpp"//has chinese Engine inside with Redirect And SelectDef
+#include "csv-query/all.cpp"
+#include "Crossword/all.cpp"
 #include "ClearCache.cpp"
-#include "Help\\all.cpp"
-#include "Load\\all.cpp"
+#include "Help/all.cpp"
+#include "Load/all.cpp"
 #include "practices.cpp"
-#include "Launch.cpp"
-#include "LaunchInput.cpp"
+#include "launch.cpp"
+#include "launch-input.cpp"
 #include "ScriptEditor.cpp"
 #include "MainLoop.cpp"
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

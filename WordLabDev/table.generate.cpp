@@ -29,8 +29,8 @@ void writeWorkerData(){
 _table & settable(_table & Table){
 	Table.clear();
 	Table.setrowborder(57);
-	Table.setrow(56,"             a table of Project Table").setrowborder();
-	Table.setrow(2).setcol(11,"").setcol(43,"                Table");
+	Table.setrow(56,"             a table of Project table").setrowborder();
+	Table.setrow(2).setcol(11,"").setcol(43,"                table");
 	Table.setrow(2).setcol("project").setcol("-------------------------------------------");
 	Table.setrow(2).setcol("").setcol("powerd by MessageWindow and TextWindow").setrowborder();
 	Table.setrow(4).setcol("Staff").setcol(13,"Name").setcol(13,"Gender").setcol(13,"Age").setrowborder();
@@ -60,7 +60,7 @@ int main(){
 	Table.readdata(_table_dir + WorkerFile);
 	Table.printtable();
 	cout<<"output table to file?"<<endl;
-	if(getch()==13){
+	if(wl_getch()==13){
 		Table.writetable(_table_dir + "table.layout.txt");
 		Table.outputlabels(_table_dir + "table.labels.txt");
 		cout<<"done."<<endl;

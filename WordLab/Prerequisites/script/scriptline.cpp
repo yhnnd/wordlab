@@ -60,4 +60,5 @@ int scriptprocessor::scriptline(const char *line,const char *functname) {
 		return 0;
 	}
 	executeline(line);
+    return 0;
 }

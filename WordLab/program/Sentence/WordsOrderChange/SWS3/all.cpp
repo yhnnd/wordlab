@@ -9,7 +9,7 @@ void SpecialWordSpot3AdverbialClause() {
 		        strcmp(s[r0].txt,"ago")==0||
 		        strcmp(s[r0].txt,"before")==0
 		  ) {
-			if(AskChar("SWS3-1«∞÷√",s[r0].txt,"?")==13) Word_Insert("Left",0,r0);
+			if(AskChar("SWS3-1ÂâçÁΩÆ",s[r0].txt,"?")==13) Word_Insert("Left",0,r0);
 		}
 	}
 }

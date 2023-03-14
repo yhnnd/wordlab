@@ -3,6 +3,6 @@ bool MessageWindow::ErrorReport(const char route[]){
 	FILE * fp=NULL;
 	if((fp=fopen(route,"r"))==NULL) flag=true;
 	fclose(fp);
-	std::cout<<"錯誤報告生成"<<((flag)?"失敗":"完畢");
+	std::cout<<"Error Report Generating "<<((flag)?"failed":"success");
 	return flag;
-    }
+}

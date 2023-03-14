@@ -1,4 +1,4 @@
-//½â¾öMoreÎŞ·¨ÔÚĞÎÈİ´Ê¼°¸±´ÊÇ°·­Òë³É "¸ü" µÄÎÊÌâ.//adj./adv.
+//è§£å†³Moreæ— æ³•åœ¨å½¢å®¹è¯åŠå‰¯è¯å‰ç¿»è¯‘æˆ "æ›´" çš„é—®é¢˜.//adj./adv.
 if(strcmp(s[rwout].txt,"more")==0
 &&(WordSort(s[rwout+1].txt)==3
- ||WordSort(s[rwout+1].txt)==4)) strcpy(improve,"¸ü");
+ ||WordSort(s[rwout+1].txt)==4)) strcpy(improve,"æ›´");

@@ -1,9 +1,9 @@
-#include "find\\all.cpp"
-#include "Clause\\ClauseCheck.cpp"
-#include "Conj\\ConjCheck.cpp"
-#include "WOC1\\all.cpp"//ÕZÐò
-#include "SWS1\\all.cpp"//ÒÉ†–
-#include "SWS2\\all.cpp"//½éÔ~
-#include "SWS3\\all.cpp"// îÕZ
-#include "Framework\\all.cpp"
+#include "find/all.cpp"
+#include "Clause/ClauseCheck.cpp"
+#include "Conj/ConjCheck.cpp"
+#include "WOC1/all.cpp"//ï¿½Zï¿½ï¿½
+#include "SWS1/all.cpp"//ï¿½É†ï¿½
+#include "SWS2/all.cpp"//ï¿½ï¿½ï¿½~
+#include "SWS3/all.cpp"//ï¿½ï¿½ï¿½Z
+#include "Framework/all.cpp"
 #include "Framework.cpp"

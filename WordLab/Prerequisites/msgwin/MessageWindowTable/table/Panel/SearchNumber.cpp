@@ -10,6 +10,6 @@ void Table::SearchNumber(tablerow item[],int x,int y,int width,int Total){
 	gotoxy(20,y+6);
 	for(r=1;r<=Total;r++) if(item[r].SearchNumber(number)==1) result++;
 	gotoxy(20,y+7);
-	std::cout<<"¹²·¢ÏÖ"<<result<<"¸ö½á¹û";
-	getch();
+	std::cout<<"å…±å‘çŽ°"<<result<<"ä¸ªç»“æžœ";
+	wl_getch();
 }

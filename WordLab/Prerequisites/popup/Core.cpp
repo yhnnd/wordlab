@@ -1,4 +1,5 @@
 char popupcore(std::string& msg,const int life,const int x,const int y,const int width,const bool Record){
+#ifdef _WIN32
 	char key=0;
 	// record previous status
 	colorrecord(colorprev);
@@ -18,10 +19,10 @@ char popupcore(std::string& msg,const int life,const int x,const int y,const int
 	    	std::cout<<1+(life-(clock()-BeginTime))/1000<<"s";
 	    	Sleep(10);
 		}
-		key = getch();
+		key = wl_getch();
 		BreakWait:
 		MessageWindow.Erase(x,0,width,y);
-	}else if(life<0) key=getch();
+	}else if(life<0) key=wl_getch();
 	// reset
 	resetxy(pos);
 	colorreset(colorprev);
@@ -36,4 +37,11 @@ char popupcore(std::string& msg,const int life,const int x,const int y,const int
 		fout.close();
 	}
 	return key;
+#elif __APPLE__
+    const int lineWidth = 60;
+    std::cout << "\n+-------------------------   NOTICE  -------------------------+ \n|";
+    bsvline(msg.c_str(),lineWidth);
+    std::cout << "|\n+-------------------------------------------------------------+" << std::endl;
+    return WL_KEY_ENTER;
+#endif
 }

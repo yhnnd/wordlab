@@ -11,7 +11,7 @@ int Volume(lang language,int fromlth,int tolth,std::string bufroute){
 			break;
 		}// no else
 		if(!finZH){
-			errorlog("volume()","unfound Chinese database",tostring(lth));
+			errorlog("volume()","unfound chinese database",tostring(lth));
 			NOL[lang::CH] = -2;
 			break;
 		} else {
@@ -20,7 +20,7 @@ int Volume(lang language,int fromlth,int tolth,std::string bufroute){
 				if(line.length()!=lth) break;//error
 				++NOL[lang::EN];
 			}
-	        // count NOL Chinese ( DO NOT init NOL = 0 )
+	        // count NOL chinese ( DO NOT init NOL = 0 )
 	        while(std::getline(finZH,line)){
 				++NOL[lang::CH];
 			}

@@ -4,5 +4,6 @@ int datacontainer::init(int max,bool debug){
 	this->max=max;
 	this->number=0;
 	this->debug=debug;
+    return 0;
 }
 

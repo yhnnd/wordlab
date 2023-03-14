@@ -1,6 +1,6 @@
 void Table::Adjust(tablerow item[],int *x,int *y,int *width,int *total){
 	char key=0;
-	for(;;key=getch()){
+	for(;;key=wl_getch()){
 		if(key==13||key==8) break;
 	    else if(isupper(key)) key-='A'-'a';
 		     if(key=='a') (*x)--;

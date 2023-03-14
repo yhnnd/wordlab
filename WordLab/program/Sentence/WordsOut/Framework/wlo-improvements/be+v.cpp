@@ -1,6 +1,6 @@
-//½â¾ö be ÎŞ·¨ÔÚ¶¯´Ê¹ıÈ¥Ê½Ç°·­Òë³É "±»" µÄÎÊÌâ.
+//è§£å†³ be æ— æ³•åœ¨åŠ¨è¯è¿‡å»å¼å‰ç¿»è¯‘æˆ "è¢«" çš„é—®é¢˜.
 if(strcmp(s[rwout].txt,"be")==0
  ||strcmp(s[rwout].txt,"being")==0
  ||strcmp(s[rwout].txt,"been")==0)
  if(SortEX(s[rwout+1].txt,"verb")==0
-  ||strindex(s[rwout+1].txt,"ed")!=-1) strcpy(improve,"±»");
+  ||strindex(s[rwout+1].txt,"ed")!=-1) strcpy(improve,"è¢«");

@@ -18,4 +18,5 @@ int scriptprocessor::print(const std::string & out){
 		}else printf("%c",out[i++]);
 	}
 	if(_debug) printf("\n");
+    return 0;
 }

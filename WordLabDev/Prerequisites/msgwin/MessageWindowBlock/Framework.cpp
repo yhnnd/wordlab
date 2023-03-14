@@ -17,9 +17,9 @@ int messageblock::Switcher(char what[][LINEMAX],bool LoadDefaultSettings){
 	for(n=1,nbefore=1;;){
 	    Fillall(what,nbefore,n,max);
 	    nbefore = n;
-	    key = getch();
+	    key = wl_getch();
 		if(key == BIOSKEY){
-	    	key = getch();
+	    	key = wl_getch();
 	    	if(key==UP) key = 'w';
 	    	if(key==DOWN) key = 's';
 	    	if(key==LEFT) key = 'a';

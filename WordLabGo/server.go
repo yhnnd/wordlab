@@ -27,7 +27,7 @@ func main() {
 		fmt.Printf("input root dir:\n")
 		fmt.Scanf("%s", &rootdir)
 	} else {
-		fmt.Println("unknown command!")
+		fmt.Printf("unknown command %q\n", cmd)
 		os.Exit(0)
 	}
 	fmt.Printf("root dir is %q\n", rootdir)
@@ -69,6 +69,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			for k, v := range r.Form {
 				// fmt.Fprintf(w, "%s = %q\n", k, v[0])
 				if k == "word" {
+					fmt.Printf("func handler (line 72): %s = %q\n", k, v[0])
 					word = v[0]
 				}
 			}
@@ -103,6 +104,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 							sort := strings.Split(tempDef, "/")[1]
 							chinese := tempDef[strings.Index(tempDef, "@"):strings.LastIndex(tempDef, ";")+1]
 							result.Defs = append(result.Defs, TypeDef{Text: text, Sort: sort, Chinese: chinese})
+							fmt.Printf("func handler (line 107): sort = %q, chinese = %q\n", sort, chinese)
 						}
 						result.DefN = len(result.Defs)
 						break

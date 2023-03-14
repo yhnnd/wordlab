@@ -10,7 +10,7 @@ int main(int argc,char **argv) {
 	error_monitor_lock = 1;
 	prerequisites::ScreenX = 100;
 	prerequisites::ScreenY = 30;
-	prerequisites::host::name = "..\\wordlab\\wordlab.exe";
+	prerequisites::host::name = "../wordlab/wordlab.exe";
 	prerequisites::host::datafolder = _data_dir;
 	int x = 6, y = 8, width = 60, height = 20, colsize = 2, n = 0;
 	char Menu[MAXLINES][LINEMAX]= {
@@ -19,7 +19,7 @@ int main(int argc,char **argv) {
 		"Script Developer",//2
 		"Script Shell",//3
 		"Performance",//4
-		"Database log",//5
+		"database log",//5
 		"Script Debug log",//6
 		"Check Same Words",//7
 		"Quit"//-1

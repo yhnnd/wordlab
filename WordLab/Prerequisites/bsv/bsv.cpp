@@ -1,4 +1,4 @@
-//·µ»Ø c ÖĞ·ûºÏ pattern µÄ×Ö·û´®µÄ¸öÊı
+//è¿”å› c ä¸­ç¬¦åˆ pattern çš„å­—ç¬¦ä¸²çš„ä¸ªæ•°
 int bsvs(const char *c,int pattern,int i,...){
 	if(i<=0) return 0;
 	va_list argv;
@@ -8,14 +8,14 @@ int bsvs(const char *c,int pattern,int i,...){
 		char *s=va_arg(argv,char *);
 		int pos=strindex(c,s);
 		switch(pattern){
-			case 0: if(pos==0) n++; break;//Ê×¶ÔÆë(°üÀ¨Ê×Î²½Ô¶ÔÆë)
-			case 1: if(pos>=0) n++; break;//ÎŞ¶ÔÆë
-			case 2: if(pos>=0&&pos==lth-strlen(s)) n++; break;//Î²¶ÔÆë(°üÀ¨Ê×Î²½Ô¶ÔÆë)
-			case 3: if(pos==0||(pos>=0&&pos==lth-strlen(s))) n++; break;//Ê×¶ÔÆë»òÎ²¶ÔÆë
-			case 4: if(pos>0) n++; break;//·ÇÊ×¶ÔÆë
-			case 5: if(pos>=0&&pos<lth-strlen(s)) n++; break;//·ÇÎ²¶ÔÆë
-			case 6: if(pos>0&&pos<lth-strlen(s)) n++; break;//·ÇÊ×ÇÒ·ÇÎ²¶ÔÆë(¿ªÇø¼ä,²»°üÀ¨Ê×Î²½Ô¶ÔÆë)
-			case 7: if(pos>0||(pos>=0&&pos<lth-strlen(s))) n++; break;//·ÇÊ×»ò·ÇÎ²¶ÔÆë(±ÕÇø¼ä,²»°üÀ¨Ê×Î²½Ô¶ÔÆë)
+			case 0: if(pos==0) n++; break;//é¦–å¯¹é½(åŒ…æ‹¬é¦–å°¾çš†å¯¹é½)
+			case 1: if(pos>=0) n++; break;//æ— å¯¹é½
+			case 2: if(pos>=0&&pos==lth-strlen(s)) n++; break;//å°¾å¯¹é½(åŒ…æ‹¬é¦–å°¾çš†å¯¹é½)
+			case 3: if(pos==0||(pos>=0&&pos==lth-strlen(s))) n++; break;//é¦–å¯¹é½æˆ–å°¾å¯¹é½
+			case 4: if(pos>0) n++; break;//éé¦–å¯¹é½
+			case 5: if(pos>=0&&pos<lth-strlen(s)) n++; break;//éå°¾å¯¹é½
+			case 6: if(pos>0&&pos<lth-strlen(s)) n++; break;//éé¦–ä¸”éå°¾å¯¹é½(å¼€åŒºé—´,ä¸åŒ…æ‹¬é¦–å°¾çš†å¯¹é½)
+			case 7: if(pos>0||(pos>=0&&pos<lth-strlen(s))) n++; break;//éé¦–æˆ–éå°¾å¯¹é½(é—­åŒºé—´,ä¸åŒ…æ‹¬é¦–å°¾çš†å¯¹é½)
 			default: break;
 			}
 		}

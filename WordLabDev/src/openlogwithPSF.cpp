@@ -40,15 +40,15 @@ INPUT:
 		printline(win,x0,y0,x,y-1,false);//above
 		printline(win,x0,y0,x,y+1,false);//below
 		printline(win,x0,y0,x,y,true);//current
-		key = getch();
-		if(key==-32) key = getch();//BIOSKEY
+		key = wl_getch();
+		if(key==-32) key = wl_getch();//BIOSKEY
 		if(key==KEY_ESC||key==KEY_DELETE) return 0;
 		if(key==KEY_ENTER) {
 			int i/*name NO.*/, pww = win.innerWidth()-1;// pop window width
 			std::string value = "";
 			std::vector<decltype(value)> name = {"word","defs"}, backcolors = {"-#ylw","-#grn"}, forecolors = {"-ylw","-grn"};
 			gotoxy(win.innerLeft(),win.innerTop()+(y-y0)+(y-y0+1>=win.innerHeight()?-1:1));
-			for(i = 0; i < name.size(); ++i) { //	Find Name And Value In Line (FNAV)
+			for(i = 0; i < name.size(); ++i) { //	find Name And Value In Line (FNAV)
 				PKC label = ("<"+name[i]+">").c_str();
 				if(strncmp(label,win.text.line(y),strlen(label))==0) {
 					value = string(win.text.line(y) + strlen(label));
@@ -58,8 +58,8 @@ INPUT:
 				}
 			}//*(FNAV)
 			if( i<name.size() and value!="" ) { // Name And Value Found (NAVF)
-				char key = getch();
-				if(key==-32) key = getch();//BIOSKEY
+				char key = wl_getch();
+				if(key==-32) key = wl_getch();//BIOSKEY
 				if(key==KEY_ENTER) {
 					PKC msg = "<-grn>( Search ) <-ylw>(  Add  ) <-red>( Delete ) <-cyn>( Update )";
 					int n, nmax = 4, xborder = win.innerLeft()+2, yborder = win.innerTop()+1;

@@ -1,4 +1,4 @@
 #include "wordpos.cpp"
 #include "findnoun.cpp"
 #include "framework.cpp"
-//½é´Ê·­×gÎ»ÖÃ¿ÉÄÜ²»ÕıÈ·
+//ä»‹è¯ç¿»è­¯ä½ç½®å¯èƒ½ä¸æ­£ç¡®

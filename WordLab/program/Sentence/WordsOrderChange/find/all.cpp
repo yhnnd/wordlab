@@ -11,4 +11,5 @@ int finderr(int r0,int *r1,const char * sort,const char * tool,const char * alia
 	} else {
 		status(tool," has found ",alias,"(",tostring(*r1),s[*r1].txt,")");
 	}
+    return 0;
 }

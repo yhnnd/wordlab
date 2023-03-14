@@ -1,3 +1,3 @@
-#include "Tools.cpp"
+#include "tools.cpp"
 #include "Core.cpp"
-#include "Framework.cpp"
+#include "framework.cpp"

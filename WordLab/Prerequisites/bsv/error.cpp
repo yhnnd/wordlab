@@ -8,4 +8,5 @@ int bsverror(const char *s1,const char *s2,const char *s3){
 	bsvline(msg,ScreenX-1);
 	resetxy(xy);
 	wait(-1,100,0);
+    return 0;
 }

@@ -1,5 +1,5 @@
 void dialog::settings(int x,int y) {
-	int buttonMax = 3;
+	const int buttonMax = 3;
 	int buttonHeight[buttonMax] = {4,3,4};
 	WORD buttonColor[buttonMax] = {bothgreen,bothyellow,bothred};
 	WORD buttonActiveColor[buttonMax] = {bothlightgreen,bothlightyellow,bothlightred};
@@ -16,7 +16,7 @@ void dialog::settings(int x,int y) {
 				std::cout<<(n==buttonSelected?"***":"   ");
 			}
 		}
-		auto key = getch();
+		auto key = wl_getch();
 		if ( key == 'w' ) {
 			--buttonSelected;
 		} else if ( key == 's') {
@@ -26,13 +26,13 @@ void dialog::settings(int x,int y) {
 			this->output("start");
 			this->output("");
 			break;
-		} else if ( key == KEY_ENTER ) {
+		} else if (key == WL_KEY_ENTER ) {
 			if ( buttonSelected == 0 ) {
-				_for(e,memoryout) *e = "";
+				for(auto e=memoryout.begin();e!=memoryout.end();++e) *e = "";
 			} else if ( buttonSelected == 1 ) {
 				goto EXIT;
 			} else if ( buttonSelected == 2 ) {
-				_for(e,memoryin) *e = "";
+				for(auto e=memoryin.begin();e!=memoryin.end();++e) *e = "";
 			}
 			this->output("start");
 			this->output("");

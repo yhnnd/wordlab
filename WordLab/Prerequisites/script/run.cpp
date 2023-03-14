@@ -19,4 +19,5 @@ int scriptprocessor::scriptlines(const std::string FunctName,std::vector<std::st
 		scriptline_div(line,functname);
 	}
 	colorreset(color);
+    return 0;
 }

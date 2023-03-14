@@ -17,7 +17,7 @@ class crossword{
 		this->Board.set(wboard,hboard,x,y);
 		if(LoadPrev) this->loadboardfrom(foldername);
 		//count words in file
-		ifstream in(foldername+"\\words.dat");
+		ifstream in(foldername+"/words.dat");
 		string line="";
 		this->max=0;
 		if(in.is_open()){
@@ -88,6 +88,7 @@ class crossword{
 		for(auto p=begin;p!=end&&p-begin<max;++p){
 			this->check(p-begin,*p);
 		}
+        return 0;
 	}
 	int SelectWord(){
 		if(this->available==0) return -1;
@@ -97,7 +98,7 @@ class crossword{
 		for(;;roll(i,i,0,max-1)){
 			this->show();//refresh board
 			this->Word[i].selected();
-			key=getch();
+			key=wl_getch();
 			process:
 			if(key==13) break;
 			else if(key>='0'&&key<='9') i=key-'0';
@@ -126,12 +127,14 @@ class crossword{
 		return this->check(n,s);
 	}
 	int hint(int n){
+        return 0;
 	}
 	int rotate(int t){
 		Board.setrotate(Board.getrotate()+t);
 		swap(this->w,this->h);
 		int l=::max(this->w,this->h);
 		clearscreen(this->x,this->y,2*zx*l,zy*l+1);
+        return 0;
 	}
 	void info(const char key){
 		int l=::max(this->w,this->h);
@@ -182,6 +185,7 @@ class crossword{
 		return available;
 	}
 	int settings(){
+        return 0;
 	}
 	int savewordto(string filename,string time){
 		ofstream os(filename);
@@ -193,6 +197,7 @@ class crossword{
 		}
 		os<<time<<endl;
 		os.close();
+        return 0;
 	}
 	int saveviewto(string filename,string time){
 		ofstream os(filename);
@@ -211,6 +216,7 @@ class crossword{
 		}
 		os<<time<<endl;
 		os.close();
+        return 0;
 	}
 	int saveboardto(string filename,string time){
 		ofstream os(filename);
@@ -229,17 +235,19 @@ class crossword{
 		}
 		os<<time<<endl;
 		os.close();
+        return 0;
 	}
 	int save(){
 		time_t t=time(NULL);
 		string time=asctime(localtime(&t));
-		savewordto(foldername+"\\words.dat",time);
-		saveviewto(foldername+"\\view.dat",time);
-		saveboardto(foldername+"\\board.dat",time);
+		savewordto(foldername+"/words.dat",time);
+		saveviewto(foldername+"/view.dat",time);
+		saveboardto(foldername+"/board.dat",time);
 		status("game saved");
+        return 0;
 	}
 	int loadwordfrom(string foldername){
-		ifstream fin(foldername+"\\words.dat");
+		ifstream fin(foldername+"/words.dat");
 		if(fin.is_open()){
 			int i=0;
 			for(i=0;i<max&&!fin.eof();i++){
@@ -251,9 +259,10 @@ class crossword{
 			return i;
 		}
 		else return 0;
+        return 0;
 	}
 	int loadboardfrom(string foldername){
-		ifstream fin(foldername+"\\board.dat");
+		ifstream fin(foldername+"/board.dat");
 		if(fin.is_open()){
 			char c=' ';
 			int n=0;
@@ -268,5 +277,6 @@ class crossword{
 			}
 		}
 		fin.close();
+        return 0;
 	}
 };

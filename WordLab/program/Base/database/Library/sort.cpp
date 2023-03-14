@@ -16,7 +16,7 @@ int sortlib(int bgn,int end,const string admin,const string pwd) {
 		//sort
 		for(int r=0; r<ln-1; r++) {
 			for(int j=r+1; j<ln; j++) {
-				if(strcmpi(s_en[r],s_en[j])>0) {
+				if(strcasecmp(s_en[r],s_en[j])>0) {
 					strswap(s_en[r],s_en[j],32);
 					strswap(s_ch[r],s_ch[j],256);
 				}

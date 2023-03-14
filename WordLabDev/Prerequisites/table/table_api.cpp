@@ -53,7 +53,7 @@ class _table{
 		void editor(int=2,int=2,void (_table &)=nullptr,void (_table &)=nullptr);
 		//the last 2 parameters are function_save_table and function_save_data
 };
-// Table Reserved Error Messages
+// table Reserved Error Messages
 const std::string _table::_table_key_out_of_range = "#TableReserved_koor";
 const std::string _table::_table_label_out_of_range = "#TableReserved_loor";
 const std::string _table::_table_null_label = "#TableReserved_nl";

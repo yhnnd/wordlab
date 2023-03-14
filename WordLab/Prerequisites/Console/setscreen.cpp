@@ -1,4 +1,5 @@
 void setscreen(int w=0,int h=0){
+#if defined(_WIN32)
     char s[8],msg[64]="mode CON: ";
 	if(w>0){
 		strcat(msg," COLS=");
@@ -9,4 +10,5 @@ void setscreen(int w=0,int h=0){
 		strcat(msg,itoa(h,s,10));
 	}
 	system(msg);
+#endif
 }

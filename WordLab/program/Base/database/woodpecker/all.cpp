@@ -1,3 +1,3 @@
-#include "CheckUnsame\\All.cpp"
-#include "Check@\\All.cpp"
-#include "Framework.cpp"
+#include "CheckUnsame/all.cpp"
+#include "Check@/all.cpp"
+#include "framework.cpp"

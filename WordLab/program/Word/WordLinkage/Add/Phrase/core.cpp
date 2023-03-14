@@ -14,7 +14,7 @@ int AddPhraseCore(const string msg) {
 		}
 	}
 	Dialog.output("add "+s+" to library?");
-	if(getch()==13) {
+	if(wl_getch()==13) {
 		string route=PhraseRouteA;
 		route+=tostring(n);
 		route+=PhraseRouteB;
@@ -25,4 +25,5 @@ int AddPhraseCore(const string msg) {
 			Dialog.output("Phrase "+s+" Added.");
 		} else Dialog.output("cannot open file "+route);
 	} else Dialog.output("Addition Cancelled");
+    return 0;
 }

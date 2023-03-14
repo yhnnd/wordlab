@@ -1,8 +1,8 @@
 class{
 private:
-#include "defaultSeek.cpp"
-#include "defaultLoad.cpp"
-#include "defaultSave.cpp"
+#include "defaultseek.cpp"
+#include "defaultload.cpp"
+#include "defaultsave.cpp"
 #include "defaults.cpp"
 #include "writeTime.cpp"
 public:

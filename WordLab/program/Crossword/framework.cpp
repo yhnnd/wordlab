@@ -5,7 +5,7 @@ int CrosswordFramework(){
 	string folder2=CrosswordSelectFolder(folder);
 	if(folder2.empty()) return errorlog("CrosswordFramework()","no game folder in",folder);
 	int w=12,h=8;
-	ifstream in(folder2+"\\board_info.dat");
+	ifstream in(folder2+"/board_info.dat");
 	if(in.is_open()){
 		in.ignore(1024,'=');
 		in>>w;
@@ -22,7 +22,7 @@ int CrosswordFramework(){
 	for(;Crossword.show();){
 		Crossword.info(key);
 		Crossword.save();
-		if((key=getch())=='0'||key==8||key==27) break;
+		if((key=wl_getch())=='0'||key==8||key==27) break;
 		switch(key){
 			case 'a'://answer
 				n=Crossword.SelectWord();

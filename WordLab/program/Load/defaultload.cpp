@@ -19,4 +19,5 @@ int defaultload(char *msgs,int m,int n,int i,...){
 			}
     	}
     va_end(argv);
+    return 0;
 }

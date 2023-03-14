@@ -7,5 +7,6 @@ int execError(int n){
 	queryerror(msgs);
 	msgs.clear();
 	vector<string>().swap(msgs);
+    return 0;
 }
 

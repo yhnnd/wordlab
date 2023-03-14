@@ -3,7 +3,7 @@ void index(char *msg,const int x,const int y,WORD color=white,int BeginPoint = 0
 	char c;
 	for(r=BeginPoint;;){
 		     if(r<0){strclr(msg);return;}
-	    else if((c=getch())==13){strclr(msg,strlen(msg));return;}
+	    else if((c=wl_getch())==13){strclr(msg,strlen(msg));return;}
 	    else if(c==8||c==27){
 			if(r>0) strclr(msg,r--);
 			else{

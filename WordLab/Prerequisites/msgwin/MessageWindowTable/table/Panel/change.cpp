@@ -17,7 +17,7 @@ int Table::Change(tablerow *item,int row,int rowmax,int colmax,int x,int y,int w
 		case 3: row++;//caution: no break
 		case 2:{
 			rowmax++;
-			realloc(item,sizeof(tablerow)*(rowmax+1));
+			item = (tablerow *)realloc(item,sizeof(tablerow)*(rowmax+1));
 			for(int r=rowmax;r>row;r--) item[r].copy(item[r-1]);
 			item[row].Add(x,y,width);
 		}break;
@@ -25,7 +25,7 @@ int Table::Change(tablerow *item,int row,int rowmax,int colmax,int x,int y,int w
 			rowmax--;
 			(*begin)-=(*begin)?1:0;
 			for(int r=row;r<=rowmax;r++) item[r].copy(item[r+1]);
-			realloc(item,sizeof(tablerow)*(rowmax+1));
+			item = (tablerow *)realloc(item,sizeof(tablerow)*(rowmax+1));
 		}break;
 		case 5:
 		default:break;

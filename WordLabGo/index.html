@@ -55,8 +55,7 @@
             text-decoration: underline;
         }
     </style>
-    <div class="jumbotron fixed-top br-0" style="z-index: 0; margin-top: 2rem;min-height: 38rem;">
-
+    <div class="jumbotron fixed-top br-0" style="z-index: 0;margin: 5rem 2rem 0 2rem;min-height: 32rem;">
     </div>
     <div class="row">
         <div class="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 bg-light mt-sm-3 mb-3">
@@ -88,52 +87,16 @@
                         <div id="search-result"></div>
                     </div>
                 </div>
-                <div class="row w-100" style="position: absolute; bottom: 2rem; left: 1rem;">
-                    <div class="col-10 col-md-8 mx-auto text-center">
-                        <a class="mx-1" href="#" data-toggle="modal" data-target="#modal-sign-in">Sign In</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col d-flex justify-content-center">
             <div class="text-muted hover-underline">
-                &copy; Skyside Inc. 2014 - 2019
+                &copy; Skyside Inc. 2014 - 2023
             </div>
         </div>
     </div>
-    <div class="modal" id="modal-sign-in">
-        <div class="modal-dialog">
-            <div class="modal-content br-0">
-                <div class="modal-header">
-                    <h5 class="modal-title overflow-hidden">
-                        Sign In Using ChatRoom Account
-                    </h5>
-                    <button class="close" data-dismiss="modal">
-                        <span>&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Username</label>
-                            <input type="text" class="form-control br-0" id="login-username">
-                        </div>
-                        <div class="form-group">
-                            <label for="message-text" class="col-form-label">Password</label>
-                            <input type="password" class="form-control br-0" id="login-password">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary br-0" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary br-0">Sign In</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script>
         function clearResults() {
             $("#suggestions").empty()

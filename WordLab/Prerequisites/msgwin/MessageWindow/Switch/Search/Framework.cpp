@@ -2,7 +2,7 @@ int MessageWindow::Search(int showpos,int x,int y,int width,const char *msg,int 
 	char keyword[w], c;
 	int r, n= -1;
 	strclr(keyword);
-	for(r=0;(c=getch())!=13;){
+	for(r=0;(c=wl_getch())!=13;){
 	    if(c==8){
 			keyword[r]=0;
 			keyword[--r]=0;

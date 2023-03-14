@@ -9,4 +9,5 @@ int queryupdate(string msg=""){
 		cursormove(1,1);
 		WordUpdate(msg_trim);
 	}
+    return 0;
 }

@@ -4,7 +4,7 @@ void scriptprocessor::consolelog(const std::string & format, const std::string &
 	if(fout.good()) {
 		fout<<"<script>"<<CurrentScriptLine<<std::endl;
 		char *line = (char *) malloc(sizeof(char)*128);
-		sprintf(line,format.c_str(),v1.c_str(),v2.c_str(),v3.c_str());
+		snprintf(line,128,format.c_str(),v1.c_str(),v2.c_str(),v3.c_str());
 		fout<<"<log>"<<line<<std::endl;
 		free(line);
 		fout.close();

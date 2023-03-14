@@ -1,2 +1,6 @@
-int queryand(string msg){}
-int queryor(string msg){}
+int queryand(string msg){
+    return 0;
+}
+int queryor(string msg){
+    return 0;
+}

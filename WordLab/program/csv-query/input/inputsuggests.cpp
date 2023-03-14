@@ -24,4 +24,5 @@ int inputsuggests(char *suggests,char *msg,int lth,const int WindowX) {
 	COORD pos = getxy();
 	inputsuggestsshow(msg+msgbegin,&keywords[0][0],n,lth,maxresult, {(short)WindowX,pos.Y});
 	gotoxy(pos);
+    return 0;
 }

@@ -5,5 +5,5 @@ int AskChar(std::string s){
 	AskCharRenew(s,cache);
 	if(_Show) AskCharShow(cache);
 	AskCharReset();
-	return (ask)?getch():13;
+	return (ask)?wl_getch():13;
 }

@@ -16,7 +16,7 @@ int MessageWindow::ConfirmSwitch(int n,int x,int y,int width,int height){
 			std::cout<<std::setw(2)<<std::setiosflags(std::ios::right)<<1+(tolerance-time_passed)/1000<<"s";
 			Sleep(10);
 		}
-		key=getch();
+		key=wl_getch();
 		     if(key==13) break;
 		else if(key=='0'||key==27||key==8||key=='r'){r=0;goto end;}
 		else if(key>='1'&&key<='9') r=key-'0';

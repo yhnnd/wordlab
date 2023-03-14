@@ -4,7 +4,8 @@ int queryprint(){
 		colorset(backgray);
 		bsvline(print_msg.c_str());
 		print_msg.clear();
-		getch();
+		wl_getch();
 		return 1;
 	}
+    return 0;
 }

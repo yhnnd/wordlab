@@ -11,7 +11,7 @@ for(r=0; r<rwin; r++) {
 	) {
 		for(r0=r+1; r0<=rwin-1; r0++)
 			if(SortEX(s[r0+1].txt,"NOUN")!=0) break;
-		if(AskChar("WOC1-1<v.prep.>½«(",s[r].txt,")ºóÖÃµ½(",s[r0].txt,")ºó?")==13)
+		if(AskChar("WOC1-1<v.prep.>å°†(",s[r].txt,")åç½®åˆ°(",s[r0].txt,")å?")==13)
 			Word_Insert("Right",r,r0);
 	}
 }

@@ -9,7 +9,7 @@ START:
 		if(getline(fin,line)) ++NOL;
 		if(NOL==number) {
 			fin.close();
-			if(fontcolor==2) return line.substr(0,lth);//Interface for Scan(A) engine
+			if(fontcolor==2) return line.substr(0,lth);//Interface for scan(A) engine
 			else if(line.find("/redirected./")!=string::npos) {//Addon that support redirect definition
 				++redirect_times;
 				lth = number = 0;

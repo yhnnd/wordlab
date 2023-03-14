@@ -1,9 +1,9 @@
-//¸üĞÂÊ±¼ä 2015/10/29//adj.+adv.
+//æ›´æ–°æ—¶é—´ 2015/10/29//adj.+adv.
 for(r=0; r<rwin; r++) {
 	if(WordSort(s[r-1].txt)==3
 	        &&WordSort(s[r].txt)==4&&strcmp(s[r].txt,"how")!=0
 	        &&WordSort(s[r+1].txt)!=3) {
-		if(AskChar("WOC1-9<adj.adv.>µ÷»»(",s[r-1].txt,")Óë(",s[r].txt,")?")==13)
+		if(AskChar("WOC1-9<adj.adv.>è°ƒæ¢(",s[r-1].txt,")ä¸(",s[r].txt,")?")==13)
 			WordSwitch(r-1,r);
 	}
 }

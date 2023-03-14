@@ -12,7 +12,7 @@ void changeColor(int x,int y,int *ColorNum) {
 			if(n==r) cout<<")";
 			else cout<<" ";
 		}
-		key=getch();
+		key=wl_getch();
 		if(key==13) break;
 		else if(key==8||key==27||key=='r'||key=='R') return;
 		else if(key=='a'||key=='A'||key=='w'||key=='W') omit(n,n,-1,2);

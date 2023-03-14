@@ -11,7 +11,7 @@ void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC f
 		if(what[r-1]!='\\'&&strchr(brcmdbegin,what[r])) {
 			for(r++,r1=0; what[r-1]=='\\'||!strchr(brcmdend,what[r]); r++,r1++) msg[rmsg][r1]=what[r];
 			strclr(msg[rmsg],r1);
-			if(color = bsvcmdcolor(msg[rmsg])) ColorChange = true;
+			if((color = bsvcmdcolor(msg[rmsg]))!=0) ColorChange = true;
 			else if(strindex(msg[rmsg],"clrful-") >= 0) {
 				ColorfulForeground = true;
 				color_colorful_foreground = colornow();

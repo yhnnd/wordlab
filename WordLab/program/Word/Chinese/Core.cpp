@@ -5,8 +5,9 @@ string WLChineseCore(string line,int fontcolor) {
 	for(int r = 0; r<line.length(); r++) {
 		if(line[r]==',') flagdef = true;
 		else if(line[r]=='/') {
-			if(deny(flagsort,flagsort)) result_line += "<"+getcolorBcmd(2)+">(";
-			else {
+			if((flagsort=!flagsort)==true) {
+                result_line += "<"+getcolorBcmd(2)+">(";
+            } else {
 				result_line += ")";
 				if(fontcolor==1) result_line += "<clrful->(";
 				else result_line += "<"+getChineseColorCommandByNumber(fontcolor)+">(";

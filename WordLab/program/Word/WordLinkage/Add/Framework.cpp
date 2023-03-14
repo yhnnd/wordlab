@@ -3,7 +3,7 @@ void AddNew(const string s) {
 	Dialog.output("start");
 	for(int TIMES=1; TIMES<=2; TIMES++) {
 		AddWordPrintMessage(TIMES,s);
-		if(getch()!=13) {
+		if(wl_getch()!=13) {
 			AddWordPrintErrorMessage(1,s);
 			goto end;
 		}
@@ -13,7 +13,7 @@ void AddNew(const string s) {
 		popup("Add Phrase",0);
 		AddPhrase(s);
 	} else {
-		popup("Add Word <ylw->(",s,0);
+		popup("Add word <ylw->(",s,0);
 		AddWord(s);
 	}
 	end:

@@ -1,7 +1,7 @@
 string AddWordGetTranslation(string word){
 	// WARNING !
-	// SHOULD AND MUST ONLY append word definitions to Chinese database
-	// SHOULD NOT AND MUST NOT add endl or add word to Chinese database
+	// SHOULD AND MUST ONLY append word definitions to chinese database
+	// SHOULD NOT AND MUST NOT add endl or add word to chinese database
 	AddWordPrintMessage(3,word);// start editing definition
 	string line_of_defs="",item_sort,item_trans;
 	for(int i=0;;){// i is item NUMBER_OF_ORDER
@@ -11,7 +11,7 @@ string AddWordGetTranslation(string word){
 			cin>>item_trans;
 			if( item_trans.length()>=2 ){
 				AddWordPrintMessage(5,item_sort+" "+item_trans);//confirm definition item
-				if(getch()==13){
+				if(wl_getch()==13){
 					// append definition item to line_of_defs
 					line_of_defs += (",/"+item_sort+"/@"+item_trans+";");
 					AddWordPrintMessage(9,item_sort+" "+item_trans);// completed
@@ -27,7 +27,7 @@ string AddWordGetTranslation(string word){
 			break;
 		}
 		AddWordPrintMessage(6);// continue appending definitions ?
-		if(getch()!=13) break;
+		if(wl_getch()!=13) break;
 	}
 	AddWordPrintMessage(0);
 	return line_of_defs;

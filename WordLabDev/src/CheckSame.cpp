@@ -24,6 +24,6 @@ void checksame(){
 	if(n){
 		gotoxy(0,2+n);
 		cout<<"total: "<<n;
-		getch();
+		wl_getch();
 	}else popup("no same words found");
 }

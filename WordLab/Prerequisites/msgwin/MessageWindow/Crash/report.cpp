@@ -8,7 +8,7 @@ bool MessageWindow::Report(int X,int Y,int width,int height,const char * route){
 	gotoxy(x+1,++y);
 	std::cout<<"Crash Report";
 	gotoxy(x+1,++y);
-	std::cout<<"åeÕ`ˆó¸æ:";
+	std::cout<<"Error Report:";
 	gotoxy(x+1,++y);
 	if(listen(msg,0,1,{13,0,EOF},128)!=-1){
 	    std::ofstream fout(route,std::ios::app);
@@ -16,7 +16,7 @@ bool MessageWindow::Report(int X,int Y,int width,int height,const char * route){
 		fout.close();
 		gotoxy(x+1,++y);
 		if(!ErrorReport(route)) value=true;
-		getch();
+		wl_getch();
 	    }
 	Erase(X,Y,width,height);
 	return value;

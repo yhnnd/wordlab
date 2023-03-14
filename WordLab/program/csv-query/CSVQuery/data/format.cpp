@@ -1,1 +1,3 @@
-int queryformat(){}
+int queryformat(){
+    return 0;
+}

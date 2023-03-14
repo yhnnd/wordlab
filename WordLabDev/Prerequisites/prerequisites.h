@@ -51,9 +51,9 @@ WORD CurrentColor = white;
 int ScreenX = 100, ScreenY = 30;
 bool _Show=1,_Ask=1,_AskOnce=0,_AutoOnce=0,_ReverseColor=0;
 int bsv_cmd_msg_lth_max = 64;
-PKC MsgWinNewDefaultsRoute=_data_dir"settings\\msgwin\\MsgBlkDefaults.dat";
-PKC TableTitleRoute=_data_dir"settings\\msgwin\\table\\titles.dat";
-PKC ReportFileRoute=_data_dir"logs\\errors\\general.bsv";
+PKC MsgWinNewDefaultsRoute=_data_dir"settings/msgwin/MsgBlkDefaults.dat";
+PKC TableTitleRoute=_data_dir"settings/msgwin/table/titles.dat";
+PKC ReportFileRoute=_data_dir"logs/errors/general.bsv";
 
 class host{
 	public:
@@ -423,7 +423,7 @@ int MoniterDisable();
 int MoniterGetNumber();
 int moniterShow(int x,int y);
 void moniterSet(bool *lock);
-#include "window\\declaration.cpp"
+#include "window/declaration.cpp"
 }//namespace prerequisites
 
 #endif

@@ -59,3 +59,16 @@ load previous progress?
 Answer[A] Hint[H] Rotate[Q/R] Settings[S]
 load previous progress?
 Answer[A] Hint[H] Rotate[Q/R] Settings[S]
+<red->(config error) default file not found
+<red->(config error) default file not found
+<red->(config error) default file not found
+<-red>( database damaged )<-ylw>( lth\(4\) line\(1079\) error\(4233\)
+<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
+ Do you mean apply ?
+<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
+<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
+<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
+<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
+<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
+<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
+<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)

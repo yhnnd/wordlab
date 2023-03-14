@@ -1,7 +1,7 @@
-#include "defaults\\all.cpp"
-#include "adjust\\all.cpp"
-#include "fill\\all.cpp"
-#include "search\\all.cpp"
+#include "defaults/all.cpp"
+#include "adjust/all.cpp"
+#include "fill/all.cpp"
+#include "search/all.cpp"
 #include "setnpl.cpp"
 #include "Framework.cpp"
 messageblock::set(int x,int y,int width,int height,int cleftindex,int npl){

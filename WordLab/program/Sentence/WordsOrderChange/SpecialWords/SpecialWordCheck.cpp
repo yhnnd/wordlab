@@ -3,13 +3,13 @@ int r;
 char keyword[30];
 for(;;){
 system("cls");
-cout<<"Enter Word: ";cin>>keyword;
+cout<<"Enter word: ";cin>>keyword;
 cout<<"SortNo."<<Sort(keyword)<<endl;
 Sort_Show("Sort",Sort(keyword));
 
 for(r=0;r<=c;r++)
   if(compare(keyword,special[r])==0) cout<<"Special:"<<r<<" "<<special[r];
-if(getch()!=13) break;
+if(wl_getch()!=13) break;
 }
 return 0;
 }

@@ -4,6 +4,6 @@
 #include "SearchNumber.cpp"
 #include "CheckSame.cpp"
 #include "Add.cpp"
-#include "Change.cpp"
-#include "Adjust.cpp"
+#include "change.cpp"
+#include "adjust.cpp"
 #include "Framework.cpp"

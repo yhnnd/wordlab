@@ -3,6 +3,7 @@ int queryErrorPrint(string msg){
 	bsvline(msg.c_str(),prerequisites::ScreenX-3);
 	cursormove(1,1);
 	colorreset(white);
+    return 0;
 }
 int queryerror(const char **labels){
 	char msg[128] = "<-red>(";
@@ -16,6 +17,7 @@ int queryerror(const char **labels){
 	strcat(msg,(labels[3]==NULL)?"NULL":labels[3]);
 	strcat(msg,")");
 	queryErrorPrint(msg);
+    return 0;
 }
 int queryerror(vector<string> labels){
 	string msg = "<-red>(";
@@ -29,4 +31,5 @@ int queryerror(vector<string> labels){
 	msg += (labels.size()<4)?"NULL":labels[3];
 	msg += ")";
 	queryErrorPrint(msg);
+    return 0;
 }

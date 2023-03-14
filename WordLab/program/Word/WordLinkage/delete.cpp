@@ -6,7 +6,7 @@ void WordDelete(const string word) {
 		goto end;
 	}
 	Dialog.output("Delete "+word+"?");
-	if(getch()==13) {
+	if(wl_getch()==13) {
 		if(!User.login()) return;
 		char route[64];
 		bool flagEN=0,flagCH=0;

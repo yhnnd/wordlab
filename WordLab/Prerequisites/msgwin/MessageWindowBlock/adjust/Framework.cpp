@@ -6,10 +6,10 @@ void messageblock::Adjust(){
 	    else Frame(0,x,y,aww,awh,awh);
 		gotoxy(x+1,y+1);
 		colorset(backgray);
-		std::cout<<"Message Window Settings";
+		std::cout<<"Message window Settings";
 		for(;;){
 			adjustshowall(r);
-			if((key=getch())==13) break;
+			if((key=wl_getch())==13) break;
 		    else if(key==8||key==27) goto end;
 			else if(key=='a'||key=='w') r--;
 			else r++;

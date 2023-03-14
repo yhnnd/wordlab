@@ -1,4 +1,4 @@
-#include "operatorRight.cpp"
+#include "OperatorRight.cpp"
 constexpr int maths::fact(const int n){
 	return (n<1)?std::numeric_limits<int>::quiet_NaN():(n==1)?1:n*fact(n-1);
 }

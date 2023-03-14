@@ -6,7 +6,7 @@
 #include "noun.cpp"
 #include "nounR.cpp"
 #include "nounD.cpp"
-#include "SortEXCore.cpp"
+#include "sortexcore.cpp"
 int SortEX(char s[],const char Message[]) {
 	return SortEXCore(s,Message);
 }

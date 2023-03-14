@@ -1,4 +1,4 @@
-//½â¾ö so ÎŞ·¨·­Òë³É "Èç´Ë" µÄÎÊÌâ.
+//è§£å†³ so æ— æ³•ç¿»è¯‘æˆ "å¦‚æ­¤" çš„é—®é¢˜.
 if(strcmp(s[rwout].txt,"so")==0
 &&(WordSort(s[rwout+1].txt)==3
- ||WordSort(s[rwout+1].txt)==4)) strcpy(improve,"Èç´Ë");
+ ||WordSort(s[rwout+1].txt)==4)) strcpy(improve,"å¦‚æ­¤");

@@ -1,4 +1,4 @@
-//½â¾ö have ÎŞ·¨·­Òë³É "ÒÑ¾­" µÄÎÊÌâ.
+//è§£å†³ have æ— æ³•ç¿»è¯‘æˆ "å·²ç»" çš„é—®é¢˜.
 //one of 2(v.) 5(vi.) 6(vt.) 9(auxil.)
 if((strcmp(s[rwout].txt,"have")==0
   ||strcmp(s[rwout].txt,"has")==0
@@ -8,4 +8,4 @@ if((strcmp(s[rwout].txt,"have")==0
   &&WordSort(s[rwout+1].txt)!=4
   &&WordSort(s[rwout+1].txt)!=7
   &&WordSort(s[rwout+1].txt)!=8
-  &&WordSort(s[rwout+1].txt)!=10) strcpy(improve,"ÒÑ¾­");
+  &&WordSort(s[rwout+1].txt)!=10) strcpy(improve,"å·²ç»");

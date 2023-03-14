@@ -83,4 +83,5 @@ int queryselect() {
 		}
 	}
 	Table.table((nbuf%2)?"buf.csv":"buf2.csv",0,0,ScreenX-6);
+    return 0;
 }

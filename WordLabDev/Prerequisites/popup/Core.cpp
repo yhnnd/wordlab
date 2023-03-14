@@ -18,10 +18,10 @@ char popupcore(std::string& msg,const int life,const int x,const int y,const int
 	    	std::cout<<1+(life-(clock()-BeginTime))/1000<<"s";
 	    	Sleep(10);
 		}
-		key = getch();
+		key = wl_getch();
 		BreakWait:
 		MessageWindow.Erase(x,0,width,y);
-	}else if(life<0) key=getch();
+	}else if(life<0) key=wl_getch();
 	// reset
 	resetxy(pos);
 	colorreset(colorprev);

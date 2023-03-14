@@ -1,7 +1,7 @@
 #include "Banner.cpp"
 #include "save.cpp"
 #include "Core.cpp"
-#include "Input.cpp"
+#include "input.cpp"
 #include "Framework.cpp"
 #include "DebugInputTerminate.cpp"
 #include "DebugInput.cpp"

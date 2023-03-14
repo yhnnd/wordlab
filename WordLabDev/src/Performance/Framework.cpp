@@ -22,7 +22,7 @@ int Performance(COORD pos= {6,0},int w=64,int h=11,int rift=1,int colwidth=6) {
 	}
 	if(lth==31) Dialog.output("completed",lightgreen,xA,yA);
 	else Dialog.output("aborted",lightred,xA,yA);
-	getch();
+	wl_getch();
 	Dialog.output("reset",lightgreen,xA,yA,0);
 	Dialog.output("reset",lightgreen,xB,yB,0);
 	colorreset(colorprev);

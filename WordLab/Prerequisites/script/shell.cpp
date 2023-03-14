@@ -93,4 +93,5 @@ int scriptshell(int print_debug_msg) {
 		if(scriptshell(tempstr,print_debug_msg,32, {0,y},w,h)) break;
 	}
 	printf("terminated\n");
+    return 0;
 }

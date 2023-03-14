@@ -50,6 +50,7 @@ bool for_expr2_is_false( int it_begin, std::string op, int it_end ) {
 	else if( op == ">=" && !(it_begin >= it_end) ) return true;
 	else if( op == "==" && !(it_begin == it_end) ) return true;
 	else if( op == "!=" && !(it_begin != it_end) ) return true;
+    return false;
 }
 
 void scriptprocessor::langForExecute(std::vector<ForBlock> & forblocks) {

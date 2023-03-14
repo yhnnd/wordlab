@@ -1,1 +1,3 @@
-int querynot(string msg){}
+int querynot(string msg){
+    return 0;
+}

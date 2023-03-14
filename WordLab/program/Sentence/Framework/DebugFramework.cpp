@@ -12,7 +12,7 @@ void FrameworkDebug() {
 		banner();
 		InputDebug();
 		FrameworkCore(x,y);
-		if(popup("Press [ENTER] to exit",-1)==KEY_ENTER) break;
+		if(popup("Press [ENTER] to exit",-1)==WL_KEY_ENTER) break;
 	}
 	_Ask = AskCharPrev;
 	_Show = ShowMsgPrev;

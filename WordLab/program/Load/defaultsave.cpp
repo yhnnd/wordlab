@@ -13,4 +13,5 @@ int defaultsave(const char * route,int i,...){
     	}
     fout.close();
     va_end(argv);
-    }
+    return 0;
+}

@@ -18,7 +18,7 @@ window::INPUT_STATUS window::inputcore(int& x0,int& y0,int& x,int& y){
 		}
 		refresh(x0,y0,x,y);// REFRESH LINE
 		// GET CHAR
-		CHAR = getch();
+		CHAR = wl_getch();
 	    if(CHAR==27){//ESC
 	    	return INPUT_STATUS::ESCAPE;
 	    }else if(CHAR==13){//NEW LINE
@@ -29,7 +29,7 @@ window::INPUT_STATUS window::inputcore(int& x0,int& y0,int& x,int& y){
 				continue;
 			}else return INPUT_STATUS::DELETE_LINE;
 		}else if(CHAR==-32){//BIOSKEY
-			CHAR = getch();
+			CHAR = wl_getch();
 			switch(CHAR){
 				case UP: return INPUT_STATUS::Up;
 				case DOWN: return INPUT_STATUS::Down;

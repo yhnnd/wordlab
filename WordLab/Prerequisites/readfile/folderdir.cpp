@@ -1,4 +1,5 @@
 void folderdir(const char path[],FILE *fp,int level) {
+#if defined(_WIN32)
     char find_path[128];
     strcpy(find_path, path);
     strcat(find_path, "*");
@@ -26,4 +27,5 @@ void folderdir(const char path[],FILE *fp,int level) {
         bContinue = FindNextFile(hFind, &FindFileData);
     }
 	fclose(fp);
+#endif
 }

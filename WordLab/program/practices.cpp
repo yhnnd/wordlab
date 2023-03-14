@@ -64,17 +64,17 @@ void practices(){
 			"                                                <wte->(",
 			"                                                <wte->("};
 		popup("#time=reset();");
-		popup("<-ylw>(step 1 of 3)<-grn>( set Word.Length.Base )",0);
+		popup("<-ylw>(step 1 of 3)<-grn>( set word.Length.Base )",0);
 		key = MessageWindow.Confirm(5,15,5,52,&msgs1[0][0],9,128);
 		fout<<"LengthBase = "<<(key>0&&key<5?key+2:5)<<";"<<endl;
 		
 		popup("#time=reset();");
-		popup("<-ylw>(step 2 of 3)<-grn>( set Word.Length.VaryRange              )",0);
+		popup("<-ylw>(step 2 of 3)<-grn>( set word.Length.VaryRange              )",0);
 		key = MessageWindow.Confirm(5,15,5,52,&msgs2[0][0],9,128);
 		fout<<"LengthVaryRange = "<<(key>0&&key<5?key+3:5)<<";"<<endl;
 		
 		popup("#time=reset();");
-		popup("<-ylw>(step 3 of 3)<-grn>( set Word.Length.Difference                               )",0);
+		popup("<-ylw>(step 3 of 3)<-grn>( set word.Length.Difference                               )",0);
 		key = MessageWindow.Confirm(3,16,5,50,&msg3[0][0],9,128);
 		fout<<"LengthDifference = "<<(key>0&&key<3?key+1:2)<<";"<<endl;
 		
@@ -186,7 +186,7 @@ void practices(){
 			<<(clock()-time_start)/n<<" "//AverageTimeCost
 			<<endl;
 		fout.close();
-		getch();
+		wl_getch();
 	}
 	// clear memory
 	key_answer.clear();

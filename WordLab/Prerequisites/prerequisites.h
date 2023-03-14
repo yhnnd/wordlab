@@ -7,12 +7,75 @@ https://nuwen.net/mingw.html
 #define _PREREQUISITES_H_
 
 //C
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
-#include <ctype.h>
-#include <conio.h>
-#include <windows.h>
+#include <cstdlib>
+#include <cstdarg>
+#include <cstring>
+#include <cctype>
+//#include <conio.h>
+#include <curses.h>
+#include <cstdio>
+#include <termios.h>
+//#include <windows.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+int kbhit(void) {
+    struct termios oldt, newt;
+    int ch;
+    int oldf;
+
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+    fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+    ch = getchar();
+
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    fcntl(STDIN_FILENO, F_SETFL, oldf);
+
+    if (ch != EOF) {
+        ungetc(ch, stdin);
+        return 1;
+    }
+    return 0;
+}
+
+static struct termios oldTermios, currentTermios;
+
+/* Read 1 character with echo */
+char getche(void) {
+    bool echo = true;
+    /* Initialize new terminal i/o settings */
+    tcgetattr(0, &oldTermios); /* grab old terminal i/o settings */
+    currentTermios = oldTermios; /* make new settings same as old settings */
+    currentTermios.c_lflag &= ~ICANON; /* disable buffered i/o */
+    if (echo) {
+        currentTermios.c_lflag |= ECHO; /* set echo mode */
+    } else {
+        currentTermios.c_lflag &= ~ECHO; /* set no echo mode */
+    }
+    tcsetattr(0, TCSANOW, &currentTermios); /* use these new terminal i/o settings now */
+    char ch = getchar();
+    /* Restore old terminal i/o settings */
+    tcsetattr(0, TCSANOW, &oldTermios);
+    return ch;
+}
+
+unsigned int Sleep(unsigned int n){return sleep(n);}
+
+#define WORD unsigned short
+#define BOOL long
+#define SHORT short
+#define HANDLE void *
+#define DWORD unsigned long
+typedef struct _COORD {
+    SHORT X;
+    SHORT Y;
+} COORD, *PCOORD;
+
 #include <cmath>
 #include <ctime>
 //C++
@@ -51,9 +114,9 @@ WORD CurrentColor = white;
 int ScreenX = 100, ScreenY = 30;
 bool _Show=1,_Ask=1,_AskOnce=0,_AutoOnce=0,_ReverseColor=0;
 int bsv_cmd_msg_lth_max = 64;
-PKC MsgWinNewDefaultsRoute=_data_dir"settings\\msgwin\\MsgBlkDefaults.dat";
-PKC TableTitleRoute=_data_dir"settings\\msgwin\\table\\titles.dat";
-PKC ReportFileRoute=_data_dir"logs\\errors\\general.bsv";
+PKC MsgWinNewDefaultsRoute=_data_dir"settings/msgwin/MsgBlkDefaults.dat";
+PKC TableTitleRoute=_data_dir"settings/msgwin/table/titles.dat";
+PKC ReportFileRoute=_data_dir"logs/errors/general.bsv";
 
 class host{
 	public:
@@ -423,7 +486,7 @@ int MoniterDisable();
 int MoniterGetNumber();
 int moniterShow(int x,int y);
 void moniterSet(bool *lock);
-#include "window\\declaration.cpp"
+#include "./window/declaration.cpp"
 }//namespace prerequisites
 
 #endif
@@ -434,5 +497,4 @@ void moniterSet(bool *lock);
 #define  deny(n,i)           n=((i)==true)?false:true
 #define  _min(a,b)           ((a)>(b)?(b):(a))
 #define  _max(a,b)           ((a)>(b)?(a):(b))
-#define  _for(it,container)  for(typeof((container).begin()) it=(container).begin();it!=(container).end();++it)
 

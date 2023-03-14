@@ -16,7 +16,7 @@ void folderdir(const char path[],FILE *fp,int level){
             if (FindFileData.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY){
                 strcpy(find_path, path);
 				strcat(find_path, FindFileData.cFileName);
-				strcat(find_path, "\\");
+				strcat(find_path, "/");
                 folderdir(find_path,fp, level + 1);
             }
         }

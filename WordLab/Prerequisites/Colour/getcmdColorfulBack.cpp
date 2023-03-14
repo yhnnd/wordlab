@@ -8,4 +8,5 @@ std::string getcolorBcmd(int t){
 	else if(tp==4)  return "-cyn";//CYAN
 	else if(tp==5)  return "-blu";//BLUE
 	else if(tp==0)  return "-pnk";//PURPLE
+    return "";
 }

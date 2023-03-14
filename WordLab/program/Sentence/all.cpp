@@ -23,9 +23,9 @@ class sts {
 			rwin = rwout = punct = ma = 0;
 		}
 	public:
-#include "WordsInsert\\all.h"
-#include "WordsOrderChange\\all.cpp"
-#include "Chinese\\all.cpp"
-#include "WordsOut\\all.cpp"
-#include "Framework\\all.cpp"
+#include "WordsInsert/all.h"
+#include "WordsOrderChange/all.cpp"
+#include "Chinese/all.cpp"
+#include "WordsOut/all.cpp"
+#include "Framework/all.cpp"
 };
