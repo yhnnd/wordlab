@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chat Example</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var conn;
+            var username = document.getElementById("username");
+            var setusername = document.getElementById("setusername");
+            var msg = document.getElementById("message");
+            var sendmessage = document.getElementById("sendmessage");
+            var broadcast = document.getElementById("broadcast");
+            var searchword = document.getElementById("searchword");
+            var wordtoadd = document.getElementById("wordtoadd");
+            var defstoadd = document.getElementById("defstoadd");
+            var addword = document.getElementById("addword");
+            var log = document.getElementById("log");
+            var clearlogs = document.getElementById("clearlogs");
+
+            function appendLog(item) {
+                log.appendChild(item);
+            }
+
+            clearlogs.onclick = function (e) {
+                log.replaceChildren();
+            }
+
+            setusername.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                conn.send("username=" + username.value);
+                return false;
+            }
+
+            sendmessage.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                conn.send("message=" + msg.value);
+                msg.value = "";
+                return false;
+            }
+
+            broadcast.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                conn.send("broadcast=" + msg.value);
+                msg.value = "";
+                return false;
+            }
+
+            searchword.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                conn.send("search=" + msg.value);
+                msg.value = "";
+                return false;
+            }
+
+            addword.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                conn.send("addword=" + wordtoadd.value + "=" + defstoadd.value);
+                return false;
+            }
+
+            if (window["WebSocket"]) {
+                conn = new WebSocket("ws://" + document.location.host + "/ws");
+
+                conn.onopen = function (evt) {
+                    var item = document.createElement("div");
+                    item.innerHTML = "<b>Connection opened.</b>";
+                    appendLog(item);
+                };
+                conn.onclose = function (evt) {
+                    var item = document.createElement("div");
+                    item.innerHTML = "<b>Connection closed.</b>";
+                    appendLog(item);
+                };
+                conn.onmessage = function (evt) {
+                    console.log("message received", evt.data);
+                    var messages = evt.data.split('\n');
+                    for (var i = 0; i < messages.length; i++) {
+                        var item = document.createElement("div");
+                        item.innerText = messages[i];
+                        appendLog(item);
+                    }
+                };
+            } else {
+                var item = document.createElement("div");
+                item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
+                appendLog(item);
+            }
+        };
+    </script>
+</head>
+
+<body class="h-screen">
+    <div class="flex flex-row p-12 bg-gray-200 h-1/2">
+        <div class="basis-1/2 bg-amber-200">
+            <div class="flex flex-col gap-4 content-start">
+                <div class="flex w-full self-start justify-start">
+                    <div class="flex-col w-full self-start justify-start bg-lime-400 pt-3 px-6 pb-6">
+                        <div class="flex w-full">
+                            <p>set username</p>
+                        </div>
+                        <div class="flex w-full self-start justify-start">
+                            <input type="text" id="username" autofocus placeholder="username" class="outline outline-blue-500 self-center" />
+                            <button id="setusername" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Set</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex w-full self-start justify-start">
+                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-cyan-300 to-blue-300 p-6">
+                        <div class="flex w-full self-start justify-start">
+                            <button id="clearlogs" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center">Clear Logs</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="basis-1/2 bg-pink-200">
+            <div class="flex flex-col gap-4 content-start">
+                <div class="flex w-full self-start justify-start">
+                    <div class="flex-col w-full self-start justify-start bg-emerald-300 pt-3 px-6 pb-6">
+                        <div class="flex w-full">
+                            <p>send message</p>
+                        </div>
+                        <div class="flex w-full self-start justify-start">
+                            <input type="text" id="message" placeholder="message" class="w-1/2 outline outline-blue-500 self-center" />
+                            <button id="sendmessage"
+                                class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Send</button>
+                            <button id="broadcast"
+                                class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Broadcast</button>
+                            <button id="searchword"
+                                class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex w-full self-start justify-start">
+                    <div class="flex-col w-full self-start justify-start bg-sky-300 pt-3 px-6 pb-6">
+                        <div class="flex w-full">
+                            <p>add word <span class="text-sm font-light text-gray-600">masquerade ,/n./@化妆;,/n./@伪装;,/n./@化妆舞会;</span></p>
+                        </div>
+                        <div class="flex w-full self-start justify-start">
+                            <input type="text" id="wordtoadd" placeholder="word" class="w-1/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm"/>
+                            <input type="text" id="defstoadd" placeholder=",/n./@化妆;,/n./@伪装;,/n./@化妆舞会;" class="w-1/2 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm"/>
+                            <button id="addword" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="px-8 py-4 h-1/2">
+        <div id="log" class="h-full px-4 py-4 bg-black text-white overflow-scroll"></div>
+    </div>
+</body>
+
+</html>

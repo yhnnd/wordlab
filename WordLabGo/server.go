@@ -1,15 +1,14 @@
 package main
 
 import (
-	"strings"
-	"strconv"
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
-	"fmt"
 	"net/http"
 	"os"
-	"encoding/json"
-	// iconv "github.com/djimenez/iconv-go"
+	"strconv"
+	"strings"
 )
 
 var rootdir string = "files/lang-utf8"
