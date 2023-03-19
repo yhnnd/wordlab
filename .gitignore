@@ -1,3 +1,6 @@
 # WordLab Temp files
 *.csv.tmp
 *.csv.prev
+
+# Windows Icon files
+*.ini
