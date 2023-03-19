@@ -16,7 +16,7 @@ type TypeResult struct {
 	Message string	`json:"message"`
 }
 
-func wlsearch(word string) TypeResult {
+func (c *Client) wlsearch(word string) TypeResult {
 	var result TypeResult
 	result.Found = false
 	if (len(word) > 30) {
@@ -28,8 +28,13 @@ func wlsearch(word string) TypeResult {
 	}
 	words := strings.Split(string(englishData), "\n")
 	for index, elem := range words {
+		if len(elem) < len(word) {
+			result.Message = "wlsearch 32: error: database damaged. temp = " + elem + ", word = " + word
+			c.send <- []byte(result.Message)
+			return result
+		}
 		temp := elem[0:len(word)]
-		if word == temp {
+		if strings.EqualFold(word, temp) {
 			result.Index = index
 			result.Found = true
 			chineseData, err := ioutil.ReadFile(rootdir + "/ch/chinese" + strconv.Itoa(len(word)) + ".csv")
