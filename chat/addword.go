@@ -16,10 +16,29 @@ type TypeAddWordResult struct {
 	Total int			`json:"total"`
 	DefsIndex int		`json:"defsindex"`
 	DefsTotal int		`json:"defstotal"`
+	TotalLeft int		`json:"totalleft"`
+	TotalRight int		`json:"totalright"`
 	IsWordAdded bool	`json:"iswordadded"`
 	IsDefsAdded bool	`json:"isdefsadded"`
 	Message string		`json:"message"`
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 func (c *Client) addword(message string) TypeAddWordResult {
 	// Find the index of the equals sign in the message.
@@ -32,8 +51,10 @@ func (c *Client) addword(message string) TypeAddWordResult {
 	result.IsExisted = false
 	result.IsIndexed = false
 	result.Total = 0
+	result.TotalLeft = 0
+	result.TotalRight = 0
 	if (len(word) <=0 || len(word) > 30) {
-		c.send <- []byte("addword 36: word is not valid.")
+		c.send <- []byte("addword 57: word is not valid.")
 		return result
 	}
 	var db_en_dir = rootdir + "/en/english" + strconv.Itoa(len(word)) + ".csv"
@@ -51,35 +72,41 @@ func (c *Client) addword(message string) TypeAddWordResult {
 		temp := elem[0:len(word)]
 		if strings.ToLower(temp) < strings.ToLower(word) {
 			if result.IsIndexed == true {
-				c.send <- []byte("addword 54: error: database damaged. words not correctly ordered.")
+				c.send <- []byte("addword 75: error: database damaged. words not correctly ordered.")
 				return result
 			}
+			result.TotalLeft ++
 			result.Total ++
 		} else if strings.EqualFold(word, temp) {
-			c.send <- []byte("addword 59: word exists. unable to add word. use update.")
+			c.send <- []byte("addword 81: word exists. unable to add word. use update.")
 			return result
 		} else if strings.ToLower(temp) > strings.ToLower(word) {
 			if result.IsIndexed == false {
 				result.Index = index
 				result.IsIndexed = true
 			}
+			result.TotalRight ++
 			result.Total ++
 		} else {
-			result.Message = "addword 68: error: cannot compare temp " + temp + " with word " + word
+			result.Message = "addword 91: error: cannot compare temp " + temp + " with word " + word
 			c.send <- []byte(result.Message)
 			return result
 		}
 	}
 	if (result.Total == len(words)) {
 		if result.IsIndexed {
-			c.send <- []byte("addword 75: total = " + strconv.Itoa(len(words)) + ", index = " + strconv.Itoa(result.Index))
+			c.send <- []byte("addword 98: total = " + strconv.Itoa(len(words)) + ", index = " + strconv.Itoa(result.Index))
+		} else if result.TotalRight == 0 {
+			result.Index = result.Total
+			result.IsIndexed = true
+			c.send <- []byte("addword 102: total = " + strconv.Itoa(len(words)) + ", index = " + strconv.Itoa(result.Index))
 		} else {
-			result.Message = "addword 77: error: cannot index word " + word
+			result.Message = "addword 104: error: cannot index word " + word
 			c.send <- []byte(result.Message)
 			return result
 		}
 	} else {
-		result.Message = "addword 82: error: result.Total = " + strconv.Itoa(result.Total) + " should be " + strconv.Itoa(len(words))
+		result.Message = "addword 109: error: result.Total = " + strconv.Itoa(result.Total) + " should be " + strconv.Itoa(len(words))
 		c.send <- []byte(result.Message)
 		return result
 	}
@@ -94,7 +121,7 @@ func (c *Client) addword(message string) TypeAddWordResult {
 	for index, elem := range words {
 		temp := elem[0:len(word)]
 		if strings.EqualFold(word, temp) {
-			result.Message = "addword 97: word exists. word adding aborted."
+			result.Message = "addword 124: word exists. word adding aborted."
 			c.send <- []byte(result.Message)
 			result.IsExisted = true
 			return result
@@ -125,23 +152,39 @@ func (c *Client) addword(message string) TypeAddWordResult {
 			}
 		}
 		result.Total ++
+		// If new word's Index is last index + 1, append new word to the end of file
+		if index + 1 == len(words) && index + 1 == result.Index && result.IsWordAdded == false {
+			// The last element should not have newline symbol.
+			_, err := f.WriteString("\n" + word)
+			if err != nil {
+				panic(err)
+			}
+			result.IsWordAdded = true
+			result.Total ++
+		}
 	}
 	f.Sync()
 	// Word adding validation
-	if (result.Total < len(words) + 1) {
-		result.IsWordAdded = false
-		result.Message = "addword 133: error: data lost when adding word. aborted."
-		c.send <- []byte(result.Message)
-		return result
-	} else if (result.Total > len(words) + 1) {
-		result.IsWordAdded = false
-		result.Message = "addword 138: error: data duplicated when adding word. aborted."
+	if result.IsWordAdded {
+		if result.Total < len(words) + 1 {
+			result.IsWordAdded = false
+			result.Message = "addword 171: error: data lost when adding word. aborted."
+			c.send <- []byte(result.Message)
+			return result
+		} else if result.Total > len(words) + 1 {
+			result.IsWordAdded = false
+			result.Message = "addword 176: error: data duplicated when adding word. aborted."
+			c.send <- []byte(result.Message)
+			return result
+		}
+	} else {
+		result.Message = "addword 181: error: failed to add word. aborted."
 		c.send <- []byte(result.Message)
 		return result
 	}
 	// Adding definition
 	defLineToAdd := word + " " + defs
-	fmt.Printf("Addword 144: adding %q to chinese database.\n", defLineToAdd)
+	fmt.Printf("Addword 187: adding %q to chinese database.\n", defLineToAdd)
 	// Open original definition database
 	chineseData, err := ioutil.ReadFile(db_cn_dir)
 	if err != nil {
@@ -153,7 +196,7 @@ func (c *Client) addword(message string) TypeAddWordResult {
 		result.DefsTotal = 0
 		result.DefsIndex = 0
 	} else {
-		result.Message = "addword 156: error: definitions total " + strconv.Itoa(len(defLines)) + " does not match words total " + strconv.Itoa(len(words))
+		result.Message = "addword 199: error: definitions total " + strconv.Itoa(len(defLines)) + " does not match words total " + strconv.Itoa(len(words))
 		c.send <- []byte(result.Message)
 		return result
 	}
@@ -165,7 +208,7 @@ func (c *Client) addword(message string) TypeAddWordResult {
 	defer f.Close()
 	for index, defLine := range defLines {
 		if (len(defLine) <= len(word)) {
-			result.Message = "addword 168: error: word definition database damaged."
+			result.Message = "addword 211: error: word definition database damaged."
 			c.send <- []byte(result.Message)
 			return result
 		}
@@ -176,7 +219,7 @@ func (c *Client) addword(message string) TypeAddWordResult {
 			return !unicode.IsGraphic(r)
 		})
 		if (len(temp) != len(word)) {
-			result.Message = "addword 179: len(" + temp + ") = " + strconv.Itoa(len(temp)) + ", len(" + word + ") = " + strconv.Itoa(len(word)) + ", unable to compare temp " + temp + " with word " + word
+			result.Message = "addword 222: len(" + temp + ") = " + strconv.Itoa(len(temp)) + ", len(" + word + ") = " + strconv.Itoa(len(word)) + ", unable to compare temp " + temp + " with word " + word
 			c.send <- []byte(result.Message)
 			return result
 		}
@@ -185,17 +228,17 @@ func (c *Client) addword(message string) TypeAddWordResult {
 		// temp should be greater than the word if its index is greater than the word.
 		if strings.ToLower(temp) < strings.ToLower(word) {
 			if result.IsDefsAdded {
-				result.Message = "addword 188: error: word definition database damaged."
+				result.Message = "addword 231: error: word definition database damaged."
 				c.send <- []byte(result.Message)
 				return result
 			}
 		} else if strings.EqualFold(word, temp) {
-			result.Message = "addword 193: error: word definition exists."
+			result.Message = "addword 236: error: word definition exists."
 			c.send <- []byte(result.Message)
 			return result
 		} else if strings.ToLower(temp) > strings.ToLower(word) {
 			if index < result.Index {
-				result.Message = "addword 198: error: word definition database damaged. temp " + temp + ".Index = " + strconv.Itoa(index) + ". It should be greater than result.Index = " + strconv.Itoa(result.Index)
+				result.Message = "addword 241: error: word definition database damaged. temp " + temp + ".Index = " + strconv.Itoa(index) + ". It should be greater than result.Index = " + strconv.Itoa(result.Index)
 				c.send <- []byte(result.Message)
 				return result
 			} else if index == result.Index {
@@ -211,10 +254,11 @@ func (c *Client) addword(message string) TypeAddWordResult {
 					}
 				}
 				result.IsDefsAdded = true
+				result.DefsIndex = index
 				result.DefsTotal ++
 			}
 		} else {
-			result.Message = "addword 217: error: unable to compare temp " + temp + " with word " + word
+			result.Message = "addword 261: error: unable to compare temp " + temp + " with word " + word
 			c.send <- []byte(result.Message)
 			return result
 		}
@@ -230,22 +274,33 @@ func (c *Client) addword(message string) TypeAddWordResult {
 			}
 		}
 		result.DefsTotal ++
+		// If new definition's Index is last index + 1, append new definition to the end of file
+		if index + 1 == len(defLines) && index + 1 == result.Index && result.IsDefsAdded == false {
+			// The last element have no newline symbol.
+			_, err := f.WriteString("\n" + defLineToAdd)
+			if err != nil {
+				panic(err)
+			}
+			result.IsDefsAdded = true
+			result.DefsIndex = index + 1
+			result.DefsTotal ++
+		}
 	}
 	f.Sync()
 	// Definition adding validation
 	if result.IsDefsAdded == false {
-		result.Message = "addword 237: error: definition adding failed."
+		result.Message = "addword 292: error: definition adding failed."
 		c.send <- []byte(result.Message)
 		return result
 	}
 	if result.DefsTotal < len(defLines) + 1 {
 		result.IsDefsAdded = false
-		result.Message = "addword 243: error: data lost when adding definition. aborted."
+		result.Message = "addword 298: error: data lost when adding definition. aborted."
 		c.send <- []byte(result.Message)
 		return result
 	} else if result.DefsTotal > len(defLines) + 1 {
 		result.IsDefsAdded = false
-		result.Message = "addword 248: error: data duplicated when adding definition. aborted."
+		result.Message = "addword 303: error: data duplicated when adding definition. aborted."
 		c.send <- []byte(result.Message)
 		return result
 	}
@@ -258,7 +313,7 @@ func (c *Client) addword(message string) TypeAddWordResult {
 	// overwrite original definition database
 	os.Rename(tmpdb_cn_dir, db_cn_dir)
 	// word adding and definition adding done.
-	result.Message = "addword 261: word definition added."
+	result.Message = "addword 316: word definition added."
 	c.send <- []byte(result.Message)
 	return result
 }
