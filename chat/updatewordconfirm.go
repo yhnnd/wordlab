@@ -63,7 +63,15 @@ func (c *Client) updatewordconfirm(message string) TypeResult {
 	defLines := strings.Split(string(definitionData), "\n")
 	for index, defLine := range defLines {
 		if index == result.Index {
-			if defLine == stashedDefLine {
+			if len(strings.TrimSpace(stashedDefLine)) <= len(word) {
+				if strings.TrimSpace(defLine) == words[result.Index] + " ,[autofix];" {
+					c.send <- []byte("updatewordconfirm 68: definitions for word " + word + " was damaged and auto fixed.")
+					break
+				} else {
+					c.send <- []byte("updatewordconfirm 71: error: word definitions validation failed.")
+					return result
+				}
+			} else if defLine == stashedDefLine {
 				c.send <- []byte("updatewordconfirm 217: word definition validation done.")
 				break
 			} else {

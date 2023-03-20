@@ -81,11 +81,34 @@ func (c *Client) updateword(message string) TypeResult {
 	}
 	for index, defLine := range defLines {
 		if (len(defLine) <= len(word)) {
-			c.send <- []byte("updateword 84: error: word definition database damaged.")
-			return result
+			// If definitions line has been damaged. Auto fix it.
+			c.send <- []byte("updateword 84: word definition database damaged at index = " + strconv.Itoa(index))
+			if len(defLines) == len(words) && ((index > 0 && strings.HasPrefix(defLines[index-1], words[index-1])) || (index + 1 < len(defLines) && strings.HasPrefix(defLines[index+1], words[index+1]))) {
+				// If auto fix is available
+				_, err := f.WriteString(words[index] + " ,[autofix];")
+				if err != nil {
+					panic(err)
+				}
+				if index + 1 < len(defLines) {
+					_, err := f.WriteString("\n")
+					if err != nil {
+						panic(err)
+					}
+				}
+				c.send <- []byte("updateword 98: auto fixed.")
+				continue
+			} else {
+				c.send <- []byte("updateword 101: definitions database damaged. auto fix failed.")
+				return result
+			}
 		}
 		// Extract word from defintion line.
-		var temp string = defLine[0:strings.Index(defLine, " ")]
+		var IndexOfSpaceMark int = strings.Index(defLine, " ")
+		if IndexOfSpaceMark < 0 {
+			c.send <- []byte("updateword 108: definitions database damaged. auto fix failed.")
+			return result
+		}
+		var temp string = defLine[0:IndexOfSpaceMark]
 		// Trim unexpected invisible characters in a utf8 encoded string.
 		temp = strings.TrimFunc(temp, func(r rune) bool {
 			return !unicode.IsGraphic(r)
