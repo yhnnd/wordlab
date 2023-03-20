@@ -122,19 +122,24 @@
                 return false;
             }
 
+            // Rollback the definition database
+            // This will cancel the add/update changes made to the definition database
+            // Need to confirm the rollback action.
             rollback.onclick = function (e) {
                 if (!conn) {
                     return false;
                 }
-                conn.send("rollback=" + wordtoadd.value + "=" + defstoadd.value);
+                conn.send("rollback=" + wordtoadd.value);
                 return false;
             }
 
+            // Confirm to rollback the definition database
+            // This action cannot be undone.
             rollbackconfirm.onclick = function (e) {
                 if (!conn) {
                     return false;
                 }
-                conn.send("rollbackconfirm=" + wordtoadd.value + "=" + defstoadd.value);
+                conn.send("rollbackconfirm=" + wordtoadd.value);
                 return false;
             }
 

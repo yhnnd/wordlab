@@ -1,5 +1,7 @@
 # WordLab Temp files
 *.csv.tmp
+
+# WordLab Backup files
 *.csv.prev
 
 # Windows Icon files

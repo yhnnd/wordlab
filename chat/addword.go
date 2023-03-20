@@ -110,7 +110,7 @@ func (c *Client) addword(message string) TypeAddWordResult {
 		c.send <- []byte(result.Message)
 		return result
 	}
-	// Adding word to temp english database
+	// Creating temp words database
 	f, err := os.Create(tmpdb_en_dir)
 	if err != nil {
 		panic(err)
@@ -118,6 +118,7 @@ func (c *Client) addword(message string) TypeAddWordResult {
 	defer f.Close()
 	result.IsWordAdded = false
 	result.Total = 0
+	// Adding word to temp words database
 	for index, elem := range words {
 		temp := elem[0:len(word)]
 		if strings.EqualFold(word, temp) {
