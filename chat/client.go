@@ -109,6 +109,12 @@ func (c *Client) readPump() {
 			c.updateword(subStr)
 		} else if strings.HasPrefix(string(message), "updatewordconfirm=") == true {
 			c.updatewordconfirm(subStr)
+		} else if strings.HasPrefix(string(message), "addaura=") == true {
+			c.addaura(subStr)
+		} else if strings.HasPrefix(string(message), "searchaura=") == true {
+			c.searchaura(subStr)
+		} else if strings.HasPrefix(string(message), "searchauraword=") == true {
+			c.searchauraword(subStr)
 		} else {
 			c.send <- message
 		}

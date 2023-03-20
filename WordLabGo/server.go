@@ -16,6 +16,17 @@ var rootdir string = "files/lang-utf8"
 func main() {
 	// name1,err:=iconv.ConvertString(name,"GB2312","utf-8")
 	var cmd string
+	path, err := os.Getwd()
+	if err != nil {
+		log.Println(err)
+	}
+	fmt.Printf("working directory: %q\n", path);
+	path, err = os.Executable()
+	if err != nil {
+		log.Println(err)
+	}
+	fmt.Printf("path of executable: %q\n", path);
+	// Print Menu
 	fmt.Printf("root dir = %q\n[S]tart server\n[C]onfig root dir\n[Q]uit server\n", rootdir)
 	fmt.Scanf("%s", &cmd)
 	if strings.EqualFold(cmd, "Q") || strings.EqualFold(cmd, "Quit") {
@@ -34,6 +45,7 @@ func main() {
 		fmt.Printf("root dir %q is not available!\n", rootdir)
 		os.Exit(1)
 	}
+	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/translate", handler)
 	http.HandleFunc("/search", handleSuggests)
 	http.HandleFunc("/suggestions", handleSuggests)
@@ -56,6 +68,19 @@ type TypeResult struct {
 	DefN int 		`json:"defn"`
 	Found bool		`json:"found"`
 	Message string	`json:"message"`
+}
+
+func serveHome(w http.ResponseWriter, r *http.Request) {
+	log.Printf("url = %s\n", r.URL.Path)
+	if r.URL.Path != "/" {
+		http.Error(w, "Not found", http.StatusNotFound)
+		return
+	}
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	http.ServeFile(w, r, "index.html")
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {

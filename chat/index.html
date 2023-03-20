@@ -19,8 +19,22 @@
             var addword = document.getElementById("addword");
             var updateword = document.getElementById("updateword");
             var updatewordconfirm = document.getElementById("updatewordconfirm");
+            var rollback = document.getElementById("rollback");
+            var rollbackconfirm = document.getElementById("rollbackconfirm");
+            // Add aura and its words
+            var auraname = document.getElementById("auraname");
+            var aurawords = document.getElementById("aurawords");
+            var addaura = document.getElementById("addaura");
+            // Search aura
+            var aura = document.getElementById("aura");
+            var searchaura = document.getElementById("searchaura");
+            // Search word's aura
+            var auraword = document.getElementById("auraword");
+            var searchauraword = document.getElementById("searchauraword");
+
             var log = document.getElementById("log");
             var clearlogs = document.getElementById("clearlogs");
+            var clearinputs = document.getElementById("clearinputs");
 
             function appendLog(item) {
                 log.appendChild(item);
@@ -28,6 +42,18 @@
 
             clearlogs.onclick = function (e) {
                 log.replaceChildren();
+            }
+
+            clearinputs.onclick = function (e) {
+                username.value = "";
+                msg.value = "";
+                wordtoadd.value = "";
+                defstoadd.value = "";
+                auraname.value = "";
+                aurawords.value = "";
+                aura.value = "";
+                auraword.value = "";
+                return false;
             }
 
             setusername.onclick = function (e) {
@@ -43,7 +69,6 @@
                     return false;
                 }
                 conn.send("message=" + msg.value);
-                msg.value = "";
                 return false;
             }
 
@@ -52,7 +77,6 @@
                     return false;
                 }
                 conn.send("broadcast=" + msg.value);
-                msg.value = "";
                 return false;
             }
 
@@ -61,9 +85,18 @@
                     return false;
                 }
                 conn.send("search=" + msg.value);
-                msg.value = "";
                 return false;
             }
+
+            msg.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    if (!conn) {
+                        return false;
+                    }
+                    conn.send("search=" + msg.value);
+                    msg.value = "";
+                }
+            });
 
             addword.onclick = function (e) {
                 if (!conn) {
@@ -86,6 +119,47 @@
                     return false;
                 }
                 conn.send("updatewordconfirm=" + wordtoadd.value + "=" + defstoadd.value);
+                return false;
+            }
+
+            rollback.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                conn.send("rollback=" + wordtoadd.value + "=" + defstoadd.value);
+                return false;
+            }
+
+            rollbackconfirm.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                conn.send("rollbackconfirm=" + wordtoadd.value + "=" + defstoadd.value);
+                return false;
+            }
+
+            addaura.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                // "Your Right To Be Rich" = "Mon, 20 Mar 2023 02:37:04 GMT" = "dynamo, premise, covet, dignified"
+                conn.send("addaura=" + auraname.value + "=" + new Date().toUTCString().split(",").join("") + "=" + aurawords.value);
+                return false;
+            }
+
+            searchaura.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                conn.send("searchaura=" + aura.value);
+                return false;
+            }
+
+            searchauraword.onclick = function (e) {
+                if (!conn) {
+                    return false;
+                }
+                conn.send("searchauraword=" + auraword.value);
                 return false;
             }
 
@@ -123,7 +197,7 @@
 <body class="h-screen">
     <div class="flex flex-row p-12 bg-gray-200 h-1/2">
         <div class="basis-1/2 bg-amber-200">
-            <div class="flex flex-col gap-4 content-start">
+            <div class="flex flex-col gap-2 content-start">
                 <div class="flex w-full self-start justify-start">
                     <div class="flex-col w-full self-start justify-start bg-lime-400 pt-3 px-6 pb-6">
                         <div class="flex w-full">
@@ -136,16 +210,39 @@
                     </div>
                 </div>
                 <div class="flex w-full self-start justify-start">
-                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-cyan-300 to-blue-300 p-6">
+                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-lime-300 to-emerald-300 pl-6 pt-4 pb-6">
+                        <div class="flex w-full">
+                            <p>Add Aura</p>
+                        </div>
                         <div class="flex w-full self-start justify-start">
-                            <button id="clearlogs" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center">Clear Logs</button>
+                            <input type="text" id="auraname" autofocus placeholder="aura" class="w-1/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm" />
+                            <input type="text" id="aurawords" autofocus placeholder="dynamo,premise,covet,dignified,procrastinate" class="w-3/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm" />
+                            <button id="addaura" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Add</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex w-full self-start justify-start">
+                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-pink-300 to-rose-300 pl-6 pt-4 pb-6">
+                        <div class="flex w-full self-start justify-start">
+                            <span class="flex w-1/2">Search Aura</span>
+                            <span class="flex w-1/2">Search Word's Aura</span>
+                        </div>
+                        <div class="flex w-full self-start justify-start">
+                            <div class="flex w-1/2">
+                                <input type="text" id="aura" autofocus placeholder="Your Right To Be Rich" class="w-2/3 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm" />
+                                <button id="searchaura" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Search</button>
+                            </div>
+                            <div class="flex w-1/2 pl-3">
+                                <input type="text" id="auraword" autofocus placeholder="dynamo" class="w-2/3 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm" />
+                                <button id="searchauraword" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Search</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="basis-1/2 bg-pink-200">
-            <div class="flex flex-col gap-4 content-start">
+            <div class="flex flex-col content-start">
                 <div class="flex w-full self-start justify-start">
                     <div class="flex-col w-full self-start justify-start bg-emerald-300 pt-3 px-6 pb-6">
                         <div class="flex w-full">
@@ -163,7 +260,7 @@
                     </div>
                 </div>
                 <div class="flex w-full self-start justify-start">
-                    <div class="flex-col w-full self-start justify-start bg-sky-300 pt-3 pl-6 pb-6">
+                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-yellow-300 to-yellow-200 pt-3 pl-6 pb-6">
                         <div class="flex w-full">
                             <p>add word <span class="text-sm font-light text-gray-600">masquerade ,/n./@化妆;,/n./@伪装;,/n./@化妆舞会;</span></p>
                         </div>
@@ -173,8 +270,18 @@
                             <button id="addword" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Add</button>
                         </div>
                         <div class="flex w-full self-start justify-start mt-2">
-                            <button id="updateword" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center">Update</button>
-                            <button id="updatewordconfirm" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Update Confirm</button>
+                            <button id="updateword" class="text-white bg-green-800 hover:bg-green-700 px-6 py-1 rounded self-center">Update</button>
+                            <button id="updatewordconfirm" class="text-white bg-green-800 hover:bg-green-700 px-6 py-1 rounded self-center ml-3">Update Confirm</button>
+                            <button id="rollback" class="text-white bg-red-800 hover:bg-red-700 px-6 py-1 rounded self-center ml-3">Roll Back</button>
+                            <button id="rollbackconfirm" class="text-white bg-red-800 hover:bg-red-700 px-6 py-1 rounded self-center ml-3">Roll Back Confirm</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex w-full self-start justify-start">
+                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-cyan-300 to-blue-300 p-6">
+                        <div class="flex w-full self-start justify-start">
+                            <button id="clearlogs" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center">Clear Logs</button>
+                            <button id="clearinputs" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Clear Inputs</button>
                         </div>
                     </div>
                 </div>
