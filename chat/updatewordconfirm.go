@@ -72,7 +72,13 @@ func (c *Client) updatewordconfirm(message string) TypeResult {
 			}
 		}
 	}
+	// backup original words database
+	// os.Rename(db_en_dir, db_en_dir + ".prev")
+	// overwrite original words database
+	// os.Rename(tmpdb_en_dir, db_en_dir)
+	// backup original definitions database
 	os.Rename(db_cn_dir, db_cn_dir + ".prev")
+	// overwrite original definitions database
 	os.Rename(tmpdb_cn_dir, db_cn_dir)
 	c.send <- []byte("updatewordconfirm 227: word definition updated.")
 	return result

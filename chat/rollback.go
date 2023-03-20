@@ -61,7 +61,8 @@ func (c *Client) rollback(word string) {
 			// Load words from backup words database.
 			backupwordsData, err := ioutil.ReadFile(prev_db_en_dir)
 			if err != nil {
-				panic(err)
+				c.send <- []byte("rollback: backup not found for word \"" + word + "\". unable to restore.")
+				return
 			}
 			backupwords := strings.Split(string(backupwordsData), "\n")
 			// Search the word in backup words database.
@@ -79,10 +80,37 @@ func (c *Client) rollback(word string) {
 						panic(err)
 					}
 					backupDefsLines := strings.Split(string(backupDefsData), "\n")
-					// Fetch the previous definition of the word by its Index.
+					// Fetch the previous definitions of the word by its Index.
 					// This place has vulnerabilities when we assume the Index of Definitions Line
 					// is same to the Index of the word.
-					IndexedDefsLineInBackupDefsDb = backupDefsLines[index]
+					// There are chances that word database backup's word amount be less than
+					// definitions database backup's definitions amount since adding definitions
+					// will cause both database to backup but updating definitions will cause only
+					// definitions database backup therefore if we add definitions and then update
+					// definitions, the word database's backup will not have the word we added but
+					// the definitions database's backup will have the originally added definitions.
+					var errorcode string = ""
+					IndexedDefsLineInBackupDefsDb = func (lines []string, index int, prefix string) string {
+						for _, line := range lines[index:] {
+							if strings.HasPrefix(line, prefix) {
+								return line
+							} else if len(strings.TrimSpace(line)) < len(prefix) {
+								errorcode = "too short"
+								return line
+							}
+						}
+						errorcode = "not found"
+						return ""
+					}(backupDefsLines, index, word + " ")
+
+					if len(errorcode) > 0 {
+						if errorcode == "not found" {
+							c.send <- []byte("rollback: backup definitions not found for word \"" + word + "\"")
+						} else if errorcode == "too short" {
+							c.send <- []byte("rollback: invalid backup definitions \"" + IndexedDefsLineInBackupDefsDb + "\" cannot be restored for word \"" + word + "\".")
+						}
+						return
+					}
 					// Compare the current definition and the backup definiton.
 					if IndexedDefsLineInCurrentDefsDb == IndexedDefsLineInBackupDefsDb {
 						// If the current definition equals the backup definition,
@@ -243,4 +271,5 @@ func (c *Client) rollback(word string) {
 			}
 		}
 	}
+	c.send <- []byte("rollback: rollback is ready. you need to confirm the rollback.")
 }
