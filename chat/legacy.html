@@ -171,6 +171,9 @@
             xhr.addEventListener("load", function() {
                 eval(xhr.responseText)
             });
+            xhr.addEventListener("error", printErrorMessage);
+            xhr.timeout = 3000;
+            xhr.addEventListener("timeout", printErrorMessage);
             xhr.onreadystatechange = () => {
                 // In local files, status is 0 upon success in Mozilla Firefox
                 if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -223,8 +226,9 @@
             xhr.addEventListener("load", function() {
                 eval(xhr.responseText)
             });
-            xhr.open("GET", url + "&callback=printResult");
-            xhr.send();
+            xhr.addEventListener("error", printErrorMessage);
+            xhr.timeout = 3000;
+            xhr.addEventListener("timeout", printErrorMessage);
             xhr.onreadystatechange = () => {
                 // In local files, status is 0 upon success in Mozilla Firefox
                 if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -238,6 +242,8 @@
                     }
                 }
             };
+            xhr.open("GET", url + "&callback=printResult");
+            xhr.send();
         }
 
         document.querySelector('#search-word').addEventListener("keypress", function (event) {
