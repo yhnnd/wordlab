@@ -6,16 +6,6 @@ import (
 	"strings"
 )
 
-const (
-	rootdir = "../WordLabGo/files/lang-utf8"
-)
-
-type TypeResult struct {
-	Index int 		`json:"num"`
-	Found bool		`json:"found"`
-	Message string	`json:"message"`
-}
-
 func (c *Client) wlsearch(word string) TypeResult {
 	var result TypeResult
 	result.Found = false

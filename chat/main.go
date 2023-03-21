@@ -5,13 +5,54 @@
 package main
 
 import (
-	"flag"
 	"log"
+	"os"
 	"net/http"
 )
 
-var addr = flag.String("addr", ":8080", "http service address")
+const (
+	rootdir = "../WordLabGo/files/lang-utf8"
+)
 
+type TypeDef struct {
+	Text string 	`json:"text"`
+	Sort string 	`json:"sort"`
+	Chinese string 	`json:"chinese"`
+}
+
+type TypeResult struct {
+	Pathname string `json:"pathname"`
+	Word string 	`json:"word"`
+	Lth int 		`json:"lth"`
+	Index int 		`json:"num"`
+	Defs [] TypeDef `json:"defs"`
+	DefN int 		`json:"defn"`
+	Found bool		`json:"found"`
+	Message string	`json:"message"`
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * */
+/*           Legacy Word Lab Go                        */
+/* The Legacy WordLabGo project was migrated here      */
+/* All Legacy files has filename begins with "legacy"  */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * */
+func serveLegacyHome(w http.ResponseWriter, r *http.Request) {
+	log.Printf("url = %s\n", r.URL.Path)
+	if r.URL.Path != "/legacy" {
+		http.Error(w, "Not found", http.StatusNotFound)
+		return
+	}
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	http.ServeFile(w, r, "legacy.html")
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * */
+/*            Websocket Chat                 */
+/*   https://github.com/gorilla/websocket    */
+/* * * * * * * * * * * * * * * * * * * * * * */
 func serveHome(w http.ResponseWriter, r *http.Request) {
 	log.Printf("url = %s\n", r.URL.Path)
 	// log.Println(r.URL)
@@ -27,15 +68,53 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	flag.Parse()
+	/* * * * * * * * * * * * * * * * * * * * * * */
+	/*         Print Working Directory           */
+	/* * * * * * * * * * * * * * * * * * * * * * */
+	path, err := os.Getwd()
+	if err != nil {
+		log.Println(err)
+	}
+	log.Printf("working directory: %q\n", path)
+	path, err = os.Executable()
+	if err != nil {
+		log.Println(err)
+	}
+	log.Printf("path of executable: %q\n", path)
+
+
+
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	/*           Legacy Word Lab Go                        */
+	/* The Legacy WordLabGo project was migrated here      */
+	/* All Legacy files has filename begins with "legacy"  */
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	http.HandleFunc("/legacy", serveLegacyHome)
+	http.HandleFunc("/translate", handleTranslate)
+	var suggests LegacySuggestions
+	suggests.substrRatio = 0.5
+	suggests.subseqRatio = 0.66
+	http.HandleFunc("/suggestions", suggests.handleSuggests)
+
+
+
+
+	/* * * * * * * * * * * * * * * * * * * * * * */
+	/*            Websocket Chat                 */
+	/*   https://github.com/gorilla/websocket    */
+	/* * * * * * * * * * * * * * * * * * * * * * */
 	hub := newHub()
 	go hub.run()
 	http.HandleFunc("/", serveHome)
+	/* * * * * * * * * * * * * * * * * * * * * * * * * */
+	/*     Only This API uses Websocket protocol.      */
+	/* * * * * * * * * * * * * * * * * * * * * * * * * */
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
 		serveWs(hub, w, r)
 	})
-	err := http.ListenAndServe(*addr, nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
+	// Run HTTP Server
+	err2 := http.ListenAndServe("localhost:8080", nil)
+	if err2 != nil {
+		log.Fatal("ListenAndServe: ", err2)
 	}
 }

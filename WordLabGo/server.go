@@ -14,20 +14,21 @@ import (
 var rootdir string = "files/lang-utf8"
 
 func main() {
-	// name1,err:=iconv.ConvertString(name,"GB2312","utf-8")
-	var cmd string
+	// Line 18 to line 27 has been moved to Chat
 	path, err := os.Getwd()
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Printf("working directory: %q\n", path);
+	fmt.Printf("working directory: %q\n", path)
 	path, err = os.Executable()
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Printf("path of executable: %q\n", path);
+	fmt.Printf("path of executable: %q\n", path)
+
 	// Print Menu
 	fmt.Printf("root dir = %q\n[S]tart server\n[C]onfig root dir\n[Q]uit server\n", rootdir)
+	var cmd string
 	fmt.Scanf("%s", &cmd)
 	if strings.EqualFold(cmd, "Q") || strings.EqualFold(cmd, "Quit") {
 		fmt.Println("quit")
@@ -45,9 +46,10 @@ func main() {
 		fmt.Printf("root dir %q is not available!\n", rootdir)
 		os.Exit(1)
 	}
+
+	// Line 51 to line 55 has been moved to Chat
 	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/translate", handler)
-	http.HandleFunc("/search", handleSuggests)
 	http.HandleFunc("/suggestions", handleSuggests)
 	fmt.Println("server is running")
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
@@ -198,7 +200,7 @@ func handleSuggests(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 		for _, word := range words {
-			if(strHasSubseq(word,keyword) && lth/float64(len(word)) >= subseqRatio) {
+			if strHasSubseq(word,keyword) && lth/float64(len(word)) >= subseqRatio {
 				if _, ok := set[word]; ok {
 					continue
 				}

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Lab Legacy</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+
+<body style="background: #000; overflow: hidden;">
+    <style>
+        .br-0 {
+            border-radius: 0;
+        }
+
+        .overflow-hidden {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .hover-underline {
+            cursor: pointer;
+        }
+
+        .hover-underline:hover {
+            text-decoration: underline;
+        }
+
+        .word-sort:hover {
+            transform: scale(1.1) !important;
+            cursor: pointer !important;
+        }
+
+        .word-def:hover {
+            background: darkolivegreen !important;
+            color: lightgoldenrodyellow !important;
+            text-decoration: underline !important;
+            cursor: pointer !important;
+        }
+
+        .def-text:hover {
+            background: lightgoldenrodyellow !important;
+            color: darkolivegreen !important;
+            cursor: pointer !important;
+        }
+
+        .click-to-refresh {
+            cursor: pointer;
+        }
+
+        .click-to-refresh:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <div class="position-fixed w-100 z-0 mt-4 pt-5 px-4">
+        <div class="jumbotron d-block w-100 br-0 alert alert-danger"  style="min-height: 32rem;"></div>
+    </div>
+    <div class="d-block w-100 position-absolute z-1">
+        <div class="row">
+            <div
+                class="col-12 offset-0 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 bg-light mt-sm-3 mb-3">
+                <div class="mx-0 mx-md-4 mx-lg-5 pt-5 px-5" style="min-height: 40rem;">
+                    <div class="row">
+                        <div class="col">
+                            <div class="display-4 text-muted">
+                                WordLab Legacy
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <input class="d-inline-block form-control form-control-sm br-0" type="text" id="search-word">
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <div id="suggestions"></div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <span id="search-result-message"></span>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <div id="search-result"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <div class="text-muted hover-underline">
+                    &copy; Skyside Inc. 2014 - 2023
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function clearResults() {
+            document.querySelector("#suggestions").replaceChildren()
+            document.querySelector("#search-result-message").replaceChildren()
+            document.querySelector("#search-result").replaceChildren()
+        }
+
+        const maxInterval = 100;
+        let prevTime = new Date().getTime();
+
+        function printErrorMessage() {
+            document.querySelector(".jumbotron").classList.remove("alert-success")
+            document.querySelector(".jumbotron").classList.add("alert-danger")
+            clearResults()
+            document.querySelector("#search-result-message").innerHTML =
+            "<span class='bg-danger text-white px-1 click-to-refresh'>suggestion: cannot connect to server</span>"
+            document.querySelector(".click-to-refresh").addEventListener("click", function () {
+                window.location.reload()
+            });
+        }
+
+        function printSuggestions(data) {
+            document.querySelector(".jumbotron").classList.remove("alert-danger")
+            document.querySelector(".jumbotron").classList.add("alert-success")
+            clearResults()
+            let field = document.querySelector("#suggestions")
+            let n = 0
+            for (let i in data["prefix-suggestions"]) {
+                if (++n > 10) break;
+                let word = {
+                    "text": data["prefix-suggestions"][i]
+                };
+                let row = document.createElement("div")
+                row.setAttribute("class", 'd-flex align-items-center mt-1')
+                row.innerHTML = "<span class='word-sort badge text-bg-success mx-1'>prefix</span>" +
+                "<span class='word-def px-1'>" + word.text + "</span>" +
+                "<small class='def-text ms-auto px-1 text-muted'>" + word.text + "</small>"
+                row.addEventListener("click", function () {
+                    document.querySelector('#search-word').value = word.text
+                    document.querySelector('#search-word').focus()
+                    searchWord(word.text)
+                })
+                field.appendChild(row)
+            }
+            for (let i in data["subseq-suggestions"]) {
+                if (++n > 10) break;
+                let word = {
+                    "text": data["subseq-suggestions"][i]
+                };
+                let row = document.createElement("div")
+                row.setAttribute("class", 'd-flex align-items-center mt-1')
+                row.innerHTML = "<span class='word-sort badge text-bg-info mx-1'>subseq</span>" +
+                "<span class='word-def px-1'>" + word.text + "</span>" +
+                "<small class='def-text ms-auto px-1 text-muted'>" + word.text + "</small>"
+                row.addEventListener("click", function () {
+                    document.querySelector('#search-word').value = word.text
+                    document.querySelector('#search-word').focus()
+                    searchWord(word.text)
+                })
+                field.append(row)
+            }
+        }
+
+
+
+        function getSuggestions(word) {
+            let url = "http://localhost:8080/suggestions?word=" + word
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener("load", function() {
+                eval(xhr.responseText)
+            });
+            xhr.onreadystatechange = () => {
+                // In local files, status is 0 upon success in Mozilla Firefox
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    const status = xhr.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        // The request has been completed successfully
+                        eval(xhr.responseText.replace("printSuggestions(","console.log('getsuggestions',"))
+                    } else {
+                        // Oh no! There has been an error with the request!
+                        printErrorMessage()
+                    }
+                }
+            };
+            xhr.open("GET", url + "&callback=printSuggestions");
+            xhr.send();
+        }
+
+
+
+        document.querySelector('#search-word').addEventListener("input", function () {
+            let word = this.value
+            if (new Date().getTime() - prevTime > maxInterval) {
+                prevTime = new Date().getTime();
+                getSuggestions(word);
+            }
+        });
+
+
+
+        function printResult(data) {
+            document.querySelector(".jumbotron").classList.remove("alert-danger")
+            document.querySelector(".jumbotron").classList.add("alert-success")
+            clearResults()
+            document.querySelector("#search-result-message").innerText = data.message
+            let field = document.querySelector("#search-result")
+            for (let i in data.defs) {
+                let def = data.defs[i]
+                let row = document.createElement("div")
+                row.setAttribute("class", 'd-flex align-items-center mt-1')
+                row.innerHTML = "<span class='word-sort badge text-bg-secondary mx-1'>" + def.sort + "</span>" +
+                "<span class='word-def px-1'>" + def.chinese + "</span>" +
+                "<small class='def-text ms-auto px-1 text-muted'>" + def.text + "</small>"
+                field.appendChild(row)
+            }
+        }
+
+        function searchWord(word) {
+            let url = "http://localhost:8080/translate?word=" + word;
+            const xhr = new XMLHttpRequest();
+            xhr.addEventListener("load", function() {
+                eval(xhr.responseText)
+            });
+            xhr.open("GET", url + "&callback=printResult");
+            xhr.send();
+            xhr.onreadystatechange = () => {
+                // In local files, status is 0 upon success in Mozilla Firefox
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    const status = xhr.status;
+                    if (status === 0 || (status >= 200 && status < 400)) {
+                        // The request has been completed successfully
+                        eval(xhr.responseText.replace("printResult(","console.log('searchword',"))
+                    } else {
+                        // Oh no! There has been an error with the request!
+                        printErrorMessage()
+                    }
+                }
+            };
+        }
+
+        document.querySelector('#search-word').addEventListener("keypress", function (event) {
+            if (event.keyCode == 13) {
+                let word = this.value;
+                searchWord(word);
+            }
+        });
+
+        document.querySelector('#search-word').value = ""
+        document.querySelector('#search-word').focus()
+    </script>
+</body>
+
+</html>
