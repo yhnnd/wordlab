@@ -181,6 +181,16 @@
                 return false;
             }
 
+            aura.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    if (!conn) {
+                        return false;
+                    }
+                    conn.send("searchaura=" + aura.value);
+                    aura.value = "";
+                }
+            });
+
             searchaura.onclick = function (e) {
                 if (!conn) {
                     return false;
@@ -188,6 +198,16 @@
                 conn.send("searchaura=" + aura.value);
                 return false;
             }
+
+            auraword.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    if (!conn) {
+                        return false;
+                    }
+                    conn.send("searchauraword=" + auraword.value);
+                    auraword.value = "";
+                }
+            });
 
             searchauraword.onclick = function (e) {
                 if (!conn) {
@@ -252,9 +272,9 @@
 
 
                 <div class="absolute w-full z-10 left-0 px-12" x-show="tab == 'words'">
-                    <div class="flex-col self-start justify-start bg-emerald-300 pt-3 px-6 pb-6">
+                    <div class="flex-col self-start justify-start bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 pt-3 px-6 pb-6">
                         <div class="flex w-full justify-center">
-                            <p class="pr-16">search word</p>
+                            <p class="pr-16 text-white">search word</p>
                         </div>
                         <div class="flex w-full self-start justify-center">
                             <input type="text" id="word" placeholder="word" class="w-2/3 sm:w-1/2 xl:w-1/3 outline outline-blue-500 self-center" />
