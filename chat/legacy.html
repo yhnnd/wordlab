@@ -110,12 +110,12 @@
         const maxInterval = 100;
         let prevTime = new Date().getTime();
 
-        function printErrorMessage() {
+        function printErrorMessage(caller) {
             document.querySelector(".jumbotron").classList.remove("alert-success")
             document.querySelector(".jumbotron").classList.add("alert-danger")
             clearResults()
             document.querySelector("#search-result-message").innerHTML =
-            "<span class='bg-danger text-white px-1 click-to-refresh'>suggestion: cannot connect to server</span>"
+            "<span class='bg-danger text-white px-1 click-to-refresh'>" + caller + ": cannot connect to server</span>"
             document.querySelector(".click-to-refresh").addEventListener("click", function () {
                 window.location.reload()
             });
@@ -171,9 +171,13 @@
             xhr.addEventListener("load", function() {
                 eval(xhr.responseText)
             });
-            xhr.addEventListener("error", printErrorMessage);
+            xhr.addEventListener("error", function() {
+                printErrorMessage("suggestions")
+            });
             xhr.timeout = 3000;
-            xhr.addEventListener("timeout", printErrorMessage);
+            xhr.addEventListener("timeout", function() {
+                printErrorMessage("suggestions")
+            });
             xhr.onreadystatechange = () => {
                 // In local files, status is 0 upon success in Mozilla Firefox
                 if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -183,7 +187,7 @@
                         eval(xhr.responseText.replace("printSuggestions(","console.log('getsuggestions',"))
                     } else {
                         // Oh no! There has been an error with the request!
-                        printErrorMessage()
+                        printErrorMessage("suggestions")
                     }
                 }
             };
@@ -226,9 +230,13 @@
             xhr.addEventListener("load", function() {
                 eval(xhr.responseText)
             });
-            xhr.addEventListener("error", printErrorMessage);
+            xhr.addEventListener("error", function() {
+                printErrorMessage("search")
+            });
             xhr.timeout = 3000;
-            xhr.addEventListener("timeout", printErrorMessage);
+            xhr.addEventListener("timeout", function() {
+                printErrorMessage("search")
+            });
             xhr.onreadystatechange = () => {
                 // In local files, status is 0 upon success in Mozilla Firefox
                 if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -238,7 +246,7 @@
                         eval(xhr.responseText.replace("printResult(","console.log('searchword',"))
                     } else {
                         // Oh no! There has been an error with the request!
-                        printErrorMessage()
+                        printErrorMessage("search")
                     }
                 }
             };
