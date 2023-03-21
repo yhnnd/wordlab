@@ -12,8 +12,8 @@ func (c *Client) rollbackconfirm(word string) {
 	var db_en_dir = rootdir + "/en/english" + lth + ".csv"
 	var db_cn_dir = rootdir + "/ch/chinese" + lth + ".csv"
 
-	var tmpdb_en_dir = rootdir + "/en/english" + lth + ".csv.tmp"
-	var tmpdb_cn_dir = rootdir + "/ch/chinese" + lth + ".csv.tmp"
+	var tmpdb_en_dir = rootdir + "/en/english" + lth + ".csv.rollback.tmp"
+	var tmpdb_cn_dir = rootdir + "/ch/chinese" + lth + ".csv.rollback.tmp"
 
 	// Check if temp words database exists
 	_, err := os.Stat(tmpdb_en_dir)

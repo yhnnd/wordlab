@@ -14,8 +14,8 @@ func (c *Client) rollback(word string) {
 	var db_cn_dir = rootdir + "/ch/chinese" + lth + ".csv"
 	var prev_db_en_dir = rootdir + "/en/english" + lth + ".csv.prev"
 	var prev_db_cn_dir = rootdir + "/ch/chinese" + lth + ".csv.prev"
-	var tmpdb_en_dir = rootdir + "/en/english" + lth + ".csv.tmp"
-	var tmpdb_cn_dir = rootdir + "/ch/chinese" + lth + ".csv.tmp"
+	var tmpdb_en_dir = rootdir + "/en/english" + lth + ".csv.rollback.tmp"
+	var tmpdb_cn_dir = rootdir + "/ch/chinese" + lth + ".csv.rollback.tmp"
 
 	var IsWordInCurrentWords bool = false
 	var IsWordInBackupWords bool = false
@@ -125,7 +125,7 @@ func (c *Client) rollback(word string) {
 						// then the current definition of the word has been updated lately.
 						// Send message to client to inform him the current word
 						// definition and previous word definition.
-						c.send <- []byte("rollback: restore definitions from " + IndexedDefsLineInCurrentDefsDb + " to " + IndexedDefsLineInBackupDefsDb)
+						c.send <- []byte("rollback: restore definitions from \"" + IndexedDefsLineInCurrentDefsDb + "\" to \"" + IndexedDefsLineInBackupDefsDb + "\"")
 						// Set Mode to "Undo Update Mode" which means to restore
 						// the word's previous definitions.
 						Mode = "Undo Update Mode"
@@ -152,6 +152,9 @@ func (c *Client) rollback(word string) {
 
 
 	// Create temp words database.
+	// The temp file must be deleted if the rollback procedure aborts.
+	// If the temp file was not deleted then there will be unexpected
+	// consequences.
 	f, err := os.Create(tmpdb_en_dir)
 	if err != nil {
 		panic(err)
@@ -207,6 +210,9 @@ func (c *Client) rollback(word string) {
 	}
 
 	// Create temp definition database.
+	// The temp file must be deleted if the rollback procedure aborts.
+	// If the temp file was not deleted then there will be unexpected
+	// consequences.
 	f2, err := os.Create(tmpdb_cn_dir)
 	if err != nil {
 		panic(err)

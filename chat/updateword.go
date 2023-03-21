@@ -32,7 +32,7 @@ func (c *Client) updateword(message string) TypeResult {
 	var db_en_dir = rootdir + "/en/english" + strconv.Itoa(len(word)) + ".csv"
 	// Only definition database needs to be updated.
 	var db_cn_dir = rootdir + "/ch/chinese" + strconv.Itoa(len(word)) + ".csv"
-	var tmpdb_cn_dir = rootdir + "/ch/chinese" + strconv.Itoa(len(word)) + ".csv.tmp"
+	var tmpdb_cn_dir = rootdir + "/ch/chinese" + strconv.Itoa(len(word)) + ".csv.update.tmp"
 	englishData, err := ioutil.ReadFile(db_en_dir)
 	if err != nil {
 		panic(err)
@@ -60,6 +60,9 @@ func (c *Client) updateword(message string) TypeResult {
 	}
 	defLines := strings.Split(string(definitionData), "\n")
 	// Creating temp definition database
+	// The temp file must be deleted if the update procedure aborts.
+	// If the temp file was not deleted then there will be unexpected
+	// consequences.
 	f, err := os.Create(tmpdb_cn_dir)
 	if err != nil {
 		panic(err)
@@ -67,7 +70,12 @@ func (c *Client) updateword(message string) TypeResult {
 	defer f.Close()
 	// Filter definition lines.
 	filteredDefLines := []string{}
+	// There are invisible characters in the definitions lines in the definitions database
+	// We have to filter all the invisible characters to clean the data.
     for _, defLine := range defLines {
+		// Note that this trimming function only trims definitions line.
+		// Which means it only filters the invisible characters at two ends of the line.
+		// It will not filter the invisible characters in the midst of the line.
         if len(strings.TrimFunc(defLine, func(r rune) bool {
 			return unicode.IsGraphic(r) == false || unicode.IsSpace(r) == true
 		})) > 0 {
@@ -99,23 +107,38 @@ func (c *Client) updateword(message string) TypeResult {
 				continue
 			} else {
 				c.send <- []byte("updateword 101: definitions database damaged. auto fix failed.")
+				err := os.Remove(tmpdb_cn_dir)
+				if err != nil {
+					panic(err)
+				}
 				return result
 			}
 		}
-		// Extract word from defintion line.
+		// Extract word from defintions line.
+		// Record the separation mark in the definitions line.
 		var IndexOfSpaceMark int = strings.Index(defLine, " ")
+		// If the separation mark was not found.
 		if IndexOfSpaceMark < 0 {
 			c.send <- []byte("updateword 108: definitions database damaged. auto fix failed.")
+			err := os.Remove(tmpdb_cn_dir)
+			if err != nil {
+				panic(err)
+			}
 			return result
 		}
+		// Extract temp word from the definitions line.
 		var temp string = defLine[0:IndexOfSpaceMark]
 		// Trim unexpected invisible characters in a utf8 encoded string.
 		temp = strings.TrimFunc(temp, func(r rune) bool {
-			return !unicode.IsGraphic(r)
+			return unicode.IsGraphic(r) == false
 		})
 		// Safety Check.
 		if (len(temp) != len(word)) {
 			c.send <- []byte("updateword 95: len(" + temp + ") = " + strconv.Itoa(len(temp)) + ", len(" + word + ") = " + strconv.Itoa(len(word)) + ", unable to compare temp " + temp + " with word " + word)
+			err := os.Remove(tmpdb_cn_dir)
+			if err != nil {
+				panic(err)
+			}
 			return result
 		}
 		// Iterate to the place where word should be updated.
@@ -134,6 +157,10 @@ func (c *Client) updateword(message string) TypeResult {
 				c.send <- []byte("updateword 111: stashing word definition.")
 			} else {
 				c.send <- []byte("updateword 113: error: word definition database damaged.")
+				err := os.Remove(tmpdb_cn_dir)
+				if err != nil {
+					panic(err)
+				}
 				return result
 			}
 		} else {

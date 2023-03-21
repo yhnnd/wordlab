@@ -33,7 +33,7 @@ func (c *Client) updatewordconfirm(message string) TypeResult {
 	var db_en_dir = rootdir + "/en/english" + strconv.Itoa(len(word)) + ".csv"
 	// Only definition database needs to be updated.
 	var db_cn_dir = rootdir + "/ch/chinese" + strconv.Itoa(len(word)) + ".csv"
-	var tmpdb_cn_dir = rootdir + "/ch/chinese" + strconv.Itoa(len(word)) + ".csv.tmp"
+	var tmpdb_cn_dir = rootdir + "/ch/chinese" + strconv.Itoa(len(word)) + ".csv.update.tmp"
 	englishData, err := ioutil.ReadFile(db_en_dir)
 	if err != nil {
 		panic(err)
