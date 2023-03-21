@@ -6,14 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Lab Chat</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             var conn;
             var username = document.getElementById("username");
             var setusername = document.getElementById("setusername");
-            var msg = document.getElementById("message");
+            var message = document.getElementById("message");
             var sendmessage = document.getElementById("sendmessage");
             var broadcast = document.getElementById("broadcast");
+
+            var word = document.getElementById("word");
             var searchword = document.getElementById("searchword");
             var wordtoadd = document.getElementById("wordtoadd");
             var defstoadd = document.getElementById("defstoadd");
@@ -39,6 +42,7 @@
 
             function appendLog(item) {
                 log.appendChild(item);
+                log.scrollTop = log.scrollHeight;
             }
 
             clearlogs.onclick = function (e) {
@@ -47,9 +51,13 @@
 
             clearinputs.onclick = function (e) {
                 username.value = "";
-                msg.value = "";
+                message.value = "";
+
+                word.value = "";
+
                 wordtoadd.value = "";
                 defstoadd.value = "";
+
                 auraname.value = "";
                 aurawords.value = "";
                 aura.value = "";
@@ -65,11 +73,21 @@
                 return false;
             }
 
+            username.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    if (!conn) {
+                        return false;
+                    }
+                    conn.send("username=" + username.value);
+                    username.value = "";
+                }
+            });
+
             sendmessage.onclick = function (e) {
                 if (!conn) {
                     return false;
                 }
-                conn.send("message=" + msg.value);
+                conn.send("message=" + message.value);
                 return false;
             }
 
@@ -77,25 +95,35 @@
                 if (!conn) {
                     return false;
                 }
-                conn.send("broadcast=" + msg.value);
+                conn.send("broadcast=" + message.value);
                 return false;
             }
+
+            message.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    if (!conn) {
+                        return false;
+                    }
+                    conn.send("message=" + message.value);
+                    message.value = "";
+                }
+            });
 
             searchword.onclick = function (e) {
                 if (!conn) {
                     return false;
                 }
-                conn.send("search=" + msg.value);
+                conn.send("search=" + word.value);
                 return false;
             }
 
-            msg.addEventListener('keypress', function (e) {
+            word.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     if (!conn) {
                         return false;
                     }
-                    conn.send("search=" + msg.value);
-                    msg.value = "";
+                    conn.send("search=" + word.value);
+                    word.value = "";
                 }
             });
 
@@ -200,34 +228,44 @@
     </script>
 </head>
 
-<body class="h-screen">
-    <div class="flex flex-row p-12 bg-gray-200 h-1/2">
+<body class="h-screen" x-data="{tab: 'words'}">
+    <!-- Navigation Bar -->
+    <div class="absolute top-0 px-12 w-full">
+        <div class="flex flex-row w-full justify-start">
+            <div class="flex flex-col bg-purple-800 text-white px-4 lg:px-8 xl:px-12 py-3 hover:bg-blue-500 cursor-pointer self-start" @click="tab = 'words'">Words</div>
+            <div class="flex flex-col bg-green-800 text-white px-4 lg:px-8 xl:px-12 py-3 hover:bg-blue-500 cursor-pointer self-start" @click="tab = 'aura'">Auras</div>
+            <div class="flex flex-col bg-sky-700 text-white px-4 lg:px-8 xl:px-12 py-3 hover:bg-blue-500 cursor-pointer self-start" @click="tab = 'chat'">Chat</div>
+            <div class="flex flex-col bg-red-800 text-white px-4 lg:px-8 xl:px-12 py-3 hover:bg-blue-500 cursor-pointer self-start" @click="tab = 'database'">Database</div>
+
+            <div class="flex w-full self-start justify-end justify-self-stretch bg-gradient-to-r from-cyan-300 to-blue-300 px-6 py-2">
+                <button id="clearlogs" class="text-white bg-blue-800 hover:bg-blue-500 px-2 md:px-6 lg:px-6 py-1 rounded self-center">Clear&nbsp;Logs</button>
+                <button id="clearinputs" class="text-white bg-blue-800 hover:bg-blue-500 px-2 md:px-6 lg:px-6 py-1 rounded self-center ml-0 lg:ml-3">Clear&nbsp;Inputs</button>
+                <a href="/legacy" class="text-white bg-blue-800 hover:bg-blue-500 px-2 md:px-6 lg:px-6 py-1 rounded self-center ml-0 lg:ml-3">Legacy</a>
+            </div>
+        </div>
+    </div>
+    <!-- Control Panel -->
+    <div class="flex flex-row p-12 bg-gray-200 h-[8.75rem]">
+        <!-- Left Column -->
         <div class="basis-1/2 bg-amber-200">
-            <div class="flex flex-col gap-2 content-start">
-                <div class="flex w-full self-start justify-start">
-                    <div class="flex-col w-full self-start justify-start bg-lime-400 pt-3 px-6 pb-6">
-                        <div class="flex w-full">
-                            <p>set username</p>
+            <div class="flex flex-col content-start">
+
+
+                <div class="absolute w-full z-10 left-0 px-12" x-show="tab == 'words'">
+                    <div class="flex-col self-start justify-start bg-emerald-300 pt-3 px-6 pb-6">
+                        <div class="flex w-full justify-center">
+                            <p class="pr-16">search word</p>
                         </div>
-                        <div class="flex w-full self-start justify-start">
-                            <input type="text" id="username" autofocus placeholder="username" class="outline outline-blue-500 self-center" />
-                            <button id="setusername" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Set</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex w-full self-start justify-start">
-                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-lime-300 to-emerald-300 pl-6 pt-4 pb-6">
-                        <div class="flex w-full">
-                            <p>Add Aura</p>
-                        </div>
-                        <div class="flex w-full self-start justify-start">
-                            <input type="text" id="auraname" autofocus placeholder="aura" class="w-1/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm" />
-                            <input type="text" id="aurawords" autofocus placeholder="dynamo,premise,covet,dignified,procrastinate" class="w-3/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm" />
-                            <button id="addaura" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Add</button>
+                        <div class="flex w-full self-start justify-center">
+                            <input type="text" id="word" placeholder="word" class="w-2/3 sm:w-1/2 xl:w-1/3 outline outline-blue-500 self-center" />
+                            <button id="searchword"
+                                class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Search</button>
                         </div>
                     </div>
                 </div>
-                <div class="flex w-full self-start justify-start">
+
+
+                <div class="flex w-full self-start justify-start" x-show="tab == 'aura'">
                     <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-pink-300 to-rose-300 pl-6 pt-4 pb-6">
                         <div class="flex w-full self-start justify-start">
                             <span class="flex w-1/2">Search Aura</span>
@@ -245,11 +283,59 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="flex w-full self-start justify-start" x-show="tab == 'chat'">
+                    <div class="flex-col w-full self-start justify-start bg-lime-400 pt-3 px-6 pb-6">
+                        <div class="flex w-full">
+                            <p>set username</p>
+                        </div>
+                        <div class="flex w-full self-start justify-start">
+                            <input type="text" id="username" autofocus placeholder="username" class="outline outline-blue-500 self-center" />
+                            <button id="setusername" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Set</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="flex w-full self-start justify-start" x-show="tab == 'database'">
+                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-yellow-300 to-yellow-200 pt-3 pl-6 pb-6">
+                        <div class="flex w-full">
+                            <p>add word <span class="text-sm font-light text-gray-600">masquerade ,/n./@化妆;,/n./@伪装;,/n./@化妆舞会;</span></p>
+                        </div>
+                        <div class="flex w-full self-start justify-start">
+                            <input type="text" id="wordtoadd" placeholder="word" class="w-1/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm"/>
+                            <input type="text" id="defstoadd" placeholder=",/n./@化妆;,/n./@伪装;,/n./@化妆舞会;" class="w-1/2 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm"/>
+                            <button id="addword" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
+        <!-- Right Column -->
         <div class="basis-1/2 bg-pink-200">
             <div class="flex flex-col content-start">
-                <div class="flex w-full self-start justify-start">
+
+
+
+                <div class="flex w-full self-start justify-start" x-show="tab == 'aura'">
+                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-lime-300 to-emerald-300 pl-6 pt-4 pb-6">
+                        <div class="flex w-full">
+                            <p>Add Aura</p>
+                        </div>
+                        <div class="flex w-full self-start justify-start">
+                            <input type="text" id="auraname" autofocus placeholder="aura" class="w-1/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm" />
+                            <input type="text" id="aurawords" autofocus placeholder="dynamo,premise,covet,dignified,procrastinate" class="w-3/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm" />
+                            <button id="addaura" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Add</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="flex w-full self-start justify-start" x-show="tab == 'chat'">
                     <div class="flex-col w-full self-start justify-start bg-emerald-300 pt-3 px-6 pb-6">
                         <div class="flex w-full">
                             <p>send message</p>
@@ -260,22 +346,18 @@
                                 class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Send</button>
                             <button id="broadcast"
                                 class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Broadcast</button>
-                            <button id="searchword"
-                                class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Search</button>
                         </div>
                     </div>
                 </div>
-                <div class="flex w-full self-start justify-start">
+
+
+
+                <div class="flex w-full self-start justify-start" x-show="tab == 'database'">
                     <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-yellow-300 to-yellow-200 pt-3 pl-6 pb-6">
                         <div class="flex w-full">
-                            <p>add word <span class="text-sm font-light text-gray-600">masquerade ,/n./@化妆;,/n./@伪装;,/n./@化妆舞会;</span></p>
+                            <p>database</p>
                         </div>
                         <div class="flex w-full self-start justify-start">
-                            <input type="text" id="wordtoadd" placeholder="word" class="w-1/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm"/>
-                            <input type="text" id="defstoadd" placeholder=",/n./@化妆;,/n./@伪装;,/n./@化妆舞会;" class="w-1/2 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm"/>
-                            <button id="addword" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Add</button>
-                        </div>
-                        <div class="flex w-full self-start justify-start mt-2">
                             <button id="updateword" class="text-white bg-green-800 hover:bg-green-700 px-6 py-1 rounded self-center">Update</button>
                             <button id="updatewordconfirm" class="text-white bg-green-800 hover:bg-green-700 px-6 py-1 rounded self-center ml-3">Update Confirm</button>
                             <button id="rollback" class="text-white bg-red-800 hover:bg-red-700 px-6 py-1 rounded self-center ml-3">Roll Back</button>
@@ -283,19 +365,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex w-full self-start justify-start">
-                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-cyan-300 to-blue-300 p-6">
-                        <div class="flex w-full self-start justify-start">
-                            <button id="clearlogs" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center">Clear Logs</button>
-                            <button id="clearinputs" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Clear Inputs</button>
-                            <a href="/legacy" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Legacy</a>
-                        </div>
-                    </div>
-                </div>
+
+
+                
             </div>
         </div>
     </div>
-    <div class="px-8 py-4 h-1/2">
+    <div class="px-8 py-4 h-[calc(100%-8.75rem)]">
         <div id="log" class="h-full px-4 py-4 bg-black text-white overflow-scroll"></div>
     </div>
 </body>
