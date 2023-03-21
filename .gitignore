@@ -1,5 +1,6 @@
 # WordLab Temp files
-*.csv.tmp
+*.csv.update.tmp
+*.csv.rollback.tmp
 
 # WordLab Backup files
 *.csv.prev
