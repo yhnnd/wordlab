@@ -27,6 +27,7 @@ func (c *Client) searchaura(auraname string) {
 	if err != nil {
 		panic(err)
 	}
+	// (new Date()).toUTCString().split(",").join("")
 	/*
 	Index,Aura Id,Aura Name,Time Created,Time Modified,
 	1,"1","Your Right To Be Rich","Mon 20 Mar 2023 02:42:32 GMT","Mon 20 Mar 2023 02:42:32 GMT",

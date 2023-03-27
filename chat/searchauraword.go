@@ -11,6 +11,7 @@ func (c *Client) searchauraword(auraword string) {
 	if err != nil {
 		panic(err)
 	}
+	// (new Date()).toUTCString().split(",").join("")
 	/*
 	Index,Word,Aura Id,Aura Name,Time Added,
 	1,"dynamo","1","Your Right To Be Rich","Mon 20 Mar 2023 02:42:32 GMT",
