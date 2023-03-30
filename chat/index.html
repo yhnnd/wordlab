@@ -10,43 +10,58 @@
     <script type="text/javascript">
         window.onload = function () {
             var conn;
-            var username = document.getElementById("username");
-            var setusername = document.getElementById("setusername");
-            var message = document.getElementById("message");
-            var sendmessage = document.getElementById("sendmessage");
-            var broadcast = document.getElementById("broadcast");
+            const username = document.getElementById("username");
+            const setusername = document.getElementById("setusername");
+            const message = document.getElementById("message");
+            const sendmessage = document.getElementById("sendmessage");
+            const broadcast = document.getElementById("broadcast");
 
-            var word = document.getElementById("word");
-            var searchword = document.getElementById("searchword");
-            var wordtoadd = document.getElementById("wordtoadd");
-            var defstoadd = document.getElementById("defstoadd");
-            var addword = document.getElementById("addword");
-            var updateword = document.getElementById("updateword");
-            var updatewordconfirm = document.getElementById("updatewordconfirm");
-            var rollback = document.getElementById("rollback");
-            var rollbackconfirm = document.getElementById("rollbackconfirm");
+            const word = document.getElementById("word");
+            const searchword = document.getElementById("searchword");
+            const wordtoadd = document.getElementById("wordtoadd");
+            const defstoadd = document.getElementById("defstoadd");
+            const addword = document.getElementById("addword");
+            const updateword = document.getElementById("updateword");
+            const updatewordconfirm = document.getElementById("updatewordconfirm");
+            const rollback = document.getElementById("rollback");
+            const rollbackconfirm = document.getElementById("rollbackconfirm");
             // Add aura and its words
-            var auraname = document.getElementById("auraname");
-            var aurawords = document.getElementById("aurawords");
-            var addaura = document.getElementById("addaura");
+            const auraname = document.getElementById("auraname");
+            const aurawords = document.getElementById("aurawords");
+            const addaura = document.getElementById("addaura");
             // Search aura
-            var aura = document.getElementById("aura");
-            var searchaura = document.getElementById("searchaura");
+            const aura = document.getElementById("aura");
+            const searchaura = document.getElementById("searchaura");
             // Search word's aura
-            var auraword = document.getElementById("auraword");
-            var searchauraword = document.getElementById("searchauraword");
+            const auraword = document.getElementById("auraword");
+            const searchauraword = document.getElementById("searchauraword");
 
-            var log = document.getElementById("log");
-            var clearlogs = document.getElementById("clearlogs");
-            var clearinputs = document.getElementById("clearinputs");
+            const log = document.getElementById("log");
+            const clearlogs = document.getElementById("clearlogs");
+            const clearinputs = document.getElementById("clearinputs");
+
+            // Modal Add Word
+            const modal_addword = document.getElementById("modal-addword");
+            const modal_addword_log = document.getElementById("modal-addword-log");
+            const adddef = document.getElementById("adddef");
+            const defsort = document.getElementById("defsort");
+            const deftext = document.getElementById("deftext");
 
             function appendLog(item) {
                 log.appendChild(item);
                 log.scrollTop = log.scrollHeight;
+                // If modal is hidden, it should have a style of "display: none;".
+                // If modal is shown, it should not have a style.
+                let modal_addword_style = modal_addword.getAttribute("style");
+                if (modal_addword_style == null) {
+                    modal_addword_log.appendChild(item);
+                    modal_addword_log.scrollTop = modal_addword_log.scrollHeight;
+                }
             }
 
             clearlogs.onclick = function (e) {
                 log.replaceChildren();
+                modal_addword_log.replaceChildren();
             }
 
             clearinputs.onclick = function (e) {
@@ -217,6 +232,16 @@
                 return false;
             }
 
+            adddef.onclick = function (e) {
+                if (deftext.value.includes("@") == false) {
+                    deftext.value = "@" + deftext.value;
+                }
+                const def = ",/" + defsort.value + "/" + deftext.value + ";";
+                defstoadd.value += def;
+                deftext.value = "";
+                return false;
+            }
+
             if (window["WebSocket"]) {
                 conn = new WebSocket("ws://" + document.location.host + "/ws");
 
@@ -248,14 +273,13 @@
     </script>
 </head>
 
-<body class="h-screen" x-data="{tab: 'words'}">
+<body class="h-screen" x-data="{tab: 'words', modal: 'none'}">
     <!-- Navigation Bar -->
     <div class="absolute top-0 px-12 w-full">
         <div class="flex flex-row w-full justify-start">
             <div class="flex flex-col bg-purple-800 text-white px-4 lg:px-8 xl:px-12 py-3 hover:bg-blue-500 cursor-pointer self-start" @click="tab = 'words'">Words</div>
             <div class="flex flex-col bg-green-800 text-white px-4 lg:px-8 xl:px-12 py-3 hover:bg-blue-500 cursor-pointer self-start" @click="tab = 'aura'">Auras</div>
             <div class="flex flex-col bg-sky-700 text-white px-4 lg:px-8 xl:px-12 py-3 hover:bg-blue-500 cursor-pointer self-start" @click="tab = 'chat'">Chat</div>
-            <div class="flex flex-col bg-red-800 text-white px-4 lg:px-8 xl:px-12 py-3 hover:bg-blue-500 cursor-pointer self-start" @click="tab = 'database'">Database</div>
 
             <div class="flex w-full self-start justify-end justify-self-stretch bg-gradient-to-r from-cyan-300 to-blue-300 px-6 py-2">
                 <button id="clearlogs" class="text-white bg-blue-800 hover:bg-blue-500 px-2 md:px-6 lg:px-6 py-1 rounded self-center">Clear&nbsp;Logs</button>
@@ -277,9 +301,9 @@
                             <p class="pr-16 text-white">search word</p>
                         </div>
                         <div class="flex w-full self-start justify-center">
-                            <input type="text" id="word" placeholder="word" class="w-2/3 sm:w-1/2 xl:w-1/3 outline outline-blue-500 self-center" />
-                            <button id="searchword"
-                                class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Search</button>
+                            <input type="text" id="word" placeholder="word" class="w-2/3 sm:w-1/2 xl:w-1/3 outline outline-blue-500 self-center ml-32" />
+                            <button id="searchword" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Search</button>
+                            <button class="text-white bg-green-600 hover:bg-green-500 px-6 py-1 rounded self-center ml-3" @click="modal = 'addword'">Add</button>
                         </div>
                     </div>
                 </div>
@@ -317,19 +341,6 @@
                     </div>
                 </div>
 
-
-                <div class="flex w-full self-start justify-start" x-show="tab == 'database'">
-                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-yellow-300 to-yellow-200 pt-3 pl-6 pb-6">
-                        <div class="flex w-full">
-                            <p>add word <span class="text-sm font-light text-gray-600">masquerade ,/n./@化妆;,/n./@伪装;,/n./@化妆舞会;</span></p>
-                        </div>
-                        <div class="flex w-full self-start justify-start">
-                            <input type="text" id="wordtoadd" placeholder="word" class="w-1/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm"/>
-                            <input type="text" id="defstoadd" placeholder=",/n./@化妆;,/n./@伪装;,/n./@化妆舞会;" class="w-1/2 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm"/>
-                            <button id="addword" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Add</button>
-                        </div>
-                    </div>
-                </div>
 
 
             </div>
@@ -371,28 +382,54 @@
                 </div>
 
 
-
-                <div class="flex w-full self-start justify-start" x-show="tab == 'database'">
-                    <div class="flex-col w-full self-start justify-start bg-gradient-to-r from-yellow-300 to-yellow-200 pt-3 pl-6 pb-6">
-                        <div class="flex w-full">
-                            <p>database</p>
-                        </div>
-                        <div class="flex w-full self-start justify-start">
-                            <button id="updateword" class="text-white bg-green-800 hover:bg-green-700 px-6 py-1 rounded self-center">Update</button>
-                            <button id="updatewordconfirm" class="text-white bg-green-800 hover:bg-green-700 px-6 py-1 rounded self-center ml-3">Update Confirm</button>
-                            <button id="rollback" class="text-white bg-red-800 hover:bg-red-700 px-6 py-1 rounded self-center ml-3">Roll Back</button>
-                            <button id="rollbackconfirm" class="text-white bg-red-800 hover:bg-red-700 px-6 py-1 rounded self-center ml-3">Roll Back Confirm</button>
-                        </div>
-                    </div>
-                </div>
-
-
                 
             </div>
         </div>
     </div>
     <div class="px-8 py-4 h-[calc(100%-8.75rem)]">
         <div id="log" class="h-full px-4 py-4 bg-black text-white overflow-scroll"></div>
+    </div>
+
+    <div id="modal-addword" class="fixed top-0 z-40 bg-[rgba(255,255,255,0.5)] w-screen h-screen xl:px-36" x-show="modal == 'addword'">
+        <div class="w-full h-full bg-white">
+            <div class="flex w-full justify-between p-6">
+                <span class="flex self-end w-3/4">
+                    <input type="text" id="wordtoadd" autocomplete="off" value="" placeholder="word" class="w-1/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm leading-8 px-1"/>
+                    <input type="text" id="defstoadd" autocomplete="off" value="" placeholder="definitions" class="w-3/4 outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm leading-8 px-1"/>
+                    <div class="self-center w-6 cursor-pointer ml-3" onclick="document.getElementById('defstoadd').value='';">
+                        <svg class="w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="fill:rgb(59, 130, 246);">
+                            <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/>
+                        </svg>
+                    </div>
+                </span>
+                <div class="w-12 cursor-pointer" @click="modal = 'none'">
+                    <svg class="w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/></svg>
+                </div>
+            </div>
+            <div class="flex w-full self-start justify-start p-6 pr-36 border">
+                <select type="text" id="defsort" autocomplete="off" class="w-48 outline outline-blue-500 self-center h-8 px-1 bg-white">
+                    <option value="n." selected>n.&nbsp;(noun)</option>
+                    <option value="v.">v.&nbsp;(verb)</option>
+                    <option value="vt.">vt.&nbsp;(verb transitive)</option>
+                    <option value="vi.">vi.&nbsp;(verb intransitive)</option>
+                    <option value="adj.">adj.&nbsp;(adjective)</option>
+                    <option value="adv.">adv.&nbsp;(adverb)</option>
+                    <option value="prep.">prep.&nbsp;(preposition)</option>
+                    <option value="conj.">conj.&nbsp;(conjunctive)</option>
+                    <option value="abbr.">abbr.&nbsp;(abbreviation)</option>
+                </select>
+                <input type="text" id="deftext" placeholder="@化妆" autocomplete="off" class="xl:w-[32rem] min-w-[24rem] outline outline-blue-500 self-center placeholder:font-light placeholder:text-sm leading-8 px-1 ml-2"/>
+                <input type="button" id="adddef" value="add&nbsp;def" class="px-6 text-green-500 outline outline-green-500 hover:text-white hover:bg-green-500 self-center leading-8 px-1 ml-2 cursor-pointer">
+            </div>
+            <div class="flex w-full self-start justify-end p-6 pr-36 border border-t-0">
+                <button id="addword" class="text-white bg-blue-800 hover:bg-blue-500 px-4 lg:px-6 py-1 rounded self-center ml-3">Add</button>
+                <button id="updateword" class="text-white bg-green-800 hover:bg-green-700 px-4 lg:px-6 py-1 rounded self-center ml-3">Update</button>
+                <button id="updatewordconfirm" class="text-white bg-green-800 hover:bg-green-700 px-4 lg:px-6 py-1 rounded self-center ml-3">Update&nbsp;Confirm</button>
+                <button id="rollback" class="text-white bg-red-800 hover:bg-red-700 px-4 lg:px-6 py-1 rounded self-center ml-3">Roll&nbsp;Back</button>
+                <button id="rollbackconfirm" class="text-white bg-red-800 hover:bg-red-700 px-4 lg:px-6 py-1 rounded self-center ml-3">Roll&nbsp;Back&nbsp;Confirm</button>
+            </div>
+            <div class="w-full h-[calc(100%-259px)] text-white bg-black px-4 py-4 overflow-scroll" id="modal-addword-log"></div>
+        </div>
     </div>
 </body>
 
