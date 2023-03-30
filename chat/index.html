@@ -233,11 +233,15 @@
             }
 
             adddef.onclick = function (e) {
+                deftext.value = deftext.value.trim();
                 if (deftext.value.includes("@") == false) {
                     deftext.value = "@" + deftext.value;
                 }
-                const def = ",/" + defsort.value + "/" + deftext.value + ";";
-                defstoadd.value += def;
+                if (deftext.value.endsWith(";") == false) {
+                    deftext.value = deftext.value + ";";
+                }
+                const def = ",/" + defsort.value + "/" + deftext.value;
+                defstoadd.value = defstoadd.value.trim() + def;
                 deftext.value = "";
                 return false;
             }
