@@ -7,3 +7,6 @@
 
 # Windows Icon files
 *.ini
+
+# Trash files
+.DS_Store
