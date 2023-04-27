@@ -76,8 +76,8 @@
 +------------------------+------------+------------+
 */
 
-std::string get_mac_os_color_code(WORD color) {// MacOS & Linux only
-    switch(color) {
+std::string get_mac_os_foreground_color_code(WORD color) {
+    switch (color) {
         // Foreground Dark
         case red: return "31";
         case green: return "32";
@@ -86,7 +86,7 @@ std::string get_mac_os_color_code(WORD color) {// MacOS & Linux only
         case purple: return "35";
         case cyan: return "36";
         case darkwhite: return "37";
-        // Foreground Light
+            // Foreground Light
         case lightred: return "91";
         case lightgreen: return "92";
         case lightyellow: return "93";
@@ -94,6 +94,12 @@ std::string get_mac_os_color_code(WORD color) {// MacOS & Linux only
         case lightpurple: return "95";
         case lightcyan: return "96";
         case lightwhite: return "97";
+        default: return "";
+    }
+}
+
+std::string get_mac_os_background_color_code(WORD color) {
+    switch (color) {
         // Background Dark
         case backred: return ";41";
         case backgreen: return ";42";
@@ -110,24 +116,54 @@ std::string get_mac_os_color_code(WORD color) {// MacOS & Linux only
         case backlightpurple: return ";105";
         case backlightcyan: return ";106";
         case backlightwhite: return ";107";
-        // Both Foreground Dark and Background Dark
-        case bothred: return get_mac_os_color_code(red) + get_mac_os_color_code(backred);
-        case bothgreen: return get_mac_os_color_code(green) + get_mac_os_color_code(backgreen);
-        case bothyellow: return get_mac_os_color_code(yellow) + get_mac_os_color_code(backyellow);
-        case bothblue: return get_mac_os_color_code(blue) + get_mac_os_color_code(backblue);
-        case bothpurple: return get_mac_os_color_code(purple) + get_mac_os_color_code(backpurple);
-        case bothcyan: return get_mac_os_color_code(cyan) + get_mac_os_color_code(backcyan);
-        case bothdarkwhite: return get_mac_os_color_code(darkwhite) + get_mac_os_color_code(backdarkwhite);
-        // Both Foreground Light and Background Light
-        case bothlightred: return get_mac_os_color_code(lightred) + get_mac_os_color_code(backlightred);
-        case bothlightgreen: return get_mac_os_color_code(lightgreen) + get_mac_os_color_code(backlightgreen);
-        case bothlightyellow: return get_mac_os_color_code(lightyellow) + get_mac_os_color_code(backlightyellow);
-        case bothlightblue: return get_mac_os_color_code(lightblue) + get_mac_os_color_code(backlightblue);
-        case bothlightpurple: return get_mac_os_color_code(lightpurple) + get_mac_os_color_code(backlightpurple);
-        case bothlightcyan: return get_mac_os_color_code(lightcyan) + get_mac_os_color_code(backlightcyan);
-        case bothlightwhite: return get_mac_os_color_code(lightwhite) + get_mac_os_color_code(backlightwhite);
-        default: return "97";
+        default: return "";
     }
+}
+
+std::string get_mac_os_color_code(WORD color) {// MacOS & Linux only
+    std::string code = "";
+    const std::string foreground_code = get_mac_os_foreground_color_code(color);
+    const std::string background_code = get_mac_os_background_color_code(color);
+    if (foreground_code.length() == 0 && background_code.length() == 0) {
+        switch(color) {
+            // Both Foreground Dark and Background Dark
+            case bothred: return get_mac_os_foreground_color_code(red) + get_mac_os_background_color_code(backred);
+            break;
+            case bothgreen: return get_mac_os_foreground_color_code(green) + get_mac_os_background_color_code(backgreen);
+            break;
+            case bothyellow: return get_mac_os_foreground_color_code(yellow) + get_mac_os_background_color_code(backyellow);
+            break;
+            case bothblue: return get_mac_os_foreground_color_code(blue) + get_mac_os_background_color_code(backblue);
+            break;
+            case bothpurple: return get_mac_os_foreground_color_code(purple) + get_mac_os_background_color_code(backpurple);
+            break;
+            case bothcyan: return get_mac_os_foreground_color_code(cyan) + get_mac_os_background_color_code(backcyan);
+            break;
+            case bothdarkwhite: return get_mac_os_foreground_color_code(darkwhite) + get_mac_os_background_color_code(backdarkwhite);
+            break;
+            // Both Foreground Light and Background Light
+            case bothlightred: return get_mac_os_foreground_color_code(lightred) + get_mac_os_background_color_code(backlightred);
+            break;
+            case bothlightgreen: return get_mac_os_foreground_color_code(lightgreen) + get_mac_os_background_color_code(backlightgreen);
+            break;
+            case bothlightyellow: return get_mac_os_foreground_color_code(lightyellow) + get_mac_os_background_color_code(backlightyellow);
+            break;
+            case bothlightblue: return get_mac_os_foreground_color_code(lightblue) + get_mac_os_background_color_code(backlightblue);
+            break;
+            case bothlightpurple: return get_mac_os_foreground_color_code(lightpurple) + get_mac_os_background_color_code(backlightpurple);
+            break;
+            case bothlightcyan: return get_mac_os_foreground_color_code(lightcyan) + get_mac_os_background_color_code(backlightcyan);
+            break;
+            case bothlightwhite: return get_mac_os_foreground_color_code(lightwhite) + get_mac_os_background_color_code(backlightwhite);
+            break;
+            default: return "97;40";
+        }
+    } else if (foreground_code.length() == 0) {
+        code = get_mac_os_foreground_color_code(lightwhite) + background_code;
+    } else if (background_code.length() == 0) {
+        code = foreground_code + ";40";
+    }
+    return code;
 }
 #endif
 

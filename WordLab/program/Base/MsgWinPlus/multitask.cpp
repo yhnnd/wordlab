@@ -1,6 +1,6 @@
 int multitask(int x,int y,int width,char Menu[][LINEMAX],int T=0,int n=0,bool backcolor=0){
 	int a = -1;
-	bool backcolorold=MessageWindow.SetBackground(backcolor);
+	bool backcolorold = MessageWindow.SetBackground(backcolor);
 #if defined(_WIN32)
 	if (version==OLD) {
 	    if (T==0) {
@@ -17,15 +17,17 @@ int multitask(int x,int y,int width,char Menu[][LINEMAX],int T=0,int n=0,bool ba
     for (int i = 0;i < maxlength;++i) {
         printf("%d %s\n", i, Menu[i]);
     }
-    int choice;
+    string choice;
     for (;;) {
         cout << "input choice:";
         cin >> choice;
-        if (choice >= 0 && choice < maxlength) {
-            return choice;
-        } else {
-            cout << "illegal choice" << endl;
+        if (isdigit(choice.c_str()[0])) {
+            sscanf(choice.c_str(), "%d[^\n]", &a);
+            if (a >= 0 && a < maxlength) {
+                break;
+            }
         }
+        popup("<red-> (error) <ylw->(\\(illegal choice\\))",0);
     }
 #endif
 	MessageWindow.SetBackground(backcolorold);

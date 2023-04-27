@@ -8,7 +8,8 @@ BOOL colorset(WORD wAttributes){
 #else
     https://stackoverflow.com/questions/33309136/change-color-in-os-x-console-output/33311700
     current_color = wAttributes;
-    printf("\x1b[%sm", get_mac_os_color_code(wAttributes).c_str());
+    const std::string color = get_mac_os_color_code(wAttributes);
+    printf("\x1b[%sm", color.c_str());
 #endif
     return 0;
 }
