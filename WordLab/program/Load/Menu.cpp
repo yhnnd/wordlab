@@ -12,7 +12,7 @@ int Menu(std::string foldername,int x,int y,int width,int Times,int nprev) {
 		return num_lines;
 	}
 	for(;;) {
-		colorset(white);
+		colorset(lightwhite);
 		system("cls");
 		PrintSoftwareInfo();
 		n = multitask(x,y,width,menu,Times,nprev);

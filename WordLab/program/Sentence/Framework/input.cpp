@@ -3,7 +3,7 @@ char Input(int x,int y) {
 	char c;
 	for(r=0,c=0,strclr(s[rwin].txt);; r++) {
 	begin:
-		colorset(white);
+		colorset(lightwhite);
 		c = getche();
 		if(c==8) {
 			cout<<" \b";

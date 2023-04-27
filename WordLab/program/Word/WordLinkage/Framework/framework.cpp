@@ -7,7 +7,7 @@ int WLFramework() {
 			Ctype = 1;
 		}
 	}
-	colorset(white);
+	colorset(lightwhite);
 #ifdef _WIN32
 	system("cls");
 	for(;;) {
@@ -45,8 +45,11 @@ int WLFramework() {
 	}
 #elif __APPLE__
     for (;;) {
-        cout << endl << "Search:";
+        cout << endl << "input # to quit) Search:";
         cin >> s;
+        if (strcmp(s, "#") == 0) {
+            break;
+        }
         lth = strlen(s);
         std::ifstream entry_lib_lth(LibraryRoute(lth, EN));
         if (entry_lib_lth.is_open()) {
@@ -73,4 +76,5 @@ int WLFramework() {
         }
     }
 #endif
+    return 0;
 }

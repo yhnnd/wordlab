@@ -15,8 +15,8 @@ void toggleShow(int x,int y,bool lock,bool delay,bool showdigit){
 	    if(lock) gotoxy(x+r,y);
 		else gotoxy(x+3-r,y);
 		
-		if(showdigit) colorset(backwhite);
-		else colorset(bothwhite);
+		if(showdigit) colorset(backlightwhite);
+		else colorset(bothlightwhite);
 		
 		std::cout<<"   ";
 	}

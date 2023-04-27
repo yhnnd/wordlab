@@ -1,4 +1,4 @@
-void index(char *msg,const int x,const int y,WORD color=white,int BeginPoint = 0){
+void index(char *msg, const int x, const int y, WORD color=lightwhite, int BeginPoint = 0){
 	int r;
 	char c;
 	for(r=BeginPoint;;){

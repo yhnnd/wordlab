@@ -1,11 +1,11 @@
 void MsgWinSwiShwChsCore(int radius,int x,int y,int width,const char *what){
 	int r;
 	colorrecord(colorprev);
-	colorset((radius)?white:white|backlightblue);
+	colorset((radius) ? lightwhite : lightwhite | backlightblue);
 	clearline(x,y,width);
 	switch(abs(radius)){
-	    case  0: colorset(white|backlightblue);break;
-	    case  1: colorset(gray);break;
+	    case  0: colorset(lightwhite | backlightblue);break;
+	    case  1: colorset(darkwhite);break;
 	    case  2: colorset(blue);break;
 	    default: colorset(lightred);break;
 	}

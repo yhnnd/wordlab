@@ -11,7 +11,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 	std::string temp, Error_Msg = "";
 	for(;;) {
 		// Display table
-		colorset(white);
+		colorset(lightwhite);
 		this->printtable(x,y);
 		// Display Error Message
 		errorlog("#time=reset();","","");
@@ -71,7 +71,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 			int deltaX = x+2;
 			for(int ci=0; ci<c_prev; ++ci) deltaX += 2+this->getwidth(r_prev,ci);
 			gotoxy(deltaX,y+r_prev);
-			colorreset(white);
+			colorreset(lightwhite);
 			std::cout<<"\b "<<std::setw(this->getwidth(r_prev,c_prev))<<(this->getdata(r_prev,c_prev));
 			// display selected label
 			deltaX = x+2;
@@ -83,7 +83,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 			if(WindowY>ScreenY/2) WindowY = ScreenY/2;
 			colorsetcmd("-wte");
 			std::cout<<"\b "<<std::setw(this->getwidth(r,c))<<(this->getdata(r,c));
-			colorreset(white);
+			colorreset(lightwhite);
 			// record previous selected label
 			r_prev=r;
 			c_prev=c;

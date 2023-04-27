@@ -1,6 +1,6 @@
 void printcolortable(){
 //	setscreen(120,30);
-	colorset(white);
+	colorset(lightwhite);
 	char cmd[8][4]={"lit","blu","grn","cyn","red","ppl","ylw","wte"};
 	std::cout<<std::setw(6)<<"";
 	for(int i=0;i<16;++i){
@@ -8,7 +8,7 @@ void printcolortable(){
 	}
 	std::cout<<std::endl;
 	for(int i=0;i<256;++i){
-		colorset(backwhite);
+		colorset(backlightwhite);
 		if(i%16==0) std::cout<<(i/16<8?"-#":" -")<<cmd[i/16%8]<<" ";
 		colorset(i);
 		std::cout<<std::setw(6)<<i;

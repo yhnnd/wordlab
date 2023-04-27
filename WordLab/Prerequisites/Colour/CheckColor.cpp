@@ -43,11 +43,11 @@ bool checkcolor(){
 
 
 	// light + gray = white
-	if((light|gray)!=white) return false;//foreground
-	if((backlight|backgray)!=backwhite) return false;//background
-	if((bothlight|bothgray)!=bothwhite) return false;//both
-	if((gray|backgray)!=bothgray) return false;//fore + back = both
-	if((white|backwhite)!=bothwhite) return false;//forelight + backlight = bothlight
+	if((light | darkwhite) != lightwhite) return false;//foreground
+	if((backlight | backdarkwhite) != backlightwhite) return false;//background
+	if((bothlight | bothdarkwhite) != bothlightwhite) return false;//both
+	if((darkwhite | backdarkwhite) != bothdarkwhite) return false;//fore + back = both
+	if((lightwhite | backlightwhite) != bothlightwhite) return false;//forelight + backlight = bothlight
 	
 	// red + green = yellow
 	if((red|green)!=yellow) return false;//fore

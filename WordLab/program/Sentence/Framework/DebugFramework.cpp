@@ -7,7 +7,7 @@ void FrameworkDebug() {
 		if(DebugSettings()==false) break;
 		_Ask = show_debug_message;
 		_Show = show_debug_message;
-		colorset(white);
+		colorset(lightwhite);
 		system("cls");
 		banner();
 		InputDebug();

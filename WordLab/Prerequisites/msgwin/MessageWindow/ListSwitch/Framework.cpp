@@ -5,7 +5,7 @@ int MessageWindow::ListSwitch(int N,int x,int y,int width){
 		ListSwitchErase(x,y,N,width/N,1);
 		ColorfulAll(r);
 		ListSwitchBlock(x,y,N,r,width/N,1,'*');
-		colorset(white);
+		colorset(lightwhite);
 		key = wl_getch();
 		     if(key==13)  break;
 		else if(key=='0'||key=='r'||key==27||key==8) return 0;

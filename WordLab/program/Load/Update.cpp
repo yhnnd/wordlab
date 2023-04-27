@@ -30,7 +30,7 @@ void Update(){
 	cursormove(1,1);
 	bsvline("<-wte>(all done",73);
 	wait(-1,100,0);
-	colorreset(white);
+	colorreset(lightwhite);
 	clearscreen(0,0,76,3);//erase the popup
 	clearscreen(0,2,76,18);//erase the panel
 }

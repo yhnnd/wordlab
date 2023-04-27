@@ -27,11 +27,11 @@ WORD bsvcmdcolor(const char *msg) {
 	}
 	if(bsvs(msg,0,3,"gry-","gray-","fore gray")) {
 		flag = true;
-		color |= gray;
+		color |= darkwhite;
 	}
 	if(bsvs(msg,0,3,"wte-","white-","fore white")) {
 		flag = true;
-		color |= white;
+		color |= lightwhite;
 	}
 
 	if(bsvs(msg,0,3,"#red-","dark red-","fore dark red")) {
@@ -89,11 +89,11 @@ WORD bsvcmdcolor(const char *msg) {
 	}
 	if(bsvs(msg,2,2,"-gry","back gray")) {
 		flag = true;
-		color |= backgray;
+		color |= backdarkwhite;
 	}
 	if(bsvs(msg,2,2,"-wte","back white")) {
 		flag = true;
-		color |= backwhite;
+		color |= backlightwhite;
 	}
 
 	if(bsvs(msg,2,2,"-#red","back dark red")) {

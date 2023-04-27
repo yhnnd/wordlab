@@ -1,15 +1,15 @@
 std::string dialog::input(std::string name,bool display,int linemax,int x,int y) {
 	if(name.empty()) name = "Unknown";
-	colorset(white);
+	colorset(lightwhite);
 	for(int ln = 1; ln <= 3; ln++ ) {
 		clearline(x+5,(SayStyle)?y+2+2*ln:y+10-ln,60);
 		colorset(ln==3?(light|blue):blue);
 		cout<<name<<": ";
-		colorset(gray);
+		colorset(darkwhite);
 		if(ln==1) cout<<memoryin[2];
 		else if(ln==2) cout<<memoryin[1];
 	}
-	colorreset(white);
+	colorreset(lightwhite);
 	// input
 	char line[linemax];
 	this -> InputResult = listen(line,0,display,{13,0,EOF},linemax);

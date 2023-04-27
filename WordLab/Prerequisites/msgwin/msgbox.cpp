@@ -8,5 +8,5 @@ void msgbox(PKC msg,int x,int y,int margin,PKC colorfont,PKC colorback){
 	colorsetcmd(colorfont);
 	gotoxy(x+margin*2,y+margin);
 	std::cout<<msg;
-	colorreset(white);
+	colorreset(lightwhite);
 }

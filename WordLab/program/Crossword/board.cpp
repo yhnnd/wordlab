@@ -24,7 +24,7 @@ class board{
 				Grid[i][j].letter=' ';
 				Grid[i][j].writable=1;
 				Grid[i][j].visible=0;
-				Grid[i][j].color=backgray;
+				Grid[i][j].color=backdarkwhite;
 			}
 		}
 	}

@@ -1,6 +1,6 @@
 void ColorfulBdim(int t){
 	int tp=t%6;
-	     if(t ==0)  colorset(backgray);
+	     if(t ==0)  colorset(backdarkwhite);
 	else if(tp==1)  colorset(backred);
 	else if(tp==2)  colorset(backyellow);
 	else if(tp==3)  colorset(backgreen);

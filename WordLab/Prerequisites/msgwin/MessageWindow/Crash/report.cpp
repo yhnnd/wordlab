@@ -4,7 +4,7 @@ bool MessageWindow::Report(int X,int Y,int width,int height,const char * route){
 	bool value=false;
 	memset(msg,0,sizeof(msg));
 	Frame(0,X,Y,width,height,0);
-	colorset(backgray);
+	colorset(backdarkwhite);
 	gotoxy(x+1,++y);
 	std::cout<<"Crash Report";
 	gotoxy(x+1,++y);

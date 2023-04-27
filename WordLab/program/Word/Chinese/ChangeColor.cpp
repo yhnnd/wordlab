@@ -4,11 +4,11 @@ void changeColor(int x,int y,int *ColorNum) {
 	for(;;) {
 		clearline(x,y);
 		for(int r=0; r<=7; r++) {
-			colorset(white);
+			colorset(lightwhite);
 			if(n==r) cout<<"(";
 			else cout<<" ";
 			changeColorCore(r);
-			colorset(white);
+			colorset(lightwhite);
 			if(n==r) cout<<")";
 			else cout<<" ";
 		}

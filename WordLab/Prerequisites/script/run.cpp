@@ -9,7 +9,7 @@ int scriptprocessor::scriptlines(const std::string FunctName,std::vector<std::st
 	inInitClassFunct.setInScopeFalse();
 	
 	colorrecord(color);
-	colorset(white);
+	colorset(lightwhite);
 	std::string line,functname;
 	for(int i=0;i<lines.size();i++){
 		line = lines[i];

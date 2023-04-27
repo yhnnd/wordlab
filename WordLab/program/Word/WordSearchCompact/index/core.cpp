@@ -1,4 +1,4 @@
-void indexCore(const std::string msg,int x=10,int y=9,WORD color=gray){
+void indexCore(const std::string msg,int x=10,int y=9,WORD color=darkwhite){
 	recordxy(pos);
 	char wordbase[LINEMAX];
 	colorset(color);

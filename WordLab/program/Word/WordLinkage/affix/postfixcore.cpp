@@ -13,7 +13,7 @@ int postfixcore(int lth,string &word,int affixmax,char affix[][22][10],int lthma
 					}
 					colorset(light|cyan);
 					cout<<affix[j-1][i];
-					colorreset(white);
+					colorreset(lightwhite);
 					return lth;
 				}
 			}

@@ -95,7 +95,7 @@ typedef struct _COORD {
 //C++11
 //#include <chrono>
 //#include <thread>
-#include "colordefs.h"
+#include "Colour/colordefs.h"
 #include "keyboard.h"
 
 #define _CacheMax 3
@@ -110,7 +110,8 @@ typedef const char * PKC;//pointer to const char
 namespace prerequisites
 {
 bool ColorL=1;
-WORD CurrentColor = white;
+WORD CurrentColor = lightwhite;
+inline WORD colornow() {return CurrentColor;}
 int ScreenX = 100, ScreenY = 30;
 bool _Show=1,_Ask=1,_AskOnce=0,_AutoOnce=0,_ReverseColor=0;
 int bsv_cmd_msg_lth_max = 64;
@@ -350,7 +351,7 @@ class MessageWindow{
 	bool  GetMonochrome(bool flag);
 	void  SetStyle(bool AutoColorful,bool Monochrome,bool ForeColor,bool BackColor,bool EnableRoller);
 	void init();
-	void Erase(int,int,int,int,WORD color=white);
+	void Erase(int,int,int,int,WORD color=lightwhite);
 	int  Edge(int,int,int);
 	void LineColorful(int);
 	int Line(int,int,int,const char *,int);
@@ -469,7 +470,7 @@ class progressbar{
 	void line(int,int,int,int,char,WORD);
 	public:
 	void init(int,bool,bool);
-	int  show(int,int,int,int,int,WORD back=allgreen,WORD fore=bothlightgreen);
+	int  show(int,int,int,int,int,WORD back=bothgreen,WORD fore=bothlightgreen);
 	progressbar(int threadmax,bool interrupt,bool ask=1);
 };
 void fatalerror(int delayperiod);

@@ -25,6 +25,6 @@ int MessageWindow::ConfirmSwitch(int n,int x,int y,int width,int height){
 		roll(r,r,(n>0?1:0),n);
 	}
 	end:
-	colorset(white);
+	colorset(lightwhite);
 	return r;
 }

@@ -1,6 +1,6 @@
 void ColorfulAll(int t){
 	int tp=t%6;
-	     if(t ==0)  colorset(bothwhite);
+	     if(t ==0)  colorset(bothlightwhite);
 	else if(tp==1)  colorset(bothlightred);
 	else if(tp==2)  colorset(bothlightyellow);
 	else if(tp==3)  colorset(bothlightgreen);

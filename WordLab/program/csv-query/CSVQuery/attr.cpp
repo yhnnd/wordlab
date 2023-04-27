@@ -23,7 +23,7 @@
 			if(n<0) return n;
 			cursormove(1,0);
 			colorrecord(colorprev);
-			colorset(backwhite);
+			colorset(backlightwhite);
 			cout<<"attr["<<n<<"]=";
 			cout<<"{name:"<<this->name<<",";
 			cout<<"req:"<<req<<",";

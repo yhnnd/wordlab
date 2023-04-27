@@ -13,6 +13,6 @@ int infix(int lth,string word) {
 	}
 	colorset(light|blue);
 	cout<<word;
-	colorreset(white);
+	colorreset(lightwhite);
 	return lth;
 }

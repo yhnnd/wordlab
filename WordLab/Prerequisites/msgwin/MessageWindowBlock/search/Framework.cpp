@@ -3,7 +3,7 @@ int messageblock::Search(char what[][LINEMAX],int N) {
 	char c,keyword[lth];
 	strclr(keyword);
 	colorrecord(colorprev);
-	colorset(bothwhite);
+	colorset(bothlightwhite);
 	clearline(x+(width-lth)/2,y-1,lth);
 	for(r=0; (c=wl_getch())!=13; nprev=n) {
 		if(c==8) {
@@ -25,7 +25,7 @@ int messageblock::Search(char what[][LINEMAX],int N) {
 			keyword[strlen(keyword)-1]=0;
 			colorreset(colorprev);
 			if(host::name.length()&&strindex(keyword,"tips")==0) {
-				colorset(white|backlight);
+				colorset(lightwhite | backlight);
 				clearline(x+(width-lth)/2,y-1,lth);
 				system((host::name+" tips ").c_str());
 			} else if(host::name.length()&&system((host::name+" launch "+keyword).c_str())>=0);

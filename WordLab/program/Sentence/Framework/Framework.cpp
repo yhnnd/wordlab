@@ -4,7 +4,7 @@ void Framework() {
 	_Ask = false;
 	for(;;) {
 		reset();
-		colorset(white);
+		colorset(lightwhite);
 		system("cls");
 		banner();
 		for(rwin = 0;; rwin++) {

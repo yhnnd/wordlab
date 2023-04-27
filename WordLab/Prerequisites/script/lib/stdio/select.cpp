@@ -50,7 +50,7 @@ int scriptprocessor::select(const std::string & line) {
 	}
 	for(iprev = 0, i = 0; i < max; limit(i,i,0,max-1)) {
 		gotoxy(ogpos);
-		selectshow(optionName[iprev],optionName[i],i-iprev,32,10,blue|backwhite);
+		selectshow(optionName[iprev],optionName[i],i-iprev,32,10, blue | backlightwhite);
 		iprev = i;
 		char k = wl_getch();
 		if( k == 13 ) break;

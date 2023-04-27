@@ -32,7 +32,7 @@ int main(int argc,char **argv) {
 			ScriptEditor(argv[2]);
 		} else if(strcmp(argv[1],"tips")==0) {
 			char command[256];
-			InputForLaunch(command,getcolor(),backwhite);
+			InputForLaunch(command, getcolor(), backlightwhite);
 			if(command[0]) {
 				cout<<"=";
 				return launch(command);

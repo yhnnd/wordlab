@@ -7,11 +7,11 @@ int csvqueryshell(){
 		MessageWindow.Frame(0,0,0,ScreenX-6,10,10);
 		MessageWindow.Title(1,0,ScreenX-6,versionInfo);
 		gotoxy(1,1);
-		colorset(backgray);
+		colorset(backdarkwhite);
 		cout<<">>> ";
 		beginpoint=0;
 		begin:
-		if(csvQueryInput(query,beginpoint,256,backgray,backlight|backyellow)==0) goto end;
+		if(csvQueryInput(query, beginpoint, 256, backdarkwhite, backlight | backyellow) == 0) goto end;
 		if(query[0]=='\0') goto end;
 		if(strindex(query,"repeat")==0){
 			strcpy(query,queryprev);
@@ -24,7 +24,7 @@ int csvqueryshell(){
 		csvsql.exec();
 	}
 end:
-	colorreset(white);
+	colorreset(lightwhite);
 	clearscreen(0,0,ScreenX,12);
 	return 0;
 }

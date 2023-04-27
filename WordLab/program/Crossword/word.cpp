@@ -75,7 +75,7 @@ class crossword_word{
 		else{
 			for(int i=0;i<word.length();i++){
 				if(this->Board->getwritable(x+xd*i,y+yd*i))
-				this->Board->setcolor(x+xd*i,y+yd*i,backwhite);
+				this->Board->setcolor(x+xd*i,y+yd*i, backlightwhite);
 			}
 		}
 	}
@@ -153,7 +153,7 @@ class crossword_word{
 		gotoxy(x,y+zy);
 		colorset(backlight|backcyan);
 		cout<<this->def;
-		colorreset(white);
+		colorreset(lightwhite);
 	}
 	int selected(){
 		if(this->Board==nullptr) return errorlog("word.selected","invalid board");

@@ -1,6 +1,6 @@
 int SmartTranslater() {
 	if(!isalpha(s[rwout].txt[0])) {
-		colorset(white);
+		colorset(lightwhite);
 		cout<<s[rwout].txt;
 	} else if(getChineseOfWord(s[rwout].txt)!=0);
 	else if(WordCutter(s[rwout].txt)==1);

@@ -13,6 +13,6 @@ int prefixcore(int lth,string &word,int affixmax,int affixlth,char affix[][8]) {
 			// attention: word must be passed by reference not by value
 		}
 	}
-	colorreset(white);
+	colorreset(lightwhite);
 	return lth;
 }

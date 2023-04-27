@@ -5,7 +5,7 @@ void messageblock::Adjust(){
 	    if(T==0) Show(x,y,aww,awh,awh);
 	    else Frame(0,x,y,aww,awh,awh);
 		gotoxy(x+1,y+1);
-		colorset(backgray);
+		colorset(backdarkwhite);
 		std::cout<<"Message window Settings";
 		for(;;){
 			adjustshowall(r);

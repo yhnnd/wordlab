@@ -1,3 +1,4 @@
+#include "colordefs.h"
 #include "SetColor.cpp"
 #include "ColorfulForeDark.cpp"
 #include "ColorfulForeLight.cpp"

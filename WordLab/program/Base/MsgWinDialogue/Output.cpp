@@ -13,7 +13,7 @@ void dialog::output(const string msg,bool Times,WORD color,string title,int x,in
 		memoryout[0] = msg;
 		already_reseted = false;
 	}
-	colorset(white);
+	colorset(lightwhite);
 	for( int ln = 1; ln <= 3; ln++ ) {
 		clearline(x+5,y+1+ln*(1+SayStyle),60);
 		if( ln==3 and not Times ) bar(msg.length(),LINEMAX);

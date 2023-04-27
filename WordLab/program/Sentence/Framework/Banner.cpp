@@ -1,6 +1,6 @@
 void banner() {
 	int x = 0;
-	colorset(white);
+	colorset(lightwhite);
 	system("cls");
 	colorset(lightgreen);
 	gotoxy(x,0);

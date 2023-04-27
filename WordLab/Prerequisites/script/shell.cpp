@@ -56,7 +56,7 @@ int scriptshell(std::string filename,int print_debug_msg,int data_capacity,COORD
 	// initialize script interpreter
 	scriptprocessor script(print_debug_msg,data_capacity,logfolder);
 	for(;;) {
-		colorset(white);
+		colorset(lightwhite);
 		clearscreen(pos.X,pos.Y,w,h,' ');
 		gotoxy(pos);
 		//select function name
@@ -84,7 +84,7 @@ int scriptshell(std::string filename,int print_debug_msg,int data_capacity,COORD
 int scriptshell(int print_debug_msg) {
 	std::string tempstr;
 	for(;;) {
-		colorset(white);
+		colorset(lightwhite);
 		system("cls");
 		std::cout<<"input filename or \"new\""<<std::endl<<">>> ";
 		std::cin>>tempstr;

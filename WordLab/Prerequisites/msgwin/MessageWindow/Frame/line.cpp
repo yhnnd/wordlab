@@ -7,7 +7,7 @@ int MessageWindow::Line(int x,int y,int width,const char *what,int n){
 	gotoxy(x,y++);
 	colorset(bothlightblue);
 	std::cout<<"*";
-	colorset(backgray);
+	colorset(backdarkwhite);
 	std::cout<<"   ";
 	LineColorful(n);
 	bsvline(what,width,"<",">","(",")",",;");
@@ -21,7 +21,7 @@ int MessageWindow::line(int x,int y,int width){
 	gotoxy(x,y++);
 	colorset(bothlightblue);
 	std::cout<<"*";
-	colorset(backgray);
+	colorset(backdarkwhite);
 	std::cout<<"   ";
 	for(r=0;r<=width;r++) std::cout<<" ";
 	colorset(bothlightblue);

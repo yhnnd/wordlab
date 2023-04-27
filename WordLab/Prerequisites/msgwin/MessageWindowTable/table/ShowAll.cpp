@@ -3,11 +3,11 @@ void Table::ShowAll(tablerow item[],int begin,int max,int Class,int x,int y,int 
 	Title(x,y,width,max);
 	for(r=1;r<=max;r++){
 	    gotoxy(x+4,y+2+r);
-		colorset(backwhite);
+		colorset(backlightwhite);
 		std::cout<<std::setw(4)<<r+begin;
-		colorset(backgray);
+		colorset(backdarkwhite);
 		std::cout<<" ";
 		if(item[r+begin].IsClass(Class)) item[r+begin].Out();
 	}
-	colorset(white);
+	colorset(lightwhite);
 }

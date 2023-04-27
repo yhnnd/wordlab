@@ -1,6 +1,6 @@
 void Colorfuldim(int t){
 	int tp=t%6;
-	     if(t ==0)  colorset(gray);
+	     if(t ==0)  colorset(darkwhite);
 	else if(tp==1)  colorset(red);
 	else if(tp==2)  colorset(yellow);
 	else if(tp==3)  colorset(green);

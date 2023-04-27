@@ -7,7 +7,7 @@ void messageblock::adjustshowall(int r){
 			std::cout<<"-->";
 			colorset(backlightyellow);
 		}else{
-			colorset(backgray);
+			colorset(backdarkwhite);
 			std::cout<<"   ";
 		}
 		for(int r=0;r<=aww;r++) std::cout<<" ";

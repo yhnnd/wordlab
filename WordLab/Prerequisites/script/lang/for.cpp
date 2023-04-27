@@ -102,7 +102,7 @@ void scriptprocessor::langForExecute(std::vector<ForBlock> & forblocks) {
 			auto &op = operator2[n];
 			if(_debug) {
 				std::cout<<"<lang><for><execute> ";
-				colorset(backwhite);
+				colorset(backlightwhite);
 				std::cout<<"expr2["<<n<<"] = '"<<it_begin<<op<<it_end<<"'";
 				if(for_expr2_is_false(it_begin,op,it_end)) {
 					colorreset(backlightred);
@@ -111,7 +111,7 @@ void scriptprocessor::langForExecute(std::vector<ForBlock> & forblocks) {
 					colorreset(backlightgreen);
 					std::cout<<" true ";
 				}
-				colorreset(white);
+				colorreset(lightwhite);
 				std::cout<<std::endl;
 			}
 			// check if( expr2 )
