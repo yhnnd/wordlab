@@ -88,9 +88,9 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 			r_prev=r;
 			c_prev=c;
 			// get user response
-			key = wl_getch();
+			key = getch();
 			if(key==BIOSKEY) {
-				key=wl_getch();
+				key=getch();
 				if(key==UP) {
 					if(c>=this->getrow(r-1).getnumofcol()) {
 						if(c<this->getrow(r-2).getnumofcol()) {

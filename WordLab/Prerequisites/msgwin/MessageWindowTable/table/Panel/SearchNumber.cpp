@@ -11,5 +11,5 @@ void Table::SearchNumber(tablerow item[],int x,int y,int width,int Total){
 	for(r=1;r<=Total;r++) if(item[r].SearchNumber(number)==1) result++;
 	gotoxy(20,y+7);
 	std::cout<<"共发现"<<result<<"个结果";
-	wl_getch();
+	getch();
 }

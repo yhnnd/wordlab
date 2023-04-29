@@ -98,7 +98,7 @@ class crossword{
 		for(;;roll(i,i,0,max-1)){
 			this->show();//refresh board
 			this->Word[i].selected();
-			key=wl_getch();
+			key=getch();
 			process:
 			if(key==13) break;
 			else if(key>='0'&&key<='9') i=key-'0';

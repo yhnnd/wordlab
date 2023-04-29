@@ -1,6 +1,5 @@
-char popupcore(std::string& msg,const int life,const int x,const int y,const int width,const bool Record){
-#ifdef _WIN32
-	char key=0;
+char popupcore(std::string& msg, const int life, const int x, const int y, const int width, const bool Record) {
+	char key = 0;
 	// record previous status
 	colorrecord(colorprev);
 	recordxy(pos);
@@ -8,21 +7,25 @@ char popupcore(std::string& msg,const int life,const int x,const int y,const int
 	if(y==1) MessageWindow.Edge(x,0,width);
 	MessageWindow.Line(x,y,width,msg.c_str(),0);
 	MessageWindow.Edge(x,y+1,width);
-	colorset(white);
+	colorset(lightwhite);
 	// wait for response
-	if(life>0){
+	if (life > 0) {
+#ifdef _WIN32
 		time_t BeginTime=clock();
-		while(!kbhit()){
+		while(!kbhit()) {
 	    	if(clock()-BeginTime>life) goto BreakWait;
 	    	gotoxy(x+width,y);
 			//show time remains
 	    	std::cout<<1+(life-(clock()-BeginTime))/1000<<"s";
 	    	Sleep(10);
 		}
-		key = wl_getch();
+#endif
+		key = getch();
 		BreakWait:
 		MessageWindow.Erase(x,0,width,y);
-	}else if(life<0) key=wl_getch();
+	} else if (life < 0) {
+        key = getch();
+    }
 	// reset
 	resetxy(pos);
 	colorreset(colorprev);
@@ -37,11 +40,4 @@ char popupcore(std::string& msg,const int life,const int x,const int y,const int
 		fout.close();
 	}
 	return key;
-#elif __APPLE__
-    const int lineWidth = 60;
-    std::cout << "\n+-------------------------   NOTICE  -------------------------+ \n|";
-    bsvline(msg.c_str(),lineWidth);
-    std::cout << "|\n+-------------------------------------------------------------+" << std::endl;
-    return WL_KEY_ENTER;
-#endif
 }

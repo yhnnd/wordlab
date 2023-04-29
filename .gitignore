@@ -1,12 +1,14 @@
 # WordLab Temp files
 *.csv.update.tmp
 *.csv.rollback.tmp
+*.log
 
 # WordLab Backup files
 *.csv.prev
 
 # Windows Icon files
 *.ini
+*.exe
 
 # Trash files
 .DS_Store

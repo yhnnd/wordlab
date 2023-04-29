@@ -4,8 +4,8 @@ void scriptprocessor :: executeline(const char *line) {
 	if(find(line,"function ")>=0) {
 	} else if(find(line,"gotoxy")>=0) {
 		scriptgotoxy(line);
-	} else if(find(line,"wl_getch()")>=0) {
-		scriptgetch(line);//wl_getch()
+	} else if(find(line,"getch()")>=0) {
+		scriptgetch(line);//getch()
 	} else if(find(line,"fgets")>=0) {
 		scriptfgets(line);//fgets(route)
 	} else if(find(line,"gets()")>=0) {

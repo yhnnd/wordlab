@@ -8,7 +8,7 @@ void FrameworkDebug() {
 		_Ask = show_debug_message;
 		_Show = show_debug_message;
 		colorset(lightwhite);
-		system("cls");
+		clearScreen();
 		banner();
 		InputDebug();
 		FrameworkCore(x,y);

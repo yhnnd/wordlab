@@ -60,7 +60,7 @@ int main(){
 	Table.readdata(_table_dir + WorkerFile);
 	Table.printtable();
 	cout<<"output table to file?"<<endl;
-	if(wl_getch()==13){
+	if(getch()==13){
 		Table.writetable(_table_dir + "table.layout.txt");
 		Table.outputlabels(_table_dir + "table.labels.txt");
 		cout<<"done."<<endl;

@@ -2,7 +2,7 @@ int listen(char *msg,int INDEX,bool DISPLAY,std::initializer_list<char> TERM,int
 	char c;
 	for(int r = INDEX; r >= 0 && r < MAX; msg[++r] = 0 ) {
 		begin:
-		c = wl_getch();
+		c = getch();
 		auto n = std::find_if(TERM.begin(),TERM.end(),[c](char e) {
 			return c == e;
 		});
@@ -22,7 +22,7 @@ int listen(char *msg,int INDEX,bool DISPLAY,std::initializer_list<char> TERM,int
 				goto end;
 			}
 		} else if(c==-32) { //bioskey
-			return wl_getch();
+			return getch();
 		} else if(isprint(c)) { //print
 			putc(DISPLAY?c:'*',stdout);
 		} else if(c=='\t') { //TABLE

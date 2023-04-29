@@ -9,7 +9,7 @@ void messageblock::Adjust(){
 		std::cout<<"Message window Settings";
 		for(;;){
 			adjustshowall(r);
-			if((key=wl_getch())==13) break;
+			if((key=getch())==13) break;
 		    else if(key==8||key==27) goto end;
 			else if(key=='a'||key=='w') r--;
 			else r++;

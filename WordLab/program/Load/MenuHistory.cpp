@@ -1,4 +1,4 @@
-void History(){
+void load::History() {
 	int x=0,y=9,width=30,n,nprev=0,T=0;
 	char Menu[20][LINEMAX];
 	if(LANGUAGE==0) loadmsg((char*)Menu,SetHistoryRoute"en.csv",20,LINEMAX,1,1);

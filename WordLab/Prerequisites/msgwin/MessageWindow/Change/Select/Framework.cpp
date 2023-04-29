@@ -7,7 +7,7 @@ char key;
 for(r=lastpos;;){
     SelectErase(x,y,n,pattern1);
 	SelectShow(x,y,r,n,pattern2,pattern3);
-	key=wl_getch();
+	key=getch();
          if(key==13) break;
 	else if(key=='w'||key=='W'||key=='-') r--;
 	else if(key=='s'||key=='S'||key=='d'||key=='D'||key=='+') r++;

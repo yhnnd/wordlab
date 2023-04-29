@@ -1,4 +1,4 @@
-void Values(){
+void load::Values(){
 	int x=0,y=9,width=30,r=0,rprev=0,total;
 	total=filelines(SetValuesRoute"en.csv",true)-2;
 	if(total<=0){popup("<Critical Error> SetValues menu file lost",-1);return;}

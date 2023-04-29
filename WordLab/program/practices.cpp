@@ -124,7 +124,7 @@ void practices(){
 		}
 		key = 1+rand()%4;
 		// display question
-		popup(string("<-ylw>(word ")+word[key-1],0);
+		popup(string("<-#ylw>(word ")+word[key-1],0);
 		popup("<-wte>(possible translations",0);
 		for(int i=0;i<4;++i){
 			popup(string("<-gry>(")+tostring(char('A'+i))+" "+trans[i],0);
@@ -153,7 +153,7 @@ void practices(){
 		popup("<wte-blu>( result",0);
 		popup(string(key==answer?"<-grn>(":"<-red>(")+"you've chose the "
 			+(key==answer?"correct":"wrong")+" answer",0);
-		popup(string("<-ylw>(word ")+word[key-1]+" "+trans[key-1],0);
+		popup(string("<-#ylw>(word ")+word[key-1]+" "+trans[key-1],0);
 		popup("<-wte>(all translations",0);
 		for(int i=0;i<4;++i){
 			popup(string(key==answer?i+1==key?"<-grn>(":"<-gry>(":i+1==key?"<-cyn>(":i+1==answer?"<-red>(":"<-gry>(")
@@ -186,7 +186,7 @@ void practices(){
 			<<(clock()-time_start)/n<<" "//AverageTimeCost
 			<<endl;
 		fout.close();
-		wl_getch();
+		getch();
 	}
 	// clear memory
 	key_answer.clear();

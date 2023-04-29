@@ -5,7 +5,7 @@ char WLDictionary(string keyword) {
 	if(fin) {// file exists
 		fin.close();
 		bsvline(("<-wte>(Press <wte-#gry>( ENTER ) to check out more about <-grn>( "+keyword+" )").c_str());
-		ReturnLetter = wl_getch();
+		ReturnLetter = getch();
 		if(ReturnLetter==13) {
 			window document;
 			document.setfilename(DictionaryPageFileName);

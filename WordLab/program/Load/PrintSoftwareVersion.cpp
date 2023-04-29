@@ -1,4 +1,4 @@
-void PrintSoftwareVersion(int x,int y){
+void load::PrintSoftwareVersion(int x,int y){
 	_table VersionTable;
 	VersionTable.setrowborder(57);
 	//script processor

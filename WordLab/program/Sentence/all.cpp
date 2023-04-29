@@ -23,7 +23,7 @@ class sts {
 			rwin = rwout = punct = ma = 0;
 		}
 	public:
-#include "WordsInsert/all.h"
+#include "WordsInsert/all_bsv.h"
 #include "WordsOrderChange/all.cpp"
 #include "Chinese/all.cpp"
 #include "WordsOut/all.cpp"

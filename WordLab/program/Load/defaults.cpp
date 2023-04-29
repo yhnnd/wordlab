@@ -1,4 +1,4 @@
-bool defaults(const char *route,bool in){
+bool load::defaults(const char *route,bool in) {
 	FILE *fp=fopen(route,"rb");
 	if(fp==NULL){popup("<red->(config error) default file not found",-1);return false;}
 	fclose(fp);

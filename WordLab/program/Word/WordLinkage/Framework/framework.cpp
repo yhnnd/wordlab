@@ -1,15 +1,15 @@
 int WLFramework() {
 	int lth = 0;
     char s[32] = "", FirstLetter = 0;
-	if( VL and db_is_secure(false,true)==false ) wl_getch();
+	if( VL and db_is_secure(false,true)==false ) getch();
 	if(Ctype==0) {
 		if(popup("<-wte>(Add word Engine Authorization Was Set Off. Reset now?",-1) == WL_KEY_ENTER) {
 			Ctype = 1;
 		}
 	}
 	colorset(lightwhite);
-#ifdef _WIN32
-	system("cls");
+
+	clearScreen();
 	for(;;) {
         // INPUT DATA
 		if(FirstLetter!=13) {
@@ -39,42 +39,9 @@ int WLFramework() {
 			FirstLetter = WLDictionary(s);
 			if( FirstLetter == 8 || FirstLetter == 27 ) return -1;
 			// (BELOW) PREVENT FROM CLEARSCREEN IMMEDIATELY
-			else if(!isalpha(FirstLetter)) FirstLetter = wl_getch();
+			else if(!isalpha(FirstLetter)) FirstLetter = getch();
 			if( FirstLetter == 8 || FirstLetter == 27 ) return -1;
 		}
 	}
-#elif __APPLE__
-    for (;;) {
-        cout << endl << "input # to quit) Search:";
-        cin >> s;
-        if (strcmp(s, "#") == 0) {
-            break;
-        }
-        lth = strlen(s);
-        std::ifstream entry_lib_lth(LibraryRoute(lth, EN));
-        if (entry_lib_lth.is_open()) {
-            std::ifstream defs_lib_lth(LibraryRoute(lth, CH));
-            if (defs_lib_lth.is_open()) {
-                std::string line_entry, line_defs;
-                unsigned short matchedCount = 0;
-                while (entry_lib_lth && defs_lib_lth) {
-                    std::getline(entry_lib_lth, line_entry);
-                    std::getline(defs_lib_lth, line_defs);
-                    if (line_entry == s) {
-                        ++matchedCount;
-                        std::cout << line_entry << " => " << line_defs << endl;
-                    }
-                }
-                defs_lib_lth.close();
-                if (matchedCount > 0) {
-                    cout << matchedCount << " results found." << endl;
-                } else {
-                    cout << "No result." << endl;
-                }
-            }
-            entry_lib_lth.close();
-        }
-    }
-#endif
     return 0;
 }

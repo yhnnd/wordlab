@@ -1,4 +1,4 @@
-bool writeTime(const string fileroute){
+bool load::writeTime(const string fileroute) {
     cout<<fileroute<<endl;
 	ofstream fout(fileroute,ios::trunc);
 	if(!fout.is_open()){

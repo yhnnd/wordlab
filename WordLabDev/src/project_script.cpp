@@ -14,7 +14,7 @@ int project_script_framework(){
 	prerequisites::ScreenY=32;
 	setscreen(ScreenX+1,1000);
 	colorset(white);
-	system("cls");
+	clearScreen();
 	string folder,project,scriptfilename;
 	bool DisplayLogs;
 	int DataCapacity;
@@ -93,7 +93,7 @@ int project_script_framework(){
 	}
 	end:
 	colorreset(white);
-	system("cls");
+	clearScreen();
 	popup("<-wte>( <-ylw>( project ",folder," ) terminated",0);
 }
 

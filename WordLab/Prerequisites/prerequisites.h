@@ -11,13 +11,25 @@ https://nuwen.net/mingw.html
 #include <cstdarg>
 #include <cstring>
 #include <cctype>
-//#include <conio.h>
-#include <curses.h>
+
+#ifdef _WIN32
+
+#include <conio.h>
+#include <windows.h>
+int clearScreen(void) {
+    return system("cls");
+}
+
+#elifdef __APPLE__
+//#include <curses.h>
 #include <cstdio>
 #include <termios.h>
-//#include <windows.h>
 #include <unistd.h>
 #include <fcntl.h>
+
+int clearScreen(void) {
+    return system("clear");
+}
 
 int kbhit(void) {
     struct termios oldt, newt;
@@ -43,10 +55,28 @@ int kbhit(void) {
     return 0;
 }
 
-static struct termios oldTermios, currentTermios;
+
+int getch(void) {
+    struct termios tm, tm_old;
+    int fd = 0, ch;
+    if (tcgetattr(fd, &tm) < 0) {//保存现在的终端设置
+        return -1;
+    }
+    tm_old = tm;
+    cfmakeraw(&tm);//更改终端设置为原始模式，该模式下所有的输入数据以字节为单位被处理
+    if (tcsetattr(fd, TCSANOW, &tm) < 0) {//设置上更改之后的设置
+        return -1;
+    }
+    ch = getchar();
+    if (tcsetattr(fd, TCSANOW, &tm_old) < 0) {//更改设置为最初的样子
+        return -1;
+    }
+    return ch;
+}
 
 /* Read 1 character with echo */
 char getche(void) {
+    struct termios oldTermios, currentTermios;
     bool echo = true;
     /* Initialize new terminal i/o settings */
     tcgetattr(0, &oldTermios); /* grab old terminal i/o settings */
@@ -75,6 +105,8 @@ typedef struct _COORD {
     SHORT X;
     SHORT Y;
 } COORD, *PCOORD;
+
+#endif
 
 #include <cmath>
 #include <ctime>
@@ -320,9 +352,9 @@ int scriptshell(std::string,int,int,COORD,int,int);
 int scriptshell(int print_debug_msg);
 std::string scriptVersion();
 //bsv
-int bsvs(PKC c,int pattern,int i,...);
-WORD bsvcmdcolor(PKC msg);
-WORD bsvcmdcolor(std::string msg);
+int bsvMatchCommand(const char * c,const char pattern, int i,...);
+WORD bsvcmdcolor(const char * msg);
+int colorsetcmd(const std::string msg);
 int bsvmaxlth(PKC msg,PKC br1,PKC br2,PKC omit,PKC term);
 void bsvline(PKC what,int width=0,PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",PKC tokens_term=";");
 int bsverror(PKC s1,PKC s2,PKC s3);
@@ -473,7 +505,7 @@ class progressbar{
 	int  show(int,int,int,int,int,WORD back=bothgreen,WORD fore=bothlightgreen);
 	progressbar(int threadmax,bool interrupt,bool ask=1);
 };
-void fatalerror(int delayperiod);
+char fatalerror(int delayperiod);
 int confirmationbar(int x,int y,int width,int delay);
 //popup
 char popupcore(std::string& msg,const int life,const int x,const int y,const int width,const bool Record);

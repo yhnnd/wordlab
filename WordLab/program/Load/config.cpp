@@ -1,11 +1,11 @@
-void animation(int r,int max){
+void load::animation(int r,int max) {
 	int margin=10,leap=(ScreenX-2*margin)/max;
 	progressbar Bar(1,0);
 	for(int i=0;i<=leap;i++) Bar.show(margin,ScreenY-2,0,r*leap+i,max*leap);
 }
-void config(){
-	int r=0,max=6;
-	bool flag=1;
+void load::config() {
+	int r = 0, max = 6;
+	bool flag = 1;
 	for(r=0;r<max;animation(r++,max)){
 		switch(r){
 			case 0:  setscreen(ScreenX,ScreenY);break;
@@ -17,8 +17,13 @@ void config(){
 			default: errorlog("config","error",tostring(r));break;
 		}
 		if(!flag){
-			fatalerror(100);
-			exit(-1);
+			char ch = fatalerror(100);
+            if (ch == 13) {
+                popup("wordlab terminated.", -1);
+                exit(-1);
+            } else {
+                popup("override.", -1);
+            }
 		}
 	}
 }

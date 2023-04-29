@@ -1,74 +1,15 @@
-<-wte>(monitor  <red-wte>(OFF)  <grn-wte> (enabled) 0<red-wte> (disabled) 2
-user login completed
-Add Word <ylw->(candidate
-sortlib: library from <ylw->(lth=9) to <ylw->(lth=9) has been sorted
-user login completed
-Add Word <ylw->(magazine
-sortlib: library from <ylw->(lth=8) to <ylw->(lth=8) has been sorted
-Press [ENTER] to exit
-<fore yellow>(SEARCH HISTORY) deleted;
-<fore yellow>(ANSWER HISTORY) deleted;
-<fore yellow>(UNKNOWN HISTORY) deleted;
-<ylw->(SEARCH HISTORY) HAS BEEN DELETED;
-press [ENTER] to continue
-press [ENTER] to continue
-press [ENTER] to continue
-user login completed
-Add Word <ylw->(staunch
-sortlib: library from <ylw->(lth=7) to <ylw->(lth=7) has been sorted
-press [A] to add <fore yellow>(fervent)
-press [D] to delete <fore red>(fervent)
-press [U] to update <fore cyan>(fervent)
-sortlib: library from <ylw->(lth=7) to <ylw->(lth=7) has been sorted
-updating of <fore yellow>(fervent) is completed
-press [A] to add <fore yellow>(quest)
-press [D] to delete <fore red>(quest)
-press [U] to update <fore cyan>(quest)
-sortlib: library from <ylw->(lth=5) to <ylw->(lth=5) has been sorted
-updating of <fore yellow>(quest) is completed
-press [ENTER] to continue
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-load previous progress?
-Answer[A] Hint[H] Rotate[Q/R] Settings[S]
-<red->(config error) default file not found
-<red->(config error) default file not found
-<red->(config error) default file not found
-<-red>( database damaged )<-ylw>( lth\(4\) line\(1079\) error\(4233\)
-<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
  Do you mean apply ?
-<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
-<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
-<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
-<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
-<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
-<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
-<-red>( database damaged )<-ylw>( lth\(31\) line\(1\) error\(30\)
+ Do you mean apply ?
+ Do you mean apply ?
+<red-> (error) <ylw->(\(illegal choice\))
+ Do you mean apply ?
+ Do you mean apply ?
+ Do you mean apply ?
+ Do you mean apply ?
+ Do you mean apply ?
+press [A] to add <fore yellow>(qqfsdf
+)
+press [D] to delete <fore red>(qqfsdf
+)
+press [U] to update <fore cyan>(qqfsdf
+)

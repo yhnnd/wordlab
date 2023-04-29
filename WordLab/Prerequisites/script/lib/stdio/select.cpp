@@ -37,7 +37,7 @@ int scriptprocessor::select(const std::string & line) {
 	int i = 0, iprev = 0, max = filelines(filename,1);
 	if(max<=0) {
 		printf("select: fopen(%s) is null\n",filename.c_str());
-		if(_debug) wl_getch();
+		if(_debug) getch();
 		return 0;
 	}
 	std::string s[max], optionName[max], optionValue[max];
@@ -52,7 +52,7 @@ int scriptprocessor::select(const std::string & line) {
 		gotoxy(ogpos);
 		selectshow(optionName[iprev],optionName[i],i-iprev,32,10, blue | backlightwhite);
 		iprev = i;
-		char k = wl_getch();
+		char k = getch();
 		if( k == 13 ) break;
 		else if( k == 8 ) {
 			i = -1;

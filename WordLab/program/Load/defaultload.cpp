@@ -1,4 +1,4 @@
-int defaultload(char *msgs,int m,int n,int i,...){
+int load::defaultload(char *msgs,int m,int n,int i,...) {
     va_list argv;
     va_start(argv,i);
 	char *typemsg=NULL,type;

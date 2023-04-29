@@ -5,5 +5,5 @@ int MessageWindow::Pointer(int x,int y,int max,int n,int nprev,bool flag0=true,b
 	if(flag0==true){colorset(bothlightred);  gotoxy(x,y+max-1);std::cout<<" 0 ";}
 	if(n>=0&&n<max){colorset(bothlightyellow);gotoxy(x,y+n);std::cout<<"-->";}
 	colorreset(colorprev);
-	return wl_getch();
+	return getch();
 }

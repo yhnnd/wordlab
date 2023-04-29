@@ -6,7 +6,7 @@
 #include "Crossword/all.cpp"
 #include "ClearCache.cpp"
 #include "Help/all.cpp"
-#include "Load/all.cpp"
+#include "Load/all_load.cpp"
 #include "practices.cpp"
 #include "launch.cpp"
 #include "launch-input.cpp"

@@ -1,8 +1,12 @@
-void UpdateDatabase(string route){
+void load::UpdateDatabase(string route){
+
 }
-void UpdateSoftware(string route){
+
+void load::UpdateSoftware(string route){
+
 }
-void Update(){
+
+void load::Update() {
 	MessageWindow.Frame(0,0,2,70,16,16);
 	gotoxy(1,3);
 	bsvline("<-wte>(enter file route",73);

@@ -7,7 +7,7 @@ int launch(std::string);
 int main(int argc,char **argv) {
 //	if(sortofword("apple")!="noun") {
 //		cout<<"error: word sort error!";
-//		wl_getch();
+//		getch();
 //	}
 
 //	string a = "ABC";

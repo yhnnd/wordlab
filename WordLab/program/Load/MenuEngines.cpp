@@ -1,4 +1,4 @@
-void Engines() {
+void load::Engines() {
 	int x = 0, y = 9, width = 30, r, rprev = 0, total = 11;
 	char Menu[20][LINEMAX];
 	if(LANGUAGE==0) loadmsg((char*)Menu,SetEnginesRoute"en.csv",20,LINEMAX,1,1);

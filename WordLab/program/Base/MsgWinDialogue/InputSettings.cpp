@@ -16,7 +16,7 @@ void dialog::settings(int x,int y) {
 				std::cout<<(n==buttonSelected?"***":"   ");
 			}
 		}
-		auto key = wl_getch();
+		auto key = getch();
 		if ( key == 'w' ) {
 			--buttonSelected;
 		} else if ( key == 's') {

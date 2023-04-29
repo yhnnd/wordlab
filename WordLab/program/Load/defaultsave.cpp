@@ -1,4 +1,4 @@
-int defaultsave(const char * route,int i,...){
+int load::defaultsave(const char * route,int i,...) {
     va_list argv;
     va_start(argv,i);
 	char *typemsg;

@@ -1,4 +1,4 @@
-void PrintSoftwareInfo(){
+void load::PrintSoftwareInfo(){
 	// Trade Mark
 	std::ifstream fin(TradeMarkRoute);
 	if ( fin ) {

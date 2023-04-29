@@ -1,7 +1,7 @@
 void banner() {
 	int x = 0;
 	colorset(lightwhite);
-	system("cls");
+	clearScreen();
 	colorset(lightgreen);
 	gotoxy(x,0);
 	cout<<"+----------------------------------+";

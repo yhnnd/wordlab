@@ -8,7 +8,7 @@ const string TextWindowName = "TextWindow";
 char popupbsvline(std::string msg,bool Getch=true,COORD pos= {0,0},int width=ScreenX) {
 	gotoxy(pos);
 	bsvline(msg.c_str(),width-1);
-	if(Getch) return wl_getch();
+	if(Getch) return getch();
 	else return 0;
 }
 int main(int argc,char **argv) {

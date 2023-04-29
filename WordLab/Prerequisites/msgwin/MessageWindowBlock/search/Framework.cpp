@@ -5,7 +5,7 @@ int messageblock::Search(char what[][LINEMAX],int N) {
 	colorrecord(colorprev);
 	colorset(bothlightwhite);
 	clearline(x+(width-lth)/2,y-1,lth);
-	for(r=0; (c=wl_getch())!=13; nprev=n) {
+	for(r=0; (c=getch())!=13; nprev=n) {
 		if(c==8) {
 			keyword[r]=0;
 			keyword[--r]=0;

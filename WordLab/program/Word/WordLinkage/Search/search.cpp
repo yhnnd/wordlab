@@ -29,7 +29,7 @@ int WLSearch(string s,bool ignoreCase){
 		}
 	}
 	fclose(fp);
-	if(number==0){
+	if (number == 0) {
 	    WLHistory.RecordAnswer(s.substr(0,lth),0);
 		WLHistory.RecordUnfound(s.substr(0,lth),0);
 	}

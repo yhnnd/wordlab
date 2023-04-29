@@ -5,7 +5,7 @@ void Framework() {
 	for(;;) {
 		reset();
 		colorset(lightwhite);
-		system("cls");
+		clearScreen();
 		banner();
 		for(rwin = 0;; rwin++) {
 			punct = Input(x,y);

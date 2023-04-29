@@ -1,131 +1,148 @@
-WORD bsvcmdcolor(const char *msg) {
+WORD bsvcmdcolor(const char * msg) {
 	bool flag = false;
 	WORD color= 0;
-	if(bsvs(msg,0,3,"red-","red-","fore red")) {
+    // foreground light
+	if(bsvMatchCommand(msg, '0', 2, "red-", "red-")) {
 		flag = true;
-		color |= light|red;
+		color |= lightred;
 	}
-	if(bsvs(msg,0,3,"grn-","green-","fore green")) {
+	if(bsvMatchCommand(msg, '0', 2, "grn-", "green-")) {
 		flag = true;
-		color |= light|green;
+		color |= lightgreen;
 	}
-	if(bsvs(msg,0,3,"blu-","blue-","fore blue")) {
+	if(bsvMatchCommand(msg, '0', 2, "blu-", "blue-")) {
 		flag = true;
-		color |= light|blue;
+		color |= lightblue;
 	}
-	if(bsvs(msg,0,3,"ylw-","yellow-","fore yellow")) {
+	if(bsvMatchCommand(msg, '0', 2, "ylw-", "yellow-")) {
 		flag = true;
-		color |= light|yellow;
+		color |= lightyellow;
 	}
-	if(bsvs(msg,0,3,"cyn-","cyan-","fore cyan")) {
+	if(bsvMatchCommand(msg, '0', 2, "cyn-", "cyan-")) {
 		flag = true;
-		color |= light|cyan;
+		color |= lightcyan;
 	}
-	if(bsvs(msg,0,3,"pnk-","pink-","fore pink")) {
+	if(bsvMatchCommand(msg, '0', 2, "pnk-", "pink-")) {
 		flag = true;
-		color |= light|purple;
+		color |= lightpurple;
 	}
-	if(bsvs(msg,0,3,"gry-","gray-","fore gray")) {
+    if(bsvMatchCommand(msg, '0', 2, "wte-", "white-")) {
+        flag = true;
+        color |= lightwhite;
+    }
+	if(bsvMatchCommand(msg, '0', 2, "gry-", "gray-")) {
 		flag = true;
 		color |= darkwhite;
 	}
-	if(bsvs(msg,0,3,"wte-","white-","fore white")) {
-		flag = true;
-		color |= lightwhite;
-	}
 
-	if(bsvs(msg,0,3,"#red-","dark red-","fore dark red")) {
+    // foreground dark
+	if(bsvMatchCommand(msg, '0', 2, "#red-", "#red-")) {
 		flag = true;
 		color |= red;
 	}
-	if(bsvs(msg,0,3,"#grn-","dark green-","fore dark green")) {
+	if(bsvMatchCommand(msg, '0', 2, "#grn-", "#green-")) {
 		flag = true;
 		color |= green;
 	}
-	if(bsvs(msg,0,3,"#blu-","dark blue-","fore dark blue")) {
+	if(bsvMatchCommand(msg, '0', 2, "#blu-", "#blue-")) {
 		flag = true;
 		color |= blue;
 	}
-	if(bsvs(msg,0,3,"#ylw-","dark yellow-","fore dark yellow")) {
+	if(bsvMatchCommand(msg, '0', 2, "#ylw-", "#yellow-")) {
 		flag = true;
 		color |= yellow;
 	}
-	if(bsvs(msg,0,3,"#cyn-","dark cyan-","fore dark cyan")) {
+	if(bsvMatchCommand(msg, '0', 2, "#cyn-", "#cyan-")) {
 		flag = true;
 		color |= cyan;
 	}
-	if(bsvs(msg,0,3,"#pnk-","dark pink-","fore dark pink")) {
+	if(bsvMatchCommand(msg, '0', 2, "#pnk-", "#pink-")) {
 		flag = true;
 		color |= purple;
 	}
-	if(bsvs(msg,0,3,"#gry-","dark gray-","fore dark gray")) {
+    if(bsvMatchCommand(msg, '0', 2, "#wte-", "#white-")) {
+        flag = true;
+        color |= darkwhite;
+    }
+	if(bsvMatchCommand(msg, '0', 2, "#gry-", "#gray-")) {
 		flag = true;
 		color |= light;
 	}
 
-	if(bsvs(msg,2,2,"-red","back red")) {
+    // background light
+	if(bsvMatchCommand(msg, '2', 2, "-red", "-red")) {
 		flag = true;
-		color |= backlight|backred;
+		color |= backlightred;
 	}
-	if(bsvs(msg,2,2,"-grn","back green")) {
+	if(bsvMatchCommand(msg, '2', 2, "-grn", "-green")) {
 		flag = true;
-		color |= backlight|backgreen;
+		color |= backlightgreen;
 	}
-	if(bsvs(msg,2,2,"-blu","back blue")) {
+	if(bsvMatchCommand(msg, '2', 2, "-blu", "-blue")) {
 		flag = true;
-		color |= backlight|backblue;
+		color |= backlightblue;
 	}
-	if(bsvs(msg,2,2,"-ylw","back yellow")) {
+	if(bsvMatchCommand(msg, '2', 2, "-ylw", "-yellow")) {
 		flag = true;
-		color |= backlight|backyellow;
+		color |= backlightyellow;
 	}
-	if(bsvs(msg,2,2,"-cyn","back cyan")) {
+	if(bsvMatchCommand(msg, '2', 2, "-cyn", "-cyan")) {
 		flag = true;
-		color |= backlight|backcyan;
+		color |= backlightcyan;
 	}
-	if(bsvs(msg,2,2,"-pnk","back pink")) {
+	if(bsvMatchCommand(msg, '2', 2, "-pnk", "-pink")) {
 		flag = true;
-		color |= backlight|backpurple;
+		color |= backlightpurple;
 	}
-	if(bsvs(msg,2,2,"-gry","back gray")) {
-		flag = true;
-		color |= backdarkwhite;
-	}
-	if(bsvs(msg,2,2,"-wte","back white")) {
+	if(bsvMatchCommand(msg, '2', 2, "-wte", "-white")) {
 		flag = true;
 		color |= backlightwhite;
 	}
+    if(bsvMatchCommand(msg, '2', 2, "-gry", "-gray")) {
+        flag = true;
+        color |= backdarkwhite;
+    }
 
-	if(bsvs(msg,2,2,"-#red","back dark red")) {
+    // background dark
+	if(bsvMatchCommand(msg, '2', 2, "-#red", "-#red")) {
 		flag = true;
 		color |= backred;
 	}
-	if(bsvs(msg,2,2,"-#grn","back dark green")) {
+	if(bsvMatchCommand(msg, '2', 2, "-#grn", "-#green")) {
 		flag = true;
 		color |= backgreen;
 	}
-	if(bsvs(msg,2,2,"-#blu","back dark blue")) {
+	if(bsvMatchCommand(msg, '2', 2, "-#blu", "-#blue")) {
 		flag = true;
 		color |= backblue;
 	}
-	if(bsvs(msg,2,2,"-#ylw","back dark yellow")) {
+	if(bsvMatchCommand(msg, '2', 2, "-#ylw", "-#yellow")) {
 		flag = true;
 		color |= backyellow;
 	}
-	if(bsvs(msg,2,2,"-#cyn","back dark cyan")) {
+	if(bsvMatchCommand(msg, '2', 2, "-#cyn", "-#cyan")) {
 		flag = true;
 		color |= backcyan;
 	}
-	if(bsvs(msg,2,2,"-#pnk","back dark pink")) {
+	if(bsvMatchCommand(msg, '2', 2, "-#pnk", "-#pink")) {
 		flag = true;
 		color |= backpurple;
 	}
-	if(bsvs(msg,2,2,"-#gry","back dark gray")) {
+    if(bsvMatchCommand(msg, '2', 2, "-#wte", "-#white")) {
+        flag = true;
+        color |= backdarkwhite;
+    }
+	if(bsvMatchCommand(msg, '2', 2, "-#gry", "-#gray")) {
 		flag = true;
 		color |= backlight;
 	}
 	return flag * color;
 }
-WORD bsvcmdcolor(std::string msg) {
-	return bsvcmdcolor(msg.c_str());
+
+
+int colorsetcmd(const std::string msg) {
+    const WORD color = bsvcmdcolor(msg.c_str());
+//    colorset(lightwhite);
+//    printf("msg = %s, color = %d\n", msg.c_str(), color);
+    return colorset(color);
 }

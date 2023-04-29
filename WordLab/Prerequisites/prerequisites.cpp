@@ -18,13 +18,6 @@ std::string getCurrentTime(){
 	if(*(CurrentTime.cend()-1)=='\n') CurrentTime.erase(CurrentTime.length()-1);
 	return CurrentTime;
 }
-int wl_getch(){
-#if defined(_WIN32)
-    return getch();
-#else
-    return getche();
-#endif
-}
 //user interface
 #include "table/all.cpp"
 #include "chart/all.cpp"
@@ -33,7 +26,7 @@ int wl_getch(){
 #include "maths/all.cpp"
 #include "dataContainer/all.cpp"// requires table
 #include "script/all.cpp"//requires Maths & dataContainer
-#include "bsv/all.cpp"//requires script
+#include "bsv/all_bsv.cpp"//requires script
 #include "input.cpp"
 #include "msgwin/all.cpp"//requires askchar & bsv & launch() & input
 #include "progress/all.cpp"//requires messagewindow

@@ -85,7 +85,7 @@ int scriptshell(int print_debug_msg) {
 	std::string tempstr;
 	for(;;) {
 		colorset(lightwhite);
-		system("cls");
+		clearScreen();
 		std::cout<<"input filename or \"new\""<<std::endl<<">>> ";
 		std::cin>>tempstr;
 		auto y = getxy().Y;

@@ -16,7 +16,7 @@ bool MessageWindow::Report(int X,int Y,int width,int height,const char * route){
 		fout.close();
 		gotoxy(x+1,++y);
 		if(!ErrorReport(route)) value=true;
-		wl_getch();
+		getch();
 	    }
 	Erase(X,Y,width,height);
 	return value;

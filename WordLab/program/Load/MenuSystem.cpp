@@ -1,4 +1,4 @@
-void System(){
+void load::System() {
 	int x=0,y=9,width=30,n=0,nprev=0,T=0;
 	char Menu[MAXLINES][LINEMAX];
 	if(LANGUAGE==0) loadmsg((char*)Menu,SetSystemRoute"en.csv",MAXLINES,LINEMAX,1,1);

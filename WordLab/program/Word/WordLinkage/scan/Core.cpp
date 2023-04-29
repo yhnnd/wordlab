@@ -8,7 +8,7 @@ void WLscancore(int lth,int NOL,FILE *fp1){
 	strsort(&word[0][0],NOL,lth+1);
 	int page = 1, pagemin = 1, pagemax = ceil(NOL/vol)+1;
 	for(page = pagemin;;){
-		system("cls");
+		clearScreen();
 		cout<<"db-"<<lth<<"-"<<NOL<<":"<<pagemax<<"-"<<page<<endl;
 		for( int i = (page - 1) * vol; i < NOL and i < page * vol; ++i ){
 			int lineNumber = Search(word[i],lth);

@@ -40,8 +40,8 @@ INPUT:
 		printline(win,x0,y0,x,y-1,false);//above
 		printline(win,x0,y0,x,y+1,false);//below
 		printline(win,x0,y0,x,y,true);//current
-		key = wl_getch();
-		if(key==-32) key = wl_getch();//BIOSKEY
+		key = getch();
+		if(key==-32) key = getch();//BIOSKEY
 		if(key==KEY_ESC||key==KEY_DELETE) return 0;
 		if(key==KEY_ENTER) {
 			int i/*name NO.*/, pww = win.innerWidth()-1;// pop window width
@@ -58,8 +58,8 @@ INPUT:
 				}
 			}//*(FNAV)
 			if( i<name.size() and value!="" ) { // Name And Value Found (NAVF)
-				char key = wl_getch();
-				if(key==-32) key = wl_getch();//BIOSKEY
+				char key = getch();
+				if(key==-32) key = getch();//BIOSKEY
 				if(key==KEY_ENTER) {
 					PKC msg = "<-grn>( Search ) <-ylw>(  Add  ) <-red>( Delete ) <-cyn>( Update )";
 					int n, nmax = 4, xborder = win.innerLeft()+2, yborder = win.innerTop()+1;

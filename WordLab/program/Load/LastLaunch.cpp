@@ -1,4 +1,4 @@
-string lastlaunch(){
+string load::lastlaunch() {
 	string line="";
 	ifstream in(LastLaunchRoute);
 	if(!std::getline(in,line)) line="error";

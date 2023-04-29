@@ -1,5 +1,5 @@
 int CrosswordFramework(){
-	system("cls");
+	clearScreen();
 	colorset(lightwhite);
 	string folder=CrosswordDataFolder;
 	string folder2=CrosswordSelectFolder(folder);
@@ -22,7 +22,7 @@ int CrosswordFramework(){
 	for(;Crossword.show();){
 		Crossword.info(key);
 		Crossword.save();
-		if((key=wl_getch())=='0'||key==8||key==27) break;
+		if((key=getch())=='0'||key==8||key==27) break;
 		switch(key){
 			case 'a'://answer
 				n=Crossword.SelectWord();

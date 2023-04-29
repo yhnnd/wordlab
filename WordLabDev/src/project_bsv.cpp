@@ -9,7 +9,7 @@ template <typename T,typename T2>
 const T& project_input_with_default(bool AllowSet,T& s,const string name,const T2 default_value){
 	project_input_with_default_print_name(name,"=",AllowSet);
 	cout<<default_value;
-	if(!AllowSet||wl_getch()==13){
+	if(!AllowSet||getch()==13){
 		s = default_value;
 		cout<<endl;
 	}else{
@@ -59,7 +59,7 @@ int project_bsv_framework(){
 	prerequisites::ScreenY=32;
 	setscreen(ScreenX+1,ScreenY+1);
 	colorset(white);
-	system("cls");
+	clearScreen();
 	string folder,project,bsvlabel,scriptfilename;
 	bool DisplayLogs;
 	int DataCapacity;
@@ -110,7 +110,7 @@ int project_bsv_framework(){
 	}
 	end:
 	colorreset(white);
-	system("cls");
+	clearScreen();
 	popup("<-wte>( <-ylw>( project ",folder," ) terminated",0);
 }
 

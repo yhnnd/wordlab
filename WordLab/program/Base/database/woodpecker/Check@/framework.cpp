@@ -10,7 +10,7 @@ int WoodPeckerCheckSyntax(int first,int last,int buffermax){
 			    error++;
 			    if(error==1) cout<<"--- ---"<<endl<<"total  library  line   content"<<endl;
 			    cout<<setw(4)<<error<<setw(7)<<r<<setw(8)<<r1<<"     "<<s<<endl;
-			    if((error-10)%10==0){cout<<"press any key to continue."<<endl;wl_getch();}
+			    if((error-10)%10==0){cout<<"press any key to continue."<<endl;getch();}
 	        }
 	    }
         fclose(fp);

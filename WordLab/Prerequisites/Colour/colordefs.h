@@ -120,10 +120,13 @@ std::string get_mac_os_background_color_code(WORD color) {
     }
 }
 
-std::string get_mac_os_color_code(WORD color) {// MacOS & Linux only
+std::string get_mac_os_color_code(const WORD color) {// MacOS & Linux only
     std::string code = "";
-    const std::string foreground_code = get_mac_os_foreground_color_code(color);
-    const std::string background_code = get_mac_os_background_color_code(color);
+    const WORD foreColor = color % 16;
+    const WORD backColor = color - foreColor;
+//    printf("color = %d, forecolor = %d, backcolor = %d\n", color, foreColor, backColor);
+    const std::string foreground_code = get_mac_os_foreground_color_code(foreColor);
+    const std::string background_code = get_mac_os_background_color_code(backColor);
     if (foreground_code.length() == 0 && background_code.length() == 0) {
         switch(color) {
             // Both Foreground Dark and Background Dark
@@ -162,6 +165,8 @@ std::string get_mac_os_color_code(WORD color) {// MacOS & Linux only
         code = get_mac_os_foreground_color_code(lightwhite) + background_code;
     } else if (background_code.length() == 0) {
         code = foreground_code + ";40";
+    } else {
+        code = foreground_code + background_code;
     }
     return code;
 }
@@ -169,4 +174,3 @@ std::string get_mac_os_color_code(WORD color) {// MacOS & Linux only
 
 // Functions
 #define colorrecord(color) WORD color = CurrentColor
-#define colorsetcmd(x) colorset(bsvcmdcolor(x))

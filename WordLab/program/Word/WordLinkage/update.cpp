@@ -15,7 +15,7 @@ void WordUpdate(const string word){
 		Dialog.output(trans,light|yellow);//print definition
 	    listen(trans,strlen(trans),1,{13,0,EOF},256);//edit definition
 	    Dialog.output(string("use (")+trans+")?",lightyellow);
-	    if(wl_getch()==13) break;
+	    if(getch()==13) break;
 	}
     if(DeleteLine(LibraryRoute(lth,EN),n,1)!=0){
 	    popup("cannot delete word <fore red>(",word,")",-1);
@@ -40,11 +40,11 @@ void WordUpdate(const string word){
     flog<<"<defs>"<<trans;//will be followed by new definitions
     //add more definition to chinese database
     Dialog.output("add new definition?");
-    if(wl_getch()==13){
+    if(getch()==13){
 		string trans_new = AddWordGetTranslation(word);//exprimt'l
 		if(trans_new.length()>5/*/n./{};*/){
 			Dialog.output("add \""+trans_new+"\" ?");
-			if(wl_getch()==13){
+			if(getch()==13){
 				fout << trans_new;
     			flog << trans_new << "\n" << endl;//write log file 2
 			}else Dialog.output("cancelled");

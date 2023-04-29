@@ -1,4 +1,4 @@
-void UpdateCheck(string msg){
+void load::UpdateCheck(string msg) {
 	string lib = DatabaseVersion();
 	string sys = SoftwareVersion();
 	string lib_new,sys_new;

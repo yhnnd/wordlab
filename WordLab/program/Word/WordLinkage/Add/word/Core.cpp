@@ -4,7 +4,7 @@ void AddWordCore(string word,ofstream &foutEN,ofstream &foutCH,ofstream &flog){
 	if(line_of_defs.length()){
 		// Prepare to Add word and Definition to DB
 		AddWordPrintMessage(8,word+" "+line_of_defs);
-		if(wl_getch()==13){
+		if(getch()==13){
 			foutEN<<endl<<word;// Add word to DB
 			foutCH<<endl<<word<<" "<<line_of_defs;// Add Def to DB
 			// write log file

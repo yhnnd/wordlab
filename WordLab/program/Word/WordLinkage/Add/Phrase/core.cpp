@@ -14,7 +14,7 @@ int AddPhraseCore(const string msg) {
 		}
 	}
 	Dialog.output("add "+s+" to library?");
-	if(wl_getch()==13) {
+	if(getch()==13) {
 		string route=PhraseRouteA;
 		route+=tostring(n);
 		route+=PhraseRouteB;

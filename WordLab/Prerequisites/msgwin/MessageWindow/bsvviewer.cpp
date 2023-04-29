@@ -26,7 +26,7 @@ int MessageWindow::bsvviewer(const char *route,bool _Animation,int x,int y,int w
 	if(select) for(;;) {
 			n=Switch(x,y,width,&msgs[0][0],height,w,n);
 			if(n==-1||n==height-1) break;
-		} else n=wl_getch();
+		} else n=getch();
 
 	if(_Animation) Hide(x,y,width,&msgs[0][0],height,linemax);
 	else       Frame(-1,x,y,width,&msgs[0][0],height,linemax);

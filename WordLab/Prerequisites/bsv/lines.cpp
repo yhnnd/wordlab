@@ -17,9 +17,9 @@ int bsvlines(char **msgs,const int max,int width,const char *folder,int x,int y,
 			maxlinks = bsvlabel(msgs[i],0,maxlinks,0,folder,x,y,width,"wte-gry","wte-blu","<",">","(",")",spptr);
 		}
 		enter = 0;
-		key = wl_getch();
+		key = getch();
 		if(key == BIOSKEY) {
-			key = wl_getch();
+			key = getch();
 			if(key==UP) key = 'w';
 			if(key==DOWN) key = 's';
 			if(key==LEFT) key = 'a';

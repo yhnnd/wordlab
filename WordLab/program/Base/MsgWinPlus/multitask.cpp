@@ -12,22 +12,23 @@ int multitask(int x,int y,int width,char Menu[][LINEMAX],int T=0,int n=0,bool ba
 	} else if(version==NEW) {
         a = MessageBlock.Switcher(Menu);
     }
-#else
+#elif defined(__APPLE__)
     const int maxlength = MaxLength(&Menu[0][0],LINEMAX);
-    for (int i = 0;i < maxlength;++i) {
-        printf("%d %s\n", i, Menu[i]);
-    }
-    string choice;
-    for (;;) {
-        cout << "input choice:";
-        cin >> choice;
-        if (isdigit(choice.c_str()[0])) {
-            sscanf(choice.c_str(), "%d[^\n]", &a);
-            if (a >= 0 && a < maxlength) {
-                break;
-            }
+    if (version==OLD) {
+        if (T==0) {
+            MessageWindow.Show(x,y,width,&Menu[0][0],0,LINEMAX);
+        } else {
+            MessageWindow.Frame(0,x,y,width,&Menu[0][0],0);
         }
-        popup("<red-> (error) <ylw->(\\(illegal choice\\))",0);
+        a =  MessageWindow.Switch (x,y,width,&Menu[0][0],0,LINEMAX,n);
+    } else if(version==NEW) {
+        a = MessageBlock.Switcher(Menu);
+    }
+
+    if (a >= 0 && a < maxlength) {
+//        popup("<grn->(your choice:) ", tostring(a), -1);
+    } else {
+        popup("<red-> (error) <ylw->(\\(illegal choice\\))",-1);
     }
 #endif
 	MessageWindow.SetBackground(backcolorold);

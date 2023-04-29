@@ -1,10 +1,10 @@
 #define _data_dir "../files/"
-#include "./prerequisites/prerequisites.cpp"
+#include "../wordlab/prerequisites/prerequisites.cpp"
 using namespace prerequisites;
 using namespace std;
 int launch(std::string) {}
 #include "../wordlab/program/base/all.cpp"
-#include "src/all.cpp"
+#include "./src/all.cpp"
 int main(int argc,char **argv) {
 	if(checkcolor()==false) return -1;
 	error_monitor_lock = 1;
@@ -72,6 +72,6 @@ int main(int argc,char **argv) {
 				break;
 		}
 		colorset(white);
-		system("cls");
+		clearScreen();
 	}
 }
