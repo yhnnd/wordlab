@@ -7,7 +7,7 @@ std::string host::datafolder="";
 #include "Colour/all.cpp"
 #include "Console/all.cpp"
 #include "string/all.cpp"
-#include "error/all.hpp"
+#include "error/all_window_text.hpp"
 #include "readfile/all.cpp"
 #include "writefile/all.cpp"
 std::string getCurrentTime(){
@@ -32,6 +32,6 @@ std::string getCurrentTime(){
 #include "progress/all.cpp"//requires messagewindow
 #include "popup/all.cpp"//requires bsv & messagewindow
 #include "moniter/all.cpp"//requires progress & popup
-#include "window/all.cpp"
+#include "window/all_window.cpp"
 #include "wait.cpp"
 }
