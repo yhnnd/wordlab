@@ -19,9 +19,9 @@
 				return p;
 			}
 		}value;
-		int tostring(int n){
+		int tostring(int n) {
 			if(n<0) return n;
-			cursormove(1,0);
+			gotoxy(1, getxy().Y);
 			colorrecord(colorprev);
 			colorset(backlightwhite);
 			cout<<"attr["<<n<<"]=";

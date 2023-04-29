@@ -6,7 +6,7 @@ private:
     bool defaults(const char *route, bool in);
     bool writeTime(const string fileroute);
     void animation(int r,int max);// called by Config
-    void PrintSoftwareVersion(int x,int y);// called by PrintSoftwareInfo
+    void PrintSoftwareVersion(const int x, const int y);// called by PrintSoftwareInfo
     void PrintSoftwareInfo();
 public:
     void config();

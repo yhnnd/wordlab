@@ -1,7 +1,7 @@
 int queryErrorPrint(string msg){
-	cursormove(1,0);
+	gotoxy(1, getxy().Y);
 	bsvline(msg.c_str(),prerequisites::ScreenX-3);
-	cursormove(1,1);
+	gotoxy(1, getxy().Y + 1);
 	colorreset(lightwhite);
     return 0;
 }

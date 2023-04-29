@@ -4,7 +4,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 		return;
 	}
 	// initialize parameters
-	int WindowX=0,WindowY=0;// INPUT WINDOW
+	int WindowX = 0, WindowY = 0, CurrentWindowY = 0;// INPUT WINDOW
 	int r=0,r_prev=0,c=0,c_prev=0,row_max = this->getnumofrow();
 	char key;
 	bool Void_Option = 0;
@@ -79,8 +79,12 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 			gotoxy(deltaX,y+r);
 			WindowX = getxy().X-1;// record cursor position
 			WindowY = getxy().Y;// record cursor position
-			if(WindowX>ScreenX/3) WindowX = ScreenX/4;
-			if(WindowY>ScreenY/2) WindowY = ScreenY/2;
+			if (WindowX > ScreenX/3) {
+                WindowX = ScreenX/4;
+            }
+			if (WindowY > ScreenY/2) {
+                WindowY = ScreenY/2;
+            }
 			colorsetcmd("-wte");
 			std::cout<<"\b "<<std::setw(this->getwidth(r,c))<<(this->getdata(r,c));
 			colorreset(lightwhite);
@@ -146,20 +150,21 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 			else if(key==8||key==27) return;
 		}
 		// Select table Item completed
-		gotoxymove(0,0,1,WindowY);
+		gotoxy(WindowX, WindowY);
+        CurrentWindowY = WindowY;
 		colorsetcmd("-ylw");
 		if(this->iserror(r,c)) { // invalid label
 			Error_Msg = this->geterror(r,c);
 		} else { // valid label
 			int i = 1;
 			if(this->isTag(r,c)) { // label is tag that links to data
-				gotoxymove(1,WindowX,0,1);
+                gotoxy(WindowX, ++CurrentWindowY);
 				std::cout<<"[1] label("<<r<<","<<c<<")=\""<<(this->getlabel(r,c))<<"\"";
-				gotoxymove(1,WindowX,0,1);
+                gotoxy(WindowX, ++CurrentWindowY);
 				std::cout<<"[2] data("<<r<<","<<c<<")=\""<<(this->getdata(r,c))<<"\""
 				         <<(this->getReadOnly(r,c)?" [ READ ONLY ] ":"");
 				if(!this->getReadOnly(r,c)) { // data is not read only
-					gotoxymove(1,WindowX,0,1);
+                    gotoxy(WindowX, ++CurrentWindowY);
 					std::cout<<"select item by number:";
 					colorsetcmd("-gry");
 					std::cin>>temp;
@@ -167,11 +172,11 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 					colorsetcmd("-ylw");
 				}
 			} else { // label is text
-				gotoxymove(1,WindowX,0,1);
+				gotoxy(WindowX, ++CurrentWindowY);
 				std::cout<<"text("<<r<<","<<c<<")=\""<<(this->getlabel(r,c))<<"\"";
 			}
 			if(i>=1&&i<=2) { // modify label or data
-				gotoxymove(1,WindowX,0,1);
+				gotoxy(WindowX, ++CurrentWindowY);
 				std::cout<<"input new "<<(i==1?(this->isTag(r,c)?"label":"text"):"data")<<":";
 				std::cin.clear();
 				std::cin.sync();

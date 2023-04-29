@@ -9,16 +9,20 @@ int scriptprocessor::selectshow(const std::string & prev,const std::string & cur
 		for(int i = 0; i <= l1; i++ ) {
 			gotoxy(ogpos);
 			clearline(width);
-			for(int j = 0; j < l2; j++ ) printf("%c",s[j+i]);
-			Sleep(interval);
+			for(int j = 0; j < l2; j++ ) {
+				printf("%c",s[j+i]);
+			}
+			// Sleep(interval);
 		}
 	} else if(dir<0) {
 		s = curr + prev;
 		for(int i = l1; i >= 0; i-- ) {
 			gotoxy(ogpos);
 			clearline(width);
-			for(int j = 0; j < l2; j++ ) printf("%c",s[j+i]);
-			Sleep(interval);
+			for(int j = 0; j < l2; j++ ) {
+				printf("%c",s[j+i]);
+			}
+			// Sleep(interval);
 		}
 	} else {
 		gotoxy(ogpos);
@@ -54,7 +58,7 @@ int scriptprocessor::select(const std::string & line) {
 		iprev = i;
 		char k = getch();
 		if( k == 13 ) break;
-		else if( k == 8 ) {
+		else if( k == 8 || k == 127 ) {
 			i = -1;
 			break;
 		} else if(k=='s'||k=='d') i++;

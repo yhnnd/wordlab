@@ -5,6 +5,8 @@ void indexCore(const std::string msg,int x=10,int y=9,WORD color=darkwhite){
 	clearscreen(x,y,60,10);
 	gotoxy(x,y);
 	cout<<msg;
-	if(!indexerror()&&IL) Select(msg.c_str(),wordbase,x,y);
+	if(!indexerror() && IL) {
+        Select(msg.c_str(), wordbase, x, y);
+    }
 	resetxy(pos);
 }

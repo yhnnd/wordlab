@@ -47,7 +47,7 @@ int bsvLabelEnter(PKC folder, PKC label, int x, int y, int width, PKC color, voi
 		gotoxy(x,y-1);
 		colorset(bsvcmdcolor(color));
 		bsvline(route,width);
-		gotoxymove(1,x,1,y);
+		gotoxy(x,y);
 		return bsvlines(ptr,max-1,width,folder,x,y,spptr);
 	}
 }

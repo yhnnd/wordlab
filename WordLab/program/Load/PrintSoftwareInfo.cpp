@@ -5,11 +5,13 @@ void load::PrintSoftwareInfo(){
 		std::string s = "";
 		gotoxy(0,0);
 		colorset(lightyellow);
-		while(std::getline(fin,s)) std::cout<<s<<std::endl;
+		while(std::getline(fin,s)) {
+            std::cout<<s<<std::endl;
+        }
 		fin.close();
 	}
 	// Version
-	PrintSoftwareVersion(22,0);
+	PrintSoftwareVersion(40,0);
 	// Monitor
 	monitorShow(24,0);
 	// DB security

@@ -1,5 +1,4 @@
 #include "searchCore.cpp"
 #include "search.cpp"
-#include "searchFuzzyAsk.cpp"
 #include "searchFuzzy.cpp"
 #include "searchPhrase.cpp"

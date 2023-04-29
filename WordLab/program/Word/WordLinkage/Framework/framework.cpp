@@ -1,8 +1,8 @@
-int WLFramework() {
+int WLFramework(void) {
 	int lth = 0;
     char s[32] = "", FirstLetter = 0;
 	if( VL and db_is_secure(false,true)==false ) getch();
-	if(Ctype==0) {
+	if (Ctype == 0) {
 		if(popup("<-wte>(Add word Engine Authorization Was Set Off. Reset now?",-1) == WL_KEY_ENTER) {
 			Ctype = 1;
 		}
@@ -14,11 +14,13 @@ int WLFramework() {
         // INPUT DATA
 		if(FirstLetter!=13) {
 			memset(s,0,sizeof(s));
-			if(isalpha(FirstLetter)) s[0] = FirstLetter;
+			if(isalpha(FirstLetter)) {
+                s[0] = FirstLetter;
+            }
 			indexCore(s,10,9,light|green);
 			index(s,10,9,light|green,isalpha(FirstLetter)?1:0);
 			FirstLetter = 0;
-			lth=strlen(s);
+			lth = strlen(s);
 		}
 		// PROCESS DATA
 		char * ptr_token=strstr(s,"#");
@@ -37,10 +39,14 @@ int WLFramework() {
 			gotoxy(0,BeginY);
 			FirstLetter = WLFrameworkCore(s);
 			FirstLetter = WLDictionary(s);
-			if( FirstLetter == 8 || FirstLetter == 27 ) return -1;
-			// (BELOW) PREVENT FROM CLEARSCREEN IMMEDIATELY
-			else if(!isalpha(FirstLetter)) FirstLetter = getch();
-			if( FirstLetter == 8 || FirstLetter == 27 ) return -1;
+			if( FirstLetter == 8/* backspace */ || FirstLetter ==127/* delete */ || FirstLetter == 27/* escape */ ) {
+                return -1;
+            } else if(!isalpha(FirstLetter)) {// (BELOW) PREVENT FROM CLEARSCREEN IMMEDIATELY
+                FirstLetter = getch();
+            }
+			if( FirstLetter == 8/* backspace */ || FirstLetter ==127/* delete */ || FirstLetter == 27/* escape */ ) {
+                return -1;
+            }
 		}
 	}
     return 0;

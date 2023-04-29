@@ -32,7 +32,7 @@ int messageblock::Switcher(char what[][LINEMAX],bool LoadDefaultSettings){
 		else if(key=='d'||key=='D') n++;
 		else if(key=='w'||key=='W') n-=npl;
 		else if(key=='s'||key=='S') n+=npl;
-		else if(key== 8 ||key==27||key=='r'||key=='R'){
+		else if(key == 8 || key == 127 || key == 27 || key == 'r' || key == 'R'){
 			colorreset(colorprev);
 			return -1;
 		}else if(key=='i'||key=='I'){

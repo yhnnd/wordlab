@@ -30,7 +30,7 @@ char popupcore(std::string& msg, const int life, const int x, const int y, const
 	resetxy(pos);
 	colorreset(colorprev);
 	// write history
-	if(Record){
+	if (Record) {
 #ifndef _data_dir
 	    std::ofstream fout("buf.bsv",std::ios::app);
 #else
@@ -39,5 +39,6 @@ char popupcore(std::string& msg, const int life, const int x, const int y, const
 		if(fout.is_open()) fout<<msg.c_str()<<std::endl;
 		fout.close();
 	}
+//    printf("\nInput key is [%c] (%d)\n", key, key);
 	return key;
 }

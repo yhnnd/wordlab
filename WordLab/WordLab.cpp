@@ -5,6 +5,12 @@ using namespace std;
 int launch(std::string);
 #include "program/all.cpp"
 int main(int argc,char **argv) {
+    gotoxy(1,2);
+    getxy();
+    printf("   ");
+    getxy();
+    gotoxy(20, 4);
+    getxy();
 //	if(sortofword("apple")!="noun") {
 //		cout<<"error: word sort error!";
 //		getch();

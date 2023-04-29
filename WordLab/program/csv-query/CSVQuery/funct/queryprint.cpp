@@ -1,6 +1,6 @@
 int queryprint(){
 	if(!print_msg.empty()){
-		cursormove(1,0);
+		gotoxy(1, getxy().Y);
 		colorset(backdarkwhite);
 		bsvline(print_msg.c_str());
 		print_msg.clear();

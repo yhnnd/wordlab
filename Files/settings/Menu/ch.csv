@@ -1,9 +1,9 @@
-Ö÷ßx†Î,menu,search();
-†ÎÔ~ŒWÁ•,launch,practices();
-†ÎÔ~²éÕÒ,launch,wordlinkage();
-ÎÄ±¾·­×g,launch,translater();
-Œ£˜I·­×g,launch,translaterpro();
-é_°lÕß…^,menu,new_menu(Settings\Menu\DevelopersMenu\);
-ÓÃ‘ôµÇä›,menu,new_menu(Settings\Menu\UsersMenu\);
-ÆäËûßxí—,menu,new_menu(Settings\Menu\SettingsMenu\);
-ÍË³öÏµ½y,menu,quit();
+ä¸»é¸å–®,menu,search();
+å–®è©å­¸ç¿’,launch,practices();
+å–®è©æŸ¥æ‰¾,launch,wordlinkage();
+æ–‡æœ¬ç¿»è­¯,launch,translater();
+å°ˆæ¥­ç¿»è­¯,launch,translaterpro();
+é–‹ç™¼è€…å€,menu,new_menu(Settings/Menu/DevelopersMenu/);
+ç”¨æˆ¶ç™»éŒ„,menu,new_menu(Settings/Menu/UsersMenu/);
+å…¶ä»–é¸é …,menu,new_menu(Settings/Menu/SettingsMenu/);
+é€€å‡ºç³»çµ±,menu,quit();

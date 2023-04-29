@@ -19,17 +19,21 @@ int WLSearchFuzzy(const char *s,int Limit){
             goto CORRECT;
         }
 	    if (km >= lth - Limit) {
-	    	key = WLSearchFuzzyAsk(popup(" Do you mean ",c," ?",3000));
-	        if (key == 1) {
-	        	CORRECT:
-				WLSearchCore(lth,NOL,c,k);
-				n++;
-				break;
-			} else if(key==-1) {
+	    	key = (popup(" Do you mean ",c," ?",3000));
+//            printf("\ninput key is = %d\n", key);
+            if (key == 13) {
+                CORRECT:
+                WLSearchCore(lth,NOL,c,k);
+                n++;
                 break;
+            } else if (key == 'c' || key == 8 || key == 127 || key == 27) {
+                break;
+            } else {
+                continue;
             }
 	    }
 	}
 	fclose(fp);
+//    printf("\nWLSearchFuzzy returns %d\n", n);
 	return n;
 }

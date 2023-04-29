@@ -98,7 +98,7 @@ char getche(void) {
     return ch;
 }
 
-unsigned int Sleep(unsigned int n){return sleep(n);}
+unsigned int Sleep(unsigned int n){return 0;}
 
 #define WORD unsigned short
 #define BOOL long
@@ -176,7 +176,7 @@ void setscreen(int w,int h);
 COORD getxy();
 void gotoxy(int x,int y);
 void gotoxy(COORD pos);
-void gotoxymove(bool posabsX,int paddingLeft,bool posabsY,int paddingTop);
+void movexy(const int offsetX,const int offsetY);
 void clearline(int x=-1,int y=-1,int n=ScreenX-1,const char c=' ');
 void clearscreen(const int x,const int y,const int width,const int height,const char fill=' ');
 //string

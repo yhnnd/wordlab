@@ -1,5 +1,5 @@
-é_°lÕß…^,menu,search();
-½Å±¾³ÌĞò,menu,new_menu(Settings\Menu\DevelopersMenu\1);
-¹¤¾ßÏä,menu,new_menu(Settings\Menu\DevelopersMenu\2);
-ÓÎÏ·,menu,new_menu(Settings\Menu\DevelopersMenu\3);
-ÍË³ö,menu,quit();
+é–‹ç™¼è€…å€,menu,search();
+è„šæœ¬ç¨‹åº,menu,new_menu(Settings/Menu/DevelopersMenu/1);
+å·¥å…·ç®±,menu,new_menu(Settings/Menu/DevelopersMenu/2);
+æ¸¸æˆ,menu,new_menu(Settings/Menu/DevelopersMenu/3);
+é€€å‡º,menu,quit();

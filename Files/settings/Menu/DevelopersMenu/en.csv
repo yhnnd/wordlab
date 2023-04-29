@@ -1,5 +1,5 @@
 Developers,menu,search();
-shells,menu,new_menu(Settings\Menu\DevelopersMenu\1);
-tools,menu,new_menu(Settings\Menu\DevelopersMenu\2);
-games,menu,new_menu(Settings\Menu\DevelopersMenu\3);
+shells,menu,new_menu(Settings/Menu/DevelopersMenu/1);
+tools,menu,new_menu(Settings/Menu/DevelopersMenu/2);
+games,menu,new_menu(Settings/Menu/DevelopersMenu/3);
 Exit,menu,quit();
