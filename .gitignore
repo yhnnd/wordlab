@@ -2,6 +2,7 @@
 *.csv.update.tmp
 *.csv.rollback.tmp
 *.log
+buf.bsv
 
 # WordLab Backup files
 *.csv.prev

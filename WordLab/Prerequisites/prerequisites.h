@@ -28,6 +28,7 @@ int clearScreen(void) {
 #include <fcntl.h>
 
 int clearScreen(void) {
+    printf("\x1b[%sm\n", "97;40");
     return system("clear");
 }
 
@@ -57,18 +58,20 @@ int kbhit(void) {
 
 
 int getch(void) {
-    struct termios tm, tm_old;
+    struct termios oldTermios, currentTermios;
     int fd = 0, ch;
-    if (tcgetattr(fd, &tm) < 0) {//保存现在的终端设置
+    if (tcgetattr(fd, &currentTermios) < 0) {//保存现在的终端设置
         return -1;
     }
-    tm_old = tm;
-    cfmakeraw(&tm);//更改终端设置为原始模式，该模式下所有的输入数据以字节为单位被处理
-    if (tcsetattr(fd, TCSANOW, &tm) < 0) {//设置上更改之后的设置
+    oldTermios = currentTermios;
+
+    cfmakeraw(&currentTermios);//更改终端设置为原始模式，该模式下所有的输入数据以字节为单位被处理
+
+    if (tcsetattr(fd, TCSANOW, &currentTermios) < 0) {//设置上更改之后的设置
         return -1;
     }
     ch = getchar();
-    if (tcsetattr(fd, TCSANOW, &tm_old) < 0) {//更改设置为最初的样子
+    if (tcsetattr(fd, TCSANOW, &oldTermios) < 0) {//更改设置为最初的样子
         return -1;
     }
     return ch;
@@ -79,18 +82,19 @@ char getche(void) {
     struct termios oldTermios, currentTermios;
     bool echo = true;
     /* Initialize new terminal i/o settings */
-    tcgetattr(0, &oldTermios); /* grab old terminal i/o settings */
-    currentTermios = oldTermios; /* make new settings same as old settings */
+    tcgetattr(0, &currentTermios); /* grab old terminal i/o settings */
+    oldTermios = currentTermios; /* make new settings same as old settings */
+
     currentTermios.c_lflag &= ~ICANON; /* disable buffered i/o */
     if (echo) {
         currentTermios.c_lflag |= ECHO; /* set echo mode */
     } else {
         currentTermios.c_lflag &= ~ECHO; /* set no echo mode */
     }
-    tcsetattr(0, TCSANOW, &currentTermios); /* use these new terminal i/o settings now */
+
+    tcsetattr(0, TCSANOW, &currentTermios);/* use these new terminal i/o settings now */
     char ch = getchar();
-    /* Restore old terminal i/o settings */
-    tcsetattr(0, TCSANOW, &oldTermios);
+    tcsetattr(0, TCSANOW, &oldTermios);/* Restore old terminal i/o settings */
     return ch;
 }
 

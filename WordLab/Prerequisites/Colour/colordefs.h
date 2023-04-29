@@ -168,6 +168,11 @@ std::string get_mac_os_color_code(const WORD color) {// MacOS & Linux only
     } else {
         code = foreground_code + background_code;
     }
+    if (code.find(";") == 0) {
+        code = get_mac_os_foreground_color_code(lightwhite) + code;
+    } else if (code.find(";") == std::string::npos) {
+        code = code + ";40";
+    }
     return code;
 }
 #endif

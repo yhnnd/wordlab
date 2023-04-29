@@ -1,5 +1,6 @@
 // updated on 2017.03.09
-//如果 launch 返回負值, 则调用 launch 的 MessageWindow 计算 msg 的值
+// updated on 2023.04.29
+// The return value of launch is: the value of msg(from MessageWindow) which was passed to launch.
 // all function names are of lower characters
 // return value is number of function order
 //  0 function List() or Translate()
