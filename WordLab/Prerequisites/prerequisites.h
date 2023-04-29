@@ -394,7 +394,7 @@ class MessageWindow{
 	int line(int,int,int);
 	int SearchCore(int,int,int,int,const char *,int,int,char *);
 	int Search(int,int,int,int,const char *,int,int);
-	int Pointer(int,int,int,int,int,bool,bool);
+	int Pointer(const int, const int, const int, const int, const int, const bool, const bool);
 	void SwitchLoop(int,int,int,const char *,int,int,int*);
 	int Switch(int,int,int,char *,int,int,int);
 	int Switch(int x,int y,int width,std::vector<std::string> msgs,int n);

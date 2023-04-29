@@ -3,6 +3,8 @@
 *.csv.rollback.tmp
 *.log
 buf.bsv
+WordLab/stdout
+WordLab/WordLab
 
 # WordLab Backup files
 *.csv.prev
