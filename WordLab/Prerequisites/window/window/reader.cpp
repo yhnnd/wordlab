@@ -17,7 +17,9 @@ int window::Reader(WINDOW_STATUS CurrentStatus,int x0,int y0,bool INIT) {
 			if(text.iscmd[y]) colorsetcmd(color[CurrentStatus].error.content);//error
 			else colorsetcmd(color[CurrentStatus].text[y%2].content);
 			for(uint x=x0; x<text.linecapacity()&&(x-x0)<innerWidth(); ++x) {
-				if(text.line(y)[x]==0||text.line(y)[x]==EOF) break;
+				if (text.line(y)[x]==0||text.line(y)[x]==EOF) {
+                    break;
+                }
 				std::cout<<text.line(y)[x];
 			}
 		}
