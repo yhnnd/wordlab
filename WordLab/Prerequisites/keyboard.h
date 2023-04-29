@@ -10,3 +10,20 @@
 #define PAGE_DOWN   81
 #define WL_CTRL(alpha) (alpha-96)
 #define UNCTRL(n)   (n+96)
+
+
+#define  MAC_OS_BIOSKEY_1   27 // ESC
+#ifdef __APPLE__
+#define  MAC_OS_BIOSKEY_2   91 // '['
+#define  MAC_OS_UP          65 // 'A'
+#define  MAC_OS_DOWN        66 // 'B'
+#define  MAC_OS_LEFT        68 // 'D'
+#define  MAC_OS_RIGHT       67 // 'C'
+#elifdef _WIN32
+
+#else
+//#define  UNIX_UP       103
+//#define  UNIX_LEFT     105
+//#define  UNIX_RIGHT    106
+//#define  UNIX_DOWN     108
+#endif

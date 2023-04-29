@@ -161,21 +161,37 @@ std::string get_mac_os_color_code(const WORD color) {// MacOS & Linux only
             break;
             default: return "97;40";
         }
-    } else if (foreground_code.length() == 0) {
-        code = get_mac_os_foreground_color_code(lightwhite) + background_code;
-    } else if (background_code.length() == 0) {
-        code = foreground_code + ";40";
+    } else if (foreground_code.length() == 0) {// If foreground(text) color is not set
+        if (color == (backlight|color)) {// If background color is light, set foreground(text) color to black.
+            code = "30" + background_code;
+        } else {// If background color is dark, set foreground(text) color to white.
+            code = "97" + background_code;
+        }
+    } else if (background_code.length() == 0) {// If background color is not set
+        if (color == (light|color)) {// If foreground(text) color is light, set background color to black.
+            code = foreground_code + ";40";
+        } else {// If foreground(text) color is dark, set background color to white.
+            code = foreground_code + ";107";
+        }
     } else {
         code = foreground_code + background_code;
     }
-    if (code.find(";") == 0) {
-        code = get_mac_os_foreground_color_code(lightwhite) + code;
-    } else if (code.find(";") == std::string::npos) {
-        code = code + ";40";
+    if (code.find(";") == 0) {// If foreground(text) color is not set
+        if (color == (backlight|color)) {// If background color is light, set foreground(text) color to black.
+            code = "30" + code;
+        } else {// If background color is dark, set foreground(text) color to white.
+            code = "97" + code;
+        }
+    } else if (code.find(";") == std::string::npos) {// If background color is not set
+        if (color == (light|color)) {// If foreground(text) color is light, set background color to black.
+            code = code + ";40";
+        } else {// If foreground(text) color is dark, set background color to white.
+            code = code + ";107";
+        }
     }
     return code;
 }
 #endif
 
 // Functions
-#define colorrecord(color) WORD color = CurrentColor
+#define colorrecord(color) WORD color = colornow()

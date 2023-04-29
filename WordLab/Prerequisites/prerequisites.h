@@ -146,8 +146,15 @@ typedef const char * PKC;//pointer to const char
 namespace prerequisites
 {
 bool ColorL=1;
-WORD CurrentColor = lightwhite;
-inline WORD colornow() {return CurrentColor;}
+WORD CurrentColorForWIN32 = lightwhite;
+WORD CurrentColorForMacOS = lightwhite;
+inline WORD colornow() {
+#ifdef __APPLE__
+    return CurrentColorForMacOS;
+#elifdef _WIN32
+    return CurrentColorForWIN32;
+#endif
+}
 int ScreenX = 100, ScreenY = 30;
 bool _Show=1,_Ask=1,_AskOnce=0,_AutoOnce=0,_ReverseColor=0;
 int bsv_cmd_msg_lth_max = 64;
