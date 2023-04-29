@@ -45,8 +45,8 @@ struct window {
 			std::string content,background;
 		} text[2]/*striped*/,padding,error;
 	} color[2]; //first inactive, second active
-	inline void setcolorinactive(std::string t0c,std::string t0b,std::string t1c,std::string t1b,std::string pc,std::string pb,std::string ec,std::string eb);
-	inline void setcoloractive(std::string t0c,std::string t0b,std::string t1c,std::string t1b,std::string pc,std::string pb,std::string ec,std::string eb);
+	inline void setcolorinactive(const std::string t0c, const std::string t0b, const std::string t1c, const std::string t1b, const std::string pc, const std::string pb, const std::string ec, const std::string eb);
+	inline void setcoloractive(const std::string t0c, const std::string t0b, const std::string t1c, const std::string t1b, const std::string pc, const std::string pb, const std::string ec, const std::string eb);
 	enum WINDOW_STATUS {inactive=0,active=1};
 	enum INPUT_STATUS {NEW_LINE=0,DELETE_LINE=-1,ESCAPE=-2,OUT_OF_LINE=-3,OUT_OF_PAGE=-4,
 	                   Up=UP,Down=DOWN,Left=LEFT,Right=RIGHT,UNKNOWN_BIOSKEY=-20
