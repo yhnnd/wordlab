@@ -1,6 +1,6 @@
-ßx†Î,menu,search();
-Ïµ½y,launch,settings.system();
-švÊ·,launch,settings.history();
-ÒıÇæ,launch,settings.engines();
-…¢”µ,launch,settings.values();
-ÍË³ö,menu,quit();
+é¸å–®,menu,search();
+ç³»çµ±,launch,settings.system();
+æ­·å²,launch,settings.history();
+å¼•æ“,launch,settings.engines();
+åƒæ•¸,launch,settings.values();
+é€€å‡º,menu,quit();

@@ -1,5 +1,5 @@
-µ¥´Ê¹¤¾ßÏä,menu,search();
-Ô~ĞÔ²éÔƒ,launch,wordsortcheck();
-·´Ïò™zË÷,launch,searchreverse();
-½üËÆ™zË÷,launch,searchsimilar();
-ÍË³ö,menu,quit();
+å•è¯å·¥å…·ç®±,menu,search();
+è©æ€§æŸ¥è©¢,launch,wordsortcheck();
+åå‘æª¢ç´¢,launch,searchreverse();
+è¿‘ä¼¼æª¢ç´¢,launch,searchsimilar();
+é€€å‡º,menu,quit();

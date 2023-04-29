@@ -2,14 +2,20 @@
 void MessageWindow::Frame(int begin,int x,int y,int width,const char *what,int h,int w) {
 	colorrecord(colorprev);
 	int n,max = MaxLength(what,w);
-	if(h==0) h = max;
+	if(h==0) {
+        h = max;
+    }
 	if(begin==-1) {
 		Erase(x,y,width,max);
 		colorreset(colorprev);
 		return;
 	}
-	if(begin==0) y = Edge(x,y,width);
-	for(n=begin; n<max&&n<h; n++) y = Line(x,y,width,what+n*w,n);
+	if(begin==0) {
+        y = Edge(x,y,width);
+    }
+	for (n=begin; n<max&&n<h; n++) {
+        y = Line(x,y,width,what+n*w,n);
+    }
 	Edge(x,y,width);
 	colorreset(colorprev);
 }

@@ -406,7 +406,7 @@ class MessageWindow{
 	void Hide(int x,int y,int WinWidth,const char *msg,int WinHeight,int msgWidth);
 	void Hide(int x,int y,int WinWidth,int max,int WinHeight);
 	int ConfirmSwitch(int,int,int,int,int);
-	int Confirm(int n,int x,int y,int windowWidth,const char *,int linemax,int linelength);
+	int Confirm(const int n,const int x,const int y,const int windowWidth,const char *,const int linemax,const int lineWidth);
 	int alert(PKC text,int n,int x,int y,int Width,int textPos,int Height);//copy this: 0,20,5,36,4,10
 	bool ErrorReport(const char*);
 	bool Report(int,int,int,int,const char*);

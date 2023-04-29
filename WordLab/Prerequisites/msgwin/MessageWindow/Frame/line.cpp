@@ -1,7 +1,10 @@
-void MessageWindow::LineColorful(int n){
-    if(_background) ColorfulB((_Monochrome||!_AutoColorful)?0:n);
-	else            Colorful ((_Monochrome||!_AutoColorful)?0:n);
-	}
+void MessageWindow::LineColorful(int n) {
+    if (_background) {
+        ColorfulB((_Monochrome||!_AutoColorful)?0:n);
+    } else {
+        Colorful ((_Monochrome||!_AutoColorful)?0:n);
+    }
+}
 
 int MessageWindow::Line(int x,int y,int width,const char *what,int n){
 	gotoxy(x,y++);
@@ -16,7 +19,7 @@ int MessageWindow::Line(int x,int y,int width,const char *what,int n){
 	return y;
 }
 
-int MessageWindow::line(int x,int y,int width){
+int MessageWindow::line(int x,int y,int width) {
 	int r;
 	gotoxy(x,y++);
 	colorset(bothlightblue);

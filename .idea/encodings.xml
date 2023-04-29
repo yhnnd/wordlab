@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Files/settings/Menu/DevelopersMenu/1ch.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/settings/Menu/DevelopersMenu/2ch.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/settings/Menu/DevelopersMenu/3ch.csv" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Files/settings/Menu/DevelopersMenu/ch.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/settings/Menu/SettingsMenu/ch.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/settings/Menu/SettingsMenu/engines/ch.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/settings/Menu/SettingsMenu/history/ch.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/settings/Menu/SettingsMenu/system/ch.csv" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Files/settings/Menu/ch.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/settings/MsgWin/confirmmsg/ch.dat" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/settings/MsgWin/quitmsg/ch.dat" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/settings/MsgWin/quitmsg/en.dat" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/bsv/bsvmatchcommand.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/bsv/label.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/msgwin/MessageWindow/Crash/report.cpp" charset="UTF-8" />
