@@ -3,6 +3,7 @@
 *.csv.rollback.tmp
 *.log
 buf.bsv
+Files/settings/latest_launch.dat
 WordLab/stdout
 WordLab/WordLab
 
