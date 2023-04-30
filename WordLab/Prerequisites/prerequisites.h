@@ -257,7 +257,7 @@ class maths{
 	static float calc(const float,const float,const char);
 	static float calc(PKC s);
 	static float calc(const std::string & s){return calc(s.c_str());}
-	static int filter(int n,int *flag,int *i);
+	static int filter(int n, int *flags, int *length);
 };
 //datacontainer
 class datacontainer{
