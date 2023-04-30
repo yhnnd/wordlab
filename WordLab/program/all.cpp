@@ -26,12 +26,14 @@ class molecular {
         const char signForWordLth = 'l';
         const char signForDbName = 'd';
         const char signForAtomics = 'a';
+        const char signForAtomicsVowels = 'V';
+        const char signForAtomicsConsonants = 'C';
         const char signForVMapStr = 'v';
         const char signForCMapStr = 'c';
         const char signForIndex = 'i';
 
-        const char defaultVowelsList[6] = "aeiou";
-        const char defaultConsonantsList[22] = "bcdfghjklmnpqrstvwxyz";
+        const char defaultVowelsList[12] = "aeiouAEIOU";
+        const char defaultConsonantsList[44] = "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
         char word[32];
         unsigned short wordLth;/* "apple" wordLth = 5 */
         char dbName[32];/* "apple" dbName = "5-v2-c3" */
@@ -258,15 +260,20 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
         set<string> dbNames;
         dbNames.clear();
         while (std::getline(fin, line)) {
+            // Parse Word
             self.setWord(line.substr(0,lth).c_str());
             ++NOL;
-            fout << self.Pattern.signForWord << "=" << self.Pattern.word << " ";// word
-            fout << self.Pattern.signForWordLth << "=" << self.Pattern.wordLth << " ";// wordLth
-            fout << self.Pattern.signForDbName << "=" << self.Pattern.dbName << " ";// dbName
-            fout << self.Pattern.signForAtomics << "=" << self.Pattern.atomics << " ";// atomics
-            fout << self.Pattern.signForVMapStr << "=" << self.Pattern.vMapStr << " ";// vowelsMapping
-            fout << self.Pattern.signForCMapStr << "=" << self.Pattern.cMapStr << " ";// consonantsMapping
-            fout << self.Pattern.signForIndex << "=" << NOL << endl;// index
+            static int strMaxLth = 32;
+            if (self.Pattern.vMapStr.length() > 32 || self.Pattern.cMapStr.length() > 32) {
+                strMaxLth = 48;
+            }
+            fout << self.Pattern.signForWord    << "=" << std::left << setw(tolth) << self.Pattern.word << " ";// word
+            fout << self.Pattern.signForWordLth << "=" << std::left << setw(3) << self.Pattern.wordLth << " ";// wordLth
+            fout << self.Pattern.signForDbName  << "=" << std::left << setw(12) << self.Pattern.dbName << " ";// dbName
+            fout << self.Pattern.signForAtomics << "=" << std::left << setw(16) << self.Pattern.atomics << " ";// atomics
+            fout << self.Pattern.signForVMapStr << "=" << std::left << setw(strMaxLth) << self.Pattern.vMapStr << " ";// vowelsMapping
+            fout << self.Pattern.signForCMapStr << "=" << std::left << setw(strMaxLth) << self.Pattern.cMapStr << " ";// consonantsMapping
+            fout << self.Pattern.signForIndex   << "=" << NOL << endl;// index
             dbNames.insert(self.Pattern.dbName);
         }
         fin.close();
@@ -287,7 +294,10 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
         istringstream iss(s);
         string temp;
         while (getline(iss, temp, delim)) {
-            stringVector.push_back(temp);
+            const string temp2 = trim(temp);
+            if (temp2.empty() == false) {
+                stringVector.push_back(temp2);
+            }
         }
     };
 
@@ -295,7 +305,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
     for (const auto& dbNames: dbNamesTable) {
         for (const auto& dbName : dbNames) {
             // generate each molecular db file (temp).
-            const auto tempFilename = molecular_db_dir + dbName + ".tmp";
+            const auto tempFilename = molecular_db_dir + dbName + ".ph-1.tmp";
             ofstream fout2(tempFilename, ios::trunc);
             if (!fout2) {
                 errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilename);
@@ -303,6 +313,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
             }
             // read every line of buffer file 1.
             while (std::getline(fin2, line)) {
+                line = trim(line);
                 vector<string> parameters;
                 split(line, parameters, ' ');
                 for (const auto& parameter: parameters) {
@@ -313,7 +324,11 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                             const auto& InputDbName = parameterValue;
                             if (dbName == InputDbName) {
                                 fout2 << line << endl;
-                                cout << "db= " << InputDbName << " line= " << line << endl;
+                                cout << "db= " << InputDbName << " line= " << line.substr(0, 32);
+                                if (line.length() > 32) {
+                                    cout << " ...";
+                                }
+                                cout << endl;
                             }
                             break;
                         }
@@ -329,5 +344,183 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
     }
 
     fin2.close();
+
+    for (const auto& dbNames: dbNamesTable) {
+        for (const auto& dbName : dbNames) {
+            // read each molecular db file (temp).
+            const auto tempFilename = molecular_db_dir + dbName + ".ph-1.tmp";
+            ifstream fin3(tempFilename);
+            if (!fin3) {
+                errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilename);
+                return self;
+            }
+            // generate molecular db file with Atomics sorted.
+            const auto tempFilename2 = molecular_db_dir + dbName + ".ph-2.tmp";
+            ofstream fout3(tempFilename2, ios::trunc);
+            if (!fout3) {
+                errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilename2);
+                return self;
+            }
+            // Initialize a Map to record all atomics of current molecular db.
+            map<string, set<int>> wordAtomicsMap;
+            map<string, set<int>>::iterator wordAtomicsMapIter;
+            string currentMapAtomics = "";
+            set<int> currentMapAtomicsLineNumbers;
+
+            for (int times = 0; ; ++times) {
+                if (times > 0) {
+                    if (times == 1) {
+                        wordAtomicsMapIter = wordAtomicsMap.begin();
+                    }
+                    if (wordAtomicsMapIter != wordAtomicsMap.end()) {
+                        currentMapAtomics = wordAtomicsMapIter->first;
+                        currentMapAtomicsLineNumbers = wordAtomicsMapIter->second;
+                        if (currentMapAtomicsLineNumbers.empty()) {
+                            cout << "error: CurrentMapAtomics has no lineNumbers. times = " << times << " currentMapAtomics = " << currentMapAtomics << endl;
+                            getch();
+                        }
+                    } else {
+                        break;
+                    }
+                    fin3.clear();
+                    fin3.seekg(0);
+                }
+                // read every line of db temp file.
+                int nol = 0;
+                while (std::getline(fin3, line)) {
+                    ++nol;
+//                    cout << "times = " << times << " line = " << line.substr(0,60) << endl;
+                    if (times > 0) {
+//                        cout << "nol = " << nol << " currentMapAtomicsLineNumbers = ";
+//                        for (const auto &it: currentMapAtomicsLineNumbers) {
+//                            cout << it << ", ";
+//                        }
+//                        cout << endl;
+                        if (currentMapAtomicsLineNumbers.find(nol) == currentMapAtomicsLineNumbers.end()) {
+                            continue;
+                        }
+                    }
+                    line = trim(line);
+                    vector<string> parameters;
+                    split(line, parameters, ' ');
+                    for (const auto& parameter: parameters) {
+                        if (parameter[1] == '=') {
+                            const auto parameterName = parameter[0];
+                            const auto parameterValue = parameter.substr(2);
+                            if (parameterName == self.Pattern.signForAtomics) {
+                                const auto& currentWordAtomics = parameterValue;
+                                if (times == 0) {
+                                    // record current word's Atomics.
+                                    auto entry = wordAtomicsMap.find(currentWordAtomics);
+                                    if (entry != wordAtomicsMap.end()) {
+                                        // If current word's Atomics is recorded.
+                                        set<int> & lineNumbers = entry->second;
+                                        lineNumbers.insert(nol);
+                                        cout << "times = " << times << " lineNo = " << nol << " dup " << currentWordAtomics << endl;
+//                                        getch();
+                                    } else {
+                                        // If current word's Atomics is not recorded.
+                                        cout << "times = " << times << " lineNo = " << nol << " insert " << currentWordAtomics << endl;
+                                        set<int> lineNumbers = {nol};
+                                        wordAtomicsMap.insert(pair<string, set<int>>(currentWordAtomics, lineNumbers));
+                                    }
+                                } else {
+                                    if (currentMapAtomics == currentWordAtomics) {
+                                        // output current line to temp2 file
+                                        cout << "times = " << times << " output currentMapAtomics = " << currentMapAtomics << " currentWordAtomics = " << currentWordAtomics << endl;
+                                        fout3 << line << endl;
+                                    }
+                                }
+                                break;
+                            }
+                        } else {
+                            cout << "\nillegal paramter \"" << parameter << "\"" << endl;
+                        }
+                    }
+                }
+                if (times > 0) {
+                    if (++wordAtomicsMapIter == wordAtomicsMap.end()) {
+                        break;
+                    }
+                }
+            }
+            fout3.close();
+            fin3.close();
+
+            ifstream fin4(tempFilename2);
+            if (!fin4) {
+                errorlog("molecular::generateMolecularDatabase()", "cannot open file", tempFilename2);
+                return self;
+            }
+
+            const auto tempFilename3 = molecular_db_dir + dbName + ".ph-2.map";
+            ofstream fout4(tempFilename3, ios::trunc);
+            if (!fout4) {
+                errorlog("molecular::generateMolecularDatabase()", "cannot open file", tempFilename3);
+                return self;
+            }
+
+            const auto filenameConf = molecular_db_dir + dbName + ".ph-2.map.min";
+            ofstream foutConf(filenameConf, ios::trunc);
+            if (!foutConf) {
+                errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenameConf);
+                return self;
+            }
+
+            set<string> currentMapAtomicsVowelsCheckboard;
+            for (const auto & mapEntry: wordAtomicsMap) {
+                currentMapAtomics = mapEntry.first;
+                const auto currentMapAtomicsVowels = currentMapAtomics.substr(0, currentMapAtomics.find(","));
+                if (currentMapAtomicsVowelsCheckboard.find(currentMapAtomicsVowels) != currentMapAtomicsVowelsCheckboard.end()) {
+                    continue;
+                } else {
+                    currentMapAtomicsVowelsCheckboard.insert(currentMapAtomicsVowels);
+                }
+                currentMapAtomicsLineNumbers = mapEntry.second;
+                fout4 << self.Pattern.signForAtomicsVowels << "=" << currentMapAtomicsVowels << " ";
+                foutConf << currentMapAtomicsVowels << ":";
+                cout << "currentMapAtomics = " << currentMapAtomics << " currentMapAtomicsVowels = " << currentMapAtomicsVowels << endl;
+                int nol = 0;
+                while (std::getline(fin4, line)) {
+                    ++nol;
+                    line = trim(line);
+//                    cout << "nol = " << nol << " line = " << line.substr(0, 60) << endl;
+                    vector<string> parameters;
+                    split(line, parameters, ' ');
+                    for (const auto& parameter: parameters) {
+                        if (parameter[1] == '=') {
+                            const auto parameterName = parameter[0];
+                            const auto parameterValue = parameter.substr(2);
+                            if (parameterName == self.Pattern.signForAtomics) {
+                                const auto &currentWordAtomics = parameterValue;
+                                const auto delimPos = currentWordAtomics.find(",");
+                                if (delimPos != std::string::npos) {
+                                    string currentWordVowels = "";
+                                    string currentWordConsonants = "";
+                                    if (delimPos + 1 < currentWordAtomics.length()) {
+                                        currentWordVowels = currentWordAtomics.substr(0, delimPos);
+                                        currentWordConsonants = currentWordAtomics.substr(delimPos + 1);
+                                    }
+                                    if (currentWordVowels == currentMapAtomicsVowels) {
+                                        cout << "currentWordAtomics = " << currentWordAtomics << " currentWordVowels = " << currentWordVowels << endl;
+                                        fout4 << self.Pattern.signForAtomicsConsonants << "=" << currentWordConsonants << "(" << nol << ") ";
+                                        foutConf << currentWordConsonants << "(" << nol << ");";
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+                foutConf << endl;
+                fout4 << endl;
+                fin4.clear();
+                fin4.seekg(0);
+            }
+            foutConf.close();
+            fout4.close();
+            fin4.close();
+        }
+    }
     return self;
 }
