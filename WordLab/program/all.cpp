@@ -20,4 +20,314 @@
 *	Description: an opensource english translating software		*
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-int molecular()
+class molecular {
+    struct pattern {
+        const char signForWord = 'w';
+        const char signForWordLth = 'l';
+        const char signForDbName = 'd';
+        const char signForAtomics = 'a';
+        const char signForVMapStr = 'v';
+        const char signForCMapStr = 'c';
+        const char signForIndex = 'i';
+
+        const char defaultVowelsList[6] = "aeiou";
+        const char defaultConsonantsList[22] = "bcdfghjklmnpqrstvwxyz";
+        char word[32];
+        unsigned short wordLth;/* "apple" wordLth = 5 */
+        char dbName[32];/* "apple" dbName = "5-v2-c3" */
+        char atomics[32];/* "apple" atomics = "ae,pl" */
+
+        char vowels[32];/* "apple" vowels = "ae" (0:a, 1:e) */
+        char consonants[32];/* "apple" consonants = "pl" (0:p, 1:l) */
+        unsigned short vNum;/* "apple" vNum = 2 */
+        unsigned short cNum;/* "apple" cNum = 2 */
+
+        unsigned short vMap[32][2];/* "apple" vMap = [<0,0>, <4,2>] */
+        unsigned short cMap[32][2];/* "apple" cMap = [<1,0>, <2,0>, <3,1>] */
+        unsigned short vLth;/* "apple" vLth = 2 */
+        unsigned short cLth;/* "apple" cLth = 3 */
+
+        std::string vMapStr;
+        std::string cMapStr;
+        /* Search Route
+         * take "apple" for example:
+         * Step 1
+         * getWordDbName("apple") returns "5-v2-c3"
+         * Step 2
+         * getWordAtomics("apple") returns "ae,pl"
+         * Step 3
+         * getWordVowelsMapping("apple") returns "0,0;4,2;" (0 * 32 + 0, 4 * 32 + 2)
+         * Step 4
+         * getWordConsonantsMapping("apple") returns "1,0;2,0;3,1;" (1 * 32 + 0, 2 * 32 + 0, 3 * 32 + 1)
+         * Step 5
+         * now we have dbName = "5-v2-c3" and open the index file of that database.
+         * Step 6
+         * We search the index file with Atomics = "ae,pl" and get the lineIndex in the database.
+         * Step 7
+         * Now we have the lineIndex and go to the corresponding line in the database file.
+         * Step 8
+         * From that line, read each line after that, if a line begins with VowelsMapping v="0,0;4,2;",
+         * the VowelsMapping of the keyword was matched.
+         * Step 9
+         * The lines below that line probably looks like: c="1,0;2,0;3,1;" index="69" word="apple"
+         * If ConsonantsMapping "1,0;2,0;3,1;" was matched, the word was matched.
+         * Step 10
+         * Now get the index of that ConsonantsMapping line, done.
+         * Diagram:
+         * [dbName] => [Atomics] => [VowelsMapping] => [ConsonantsMapping] => [Index]
+         */
+    } Pattern;
+
+public:
+    /*
+     * Constructor
+     */
+    explicit molecular(void);
+    /*
+     * Print Info
+     */
+    void printInfo(void);
+    /*
+     * Set Word
+     */
+    molecular & setWord(const char * word);
+    /*
+     * Generate Molecular Database
+     */
+    molecular & generateMolecularDatabase(const char * buffer_dir);
+private:
+    /*
+     * string molecular::getWordDbName(char * word)
+     * word = "apple"
+     * returns "5-v2-c3"
+     */
+    string getWordDbName(void);
+    /*
+     * string molecular::getWordThumbnail(char * word)
+     * word = "apple"
+     * returns "ap+3"
+     */
+    string getWordAtomics(void);
+    /*
+     * string molecular::getWordSignature(char * word)
+     * word = "apple"
+     * returns "ap
+     */
+    string getWordSignature(void);
+    int getWordIndex(void);
+};
+
+string molecular::getWordDbName(void) {
+    auto & ptn = this->Pattern;
+    return ptn.dbName;
+}
+
+string molecular::getWordAtomics(void) {
+    auto & ptn = this->Pattern;
+    return ptn.atomics;
+}
+
+molecular::molecular(void) {
+}
+
+molecular & molecular::setWord(const char *word) {
+    auto & Pattern = this->Pattern;
+    int i = 0, lth = strlen(word);
+    strcpy(Pattern.word, word);
+    Pattern.wordLth = lth;
+    const char * vList = Pattern.defaultVowelsList;// List of Vowels
+    const char * cList = Pattern.defaultConsonantsList;// List of Consonants
+    auto * wordVowels = Pattern.vowels;// No duplicated items
+    auto * wordConsonants = Pattern.consonants;// No duplicated items
+    auto & vNum = Pattern.vNum = 0;// No duplicated items
+    auto & cNum = Pattern.cNum = 0;// No duplicated items
+    memset((void *) wordVowels, 0, sizeof (Pattern.vowels));
+    memset((void *) wordConsonants, 0, sizeof (Pattern.consonants));
+    auto & vMap = Pattern.vMap;
+    auto & cMap = Pattern.cMap;
+    auto & vLth = Pattern.vLth = 0;// length of vMap
+    auto & cLth = Pattern.cLth = 0;// length of cMap
+    for (i = 0; i < lth; ++i) {
+        const auto & ch = Pattern.word[i];
+        // check if char is a vowel
+        if (strchr(vList, ch) != NULL) {// ch is a Vowel
+            if (strchr(wordVowels, ch) == NULL) {// ch was not in word's vowels list
+                strcat(wordVowels, (char[2]){ ch,'\0' });
+            }
+            const char * indexPtrWordVowels = strchr(wordVowels, ch);
+            if (indexPtrWordVowels != NULL) {
+                const int charIndexInWordVowels = indexPtrWordVowels - wordVowels;
+                vMap[vLth][0] = i;// index of char in word.
+                vMap[vLth][1] = charIndexInWordVowels;// index of char in word's vowels list
+                ++vLth;
+            }
+        } else if (strchr(cList, ch) != NULL) {// check if char is a consonant
+            // ch is a Consonant
+            if (strchr(wordConsonants, ch) == NULL) {// ch was not in word's consonants list
+                strcat(wordConsonants, (char[2]){ ch,'\0' });
+            }
+            const char * indexPtrWordConsonants = strchr(wordConsonants, ch);
+            if (indexPtrWordConsonants != NULL) {
+                const int charIndexInWordConsonants = indexPtrWordConsonants - wordConsonants;
+                cMap[cLth][0] = i;// index of char in word.
+                cMap[cLth][1] = charIndexInWordConsonants;// index of char in word's consonants list
+                ++cLth;
+            }
+        }
+    }
+    Pattern.vNum = strlen(wordVowels);
+    Pattern.cNum = strlen(wordConsonants);
+    // set DbName
+    auto dbName = tostring(Pattern.wordLth)
+                  + "-v" + tostring(Pattern.vLth)
+                  + "-c" + tostring(Pattern.cLth);
+    strcpy(Pattern.dbName, dbName.c_str());
+    // Set Atomics
+    auto atomics = tostring(Pattern.vowels) + "," + Pattern.consonants;
+    strcpy(Pattern.atomics, atomics.c_str());
+    // Set vMapStr
+    Pattern.vMapStr = "";
+    for (i = 0; i < Pattern.vLth; ++i) {
+        const auto & entry = Pattern.vMap[i];
+        const auto & IndexInWordText = entry[0];
+        const auto & IndexInWordVowels = entry[1];
+        const auto unit = tostring(IndexInWordText) + "," + tostring(IndexInWordVowels);
+        Pattern.vMapStr += unit + ";";
+    }
+    // Set cMapStr
+    Pattern.cMapStr = "";
+    for (i = 0; i < Pattern.cLth; ++i) {
+        const auto & entry = Pattern.cMap[i];
+        const auto & IndexInWordText = entry[0];
+        const auto & IndexInWordConsonants = entry[1];
+        const auto unit = tostring(IndexInWordText) + "," + tostring(IndexInWordConsonants);
+        Pattern.cMapStr += unit + ";";
+    }
+    this->printInfo();
+    return *this;
+}
+
+void molecular::printInfo(void) {
+    auto & Pattern = this->Pattern;
+    printf("\nword = '%s' wordLth = %d\nvs = '%s' vNum = %d vLth = %d\ncs = '%s' cNum = %d cLth = %d\n",
+           Pattern.word, Pattern.wordLth,
+           Pattern.vowels, Pattern.vNum, Pattern.vLth,
+           Pattern.consonants, Pattern.cNum, Pattern.cLth);
+    printf("vMap = ");
+    for (int i = 0; i < Pattern.vLth; ++i) {
+        const auto & entry = Pattern.vMap[i];
+        const auto & IndexInWordText = entry[0];
+        const auto & IndexInWordVowels = entry[1];
+        printf("%d => %c, ", IndexInWordText, Pattern.vowels[IndexInWordVowels]);
+    }
+    printf("\ncMap = ");
+    for (int i = 0; i < Pattern.cLth; ++i) {
+        const auto & entry = Pattern.cMap[i];
+        const auto & IndexInWordText = entry[0];
+        const auto & IndexInWordConsonants = entry[1];
+        printf("%d => %c, ", IndexInWordText, Pattern.consonants[IndexInWordConsonants]);
+    }
+    printf("\ndbName = \"%s\"\n", Pattern.dbName);
+}
+
+molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
+    auto & self = *this;
+    auto language = lang::EN;
+    int fromlth = 5, tolth = 14, lth = 0, NOL = 0;
+    ifstream fin;
+    std::string line = "";
+    if (buffer_dir == NULL || strlen(buffer_dir) == 0) {
+        errorlog("molecular::generateMolecularDatabase()","invalid bufroute");
+        return self;
+    }
+    const auto buffer_filename = tostring(buffer_dir) + "buf_molecular_db_gen.tmp";
+    auto mode = ios::trunc;
+    ofstream fout(buffer_filename, mode);
+    if(!fout) {
+        errorlog("molecular::generateMolecularDatabase()","cannot write file",buffer_filename);
+        return self;
+    }
+    vector<set<string>> dbNamesTable;
+    dbNamesTable.clear();
+    for (lth = fromlth, NOL = 0; lth <= tolth; lth++) {
+        Library(fin, lth, language);
+        if (!fin) {
+            errorlog("molecular::generateMolecularDatabase()","database not found. lth = ",tostring(lth));
+            return self;
+        }
+        set<string> dbNames;
+        dbNames.clear();
+        while (std::getline(fin, line)) {
+            self.setWord(line.substr(0,lth).c_str());
+            ++NOL;
+            fout << self.Pattern.signForWord << "=" << self.Pattern.word << " ";// word
+            fout << self.Pattern.signForWordLth << "=" << self.Pattern.wordLth << " ";// wordLth
+            fout << self.Pattern.signForDbName << "=" << self.Pattern.dbName << " ";// dbName
+            fout << self.Pattern.signForAtomics << "=" << self.Pattern.atomics << " ";// atomics
+            fout << self.Pattern.signForVMapStr << "=" << self.Pattern.vMapStr << " ";// vowelsMapping
+            fout << self.Pattern.signForCMapStr << "=" << self.Pattern.cMapStr << " ";// consonantsMapping
+            fout << self.Pattern.signForIndex << "=" << NOL << endl;// index
+            dbNames.insert(self.Pattern.dbName);
+        }
+        fin.close();
+        dbNamesTable.push_back(dbNames);
+    }
+    fout.close();
+
+    ifstream fin2(buffer_filename, ios::in);
+    if (!fin2) {
+        errorlog("molecular::generateMolecularDatabase()","cannot read file",buffer_filename);
+        return self;
+    }
+
+    const string molecular_db_dir = _data_dir"/lang/molecular/";
+
+    auto split = [](const string& s,vector<string>& stringVector,const char delim) {
+        stringVector.clear();
+        istringstream iss(s);
+        string temp;
+        while (getline(iss, temp, delim)) {
+            stringVector.push_back(temp);
+        }
+    };
+
+
+    for (const auto& dbNames: dbNamesTable) {
+        for (const auto& dbName : dbNames) {
+            // generate each molecular db file (temp).
+            const auto tempFilename = molecular_db_dir + dbName + ".tmp";
+            ofstream fout2(tempFilename, ios::trunc);
+            if (!fout2) {
+                errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilename);
+                return self;
+            }
+            // read every line of buffer file 1.
+            while (std::getline(fin2, line)) {
+                vector<string> parameters;
+                split(line, parameters, ' ');
+                for (const auto& parameter: parameters) {
+                    if (parameter[1] == '=') {
+                        const auto parameterName = parameter[0];
+                        const auto parameterValue = parameter.substr(2);
+                        if (parameterName == self.Pattern.signForDbName) {
+                            const auto& InputDbName = parameterValue;
+                            if (dbName == InputDbName) {
+                                fout2 << line << endl;
+                                cout << "db= " << InputDbName << " line= " << line << endl;
+                            }
+                            break;
+                        }
+                    } else {
+                        cout << "\nillegal paramter \"" << parameter << "\"" << endl;
+                    }
+                }
+            }
+            fout2.close();
+            fin2.clear();
+            fin2.seekg(0);
+        }
+    }
+
+    fin2.close();
+    return self;
+}

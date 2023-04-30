@@ -5,6 +5,10 @@ using namespace std;
 int launch(std::string);
 #include "program/all.cpp"
 int main(int argc,char **argv) {
+    molecular Molecular;
+    Molecular.generateMolecularDatabase(_data_dir);
+    printf("\nMolecular database generated. Press any key to continue.\n");
+    getch();
 //    gotoxy(1,2);
 //    getxy();
 //    printf("   ");
