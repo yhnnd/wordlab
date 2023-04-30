@@ -3,7 +3,7 @@
 using namespace prerequisites;
 using namespace std;
 int launch(std::string) {}
-#include "../wordlab/program/base/all.cpp"
+#include "../wordlab/program/base/all_base.cpp"
 #include "./src/all.cpp"
 int main(int argc,char **argv) {
 	if(checkcolor()==false) return -1;
