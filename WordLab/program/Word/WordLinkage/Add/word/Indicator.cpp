@@ -1,8 +1,15 @@
 void AddWordPrintMessage(int r,const string s=""){
 	switch (r){
-		case  0:  Dialog.output("DEFINITION EDITING COMPLETED");              break;
-		case  1:  if(s.find(" ")!=string::npos) Dialog.output("ADD PHRASE \""+s+"\" ?");
-				  else Dialog.output("ADD WORD \""+s+"\" ?");                 break;
+		case  0:
+            Dialog.output("DEFINITION EDITING COMPLETED");
+            break;
+		case  1:
+            if (s.find(" ")!=string::npos) {
+                Dialog.output("ADD PHRASE \""+s+"\" ?");
+            } else {
+                Dialog.output("ADD WORD \""+s+"\" ?");
+            }
+		    break;
 		case  2:  Dialog.output("CONFIRM ?");                                 break;
 		case  3:  Dialog.output("EDITING DEFINITION OF "+s);                  break;
 		case  4:  Dialog.output("ENTER TRANSLATION NO."+s);                   break;

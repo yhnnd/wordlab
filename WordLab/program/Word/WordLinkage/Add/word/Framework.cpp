@@ -1,8 +1,12 @@
 void AddWord(const string word){
 	int lth = word.length();
-	if(word.length()==0) return;
+	if(word.length()==0) {
+		return;
+	}
 	Dialog.output("start");
-	if(Search(word.c_str())>0) return AddWordPrintErrorMessage(7,word);//already added
+	if(Search(word.c_str())>0) {
+		return AddWordPrintErrorMessage(7,word);//already added
+	}
 	// initializing database writer
 	ofstream foutEN,foutCH,flog;
 	Library(foutEN,lth,EN);// Open word English database
