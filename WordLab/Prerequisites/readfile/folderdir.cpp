@@ -1,4 +1,8 @@
-void folderdir(const char path[],FILE *fp,int level) {
+#ifdef __APPLE__
+#include <filesystem>
+#endif
+
+void folderdir(const char path[], FILE * fp, int level) {
 #if defined(_WIN32)
     char find_path[128];
     strcpy(find_path, path);
@@ -27,5 +31,18 @@ void folderdir(const char path[],FILE *fp,int level) {
         bContinue = FindNextFile(hFind, &FindFileData);
     }
 	fclose(fp);
+#elif defined(__APPLE__)
+    for (const auto & file: std::__fs::filesystem::directory_iterator(path)) {
+        if (file.is_directory()) {
+            const char * filePath = file.path().c_str();
+            const char * index = strstr(filePath, path);
+            if (index != NULL) {
+                const char * filename = index + strlen(path);
+                fputs(filename, fp);
+                fputs("\n",fp);
+            }
+        }
+    }
+    fclose(fp);
 #endif
 }

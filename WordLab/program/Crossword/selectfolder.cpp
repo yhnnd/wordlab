@@ -1,12 +1,16 @@
 string CrosswordSelectFolder(const string folder) {
-	const char* tempfilename("dir.tmp");
-	//write all filenames in folder to temp file
-	FILE* fp=fopen(tempfilename,"w+");
-	folderdir((folder + "puzzle").c_str(),fp);
-	int l=filelines(fp,0,1);
+	const char * tempfilename = "dir.tmp";
+	// write all filenames in the folder to temp file
+	FILE * fp = fopen(tempfilename,"w+");
+#ifdef _WIN32
+	folderdir((folder + "puzzle").c_str(), fp);
+#elifdef __APPLE__
+    folderdir(folder.c_str(), fp);
+#endif
+	int l = filelines(fp,0,1);
 	fclose(fp);
-	//read filenames from temp file
-	if(l<=0){
+	// read filenames from temp file
+	if (l <= 0) {
 		errorlog("CrosswordSelectFolder()","no folder in",folder);
 		return "";
 	} else {
@@ -22,20 +26,27 @@ string CrosswordSelectFolder(const string folder) {
 		remove(tempfilename);
 		//user select a puzzle
 		cout<<"choose one of the puzzles below"<<endl;
-		string selectOneFromManyOptions (vector<string>, string);
-		string filename = selectOneFromManyOptions(lines, "input a number or name: ");
+        const char * tipsStyled = "input a <grn->(number) or <ylw->(name):";
+        const char * tipsPlain = "input a number or name:";
+		string selectOneFromManyOptions (const vector<string>, const char *, const char *);
+		string filename = selectOneFromManyOptions(lines, tipsStyled, tipsPlain);
 		return folder + filename;
 	}
 	return folder;
 }
 
-string selectOneFromManyOptions (vector<string> lines, string message) {
+string selectOneFromManyOptions (const vector<string> lines, const char * messageStyled, const char * messagePlainText) {
 	int nol = 0;
+    colorrecord(colorPrev);
 	for_each(lines.begin(), lines.end(), [&nol](string line) {
 		nol++;
-		cout << nol << " " + line << endl;
+        colorset(lightgreen);
+        std::cout << std::setfill(' ') << std::setw(3) << "" << nol;
+        colorset(lightyellow);
+        std::cout << std::setfill(' ') << std::setw(3) << "" << line << endl;
 	});
-	cout << message;
+    colorreset(colorPrev);
+	bsvline(messageStyled, strlen(messagePlainText));
 	string line;
 	cin >> line;
 	int n = toint(line);
