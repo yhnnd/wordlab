@@ -6,7 +6,7 @@ int messageblock::Search(char what[][LINEMAX],int N) {
 	colorset(bothlightwhite);
 	clearline(x+(width-lth)/2,y-1,lth);
 	for(r=0; (c=getch())!=13; nprev=n) {
-		if(c==8) {
+		if (c == 8 || c == 127) {
 			keyword[r]=0;
 			keyword[--r]=0;
 		} else {

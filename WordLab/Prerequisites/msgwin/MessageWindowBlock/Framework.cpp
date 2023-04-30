@@ -39,7 +39,7 @@ int messageblock::Switcher(char what[][LINEMAX],bool LoadDefaultSettings){
 		    Adjust();
 			defaultssave();
 		}else if(key=='e'||key=='E'){
-		    n = Search(what,n);
+		    n = Search(what, n);
 			if(n>0){
 				colorreset(colorprev);
 				return n;
