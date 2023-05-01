@@ -152,9 +152,9 @@ unsigned long molecular::getWordIndex(void) {
                         const auto endPos = line.find(");", cPos + cPattern.length());
                         if (endPos != std::string::npos) {
                             const auto beginPos = cPos + cPattern.length();
-                            cout << "beginPos = " << beginPos << " endPos = " << endPos << endl;
+//                            cout << "\nbeginPos = " << beginPos << " endPos = " << endPos << endl;
                             const auto & lineNoStr = line.substr(beginPos, endPos - beginPos);
-                            cout << "\nlineNoStr = " << lineNoStr << endl;
+//                            cout << "\nlineNoStr = " << lineNoStr << endl;
                             lineNo = toint(lineNoStr);
                         }
                     }
@@ -173,7 +173,7 @@ unsigned long molecular::getWordIndex(void) {
             while (getline(finDb, line)) {
                 ++nol;
                 if (nol == lineNo) {
-                    cout << "line = " << line << endl;
+//                    cout << "line = " << line << endl;
                     const auto delimPos = line.find(";");
                     if (delimPos != std::string::npos && delimPos + 1 < line.length()) {
                         const auto beginPos = delimPos + 1;
@@ -266,7 +266,7 @@ molecular & molecular::setWord(const char *word) {
         const auto unit = tostring(IndexInWordText) + "," + tostring(IndexInWordConsonants);
         Pattern.cMapStr += unit + ";";
     }
-    this->printInfo();
+//    this->printInfo();
     return *this;
 }
 

@@ -9,11 +9,28 @@ int main(int argc,char **argv) {
 //    Molecular.generateMolecularDatabase(_data_dir);
 //    printf("\nMolecular database generated. Press any key to continue.\n");
 //    getch();
-    Molecular.setWord("tranquil");
-    Molecular.getWordIndex();
-//    getch();
-    Molecular.setWord("apple");
-    Molecular.getWordIndex();
+    const auto words = {
+            "apple", "business", "remind", "solitude", "deputy", "department", "heavy", "substitute",
+            "mansion", "hostile", "tranquil", "derive", "hover", "event", "issue", "atomic", "molecular",
+            "despite", "require", "postpone", "divine", "render", "remedy", "orphan", "demure", "decent",
+            "arrive", "honour", "quick", "maintain", "attain", "contain", "include", "compensate", "redeem",
+    };
+    time_t t1, t2;
+    t1 = clock();
+    for (const auto & word: words) {
+        Molecular.setWord(word);
+        cout << word << " " << Molecular.getWordIndex() << endl;
+    }
+    t2 = clock();
+    printf("Molecular used time: %ld.\n", t2 - t1);
+
+    t1 = clock();
+    for (const auto & word: words) {
+        WLSearch(word, false);
+        cout << word << " " << Molecular.getWordIndex() << endl;
+    }
+    t2 = clock();
+    printf("WLSearch used time: %ld.\n", t2 - t1);
     getch();
 //    gotoxy(1,2);
 //    getxy();
