@@ -4,7 +4,7 @@ void AddWord(const string word){
 		return;
 	}
 	Dialog.output("start");
-	if(Search(word.c_str())>0) {
+	if (Search(word.c_str(), word.length()) > 0) {
 		return AddWordPrintErrorMessage(7,word);//already added
 	}
 	// initializing database writer

@@ -146,3 +146,73 @@ int colorsetcmd(const std::string msg) {
 //    printf("msg = %s, color = %d\n", msg.c_str(), color);
     return colorset(color);
 }
+
+
+int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd, const std::string backgroundColorCmd) {
+    const WORD foregroundColor = bsvcmdcolor(foregroundColorCmd.c_str());
+    const WORD backgroundColor = bsvcmdcolor(backgroundColorCmd.c_str());
+    const WORD color = foregroundColor | backgroundColor;
+#if defined(_WIN32)
+    return colorset(color);
+#elif defined(__APPLE__)
+    CurrentColorForMacOS = color;
+
+    const std::string colorCode = [&] (void) /* lambda */ {
+        std::string foregroundColorCode = "";
+        if (foregroundColorCmd == "blk-" || foregroundColorCmd == "black-") {
+            foregroundColorCode = "30";// dark black => black
+        } else if (foregroundColorCmd == "gry-" || foregroundColorCmd == "gray-") {
+            foregroundColorCode = "37";// dark white => gray
+        } else if (foregroundColorCmd == "#gry-" || foregroundColorCmd == "#gray-") {
+            foregroundColorCode = "90";// light black => dark gray
+        } else if (foregroundColorCmd == "wte-" || foregroundColorCmd == "white-") {
+            foregroundColorCode = "97";// light white => white
+        } else {
+            foregroundColorCode = get_mac_os_foreground_color_code(foregroundColor);
+        }
+        return foregroundColorCode;
+    }()/* call */ + [&] (void) /* lambda */ {
+        std::string backgroundColorCode = "";
+        if (backgroundColorCmd == "-blk" || backgroundColorCmd == "-black") {
+            backgroundColorCode = ";40";// dark black => black
+        } else if (backgroundColorCmd == "-gry" || backgroundColorCmd == "-gray") {
+            backgroundColorCode = ";47";// dark white => gray
+        } else if (backgroundColorCmd == "-#gry" || backgroundColorCmd == "-#gray") {
+            backgroundColorCode = ";100";// light black => dark gray
+        } else if (backgroundColorCmd == "-wte" || backgroundColorCmd == "-white") {
+            backgroundColorCode = ";107";// light white => white
+        } else {
+            backgroundColorCode = get_mac_os_background_color_code(backgroundColor);
+        }
+        return backgroundColorCode;
+    }()/* call */;
+
+    printf("\x1b[%sm", colorCode.c_str());
+
+    return color;
+#endif
+}
+/*
++------------------------+------------+------------+
+|         color          | foreground | background |
+|                        |    code    |    code    |
++------------------------+------------+------------+
+| Dark Black             |     30     |     40     |
+| Dark Red               |     31     |     41     |
+| Dark Green             |     32     |     42     |
+| Dark Yellow            |     33     |     43     |
+| Dark Blue              |     34     |     44     |
+| Dark Magenta           |     35     |     45     |
+| Dark Cyan              |     36     |     46     |
+| Dark White             |     37     |     47     |
++------------------------+------------+------------+
+| Bright Black           |     90     |    100     |
+| Bright Red             |     91     |    101     |
+| Bright Green           |     92     |    102     |
+| Bright Yellow          |     93     |    103     |
+| Bright Blue            |     94     |    104     |
+| Bright Magenta         |     95     |    105     |
+| Bright Cyan            |     96     |    106     |
+| Bright White           |     97     |    107     |
++------------------------+------------+------------+
+*/
