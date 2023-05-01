@@ -97,26 +97,26 @@ public:
      * Generate Molecular Database
      */
     molecular & generateMolecularDatabase(const char * buffer_dir);
-private:
     /*
-     * string molecular::getWordDbName(char * word)
+     * long molecular::getWordIndex(void)
+     * word = "apple"
+     * returns 69
+     */
+    unsigned long getWordIndex(void);
+private:
+    const string molecular_db_dir = _data_dir"/lang/molecular/";
+    /*
+     * string molecular::getWordDbName(void)
      * word = "apple"
      * returns "5-v2-c3"
      */
     string getWordDbName(void);
     /*
-     * string molecular::getWordThumbnail(char * word)
+     * string molecular::getWordThumbnail(void)
      * word = "apple"
      * returns "ap+3"
      */
     string getWordAtomics(void);
-    /*
-     * string molecular::getWordSignature(char * word)
-     * word = "apple"
-     * returns "ap
-     */
-    string getWordSignature(void);
-    int getWordIndex(void);
 };
 
 string molecular::getWordDbName(void) {
@@ -130,6 +130,67 @@ string molecular::getWordAtomics(void) {
 }
 
 molecular::molecular(void) {
+}
+
+unsigned long molecular::getWordIndex(void) {
+    auto & pattern = this->Pattern;
+    unsigned long lineNo = 0;
+    const auto dbName = this->getWordDbName();
+    const auto filenamePhase3Map = molecular_db_dir + "phase-3/" + dbName + ".ph-3.map";
+    ifstream finMap(filenamePhase3Map);
+    if (finMap) {
+        std::string line;
+        while (std::getline(finMap, line)) {
+            const auto delimPos = line.find(";");
+            if (delimPos != std::string::npos) {
+                const auto & vowels = line.substr(0, delimPos);
+                if (vowels == pattern.vowels) {
+//                    cout << "line = " << line << endl;
+                    const string cPattern = tostring(";") + pattern.consonants + "(";
+                    const auto cPos = line.find(cPattern);
+                    if (cPos != std::string::npos) {
+                        const auto endPos = line.find(");", cPos + cPattern.length());
+                        if (endPos != std::string::npos) {
+                            const auto beginPos = cPos + cPattern.length();
+                            cout << "beginPos = " << beginPos << " endPos = " << endPos << endl;
+                            const auto & lineNoStr = line.substr(beginPos, endPos - beginPos);
+                            cout << "\nlineNoStr = " << lineNoStr << endl;
+                            lineNo = toint(lineNoStr);
+                        }
+                    }
+//                    getch();
+                }
+            }
+        }
+        finMap.close();
+    }
+    if (lineNo > 0) {
+        const auto filenamePhase3Db = molecular_db_dir + "phase-3/" + dbName + ".ph-3.tmp";
+        ifstream finDb(filenamePhase3Db);
+        if (finDb) {
+            std::string line;
+            unsigned int nol = 0;
+            while (getline(finDb, line)) {
+                ++nol;
+                if (nol == lineNo) {
+                    cout << "line = " << line << endl;
+                    const auto delimPos = line.find(";");
+                    if (delimPos != std::string::npos && delimPos + 1 < line.length()) {
+                        const auto beginPos = delimPos + 1;
+                        const auto endPos = line.find(";", beginPos + 1);
+                        if (endPos != std::string::npos) {
+                            const auto & indexStr = line.substr(beginPos, endPos - beginPos);
+                            lineNo = toint(indexStr);
+//                            cout << "indexStr = " << indexStr << " index = " << lineNo << endl;
+                            return lineNo;
+                        }
+                    }
+                }
+            }
+            finDb.close();
+        }
+    }
+    return 0;
 }
 
 molecular & molecular::setWord(const char *word) {
@@ -286,8 +347,6 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
         errorlog("molecular::generateMolecularDatabase()","cannot read file",buffer_filename);
         return self;
     }
-
-    const string molecular_db_dir = _data_dir"/lang/molecular/";
 
     auto split = [](const string& s,vector<string>& stringVector,const char delim) {
         stringVector.clear();
