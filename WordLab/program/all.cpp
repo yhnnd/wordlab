@@ -305,10 +305,10 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
     for (const auto& dbNames: dbNamesTable) {
         for (const auto& dbName : dbNames) {
             // generate each molecular db file (temp).
-            const auto tempFilename = molecular_db_dir + dbName + ".ph-1.tmp";
-            ofstream fout2(tempFilename, ios::trunc);
+            const auto tempFilenamePhase1 = molecular_db_dir + dbName + ".ph-1.tmp";
+            ofstream fout2(tempFilenamePhase1, ios::trunc);
             if (!fout2) {
-                errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilename);
+                errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilenamePhase1);
                 return self;
             }
             // read every line of buffer file 1.
@@ -348,17 +348,24 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
     for (const auto& dbNames: dbNamesTable) {
         for (const auto& dbName : dbNames) {
             // read each molecular db file (temp).
-            const auto tempFilename = molecular_db_dir + dbName + ".ph-1.tmp";
-            ifstream fin3(tempFilename);
+            const auto tempFilenamePhase1 = molecular_db_dir + dbName + ".ph-1.tmp";
+            ifstream fin3(tempFilenamePhase1);
             if (!fin3) {
-                errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilename);
+                errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilenamePhase1);
                 return self;
             }
-            // generate molecular db file with Atomics sorted.
+            // generate molecular db file with word sorted by Atomics.
             const auto tempFilename2 = molecular_db_dir + dbName + ".ph-2.tmp";
             ofstream fout3(tempFilename2, ios::trunc);
             if (!fout3) {
                 errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilename2);
+                return self;
+            }
+            // Minimize molecular db file.
+            const auto filenamePhase3 = molecular_db_dir + dbName + ".ph-3.tmp";
+            ofstream foutPhase3(tempFilename2, ios::trunc);
+            if (!foutPhase3) {
+                errorlog("molecular::generateMolecularDatabase()","cannot open file",filenamePhase3);
                 return self;
             }
             // Initialize a Map to record all atomics of current molecular db.
@@ -387,8 +394,11 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                 }
                 // read every line of db temp file.
                 int nol = 0;
+                bool shouldOutput = false;
+                unsigned long wordIndex = 0;
                 while (std::getline(fin3, line)) {
                     ++nol;
+                    shouldOutput = false;
 //                    cout << "times = " << times << " line = " << line.substr(0,60) << endl;
                     if (times > 0) {
 //                        cout << "nol = " << nol << " currentMapAtomicsLineNumbers = ";
@@ -416,26 +426,34 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                                         // If current word's Atomics is recorded.
                                         set<int> & lineNumbers = entry->second;
                                         lineNumbers.insert(nol);
-                                        cout << "times = " << times << " lineNo = " << nol << " dup " << currentWordAtomics << endl;
+                                        cout << "times = " << times << " lineNo = " << nol << " word = " << self.Pattern.word << " [insert dup] " << currentWordAtomics << endl;
 //                                        getch();
                                     } else {
                                         // If current word's Atomics is not recorded.
-                                        cout << "times = " << times << " lineNo = " << nol << " insert " << currentWordAtomics << endl;
+                                        cout << "times = " << times << " lineNo = " << nol << " word = " << self.Pattern.word << " [insert new] " << currentWordAtomics << endl;
                                         set<int> lineNumbers = {nol};
                                         wordAtomicsMap.insert(pair<string, set<int>>(currentWordAtomics, lineNumbers));
                                     }
                                 } else {
                                     if (currentMapAtomics == currentWordAtomics) {
                                         // output current line to temp2 file
-                                        cout << "times = " << times << " output currentMapAtomics = " << currentMapAtomics << " currentWordAtomics = " << currentWordAtomics << endl;
-                                        fout3 << line << endl;
+                                        cout << "times = " << times << " lineNo = " << nol << " word = " << self.Pattern.word << " [output] currentMapAtomics = " << currentMapAtomics << " currentWordAtomics = " << currentWordAtomics << endl;
+                                        shouldOutput = true;
                                     }
                                 }
-                                break;
+//                                break;
+                            } else if (parameterName == self.Pattern.signForWord) {
+                                self.setWord(parameterValue.c_str());
+                            } else if (parameterName == self.Pattern.signForIndex) {
+                                wordIndex = toint(parameterValue);
                             }
                         } else {
                             cout << "\nillegal paramter \"" << parameter << "\"" << endl;
                         }
+                    }
+                    if (shouldOutput == true) {
+                        fout3 << line << endl;
+                        foutPhase3 << self.Pattern.word << ";" << wordIndex << ";" << endl;
                     }
                 }
                 if (times > 0) {
@@ -444,8 +462,10 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                     }
                 }
             }
+            foutPhase3.close();
             fout3.close();
             fin3.close();
+            std::remove(tempFilenamePhase1.c_str());
 
             ifstream fin4(tempFilename2);
             if (!fin4) {
@@ -453,17 +473,17 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                 return self;
             }
 
-            const auto tempFilename3 = molecular_db_dir + dbName + ".ph-2.map";
-            ofstream fout4(tempFilename3, ios::trunc);
-            if (!fout4) {
-                errorlog("molecular::generateMolecularDatabase()", "cannot open file", tempFilename3);
+            const auto filenamePhase2Map = molecular_db_dir + dbName + ".ph-2.map";
+            ofstream foutPhase2Map(filenamePhase2Map, ios::trunc);
+            if (!foutPhase2Map) {
+                errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Map);
                 return self;
             }
 
-            const auto filenameConf = molecular_db_dir + dbName + ".ph-2.map.min";
-            ofstream foutConf(filenameConf, ios::trunc);
-            if (!foutConf) {
-                errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenameConf);
+            const auto filenamePhase3Map = molecular_db_dir + dbName + ".ph-3.map";
+            ofstream foutPhase3Map(filenamePhase3Map, ios::trunc);
+            if (!foutPhase3Map) {
+                errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase3Map);
                 return self;
             }
 
@@ -477,8 +497,8 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                     currentMapAtomicsVowelsCheckboard.insert(currentMapAtomicsVowels);
                 }
                 currentMapAtomicsLineNumbers = mapEntry.second;
-                fout4 << self.Pattern.signForAtomicsVowels << "=" << currentMapAtomicsVowels << " ";
-                foutConf << currentMapAtomicsVowels << ":";
+                foutPhase2Map << self.Pattern.signForAtomicsVowels << "=" << currentMapAtomicsVowels << " ";
+                foutPhase3Map << currentMapAtomicsVowels << ";";
                 cout << "currentMapAtomics = " << currentMapAtomics << " currentMapAtomicsVowels = " << currentMapAtomicsVowels << endl;
                 int nol = 0;
                 while (std::getline(fin4, line)) {
@@ -503,8 +523,8 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                                     }
                                     if (currentWordVowels == currentMapAtomicsVowels) {
                                         cout << "currentWordAtomics = " << currentWordAtomics << " currentWordVowels = " << currentWordVowels << endl;
-                                        fout4 << self.Pattern.signForAtomicsConsonants << "=" << currentWordConsonants << "(" << nol << ") ";
-                                        foutConf << currentWordConsonants << "(" << nol << ");";
+                                        foutPhase2Map << self.Pattern.signForAtomicsConsonants << "=" << currentWordConsonants << "(" << nol << ") ";
+                                        foutPhase3Map << currentWordConsonants << "(" << nol << ");";
                                     }
                                 }
                                 break;
@@ -512,13 +532,13 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                         }
                     }
                 }
-                foutConf << endl;
-                fout4 << endl;
+                foutPhase3Map << endl;
+                foutPhase2Map << endl;
                 fin4.clear();
                 fin4.seekg(0);
             }
-            foutConf.close();
-            fout4.close();
+            foutPhase3Map.close();
+            foutPhase2Map.close();
             fin4.close();
         }
     }
