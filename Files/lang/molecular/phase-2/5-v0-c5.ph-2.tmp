@@ -1,5 +1,5 @@
-w=crypt          l=5   d=5-v0-c5      a=,crypt           v=                                 c=0,0;1,1;2,2;3,3;4,4;             i=289
-w=glyph          l=5   d=5-v0-c5      a=,glyph           v=                                 c=0,0;1,1;2,2;3,3;4,4;             i=487
-w=lynch          l=5   d=5-v0-c5      a=,lynch           v=                                 c=0,0;1,1;2,2;3,3;4,4;             i=638
-w=nymph          l=5   d=5-v0-c5      a=,nymph           v=                                 c=0,0;1,1;2,2;3,3;4,4;             i=713
-w=tryst          l=5   d=5-v0-c5      a=,trys            v=                                 c=0,0;1,1;2,2;3,3;4,0;             i=1179
+w=crypt                          l=5   d=5-v0-c5      a=,crypt           v=                                 c=0,0;1,1;2,2;3,3;4,4;             i=289
+w=glyph                          l=5   d=5-v0-c5      a=,glyph           v=                                 c=0,0;1,1;2,2;3,3;4,4;             i=487
+w=lynch                          l=5   d=5-v0-c5      a=,lynch           v=                                 c=0,0;1,1;2,2;3,3;4,4;             i=638
+w=nymph                          l=5   d=5-v0-c5      a=,nymph           v=                                 c=0,0;1,1;2,2;3,3;4,4;             i=713
+w=tryst                          l=5   d=5-v0-c5      a=,trys            v=                                 c=0,0;1,1;2,2;3,3;4,0;             i=1179

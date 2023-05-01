@@ -1,8 +1,8 @@
-w=transplant     l=10  d=10-v2-c8     a=a,trnspl         v=2,0;7,0;                         c=0,0;1,1;3,2;4,3;5,4;6,5;8,2;9,0; i=6362
-w=gymnastics     l=10  d=10-v2-c8     a=ai,gymnstc       v=4,0;7,1;                         c=0,0;1,1;2,2;3,3;5,4;6,5;8,6;9,4; i=6092
-w=playwright     l=10  d=10-v2-c8     a=ai,plywrght      v=2,0;6,1;                         c=0,0;1,1;3,2;4,3;5,4;7,5;8,6;9,7; i=6235
-w=standstill     l=10  d=10-v2-c8     a=ai,stndl         v=2,0;7,1;                         c=0,0;1,1;3,2;4,3;5,0;6,1;8,4;9,4; i=6321
-w=transcript     l=10  d=10-v2-c8     a=ai,trnscp        v=2,0;7,1;                         c=0,0;1,1;3,2;4,3;5,4;6,1;8,5;9,0; i=6356
-w=brightness     l=10  d=10-v2-c8     a=ie,brghtns       v=2,0;7,1;                         c=0,0;1,1;3,2;4,3;5,4;6,5;8,6;9,6; i=5892
-w=constantly     l=10  d=10-v2-c8     a=oa,cnstly        v=1,0;5,1;                         c=0,0;2,1;3,2;4,3;6,1;7,3;8,4;9,5; i=5956
-w=psychopath     l=10  d=10-v2-c8     a=oa,psycht        v=5,0;7,1;                         c=0,0;1,1;2,2;3,3;4,4;6,0;8,5;9,4; i=6259
+w=transplant                     l=10  d=10-v2-c8     a=a,trnspl         v=2,0;7,0;                         c=0,0;1,1;3,2;4,3;5,4;6,5;8,2;9,0; i=561
+w=gymnastics                     l=10  d=10-v2-c8     a=ai,gymnstc       v=4,0;7,1;                         c=0,0;1,1;2,2;3,3;5,4;6,5;8,6;9,4; i=291
+w=playwright                     l=10  d=10-v2-c8     a=ai,plywrght      v=2,0;6,1;                         c=0,0;1,1;3,2;4,3;5,4;7,5;8,6;9,7; i=434
+w=standstill                     l=10  d=10-v2-c8     a=ai,stndl         v=2,0;7,1;                         c=0,0;1,1;3,2;4,3;5,0;6,1;8,4;9,4; i=520
+w=transcript                     l=10  d=10-v2-c8     a=ai,trnscp        v=2,0;7,1;                         c=0,0;1,1;3,2;4,3;5,4;6,1;8,5;9,0; i=555
+w=brightness                     l=10  d=10-v2-c8     a=ie,brghtns       v=2,0;7,1;                         c=0,0;1,1;3,2;4,3;5,4;6,5;8,6;9,6; i=91
+w=constantly                     l=10  d=10-v2-c8     a=oa,cnstly        v=1,0;5,1;                         c=0,0;2,1;3,2;4,3;6,1;7,3;8,4;9,5; i=155
+w=psychopath                     l=10  d=10-v2-c8     a=oa,psycht        v=5,0;7,1;                         c=0,0;1,1;2,2;3,3;4,4;6,0;8,5;9,4; i=458
