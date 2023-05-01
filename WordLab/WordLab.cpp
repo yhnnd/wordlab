@@ -14,23 +14,69 @@ int main(int argc,char **argv) {
             "mansion", "hostile", "tranquil", "derive", "hover", "event", "issue", "atomic", "molecular",
             "despite", "require", "postpone", "divine", "render", "remedy", "orphan", "demure", "decent",
             "arrive", "honour", "quick", "maintain", "attain", "contain", "include", "compensate", "redeem",
+            "attraction", "attractive", "confirm", "reconcile", "replicate", "reply", "revenge", "avenge",
+            "report", "admonish", "advice", "advocate", "dislike", "respect", "retire", "relax", "condemn",
+            "complain", "convenient", "reservoir", "unite", "deceive", "conceive", "conduct", "convey",
+            "vehicle", "automation", "animation", "delusion", "inspire", "simulate", "stimulate", "imagine",
     };
+    int num = 0;
     time_t t1, t2;
     t1 = clock();
     for (const auto & word: words) {
         Molecular.setWord(word);
-        cout << word << " " << Molecular.getWordIndex() << endl;
+        const auto lth = strlen(word);
+        const auto k = Molecular.getWordIndex();
+        const auto chinese = "\"" + Chinese(lth, k) + "\"";
+
+        colorsetcmd("wte-");
+        cout << std::right << setw(14) << word << " ";
+        cout << std::right << setw(2) << lth <<  " ";
+        cout << std::left << setw(4) << k << " ";
+
+        if (k == 0) {
+            colorsetcmd("red-");
+        } else {
+            colorsetcmd("grn-");
+        }
+        cout << std::left << setw(12) << chinese;
+        colorsetcmd("wte-");
+
+        if (num++ % 3 == 2) {
+            cout << endl;
+        } else {
+            cout << "\t";
+        }
     }
     t2 = clock();
-    printf("Molecular used time: %ld.\n", t2 - t1);
-
+    printf("\n\nMolecular used time: %ld.\n\n", t2 - t1);
+    num = 0;
     t1 = clock();
     for (const auto & word: words) {
-        WLSearch(word, false);
-        cout << word << " " << Molecular.getWordIndex() << endl;
+        const auto lth = strlen(word);
+        const auto k = WLSearch(word, false, false, 'k', false);
+        const auto chinese = "\"" + Chinese(lth, k) + "\"";
+
+        colorsetcmd("wte-");
+        cout << std::right << setw(14) << word << " ";
+        cout << std::right << setw(2) << lth <<  " ";
+        cout << std::left << setw(4) << k << " ";
+
+        if (k == 0) {
+            colorsetcmd("red-");
+        } else {
+            colorsetcmd("grn-");
+        }
+        cout << std::left << setw(12) << chinese;
+        colorsetcmd("wte-");
+
+        if (num++ % 3 == 2) {
+            cout << endl;
+        } else {
+            cout << "\t";
+        }
     }
     t2 = clock();
-    printf("WLSearch used time: %ld.\n", t2 - t1);
+    printf("\n\nWLSearch used time: %ld.\n\n", t2 - t1);
     getch();
 //    gotoxy(1,2);
 //    getxy();

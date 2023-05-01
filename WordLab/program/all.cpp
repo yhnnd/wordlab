@@ -36,6 +36,7 @@ class molecular {
         const char defaultConsonantsList[44] = "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
         char word[32];
         unsigned short wordLth;/* "apple" wordLth = 5 */
+        unsigned long long wordIndex;
         char dbName[32];/* "apple" dbName = "5-v2-c3" */
         char atomics[32];/* "apple" atomics = "ae,pl" */
 
@@ -198,6 +199,7 @@ molecular & molecular::setWord(const char *word) {
     int i = 0, lth = strlen(word);
     strcpy(Pattern.word, word);
     Pattern.wordLth = lth;
+    Pattern.wordIndex = 0;
     const char * vList = Pattern.defaultVowelsList;// List of Vowels
     const char * cList = Pattern.defaultConsonantsList;// List of Consonants
     auto * wordVowels = Pattern.vowels;// No duplicated items
@@ -296,7 +298,7 @@ void molecular::printInfo(void) {
 molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
     auto & self = *this;
     auto language = lang::EN;
-    int fromlth = 5, tolth = 14, lth = 0, NOL = 0;
+    int fromlth = 1, tolth = 30, lth = 0, NOL = 0;
     ifstream fin;
     std::string line = "";
     if (buffer_dir == NULL || strlen(buffer_dir) == 0) {
@@ -320,10 +322,12 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
         }
         set<string> dbNames;
         dbNames.clear();
+        NOL = 0;
         while (std::getline(fin, line)) {
             // Parse Word
             self.setWord(line.substr(0,lth).c_str());
             ++NOL;
+            self.Pattern.wordIndex = NOL;
             static int strMaxLth = 32;
             if (self.Pattern.vMapStr.length() > 32 || self.Pattern.cMapStr.length() > 32) {
                 strMaxLth = 48;
@@ -334,7 +338,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
             fout << self.Pattern.signForAtomics << "=" << std::left << setw(16) << self.Pattern.atomics << " ";// atomics
             fout << self.Pattern.signForVMapStr << "=" << std::left << setw(strMaxLth) << self.Pattern.vMapStr << " ";// vowelsMapping
             fout << self.Pattern.signForCMapStr << "=" << std::left << setw(strMaxLth) << self.Pattern.cMapStr << " ";// consonantsMapping
-            fout << self.Pattern.signForIndex   << "=" << NOL << endl;// index
+            fout << self.Pattern.signForIndex   << "=" << self.Pattern.wordIndex << endl;// index
             dbNames.insert(self.Pattern.dbName);
         }
         fin.close();
@@ -454,7 +458,6 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                 // read every line of db temp file.
                 int nol = 0;
                 bool shouldOutput = false;
-                unsigned long wordIndex = 0;
                 while (std::getline(fin3, line)) {
                     ++nol;
                     shouldOutput = false;
@@ -504,7 +507,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                             } else if (parameterName == self.Pattern.signForWord) {
                                 self.setWord(parameterValue.c_str());
                             } else if (parameterName == self.Pattern.signForIndex) {
-                                wordIndex = toint(parameterValue);
+                                self.Pattern.wordIndex = toint(parameterValue);
                             }
                         } else {
                             cout << "\nillegal paramter \"" << parameter << "\"" << endl;
@@ -512,7 +515,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                     }
                     if (shouldOutput == true) {
                         foutPhase2Db << line << endl;
-                        foutPhase3Db << self.Pattern.word << ";" << wordIndex << ";" << endl;
+                        foutPhase3Db << self.Pattern.word << ";" << self.Pattern.wordIndex << ";" << endl;
                     }
                 }
                 if (times > 0) {

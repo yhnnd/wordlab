@@ -1,4 +1,4 @@
-int WLSearch(string keyword, bool ignoreCase) {
+int WLSearch(string keyword, bool ignoreCase, bool printResult, char mode, bool recordUnknown) {
 	const int wordLth = keyword.length();
 	FILE *fp = Library(wordLth, EN, "r");
 	char currentCheckingWord[32];// current checking word.
@@ -37,15 +37,22 @@ int WLSearch(string keyword, bool ignoreCase) {
         } else if (compareResult > 0) {// If keyword is larger than the current checking word.
             Left = Location;// Set the left boundary to the current location.
         } else {// Result found.
-			WLSearchCore(wordLth, Max, currentCheckingWord, Location);
+            if (printResult) {
+                WLSearchCore(wordLth, Max, currentCheckingWord, Location);
+            }
 			number++;
 			break;
 		}
 	}
 	fclose(fp);
-	if (number == 0) {
+	if (number == 0 && recordUnknown == true) {
 	    WLHistory.RecordAnswer(keyword.substr(0, wordLth), 0);
 		WLHistory.RecordUnfound(keyword.substr(0, wordLth), 0);
 	}
-	return number;
+    if (mode == 'n') {
+        return number;
+    } else if (mode == 'k') {
+        return Location;
+    }
+    return 0;
 }

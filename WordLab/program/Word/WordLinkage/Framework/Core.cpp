@@ -4,10 +4,10 @@ int WLFrameworkCore(string s) {
     clearscreen(0, 0, ScreenX - 1, 3);
 	WLHistory.RecordSearch(s,0);
 	if (BL) {
-        n = WLSearch(s,0);//UPPER-LOWER CASE SENSITIVE
+        n = WLSearch(s, false, true, 'n', true);//UPPER-LOWER CASE SENSITIVE
     }
 	if (BL && n == 0) {
-        n = WLSearch(s,1);//UPPER_LOWER CASE IGNORED
+        n = WLSearch(s, true, true, 'n', true);//UPPER_LOWER CASE IGNORED
     }
 //    printf("search result is %d\n", n);
 	if (BL && n == 0) {
