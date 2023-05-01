@@ -1,10 +1,16 @@
-char popupcore(std::string& msg, const int life, const int x, const int y, const int width, const bool Record) {
+char popupcore(std::string& msg, const int life, const int x, const int y, const int width, popupConfigs& configs) {
 	char key = 0;
 	// record previous status
 	colorrecord(colorprev);
 	recordxy(pos);
 	// display message
-	if(y==1) MessageWindow.Edge(x,0,width);
+
+    if (configs.ShowBorderTop == true || configs.Mode == "y=1") {
+        MessageWindow.Edge(x, y - 1, width);
+		if (configs.Mode == "y++") {
+			configs.ShowBorderTop = false;
+		}
+    }
 	MessageWindow.Line(x,y,width,msg.c_str(),0);
 	MessageWindow.Edge(x,y+1,width);
 	colorset(lightwhite);
@@ -30,7 +36,7 @@ char popupcore(std::string& msg, const int life, const int x, const int y, const
 	resetxy(pos);
 	colorreset(colorprev);
 	// write history
-	if (Record) {
+	if (configs.RecordEnabled) {
 #ifndef _data_dir
 	    std::ofstream fout("buf.bsv",std::ios::app);
 #else

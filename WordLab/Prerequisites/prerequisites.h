@@ -519,9 +519,18 @@ class progressbar{
 char fatalerror(int delayperiod);
 int confirmationbar(int x,int y,int width,int delay);
 //popup
-char popupcore(std::string& msg,const int life,const int x,const int y,const int width,const bool Record);
-char popup(std::string& msg,int life);
-char popup(std::string s);// #time=clock()/reset(); #record=true/false/reset();
+struct popupConfigs {
+    bool RecordEnabled = true;
+    bool RecordPrev = true;
+    bool ShowBorderTop = true;
+    std::string Mode = "y=1";
+    int OffsetX = 0;
+    int OffsetY = 1;
+    int PrevTime = -1000;
+};
+char popupcore(std::string& msg,const int life,const int x,const int y,const int width, const popupConfigs &);
+char popup(std::string msg, int life);
+
 //moniter
 bool error_monitor_lock = 0;
 bool buffer_monitor_lock = 0;

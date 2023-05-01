@@ -18,7 +18,7 @@ bool db_is_secure(bool print_success,bool print_error){
 	}
     // summary
 	if( lth == 31 and error == 0 ){
-		if(print_success) popup("all functions <grn->(SECURE)",0);
+		if(print_success) popup("all functions <grn->(SECURE)", 0);
 		return true;
 	} else {
 		if(print_error){
