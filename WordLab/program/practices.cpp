@@ -231,7 +231,7 @@ void practices() {
         }
     }// main loop
     popup("#record=reset();");
-    popup("#setMode=('y=1');");
+    popup("#setMode('y=1');");
     popup("#offsetY=1;", 0);
     popup("#enableBorderTop=true;");
 }
