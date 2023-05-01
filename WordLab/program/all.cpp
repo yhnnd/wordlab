@@ -305,7 +305,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
     for (const auto& dbNames: dbNamesTable) {
         for (const auto& dbName : dbNames) {
             // generate each molecular db file (temp).
-            const auto tempFilenamePhase1 = molecular_db_dir + dbName + ".ph-1.tmp";
+            const auto tempFilenamePhase1 = molecular_db_dir + "phase-1/" + dbName + ".ph-1.tmp";
             ofstream fout2(tempFilenamePhase1, ios::trunc);
             if (!fout2) {
                 errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilenamePhase1);
@@ -348,23 +348,23 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
     for (const auto& dbNames: dbNamesTable) {
         for (const auto& dbName : dbNames) {
             // read each molecular db file (temp).
-            const auto tempFilenamePhase1 = molecular_db_dir + dbName + ".ph-1.tmp";
+            const auto tempFilenamePhase1 = molecular_db_dir + "phase-1/" + dbName + ".ph-1.tmp";
             ifstream fin3(tempFilenamePhase1);
             if (!fin3) {
                 errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilenamePhase1);
                 return self;
             }
             // generate molecular db file with word sorted by Atomics.
-            const auto tempFilename2 = molecular_db_dir + dbName + ".ph-2.tmp";
-            ofstream fout3(tempFilename2, ios::trunc);
-            if (!fout3) {
-                errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilename2);
+            const auto filenamePhase2Db = molecular_db_dir + "phase-2/" + dbName + ".ph-2.tmp";
+            ofstream foutPhase2Db(filenamePhase2Db, ios::trunc);
+            if (!foutPhase2Db) {
+                errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Db);
                 return self;
             }
             // Minimize molecular db file.
-            const auto filenamePhase3 = molecular_db_dir + dbName + ".ph-3.tmp";
-            ofstream foutPhase3(tempFilename2, ios::trunc);
-            if (!foutPhase3) {
+            const auto filenamePhase3 = molecular_db_dir + "phase-3/" + dbName + ".ph-3.tmp";
+            ofstream foutPhase3Db(filenamePhase3, ios::trunc);
+            if (!foutPhase3Db) {
                 errorlog("molecular::generateMolecularDatabase()","cannot open file",filenamePhase3);
                 return self;
             }
@@ -452,8 +452,8 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                         }
                     }
                     if (shouldOutput == true) {
-                        fout3 << line << endl;
-                        foutPhase3 << self.Pattern.word << ";" << wordIndex << ";" << endl;
+                        foutPhase2Db << line << endl;
+                        foutPhase3Db << self.Pattern.word << ";" << wordIndex << ";" << endl;
                     }
                 }
                 if (times > 0) {
@@ -462,25 +462,25 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir) {
                     }
                 }
             }
-            foutPhase3.close();
-            fout3.close();
+            foutPhase3Db.close();
+            foutPhase2Db.close();
             fin3.close();
             std::remove(tempFilenamePhase1.c_str());
 
-            ifstream fin4(tempFilename2);
+            ifstream fin4(filenamePhase2Db);
             if (!fin4) {
-                errorlog("molecular::generateMolecularDatabase()", "cannot open file", tempFilename2);
+                errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Db);
                 return self;
             }
 
-            const auto filenamePhase2Map = molecular_db_dir + dbName + ".ph-2.map";
+            const auto filenamePhase2Map = molecular_db_dir + "phase-2/" + dbName + ".ph-2.map";
             ofstream foutPhase2Map(filenamePhase2Map, ios::trunc);
             if (!foutPhase2Map) {
                 errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Map);
                 return self;
             }
 
-            const auto filenamePhase3Map = molecular_db_dir + dbName + ".ph-3.map";
+            const auto filenamePhase3Map = molecular_db_dir + "phase-3/" + dbName + ".ph-3.map";
             ofstream foutPhase3Map(filenamePhase3Map, ios::trunc);
             if (!foutPhase3Map) {
                 errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase3Map);
