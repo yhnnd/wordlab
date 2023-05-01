@@ -3,7 +3,7 @@
 using namespace prerequisites;
 using namespace std;
 int launch(std::string);
-#include "program/all.cpp"
+#include "program/all_program.cpp"
 #include "program/performanceTest.cpp"
 int main(int argc,char **argv) {
     performanceTest();
