@@ -1,5 +1,5 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(name = "the object of the exercise"
-<#gry-#gry>( )<-wte>(value = "the purpose of what you are doing"
-<#gry-#gry>( )<-wte>(<"object-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(name = "the object of the exercise"
+<#blu-#blu>( )<-wte>(value = "the purpose of what you are doing"
+<#blu-#blu>( )<-wte>(<"object-main"><-ylw>( go back )
+<#blu-#blu>(

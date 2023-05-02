@@ -1,5 +1,5 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(English = "The object of the game is to improve children��s math skills."
-<#gry-#gry>( )<-wte>(Chinese = ""
-<#gry-#gry>( )<-wte>(<"object-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(English = "The object of the game is to improve children��s math skills."
+<#blu-#blu>( )<-wte>(Chinese = ""
+<#blu-#blu>( )<-wte>(<"object-main"><-ylw>( go back )
+<#blu-#blu>(

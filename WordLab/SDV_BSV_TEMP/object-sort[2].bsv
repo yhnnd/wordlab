@@ -1,4 +1,4 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(value = "vi."
-<#gry-#gry>( )<-wte>(<"object-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(value = "vi."
+<#blu-#blu>( )<-wte>(<"object-main"><-ylw>( go back )
+<#blu-#blu>(

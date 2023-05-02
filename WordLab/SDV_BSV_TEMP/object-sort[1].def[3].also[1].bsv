@@ -1,4 +1,4 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(value = "direct object"
-<#gry-#gry>( )<-wte>(<"object-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(value = "direct object"
+<#blu-#blu>( )<-wte>(<"object-main"><-ylw>( go back )
+<#blu-#blu>(

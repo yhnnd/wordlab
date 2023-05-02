@@ -1,5 +1,5 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(name = "inanimate objects"
-<#gry-#gry>( )<-wte>(value = "things that are not alive"
-<#gry-#gry>( )<-wte>(<"object-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(name = "inanimate objects"
+<#blu-#blu>( )<-wte>(value = "things that are not alive"
+<#blu-#blu>( )<-wte>(<"object-main"><-ylw>( go back )
+<#blu-#blu>(
