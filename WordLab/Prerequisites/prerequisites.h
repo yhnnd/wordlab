@@ -368,10 +368,12 @@ WORD bsvcmdcolor(const char * msg);
 int colorsetcmd(const std::string msg);
 int bsvmaxlth(PKC msg,PKC br1,PKC br2,PKC omit,PKC term);
 void bsvline(PKC what,int width=0,PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",PKC tokens_term=";");
+void bsvlineDisableColors(PKC what,int width,PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",PKC tokens_term=";");
 int bsverror(PKC s1,PKC s2,PKC s3);
 int bsvLabelEnter(PKC folder,PKC label,int x,int y,int width,PKC color="wte-blu",void *spptr=NULL);
-int bsvlabel(PKC what,const int labelchosen,int labelnow,bool enter,PKC folder,int x,int y,int width=0,PKC labelcolor="wte-gry",PKC entercolor="wte-blu",PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",void *spptr=NULL);
+int bsvLineLabels(PKC what,const int labelchosen,int labelnow,const bool enter,PKC folder,const int x,const int y,const int width=0,PKC labelcolor="wte-gry",PKC entercolor="wte-blu",PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",void *spptr= nullptr);
 int bsvlines(char **msgs,const int max,int width,PKC folder,int x,int y,void *spptr=NULL);
+
 //input
 int listen(char *msg,int index,bool display,std::initializer_list<char> term,int max);
 //message window
@@ -528,8 +530,8 @@ struct popupConfigs {
     int OffsetY = 1;
     int PrevTime = -1000;
 };
-char popupcore(std::string& msg,const int life,const int x,const int y,const int width, const popupConfigs &);
-char popup(std::string msg, int life);
+char popupcore(const std::string msg, const int life, const int x,const int y,const int width, popupConfigs &);
+char popup(const std::string msg, const int life = 0);
 
 //moniter
 bool error_monitor_lock = 0;

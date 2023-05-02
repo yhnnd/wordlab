@@ -1,5 +1,5 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(name = "play his trump card"
-<#gry-#gry>( )<-wte>(value = "use his advantage"
-<#gry-#gry>( )<-wte>(<"trump-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(name = "play his trump card"                                                                    <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(value = "use his advantage"                                                                     <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(<"trump-main"><-ylw>( go back )
+<#blu-#blu>(

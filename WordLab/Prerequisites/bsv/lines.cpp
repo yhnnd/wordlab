@@ -1,25 +1,56 @@
 // display a bsv file
-int bsvlines(char **msgs,const int max,int width,const char *folder,const int x,const int y,void *spptr) {
+int bsvlines(char **msgs,const int max,const int width,const char *folder,const int x,const int y,void *spptr) {
 	char key;
-	bool enter = 0;
-	int i = 0, chosen = 0, n_links = 0, maxlinks = 0, currentY = y;
+	bool enterKeyPressed = false, bsvStylesDisabled = false;
+	int i = 0, chosenLabel = 0, maxLabels = 0;
 	for(;;) {
 		// display bsv file
-		gotoxy(x,y);
+        int currentY = y;
 		for( i = 0; i < max; i++ ) {
 			gotoxy(x, currentY++);
-			bsvline(msgs[i],width);
-			if(msgs[i][strlen(msgs[i])-1]=='\n') {
-                gotoxy(x, currentY++);
+//            std::cout << "bsv line: " << clock();
+            if (bsvStylesDisabled == true) {
+                setForegroundColorAndBackgroundColor("red-", "-wte");
+                bsvlineDisableColors(msgs[i], width);
+            } else {
+                bsvline(msgs[i], width);
+            }
+			if (msgs[i][strlen(msgs[i])-1] == '\n') {
+                currentY++;
             }
 		}
+
+
 		gotoxy(x, y);// reset cursor
         currentY = y;
+
 		// get num of labels
-		for( i = 0, maxlinks = 0; i < max; i++ ) {// enter is 0
-			maxlinks = bsvlabel(msgs[i],0,maxlinks,0,folder,x,y,width,"wte-gry","wte-blu","<",">","(",")",spptr);
+		for( i = 0, maxLabels = 0; i < max; i++ ) {// enterKeyPressed is false
+			maxLabels = bsvLineLabels(msgs[i], 0, maxLabels,0,folder,x,y,width,"wte-gry","wte-blu","<",">","(",")",spptr);
 		}
-		enter = 0;
+
+        // highlight or enter the label selected
+        int currentLabel = 0;
+        for (i = 0; i < max; i++) {
+            gotoxy(x, currentY++);
+            currentLabel = bsvLineLabels(msgs[i], chosenLabel, currentLabel,enterKeyPressed,folder,x,y,width,"wte-gry","wte-blu","<",">","(",")",spptr);
+            if (currentLabel < 0) {
+                return -1;
+            }
+            if (msgs[i][strlen(msgs[i])-1]=='\n') {
+                gotoxy(1, currentY++);
+            }
+        }
+
+        enterKeyPressed = 0;
+
+        popup("#setMode('y++')");
+        popup("#offsetY=0;");
+        popup("#enableBorderTop=true;");
+        popup("BSV LINES: label chosen " + tostring(chosenLabel), 0);
+        popup("BSV LINES: Press [ENTER] or [W↑] [A←] [S↓] [D→] to switch labels.", 0);
+        popup("#setMode('y=1')", 0);
+
 		key = getch();
 		if (key == BIOSKEY) {
 			key = getch();
@@ -34,27 +65,16 @@ int bsvlines(char **msgs,const int max,int width,const char *folder,const int x,
             }
 		}// CANNOT FOLLOW AN 'ELSE'
 		if(key == 13) {
-            enter = true;
-        } else if(key==8||key==27) {
+            enterKeyPressed = true;
+        } else if (key == 8 || key == 127 || key == 27) {
 //			clearscreen(0,0,ScreenX,max+2);
 			return -1;//exit
 		} else if(key=='w'||key=='a') {
-            chosen--;
+            chosenLabel--;
         } else if(key=='s'||key=='d'||key==32) {
-            chosen++;
+            chosenLabel++;
         }
-		limit(chosen,chosen,0,maxlinks);
-		// highlight or enter the label selected
-		for (i = 0, n_links = 0; i < max; i++) {
-			gotoxy(x, currentY++);
-			n_links = bsvlabel(msgs[i],chosen,n_links,enter,folder,x,y,width,"wte-gry","wte-blu","<",">","(",")",spptr);
-			if (n_links < 0) {
-                return -1;
-            }
-			if (msgs[i][strlen(msgs[i])-1]=='\n') {
-                gotoxy(1, currentY++);
-            }
-		}
+		limit(chosenLabel,chosenLabel,0,maxLabels);
 		gotoxy(1, y);// reset cursor
 	}
 	return 0;

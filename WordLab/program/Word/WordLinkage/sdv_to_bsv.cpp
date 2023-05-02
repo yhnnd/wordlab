@@ -8,20 +8,28 @@ void SDV_to_BSV_PrintLabelBegin(ofstream & fout,PKC line,char & n_sort,int & n_l
 	}
 	if( n_sort_curr != n_sort ) {// new sort number => new line
 		n_sort = n_sort_curr;
-		if( (n_label-1) % 2 != 0 ) fout << endl << "<-wte>(";
+//		if( (n_label-1) % 2 != 0 ) {
+//            fout << endl << "<-wte>(";
+//        }
 		fout << endl << "<-wte>(";
 		n_label = 1;
 	}
 }
+
 void SDV_to_BSV_PrintLabelEnd(ofstream & fout,int & n_label) {
-	if( n_label % 2 == 0 ) {// 2 labels printed in this line
+//	if( n_label % 2 == 0 ) {
+//        // 2 labels printed in this line
 		fout << endl << "<-wte>(";
-	} else {// less than 2 labels printed in this line
-		fout << "  ";
-	}
+//	} else {
+//        // less than 2 labels printed in this line
+//		fout << "  ";
+//	}
 }
+
+#define borderColorStr "#blu-#blu"
+
 void SDV_to_BSV_PrintFontColor(ofstream & fout, bool is_comment) {
-	fout << "<#gry-#gry>( )";// left border
+	fout << "<" << borderColorStr << ">( )";// left border
 	if( is_comment ) {// set comments font-color
 		fout << "<-gry>(";
 	} else {// set text font-color
@@ -52,15 +60,17 @@ const string SDV_to_BSV( string keyword, window document, string folder) {// fol
 							fout << " ";
 						}
 						fout << ")";// print label end
-					} else fout << ch;// print label text
+					} else {
+                        fout << ch;// print label text
+                    }
 				}
 				SDV_to_BSV_PrintLabelEnd(fout,n_label);
 				++n_label;
-				foutsub << "<#gry-#gry>( )<-wte>(<\"" << output_file_bsv_label << "\"><-ylw>( go back )"<<endl;
-				foutsub << "<#gry-#gry>(" << endl;// bottom border
+				foutsub << "<" << borderColorStr << ">( )<-wte>(<\"" << output_file_bsv_label << "\"><-ylw>( go back )"<<endl;
+				foutsub << "<" << borderColorStr << ">(" << endl;// bottom border
 				foutsub.close();
 				foutsub.open( sub_output_file_full_name );
-				foutsub << "<#gry-#gry>(" << endl;// top border
+				foutsub << "<" << borderColorStr << ">(" << endl;// top border
 			} else {// line contains no label
 				SDV_to_BSV_PrintFontColor(foutsub,document.text.line(i)[0]=='#');
 				for( int n = 0; n < document.text.length(i); ++n ) {
@@ -70,19 +80,27 @@ const string SDV_to_BSV( string keyword, window document, string folder) {// fol
 					}
 					// replace "(text)" with "\\(text\\)"
 					char ch = document.text.line(i)[n];
-					if( ch == '(' ) foutsub << "\\(";
-					else if( ch == ')' ) foutsub << "\\)";
-					else foutsub << ch;
+					if( ch == '(' ) {
+                        foutsub << "\\(";
+                    } else if( ch == ')' ) {
+                        foutsub << "\\)";
+                    } else {
+                        foutsub << ch;
+                    }
 				}
 				foutsub << endl;
 			}
 		}
 	}
-	if( (n_label-1) % 2 != 0 ) fout << endl;
+//	if ( (n_label-1) % 2 != 0 ) {
+        fout << endl;
+//    }
 	fout << "<blu-blu>(" << endl;// main bsv bottom border
 	fout.close();
-	foutsub << "<#gry-#gry>( )<-wte>(<\"" << output_file_bsv_label << "\"><-ylw>( go back )"<<endl;
-	foutsub << "<#gry-#gry>(" << endl;// sub bsv bottom border
+	foutsub << "<" << borderColorStr << ">( )<-wte>(<\"" << output_file_bsv_label << "\"><-ylw>( go back )"<<endl;
+	foutsub << "<" << borderColorStr << ">(" << endl;// sub bsv bottom border
 	foutsub.close();
 	return output_file_bsv_label;
 }
+
+#undef borderColorStr

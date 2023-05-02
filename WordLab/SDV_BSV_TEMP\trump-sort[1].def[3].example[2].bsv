@@ -1,5 +1,5 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(English = "They hold all the trump cards."
-<#gry-#gry>( )<-wte>(Chinese = "�������������е�����."
-<#gry-#gry>( )<-wte>(<"trump-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(English = "They hold all the trump cards."                                                      <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(Chinese = "他们掌握着所有的王牌."                                                     <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(<"trump-main"><-ylw>( go back )
+<#blu-#blu>(

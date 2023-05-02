@@ -1,4 +1,4 @@
-char popup(std::string msg, int life = 0) {
+char popup(const std::string msg, const int life) {
     static popupConfigs configs;
 	if (msg == "#time=reset();") {
 		configs.PrevTime = -1000;

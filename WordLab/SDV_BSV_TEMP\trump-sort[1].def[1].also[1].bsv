@@ -1,4 +1,4 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(value = "trumps"
-<#gry-#gry>( )<-wte>(<"trump-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(value = "trumps"                                                                                <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(<"trump-main"><-ylw>( go back )
+<#blu-#blu>(

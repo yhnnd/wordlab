@@ -8,7 +8,7 @@ value = "n.";
 
 <sort[1].def[1]>
 English = "the suit chosen to have a higher value than the other suits in a particular card game";
-Chinese = "[�����[���е�]���ƻ�ɫ;";
+Chinese = "王牌(花色);將牌(花色);";
 <sort[1].def[1].explaination[1]>
 name = "suit";
 value = "one of the four types of cards in a set";
@@ -16,11 +16,11 @@ value = "one of the four types of cards in a set";
 value = "trumps";
 <sort[1].def[1].example[1]>
 English = "Hearts are the trumps.";
-Chinese = "�t��������";
+Chinese = "红桃是王牌.";
 
 <sort[1].def[2]>
 English = "a card from the suit that has been chosen to have a higher value than the other suits in a particular card game";
-Chinese = "����;����;";
+Chinese = "王牌;將牌;";
 <sort[1].def[2].explaination[1]>
 name = "suit";
 value = "one of the four types of cards in a set";
@@ -29,19 +29,19 @@ value = "trump card";
 
 <sort[1].def[3]>
 English = "something that you can do or use in a situation, which gives you an advantage";
-Chinese = "����;�^��;�����;";
+Chinese = "绝招;杀手锏;绝技;必杀技;";
 <sort[1].def[3].also[1]>
 value = "trump card";
 <sort[1].def[3].example[1]>
 English = "But then he decided to play his trump card.";
-Chinese = "���^���Q��ʹ�����Ě����.";
+Chinese = "但后来他决定打出自己的王牌.";
 <sort[1].def[3].example[1].explaination[1]>
 name = "play his trump card";
 value = "use his advantage";
 
 <sort[1].def[3].example[2]>
 English = "They hold all the trump cards.";
-Chinese = "�������������е�����.";
+Chinese = "他们掌握着所有的王牌.";
 <sort[1].def[3].example[2].explaination[1]>
 name = "They hold all the trump cards";
 value = "They have things which could give them an advantage";
@@ -51,11 +51,11 @@ value = "v.";
 
 <sort[2].def[1]>
 English = "to play a trump that beats someone else's card in a game";
-Chinese = "[�����[����]��������A[�e�˵���];";
+Chinese = "出王牌赢(在游戏中打出击败别人的牌的王牌);";
 
 <sort[2].def[2]>
 English = "to do better than someone else in a situation when people are competing with each other";
-Chinese = "�A;���^;��;";
+Chinese = "胜过;打败;发挥出色;掌握主动权;";
 <sort[2].def[2].example[1]>
 English = "By wearing a simple but stunning dress, she had trumped them all.";
-Chinese = "������һ�l���΅s�@�G��ȹ��,����Ⱥ��.";
+Chinese = "通过穿着简单但令人惊叹的衣服,她胜过了所有人.";

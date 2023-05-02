@@ -1,4 +1,5 @@
-char popupcore(std::string& msg, const int life, const int x, const int y, const int width, popupConfigs& configs) {
+
+char popupcore(const std::string msg, const int life, const int x, const int y, const int width, popupConfigs& configs) {
 	char key = 0;
 	// record previous status
 	colorrecord(colorprev);

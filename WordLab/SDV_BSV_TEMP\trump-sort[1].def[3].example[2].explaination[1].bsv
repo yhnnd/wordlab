@@ -1,5 +1,5 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(name = "They hold all the trump cards"
-<#gry-#gry>( )<-wte>(value = "They have things which could give them an advantage"
-<#gry-#gry>( )<-wte>(<"trump-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(name = "They hold all the trump cards"                                                          <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(value = "They have things which could give them an advantage"                                   <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(<"trump-main"><-ylw>( go back )
+<#blu-#blu>(

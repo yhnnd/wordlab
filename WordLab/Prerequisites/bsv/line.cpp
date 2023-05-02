@@ -47,7 +47,36 @@ void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC f
 			std::cout<<what[r];
 		}
 	}
-	for(r-=romit; r<=width; r++) std::cout<<" ";
+	for (r-=romit; r<=width; r++) {
+        std::cout<<" ";
+    }
 	colorreset(colorold);
 }
 // Update: Add Support For Colorful label <clrful->
+
+
+
+//copy this "<",">","(",")"
+void bsvlineDisableColors(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fieldend,PKC tokens_term) {
+
+    int r = 0, r1 = 0, romit = 0;
+
+    for(r=0; what[r]!='\n'&&strchr(tokens_term,what[r])==NULL&&what[r]!=0; r++) {
+        if(what[r-1]!='\\'&&strchr(brcmdbegin,what[r])) {
+            for(r++,r1=0; what[r-1]=='\\'||!strchr(brcmdend,what[r]); r++,r1++) {
+            }
+            romit += r1 + 2;
+        } else if(what[r-1]!='\\'&&strchr(fieldbegin,what[r])) {
+            romit++;
+        } else if(what[r-1]!='\\'&&strchr(fieldend,what[r])) {
+            romit++;
+        } else if(what[r]=='\\'&&strchr("()<>",what[r+1])) {
+            romit++;
+        } else {
+            std::cout<<what[r];
+        }
+    }
+    for (r-=romit; r<=width; r++) {
+        std::cout<<" ";
+    }
+}

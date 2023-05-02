@@ -1,5 +1,5 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(English = "But then he decided to play his trump card."
-<#gry-#gry>( )<-wte>(Chinese = "���^���Q��ʹ�����Ě����."
-<#gry-#gry>( )<-wte>(<"trump-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(English = "But then he decided to play his trump card."                                         <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(Chinese = "但后来他决定打出自己的王牌."                                            <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(<"trump-main"><-ylw>( go back )
+<#blu-#blu>(

@@ -1,5 +1,5 @@
-<#gry-#gry>(
-<#gry-#gry>( )<-wte>(name = "suit"
-<#gry-#gry>( )<-wte>(value = "one of the four types of cards in a set"
-<#gry-#gry>( )<-wte>(<"trump-main"><-ylw>( go back )
-<#gry-#gry>(
+<#blu-#blu>(
+<#blu-#blu>( )<-wte>(name = "suit"                                                                                   <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(value = "one of the four types of cards in a set"                                               <#blu-#blu>(  )
+<#blu-#blu>( )<-wte>(<"trump-main"><-ylw>( go back )
+<#blu-#blu>(
