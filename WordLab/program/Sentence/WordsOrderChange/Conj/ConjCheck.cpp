@@ -1,4 +1,4 @@
-void ConjCheck() {
+void sts::ConjCheck() {
 	int r,r1;
 	for(r=0; r<rwin; r++) {
 		if(

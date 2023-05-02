@@ -104,7 +104,7 @@ int launch(string msg) {
 	} else if(msg==FunctionName[15]) {
 		char keyword[LINEMAX];
 		popup("Search Compact",0);
-		index(keyword,10,9);
+		index(keyword, 10, 9, lightwhite);
 		return 15;
 	} else if(msg==FunctionName[16]) {
 		WLFramework();

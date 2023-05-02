@@ -6,4 +6,4 @@
 #include "clearscreen.cpp"
 
 #define recordxy(pos) COORD pos = getxy()
-#define resetxy(pos) gotoxy(pos.X,pos.Y)
+#define resetxy(pos) gotoxy(pos.X, pos.Y)

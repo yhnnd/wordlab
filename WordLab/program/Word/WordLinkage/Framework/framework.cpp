@@ -26,18 +26,23 @@ int WLFramework(void) {
 		char * ptr_token=strstr(s,"#");
 		if(ptr_token!=nullptr) {
 			(*ptr_token)=0;//remove #
-			if(*(ptr_token+1)!='\0') strcpy(ptr_token,ptr_token+1);
+			if (*(ptr_token+1)!='\0') {
+                strcpy(ptr_token,ptr_token+1);
+            }
 			//re-order the word after removing #
 			FirstLetter = WLTools(s)? 13 : 0;
 		} else if(strindex(s," ")>=0) {
-			if(!WLSearchPhrase(s)&&CL) AddNew(s);
+			if (!WLSearchPhrase(s)&&CL) {
+                AddNew(s);
+            }
 		} else if(lth<=0||lth>30) {
             return -1;
         } else {
 			int BeginY = 5;
 			clearscreen(0,BeginY,ScreenX,ScreenY-1-BeginY);
-			gotoxy(0,BeginY);
+			gotoxy(0, BeginY);
 			FirstLetter = WLFrameworkCore(s);
+            gotoxy(0, BeginY + 3);
 			FirstLetter = WLDictionary(s);
 			if( FirstLetter == 8/* backspace */ || FirstLetter ==127/* delete */ || FirstLetter == 27/* escape */ ) {
                 return -1;

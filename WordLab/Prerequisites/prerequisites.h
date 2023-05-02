@@ -179,8 +179,9 @@ void ColorfulBdim(int t);
 void printColorful(const char *msg);
 //cursor
 void setscreen(int w,int h);
+COORD currentCursorPosition = {0, 0};
 COORD getxy();
-void gotoxy(int x,int y);
+void gotoxy(const int x, const int y);
 void gotoxy(COORD pos);
 void movexy(const int offsetX,const int offsetY);
 void clearline(int x=-1,int y=-1,int n=ScreenX-1,const char c=' ');

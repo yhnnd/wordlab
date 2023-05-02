@@ -1,4 +1,4 @@
-void SpecialWordSpot3AdverbialClause() {
+void sts::SpecialWordSpot3AdverbialClause() {
 	int r0;
 	for(r0 = 0; r0 < rwin; r0++ ) {
 		if(strcmp(s[r0].txt,"now")==0||

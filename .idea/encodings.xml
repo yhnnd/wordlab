@@ -5,6 +5,10 @@
     <file url="file://$PROJECT_DIR$/Files/lang/Chinese Unicode Table.txt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Files/lang/English-ChineseDictionary.txt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Files/lang/StructuredDictionary/trump.sdv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/lang/phrases/1 word phrase.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/lang/phrases/2 word phrase.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/lang/phrases/3 word phrase.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Files/lang/phrases/4 word phrase.csv" charset="GB18030" />
     <file url="file://$PROJECT_DIR$/Files/settings/Menu/DevelopersMenu/1ch.csv" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Files/settings/Menu/DevelopersMenu/2ch.csv" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Files/settings/Menu/DevelopersMenu/3ch.csv" charset="UTF-8" />
@@ -27,10 +31,16 @@
     <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/msgwin/MessageWindowTable/table/Panel/M/MainMenuChinese.txt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/msgwin/MessageWindowTable/table/Panel/SearchName.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/msgwin/MessageWindowTable/table/Panel/SearchNumber.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsInsert/ClauseMove.cpp" charset="GB18030" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsInsert/WordInsert/InsertEX.cpp" charset="GB18030" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsInsert/all_bsv.h" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/Clause/ClauseCheck.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/Conj/ConjCheck.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/Framework.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/Framework/Settings.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/Framework/all_words_order_framework.cpp" charset="GB18030" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/SWS1/Explanation.txt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/SWS1/SWS1-8.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/SWS2/all.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/SWS3/all.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/WOC1/adj+adv.cpp" charset="UTF-8" />
@@ -38,17 +48,25 @@
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/WOC1/can-not.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/WOC1/can-you.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/WOC1/do-for.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/WOC1/how+aux.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/WOC1/n+adj.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/WOC1/the-more.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/WOC1/v+adv.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/WOC1/when+ad.cpp" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/all.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/all_words_order_change.cpp" charset="GB18030" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/find/findad.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/find/findnoun.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOrderChange/find/findverb.cpp" charset="GB18030" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Framework/wlo-improvements/be+v.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Framework/wlo-improvements/don't.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Framework/wlo-improvements/have.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Framework/wlo-improvements/miss.cpp" charset="GB18030" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Framework/wlo-improvements/more.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Framework/wlo-improvements/so.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Framework/wlo-improvements/to.cpp" charset="GB18030" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Framework/wlo-improvements/uppercase.cpp" charset="GB18030" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Framework/wlo-improvements/wlo-improvements.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Term/InquiryEndCheck.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsOut/Term/InquiryEndShow.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/launch.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLabDev/Prerequisites/bsv/bsv.cpp" charset="ISO-8859-1" />

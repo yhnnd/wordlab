@@ -1,7 +1,9 @@
+#include "molecular.h"
+
 #include "Base/all_base.cpp"
 #include "Word/all_word.cpp"//has chinese Engine inside with Redirect
 #include "WordSort/all_word_sort.cpp"
-#include "Sentence/all.cpp"//has chinese Engine inside with Redirect And SelectDef
+#include "Sentence/all_sentence_translater.cpp"//has chinese Engine inside with Redirect And SelectDef
 #include "csv_query/all_csv_query.cpp"
 #include "Crossword/all_crossword.cpp"
 #include "ClearCache.cpp"

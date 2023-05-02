@@ -58,10 +58,17 @@ int AskChar (std::string s) {
     }
 }
 
+
+int AskChar(std::string msg, std::string s) {
+    return AskChar(msg + s);
+}
+
+
 template <typename... Args>
 int AskChar(std::string msg, std::string s, const Args& ... rest) {
     return AskChar(msg + s, rest ... );
 }
+
 
 template <typename... Args>
 int status (std::string msg, const Args& ... rest) {

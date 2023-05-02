@@ -1,8 +1,14 @@
 int WLFrameworkCore(string s) {
 	int n = 0, ReturnLetter = 0;
 	string s2(s);
-    clearscreen(0, 0, ScreenX - 1, 3);
+
+    colorrecord(colorPrev);
+    setForegroundColorAndBackgroundColor("wte-", "-#gry");
+    clearscreen(0, 3, ScreenX - 1, 8);
+    colorreset(colorPrev);
+
 	WLHistory.RecordSearch(s,0);
+
 	if (BL) {
         n = WLSearch(s, false, true, 'n', true);//UPPER-LOWER CASE SENSITIVE
     }

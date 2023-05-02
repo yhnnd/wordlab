@@ -43,7 +43,7 @@
 
 
 //what which
-void SWS1_5() {
+void sts::SWS1_5() {
     int r,r0,r1,r2,r3,r4;
     for(r0=0; r0<rwin; r0++) {
         if (SortEX(s[r0].txt, "wh") == 0 && (strcmp(s[r0].txt, "what") == 0 || strcmp(s[r0].txt, "which") == 0)) {
@@ -70,7 +70,7 @@ void SWS1_5() {
 //who where
 //include: who can i turn to? except: who can help me?
 //Updated 2015.5.31
-void SWS1_6() {
+void sts::SWS1_6() {
     int r,r0,r1,r2,r3,r4;
     for(r0=0; r0<rwin; r0++)
         if((strcmp(s[r0].txt,"who")==0||strcmp(s[r0].txt,"where")==0)
@@ -93,7 +93,7 @@ void SWS1_6() {
 
 
 //be+n.?
-void SWS1_7() {
+void sts::SWS1_7() {
     int r,r0,r1,r2,r3,r4;
     for(r0=0; r0<rwin; r0++) {
         if(SortEX(s[r0-1].txt,"wh")!=0&&SortEX(s[r0].txt,"BE")==0
@@ -110,7 +110,7 @@ void SWS1_7() {
 }
 
 //whose
-void SWS1_8() {
+void sts::SWS1_8() {
     int r,r0,r1,r2,r3,r4;
     for(r0=0; r0<rwin; r0++) {
         if(strcmp(s[r0].txt,"whose")==0) {
@@ -129,7 +129,7 @@ void SWS1_8() {
 }
 //更新時間 2014/6/17
 
-void SpecialWordSpot1Question() {
+void sts::SpecialWordSpot1Question() {
     if(punct!='?') return;
     SWS1_5();
     SWS1_6();

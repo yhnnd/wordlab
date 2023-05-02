@@ -8,7 +8,7 @@ int WLSearch(string keyword, bool ignoreCase, bool printResult, char mode, bool 
         return -1;
     }
 
-	char currentCheckingWord[32];// current checking word.
+	char currentCheckingWord[32] = "";// current checking word.
 
     const char * delim = "\n";// the delimiter.
     const int delimLth = strlen(delim);// the length of the delimiter.
@@ -33,7 +33,7 @@ int WLSearch(string keyword, bool ignoreCase, bool printResult, char mode, bool 
             break;
         }
 
-        memset(currentCheckingWord, 0, sizeof(currentCheckingWord));
+//        memset(currentCheckingWord, 0, sizeof(currentCheckingWord));
 
 	    fseek(fp, (Location - 1) * (wordLth + delimLth), 0);
 		fread(&currentCheckingWord, wordLth, 1, fp);

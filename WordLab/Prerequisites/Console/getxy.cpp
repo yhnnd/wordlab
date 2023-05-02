@@ -38,6 +38,6 @@ COORD getxy(){
     }
 //    printf("\nlth = %zu, buffer2 = \"%s\"\n" , lth, buffer2.c_str());
 //    getch();
-    return {0,0};
+    return currentCursorPosition;
 #endif
 }

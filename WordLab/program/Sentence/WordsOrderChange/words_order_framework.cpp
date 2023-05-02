@@ -1,4 +1,4 @@
-void WordsOrderFramework() {
+void sts::WordsOrderFramework() {
 	vector<int> ListPos;
 	vector<string> CheckerInfo;
 	for(int i = 0; i < CheckerMax; i++ ) {
@@ -21,8 +21,12 @@ void WordsOrderFramework() {
 		}
 		WordsOrderFrameworkCore(n,ListPos);
 		if(show_debug_message) {// print sentence rearranged
-			for(int r = 0; r < rwin; r++ ) cout<<s[r].txt<<" ";
-			if(ispunct(punct)) cout<<"\b"<<punct;
+			for(int r = 0; r < rwin; r++ ) {
+                cout<<s[r].txt<<" ";
+            }
+			if (ispunct(punct)) {
+                cout<<"\b"<<punct;
+            }
 		}
 	}
 }
@@ -30,5 +34,5 @@ void WordsOrderFramework() {
 //Since   2014/05/12
 //Updated 2014/06/18 17:53
 //Updated 2015/06/12 12:58
-//ÐÂÄ£Ê½¿ÉÒÔÅÅÁÐCheckerˆÌÐÐí˜Ðò.2015Äê6ÔÂ13ÈÕ
+//æ–°æ¨¡å¼å¯ä»¥æŽ’åˆ—CheckeråŸ·è¡Œé †åº.2015å¹´6æœˆ13æ—¥
 //warning:the last word is s[rwin-1], not s[rwin]!//2015/06/28
