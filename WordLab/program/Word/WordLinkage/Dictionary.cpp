@@ -20,6 +20,8 @@ char WLDictionary(string keyword) {
 			bsvLabelEnter("SDV_BSV_TEMP/",("\""+label+"\"").c_str(),0,document.margin.top,document.width,"wte-blu");
 			clearscreen( 0, document.margin.top-1, document.width+1, document.innerHeight()+2 );
 			// Y = MarginTop - 1 is for bsvlines() to output filename
+            std::__fs::filesystem::remove_all("SDV_BSV_TEMP");
+            rmdir("SDV_BSV_TEMP");
 		}
 	}
 	return ReturnLetter;
