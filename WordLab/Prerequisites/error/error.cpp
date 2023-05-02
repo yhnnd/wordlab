@@ -1,7 +1,7 @@
 int errorlog(std::string s1, std::string s2, std::string s3) {
 	static int prevtime = -1000, n = 0;
 	int time=0;
-	if (!error_monitor_lock) {
+	if (error_monitor_lock == false) {
         return -1;
     } else if (s1 == "#time=reset();") {
         prevtime = -1000;

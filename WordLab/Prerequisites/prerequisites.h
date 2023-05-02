@@ -135,7 +135,6 @@ typedef struct _COORD {
 #include "keyboard.h"
 
 #define _CacheMax 3
-#define status _AutoOnce = true; AskChar
 #define LINEMAX  80
 #define MAXLINES 20
 

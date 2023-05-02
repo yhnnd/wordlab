@@ -22,7 +22,7 @@ std::string getCurrentTime(){
 #include "table/all.cpp"
 #include "chart/all.cpp"
 #include "toggles/all.cpp"
-#include "AskChar/all.cpp"
+#include "AskChar/all_ask.cpp"
 #include "maths/all.cpp"
 #include "dataContainer/all.cpp"// requires table
 #include "script/all.cpp"//requires Maths & dataContainer
