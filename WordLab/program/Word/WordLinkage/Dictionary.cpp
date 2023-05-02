@@ -16,8 +16,8 @@ char WLDictionary(string keyword) {
 			document.setcoloractive("-wte","-wte","-gry","-gry","wte-grn","-grn","ylw-red","-red");
 			document.alloc();
 			document.load("",";");
-			string label = SDV_to_BSV(keyword,document,"SDV_BSV_TEMP\\");
-			bsvLabelEnter("SDV_BSV_TEMP\\",("\""+label+"\"").c_str(),0,document.margin.top,document.width,"wte-blu");
+			string label = SDV_to_BSV(keyword,document,"SDV_BSV_TEMP/");
+			bsvLabelEnter("SDV_BSV_TEMP/",("\""+label+"\"").c_str(),0,document.margin.top,document.width,"wte-blu");
 			clearscreen( 0, document.margin.top-1, document.width+1, document.innerHeight()+2 );
 			// Y = MarginTop - 1 is for bsvlines() to output filename
 		}

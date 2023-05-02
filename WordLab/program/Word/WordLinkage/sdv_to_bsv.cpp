@@ -37,7 +37,7 @@ void SDV_to_BSV_PrintFontColor(ofstream & fout, bool is_comment) {
 	}
 }
 // TRANSFORM SDV FILE INTO BSV FILES
-const string SDV_to_BSV( string keyword, window document, string folder) {// folder = "SDV_BSV_TEMP\\"
+const string SDV_to_BSV( string keyword, window document, string folder) {// folder = "SDV_BSV_TEMP/"
 	string output_file_bsv_label = keyword + "-main";
 	string output_file_full_name = folder + output_file_bsv_label + ".bsv";
 	ofstream fout( output_file_full_name );
