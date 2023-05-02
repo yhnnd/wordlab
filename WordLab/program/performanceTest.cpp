@@ -1,9 +1,9 @@
 int performanceTest (void) {
     molecular Molecular;
 
-    Molecular.generateMolecularDatabase(_data_dir, "000000");
-    printf("\nMolecular database generated. Press any key to continue.\n");
-    getch();
+//    Molecular.generateMolecularDatabase(_data_dir, "000000");
+//    printf("\nMolecular database generated. Press any key to continue.\n");
+//    getch();
 
     const auto words = {
             "cloud", "could", "bread", "beard", "board", "broad", "aboard", "abroad", "kitchen",

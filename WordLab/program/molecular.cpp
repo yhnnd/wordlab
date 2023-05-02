@@ -420,6 +420,10 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
 
     vector<set<string>> dbNamesTable;
 
+    if (strlen(phasesToggles) < 6) {
+        return self;
+    }
+
     const bool phase_0_enabled =   phasesToggles[0] == '1';
     const bool phase_1_enabled =   phasesToggles[1] == '1';
     const bool phase_2_3_enabled = phasesToggles[2] == '1' || phasesToggles[3] == '1';
