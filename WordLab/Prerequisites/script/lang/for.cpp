@@ -85,8 +85,8 @@ void scriptprocessor::langForExecute(std::vector<ForBlock> & forblocks) {
 		if( op_begin != std::string::npos && op_end != std::string::npos ) {
 			operator2[n] = forblocks[n].expr[1].substr(op_begin,op_end);
 		}
-		it_begin_value[n] = toint(dataset.getvalue(it_begin_name[n]));
-		it_end_value[n] = toint(dataset.getvalue(it_end_name[n]));
+		it_begin_value[n] = toInt(dataset.getvalue(it_begin_name[n]));
+		it_end_value[n] = toInt(dataset.getvalue(it_end_name[n]));
 	}
 
 	/* * * * * * * * * * * * * * * * *\
@@ -97,8 +97,8 @@ void scriptprocessor::langForExecute(std::vector<ForBlock> & forblocks) {
 	\* * * * * * * * * * * * * * * * */
 	for( int for_active_level = for_nested_level - 1; for_active_level > 0; ) {
 		for( int n = 0; n >= 0 && n < for_nested_level; ++n ) {
-			auto it_begin = toint(dataset.getvalue(it_begin_name[n]));
-			auto it_end = toint(dataset.getvalue(it_end_name[n]));
+			auto it_begin = toInt(dataset.getvalue(it_begin_name[n]));
+			auto it_end = toInt(dataset.getvalue(it_end_name[n]));
 			auto &op = operator2[n];
 			if(_debug) {
 				std::cout<<"<lang><for><execute> ";

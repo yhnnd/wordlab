@@ -49,7 +49,7 @@ string selectOneFromManyOptions (const vector<string> lines, const char * messag
 	bsvline(messageStyled, strlen(messagePlainText));
 	string line;
 	cin >> line;
-	int n = toint(line);
+	int n = toInt(line);
 	if (n > 0 && n <= lines.size()) {
 		// user input an order number of an option
 		return lines[n - 1];

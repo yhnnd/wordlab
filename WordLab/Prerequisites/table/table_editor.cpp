@@ -168,7 +168,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 					std::cout<<"select item by number:";
 					colorsetcmd("-gry");
 					std::cin>>temp;
-					i = toint(temp);
+					i = toInt(temp);
 					colorsetcmd("-ylw");
 				}
 			} else { // label is text

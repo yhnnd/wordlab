@@ -158,7 +158,7 @@ int launch(string msg) {
 			errorlog("similar","error","parameter unrecognizable");
 		} else {
 			string word=msg.substr(msg.find("(")+1,msg.find(",")-msg.find("(")-1);
-			int amount=toint(msg.substr(msg.find(",")+1,msg.find(")")-msg.find(",")-1));
+			int amount = toInt(msg.substr(msg.find(",")+1,msg.find(")")-msg.find(",")-1));
 			WLSearchSimilarSpelling(word,amount);
 		}
 		return 31;

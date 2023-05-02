@@ -197,7 +197,7 @@ void strswap(char *str1,char *str2,int lth);
 void strsort(char *ptr,int n,int lth);
 template <typename arr2> int maxlth(arr2 msgs);
 template <typename T> std::string tostring(const T & object);
-template <typename T> int toint(const T& object);
+template <typename T> int toInt(const T& object);
 bool strHasSubseq(std::string line,std::string pattern);
 bool match(std::string line,std::string pattern);
 std::string strfilter(std::string line,std::string pattern,std::string replacewith);

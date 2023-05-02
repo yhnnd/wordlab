@@ -38,8 +38,11 @@ INPUT:
 				char msg[16];
 				std::cout<<" "<<name<<"=";
 				listen(msg,0,1,{13},16);
-				if(isdigit(msg[0])) value = toint(msg);
-				else std::cout<<value;
+				if(isdigit(msg[0])) {
+                    value = toInt(msg);
+                } else {
+                    std::cout<<value;
+                }
 			};
 			setparam("w",this->width);
 			setparam("h",this->height);

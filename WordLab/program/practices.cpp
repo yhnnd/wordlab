@@ -11,12 +11,15 @@ void practices() {
 	// read settings
 	ifstream fin(SettingsRoute);
 	while(getline(fin,line)){
-		if(line.find("LengthBase")!=string::npos)
-			LthBase = toint(line.substr(line.find("=")+1,line.find(";")-line.find("=")-1));
-		if(line.find("LengthVaryRange")!=string::npos)
-			LthVaryRange = toint(line.substr(line.find("=")+1,line.find(";")-line.find("=")-1));
-		if(line.find("LengthDifference")!=string::npos)
-			LthDiffer = toint(line.substr(line.find("=")+1,line.find(";")-line.find("=")-1));
+		if(line.find("LengthBase")!=string::npos) {
+            LthBase = toInt(line.substr(line.find("=") + 1, line.find(";") - line.find("=") - 1));
+        }
+		if(line.find("LengthVaryRange")!=string::npos) {
+            LthVaryRange = toInt(line.substr(line.find("=") + 1, line.find(";") - line.find("=") - 1));
+        }
+		if(line.find("LengthDifference")!=string::npos) {
+            LthDiffer = toInt(line.substr(line.find("=") + 1, line.find(";") - line.find("=") - 1));
+        }
 	}
 	fin.close();
 	for(;;) {// main loop
