@@ -22,12 +22,14 @@ int sts::SmartTranslater() {
     }
 
     result = getChineseOfWord_S(s[rwout].txt, def, sizeof(def), 1);
+
     if ( result > 0 ) {
         this->pushWordAndDefs(s[rwout], def, {"ylw-", "-blk"});
         return 0;
     }
 
     this->pushWordAndDefs(s[rwout], s[rwout].txt, {"red-", "-blk"});
+
     return 0;
 }
 
@@ -180,10 +182,12 @@ void sts::WordsOut() {
 
 
 void sts::PrintWordTranslation(const wordGroup currentWordGroup) {
+    colorrecord(colorprev);
     const string foregroundColor = currentWordGroup.defsColor.foregroundColor;
     const string backgroundColor = currentWordGroup.defsColor.backgroundColor;
     setForegroundColorAndBackgroundColor(foregroundColor, backgroundColor);
     printf("%s", currentWordGroup.defZh.c_str());
+    colorreset(colorprev);
     return;
 }
 

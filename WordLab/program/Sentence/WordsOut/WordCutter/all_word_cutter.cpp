@@ -89,20 +89,20 @@ void sts::fileIn(char msg[][LINEMAX],const char *route) {
 }
 
 
-bool sts::WordCutter(char *s) {
-    int nAffix = 0, trimLth = 0, wordLth = strlen(s), max = filelines(AffixCutRoute,true);
+bool sts::WordCutter(char *word) {
+    int nAffix = 0, trimLth = 0, wordLth = strlen(word), max = filelines(AffixCutRoute,true);
     char AffixTexts[max][LINEMAX], AffixDefs[max][LINEMAX];
     fileIn(AffixTexts, AffixCutRoute);
     fileIn(AffixDefs, AffixAddRoute);
-    wordcuttercheck(s, wordLth, &nAffix, &trimLth);
+    wordcuttercheck(word, wordLth, &nAffix, &trimLth);
     if (nAffix == 0) {
         return false;
     }
 
     const char ch = AskChar("remove \"", AffixTexts[nAffix], "\"?");
     if (ch == 13 || ch == 10) {
-        wordcutterremove(s, nAffix);
-        strclr(s, wordLth - trimLth);
+        wordcutterremove(word, nAffix);
+        strclr(word, wordLth - trimLth);
     } else {
         return false;
     }
@@ -117,58 +117,88 @@ bool sts::WordCutter(char *s) {
     }
 
     char defsOfWordAfterTrimmed [32];
-    int searchResultOfWordAfterTrimmed = getChineseOfWord(s, defsOfWordAfterTrimmed, sizeof(defsOfWordAfterTrimmed));
+    int searchResultOfWordAfterTrimmed = getChineseOfWord(word, defsOfWordAfterTrimmed, sizeof(defsOfWordAfterTrimmed));
 
-    if (nAffix == sts::_affixSymbols::_postfix_ING) {
-        // Specified for postfix "-ing"
-        if (searchResultOfWordAfterTrimmed > 0) {
-            // Print Definition of Word After Trimmed.
-            this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
-            return true;
-        } else {
-            // If word after trimmed is not valid, search word + 'e'
-            string temp = toString(s) + "e";
-            if (getChineseOfWord(temp.c_str(), defsOfWordAfterTrimmed, sizeof(defsOfWordAfterTrimmed))) {
-                // Print definition of word after trimmed + "e"
-                this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"blu-", "-blk"});
-                return true;
-            } else {
-                // word after trimmed is not valid. word after trimmed + 'e' is not valid either.
-                return false;
-            }
-        }
-    } else if (affixPtr->isPrefix()) {
+
+    if (affixPtr->isPrefix()) {
         // If Prefix Matched.
         const auto prefix_defs = AffixDefs[nAffix];
         // Print Prefix Definition
         this->pushWordAndDefs(affixPtr->getText(), prefix_defs, {"blk-", "-ylw"});
         if (searchResultOfWordAfterTrimmed > 0) {
             // Print Definition of Word After Trimmed.
-            this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
+            this->pushWordAndDefs(word, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
             return true;
         } else {
             // recursive calling.
-            return WordCutter(s);
+            return WordCutter(word);
         }
     } else if(affixPtr->isPostfix()) {
         // If Postfix Matched.
         if (searchResultOfWordAfterTrimmed > 0) {
+            PUSH_WORD_AND_POSTFIX_DEFINITIONS:
             // Print Definition of Word After Trimmed.
-            this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
-            return true;
-        } else {
-            // recursive calling.
-            int resultValue = WordCutter(s);
-            // Print Postfix Definition
+            this->pushWordAndDefs(word, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
+            // Print Definition of Postfix.
             const auto postfix_defs = AffixDefs[nAffix];
             this->pushWordAndDefs(affixPtr->getText(), postfix_defs, {"blk-", "-ylw"});
-            return resultValue;
+            return true;
+        } else {
+            // If Postfixes that could trim "e", goto branch TRY_WORD_AFTER_TRIMMED_PLUS_E.
+            const bool try_plus_e_first = (nAffix == sts::_affixSymbols::_postfix_ING || nAffix == sts::_affixSymbols::_postfix_ER || nAffix == sts::_affixSymbols::_postfix_OR);
+
+            bool plus_e_is_tried = false;
+            bool recursive_calling_is_tried = false;
+
+            if (try_plus_e_first) {
+                TRY_WORD_AFTER_TRIMMED_PLUS_E:
+                // set plus_e_is_tried true for preventing endless recursive calling.
+                if (plus_e_is_tried == true) {
+                    return false;
+                } else {
+                    plus_e_is_tried = true;
+                }
+                // If word after trimmed is not valid, search word + 'e'
+                const string wordPlusE = std::string(word) + "e";
+                int searchResultOfWordAfterTrimmedPlusE = getChineseOfWord(
+                        wordPlusE.c_str(), defsOfWordAfterTrimmed, sizeof(defsOfWordAfterTrimmed));
+                if (searchResultOfWordAfterTrimmedPlusE) {
+                    // Print definition of word after trimmed + "e"
+                    this->pushWordAndDefs(wordPlusE, defsOfWordAfterTrimmed, {"blu-", "-blk"});
+                    // Print Definition of Postfix.
+                    const auto postfix_defs = AffixDefs[nAffix];
+                    this->pushWordAndDefs(affixPtr->getText(), postfix_defs, {"blk-", "-ylw"});
+                    return true;
+                } else {
+                    // word after trimmed is not valid. word after trimmed + 'e' is not valid either.
+                    goto TRY_POSTFIX_RECURSIVE_CALLING;
+                }
+            } else {
+                TRY_POSTFIX_RECURSIVE_CALLING:
+                // set recursive_calling_is_tried true for preventing endless recursive calling.
+                if (recursive_calling_is_tried == true) {
+                    return false;
+                } else {
+                    recursive_calling_is_tried = true;
+                }
+                int resultValue = WordCutter(word);
+                // Print Postfix Definition
+                if (resultValue) {
+                    PUSH_POSTFIX_DEFINITION:
+                    const auto postfix_defs = AffixDefs[nAffix];
+                    cout << "pushWordAndDefs affixPtr->getText() = " << affixPtr->getText() << ", postfix_defs = " << postfix_defs << endl;
+                    this->pushWordAndDefs(affixPtr->getText(), postfix_defs, {"blk-", "-ylw"});
+                    return true;
+                } else {
+                    goto TRY_WORD_AFTER_TRIMMED_PLUS_E;
+                }
+            }
         }
     } else if (nAffix > 0) {
         // If affix is neither prefix nor postfix (God knows what's kind of affix that is).
         if (searchResultOfWordAfterTrimmed > 0) {
             // Print Definition of Word After Trimmed.
-            this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
+            this->pushWordAndDefs(word, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
             return true;
         }
     }
