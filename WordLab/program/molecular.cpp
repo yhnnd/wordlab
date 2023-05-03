@@ -25,7 +25,7 @@ unsigned long molecular::getWordIndexInMolecularAtomicsDb(const int expectedNumI
                 const auto & vowels = line.substr(0, delimPos);
                 if (vowels == pattern.vowels) {
 //                    cout << "line = " << line << endl;
-                    const string consonantsPattern = tostring(";") + pattern.consonants + "(";
+                    const string consonantsPattern = toString(";") + pattern.consonants + "(";
                     size_t cPos = 0;
                     for (int currentNumInDups = 0; ; ) {
                         cPos = line.find(consonantsPattern, cPos);
@@ -239,12 +239,12 @@ molecular & molecular::setWord(const char *word, const molecular::pattern * defa
     Pattern.vNum = strlen(wordVowels);
     Pattern.cNum = strlen(wordConsonants);
     // set DbName
-    auto dbName = tostring(Pattern.wordLth)
-                  + "-v" + tostring(Pattern.vLth)
-                  + "-c" + tostring(Pattern.cLth);
+    auto dbName = toString(Pattern.wordLth)
+                  + "-v" + toString(Pattern.vLth)
+                  + "-c" + toString(Pattern.cLth);
     strcpy(Pattern.dbName, dbName.c_str());
     // Set Atomics
-    auto atomics = tostring(Pattern.vowels) + "," + Pattern.consonants;
+    auto atomics = toString(Pattern.vowels) + "," + Pattern.consonants;
     strcpy(Pattern.atomics, atomics.c_str());
     // Set vMapStr
     Pattern.vMapStr = "";
@@ -252,7 +252,7 @@ molecular & molecular::setWord(const char *word, const molecular::pattern * defa
         const auto & entry = Pattern.vMap[i];
         const auto & IndexInWordText = entry[0];
         const auto & IndexInWordVowels = entry[1];
-        const auto unit = tostring(IndexInWordText) + "," + tostring(IndexInWordVowels);
+        const auto unit = toString(IndexInWordText) + "," + toString(IndexInWordVowels);
         Pattern.vMapStr += unit + ";";
     }
     // Set cMapStr
@@ -261,7 +261,7 @@ molecular & molecular::setWord(const char *word, const molecular::pattern * defa
         const auto & entry = Pattern.cMap[i];
         const auto & IndexInWordText = entry[0];
         const auto & IndexInWordConsonants = entry[1];
-        const auto unit = tostring(IndexInWordText) + "," + tostring(IndexInWordConsonants);
+        const auto unit = toString(IndexInWordText) + "," + toString(IndexInWordConsonants);
         Pattern.cMapStr += unit + ";";
     }
 //    this->printInfo();
@@ -314,7 +314,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
         return self;
     }
 
-    const auto buffer_filename = tostring(buffer_dir) + "buf_molecular_db_gen.tmp";
+    const auto buffer_filename = toString(buffer_dir) + "buf_molecular_db_gen.tmp";
 
     if (phase_0_enabled == true) {
         cout << "phase 0 begin" << endl;
@@ -331,7 +331,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
             ifstream fin;
             Library(fin, lth, language);
             if (!fin) {
-                errorlog("molecular::generateMolecularDatabase()","database not found. lth = ",tostring(lth));
+                errorlog("molecular::generateMolecularDatabase()","database not found. lth = ",toString(lth));
                 return self;
             }
             set<string> dbNames;

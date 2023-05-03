@@ -56,11 +56,11 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 					if(r<row_max-1) {
 						++r;
 						errorlog("#time=reset();","","");
-						errorlog("table","info 1-AutoDown","row "+tostring(r)+" col "+tostring(c));
+						errorlog("table","info 1-AutoDown","row "+toString(r)+" col "+toString(c));
 					} else if(r>0) {
 						--r;
 						errorlog("#time=reset();","","");
-						errorlog("table","info 1-AutoUp","row "+tostring(r)+" col "+tostring(c));
+						errorlog("table","info 1-AutoUp","row "+toString(r)+" col "+toString(c));
 					}
 					r_prev = r;
 					c_prev = c;
@@ -109,7 +109,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 					} else if(r>0) {
 						--r;
 						errorlog("#time=reset();","","");
-						errorlog("table","info 2-Up","row "+tostring(r)+" col "+tostring(c));
+						errorlog("table","info 2-Up","row "+toString(r)+" col "+toString(c));
 					}
 				} else if(key==DOWN) {
 					if(c>=this->getrow(r+1).getnumofcol()) {
@@ -125,7 +125,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 					} else if(r<row_max-1) {
 						++r;
 						errorlog("#time=reset();","","");
-						errorlog("table","info 2-Down","row "+tostring(r)+" col "+tostring(c));
+						errorlog("table","info 2-Down","row "+toString(r)+" col "+toString(c));
 					}
 				} else if(key==RIGHT) {
 					if(this->iserror(r,c+1)) {
@@ -134,7 +134,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 					} else if(c<this->getrow(r).getnumofcol()-1) {
 						++c;
 						errorlog("#time=reset();","","");
-						errorlog("table","info 2-Right","row "+tostring(r)+" col "+tostring(c));
+						errorlog("table","info 2-Right","row "+toString(r)+" col "+toString(c));
 					}
 				} else if(key==LEFT) {
 					if(this->iserror(r,c-1)) {
@@ -143,11 +143,14 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 					} else if(c>0) {
 						--c;
 						errorlog("#time=reset();","","");
-						errorlog("table","info 2-Left","row "+tostring(r)+" col "+tostring(c));
+						errorlog("table","info 2-Left","row "+toString(r)+" col "+toString(c));
 					}
 				}
-			} else if(key==13) break;
-			else if(key==8||key==27) return;
+			} else if (key == 13 || key == 10) {
+                break;
+            } else if (key == 8 || key == 27 || key == 127) {
+                return;
+            }
 		}
 		// Select table Item completed
 		gotoxy(WindowX, WindowY);

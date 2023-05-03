@@ -155,7 +155,13 @@ inline WORD colornow() {
 #endif
 }
 int ScreenX = 100, ScreenY = 30;
-bool _Show=1,_Ask=1,_AskOnce=0,_AutoOnce=0,_ReverseColor=0;
+
+bool _Show = true;
+bool _Ask = true;
+bool _AskOnce = false;
+bool _AutoOnce = false;
+bool _ReverseColor = false;
+
 int bsv_cmd_msg_lth_max = 64;
 PKC MsgWinNewDefaultsRoute=_data_dir"settings/msgwin/MsgBlkDefaults.dat";
 PKC TableTitleRoute=_data_dir"settings/msgwin/table/titles.dat";
@@ -196,7 +202,7 @@ int strsum(const char *s);
 void strswap(char *str1,char *str2,int lth);
 void strsort(char *ptr,int n,int lth);
 template <typename arr2> int maxlth(arr2 msgs);
-template <typename T> std::string tostring(const T & object);
+template <typename T> std::string toString(const T & object);
 template <typename T> int toInt(const T& object);
 bool strHasSubseq(std::string line,std::string pattern);
 bool match(std::string line,std::string pattern);

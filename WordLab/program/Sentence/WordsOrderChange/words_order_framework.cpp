@@ -15,7 +15,7 @@ void sts::WordsOrderFramework() {
 		WordsOrderSettings(ListPos,CheckerInfo);
 	}
 	for(int n = 0; n < CheckerMax; n++ ) {
-		status(tostring(ListPos[n])," ",CheckerInfo[ListPos[n]+1]);
+		status(toString(ListPos[n])," ",CheckerInfo[ListPos[n]+1]);
 		if(show_debug_message) {
 			cout<<endl<<CheckerInfo[ListPos[n]+1]<<" => ";
 		}

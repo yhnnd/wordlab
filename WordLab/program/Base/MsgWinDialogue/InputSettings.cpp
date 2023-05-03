@@ -21,12 +21,12 @@ void dialog::settings(int x,int y) {
 			--buttonSelected;
 		} else if ( key == 's') {
 			++buttonSelected;
-		} else if ( key == KEY_ESC || key == KEY_DELETE ) {
+		} else if ( key == KEY_ESC || key == KEY_DELETE || key == MAC_OS_KEY_DELETE ) {
 		EXIT:
 			this->output("start");
 			this->output("");
 			break;
-		} else if (key == WL_KEY_ENTER ) {
+		} else if (key == KEY_CARRIAGE_RETURN || key == KEY_NEW_LINE) {
 			if ( buttonSelected == 0 ) {
 				for(auto e=memoryout.begin();e!=memoryout.end();++e) *e = "";
 			} else if ( buttonSelected == 1 ) {

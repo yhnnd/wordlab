@@ -7,7 +7,7 @@ string AddWordGetTranslation(string word) {
 	for(int i=0;;){// i is item NUMBER_OF_ORDER
 		item_sort = AddWordGetSort();// select word sort item
 	    if(item_sort.length()){
-			AddWordPrintMessage(4,tostring(++i));// enter translation item
+			AddWordPrintMessage(4,toString(++i));// enter translation item
 			cin>>item_trans;
 			if (item_trans.length()>=2) {
 				AddWordPrintMessage(5,item_sort+" "+item_trans);//confirm definition item

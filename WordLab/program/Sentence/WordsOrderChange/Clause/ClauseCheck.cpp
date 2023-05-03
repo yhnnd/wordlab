@@ -9,7 +9,8 @@ void sts::ClauseCheck() {
                     break;
                 }
             }
-            if (AskChar("Clause:将",s[r+1].txt,"到",s[r1].txt,"置到",s[r-d].txt,"前?")==13) {
+            const char c = AskChar("Clause:将",s[r+1].txt,"到",s[r1].txt,"置到",s[r-d].txt,"前?");
+            if (c == 13 || c == 10) {
                 Words_Insert("Left",r-d,r+1,r1);
             }
         }

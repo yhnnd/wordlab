@@ -141,7 +141,7 @@ void scriptprocessor::langForExecute(std::vector<ForBlock> & forblocks) {
 				} else {
 					// reset iterator_begin_value inside for_active_block
 					for( int i = n + 1; i < for_nested_level; ++i ) {
-						dataset.set(it_begin_name[i],tostring(it_begin_value[i]));
+						dataset.set(it_begin_name[i],toString(it_begin_value[i]));
 					}
 					// reset for_active_block = interior_for_block
 					for_active_level = for_nested_level - 1;
@@ -150,9 +150,9 @@ void scriptprocessor::langForExecute(std::vector<ForBlock> & forblocks) {
 					std::cout<<"<lang><for><execute> exec["<<n<<"].last = '"<<forblocks[n].expr[2]<<"'"<<std::endl;
 				}
 				if(forblocks[n].expr[2].find("++")!=std::string::npos) {
-					dataset.set(it_begin_name[n],tostring(++it_begin));
+					dataset.set(it_begin_name[n],toString(++it_begin));
 				} else if(forblocks[n].expr[2].find("--")!=std::string::npos) {
-					dataset.set(it_begin_name[n],tostring(--it_begin));
+					dataset.set(it_begin_name[n],toString(--it_begin));
 				}
 				if( n == 0 ) {
 					if( for_expr2_is_false(it_begin,op,it_end) ) {

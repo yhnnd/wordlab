@@ -1,7 +1,7 @@
 int exec(){
 	int n=0,i=0,error=0;
 	if(attr_n>0){
-		for(n=0;n<attr_n;n++) attr[n].tostring(n);
+		for(n=0;n<attr_n;n++) attr[n].toString(n);
 		getch();
 	}
 	for(n=0;cmds[n]!=-1;n++){

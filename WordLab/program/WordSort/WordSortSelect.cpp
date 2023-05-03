@@ -1,4 +1,4 @@
-void WordSortSelect(word s) {
+void WordSortSelect(sts::word s) {
 	recordxy(pos);
 	const int width = 8;
 	char msg[][width] = {

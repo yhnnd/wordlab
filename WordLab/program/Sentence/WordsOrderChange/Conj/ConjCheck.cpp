@@ -9,8 +9,13 @@ void sts::ConjCheck() {
 		    strcmp(s[r].txt,"exclude")==0||
 		    strcmp(s[r].txt,"though")==0||
 		    strcmp(s[r].txt,"although")==0) {
-			for(r1=r; r1<=rwin; r1++) if(strcmp(s[r1+1].txt,"/")==0) break;
-			if(AskChar("Conj:将",s[r].txt,"到",s[r1].txt,"前置?")==13) {
+			for (r1=r; r1<=rwin; r1++) {
+                if(strcmp(s[r1+1].txt,"/")==0) {
+                    break;
+                }
+            }
+            const char ch = AskChar("Conj:将",s[r].txt,"到",s[r1].txt,"前置?");
+			if (ch == 13 || ch == 10) {
 				Words_Insert("Left",0,r,r1);
 				break;
 			}

@@ -1,5 +1,5 @@
 void WLscancore(int lth,int NOL,FILE *fp1){
-	int bits = tostring(NOL).length(), vol = 25;
+	int bits = toString(NOL).length(), vol = 25;
 	char word[NOL][lth+1];
 	for(int i = 0; i < NOL; i++){
 		fgets(word[i],lth+2,fp1);

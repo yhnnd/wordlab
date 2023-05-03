@@ -26,9 +26,9 @@ int launch(string msg) {
 		t.setrowborder(83).setrow("a list of functions that LAUNCH supports").setrowborder();
 		t.setrow(4).setcol(3,"No.").setcol(35,"function").setcol(3,"No.").setcol(35,"function").setrowborder();
 		for(int i=0,HalfSize=(FunctionName.size()+1)/2; i<HalfSize; ++i) {
-			t.setrow(4).setcol(tostring(i)).setcol(FunctionName[i]);
+			t.setrow(4).setcol(toString(i)).setcol(FunctionName[i]);
 			if(i+HalfSize<FunctionName.size())
-				t.setcol(tostring(i+HalfSize)).setcol(FunctionName[i+HalfSize]);
+				t.setcol(toString(i+HalfSize)).setcol(FunctionName[i+HalfSize]);
 			else t.setcol("").setcol("");
 		}
 		t.setrowborder().setcolborder('|').editor();

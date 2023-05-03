@@ -6,8 +6,12 @@ bool file_filter_comma(std::string tempfilename){
 		while(getline(fin,temp_line)){
 			for(auto itr = temp_line.begin(); itr != temp_line.end(); ++itr){
 				if(*itr==';'){
-					if(itr+1!=temp_line.end()) *itr = ' ';
-				}else if(*itr==',') *itr = ' ';
+					if(itr+1!=temp_line.end()) {
+                        *itr = ' ';
+                    }
+				} else if(*itr==',') {
+                    *itr = ' ';
+                }
 			}
 			fout<<temp_line<<std::endl;
 		}

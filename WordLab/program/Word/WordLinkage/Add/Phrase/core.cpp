@@ -14,9 +14,10 @@ int AddPhraseCore(const string msg) {
 		}
 	}
 	Dialog.output("add "+s+" to library?");
-	if(getch()==13) {
+    const char ch = getch();
+	if (ch == 13 || ch == 10) {
 		string route=PhraseRouteA;
-		route+=tostring(n);
+		route+=toString(n);
 		route+=PhraseRouteB;
 		ofstream fout(route,ios::app);
 		if(fout.is_open()) {

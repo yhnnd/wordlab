@@ -100,7 +100,7 @@ int sts::finderr(int r0,int *r1,const char * sort,const char * tool,const char *
 		status(tool," finding ",alias," error!");
 		*r1 = r0;
 	} else {
-		status(tool," has found ",alias,"(",tostring(*r1),s[*r1].txt,")");
+		status(tool," has found ",alias,"(",toString(*r1),s[*r1].txt,")");
 	}
     return 0;
 }

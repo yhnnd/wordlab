@@ -52,6 +52,6 @@ int sortlib(int bgn,int end,const string admin,const string pwd) {
 		free(s_en);
 		free(s_ch);
 	}
-	string message="from <ylw->(lth="+tostring(bgn)+") to <ylw->(lth="+tostring(end)+")";
+	string message="from <ylw->(lth="+toString(bgn)+") to <ylw->(lth="+toString(end)+")";
 	return sortLibError(0,message);
 }

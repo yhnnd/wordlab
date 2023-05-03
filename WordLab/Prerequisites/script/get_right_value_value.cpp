@@ -8,7 +8,7 @@ float scriptprocessor :: get_right_value_value(const std::string & rval) {
 			var_value_str = var_names[i];
 		} else {
 			var_value = maths::calc(dataset.getvalue(var_names[i]).c_str());
-			var_value_str = tostring(var_value);
+			var_value_str = toString(var_value);
 		}
 		auto var_name_pos = rval_parsed.find(var_names[i]);
 		auto var_name_length = var_names[i].length();

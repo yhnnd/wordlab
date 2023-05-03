@@ -46,7 +46,7 @@ int scriptprocessor::var(const char *line) {
 			int i=0;
 			for(i=0; value[i]!=0; i++) if(!(isdigit(value[i])||value[i]=='-')) break;
 			if(value[i]==0) break;// value is a digit
-			else value = tostring(maths::calc(value));// value is an expression
+			else value = toString(maths::calc(value));// value is an expression
 		}
 		dataset.set(name,value);
 		return 0;

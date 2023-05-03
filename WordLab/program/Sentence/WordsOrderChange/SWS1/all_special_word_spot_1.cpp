@@ -83,10 +83,14 @@ void sts::SWS1_6() {
             seekverb(r2,&r3,rwin);
             finderr(r2,&r3,"verb","SWS1-6","verb2");
             seeknoun(r3,&r4,rwin);
-            if(AskChar("SWS1-6A insert(",tostring(r1),s[r1].txt,")to(",tostring(r2),s[r2].txt,")?")==13)
-                Word_Insert("Right",r1,r2);
-            if(AskChar("SWS1-6B insert(",tostring(r0),s[r0].txt,")to(",tostring(r4),s[r4].txt,")?")==13)
-                Word_Insert("Right",r0,r4);
+            const char ch1 = AskChar("SWS1-6A insert(",toString(r1),s[r1].txt,")to(",toString(r2),s[r2].txt,")?");
+            if (ch1 == 13 || ch1 == 10) {
+                Word_Insert("Right", r1, r2);
+            }
+            const char ch2 = AskChar("SWS1-6B insert(",toString(r0),s[r0].txt,")to(",toString(r4),s[r4].txt,")?");
+            if (ch2 == 13 || ch2 == 10) {
+                Word_Insert("Right", r0, r4);
+            }
             break;
         }
 }
@@ -100,10 +104,14 @@ void sts::SWS1_7() {
            &&WordSort(s[r0+1].txt)==8&&SortEX(s[r0+1].txt,"WH")!=0) {
             seeknounEX(r0,&r1,rwin);
             finderr(r0,&r1,"noun","SWS1-7","noun1");
-            if(AskChar("SWS1-7A right insert",tostring(r0),s[r0].txt,"to",tostring(r1),s[r1].txt,"?")==13)
+            const char ch1 = AskChar("SWS1-7A right insert",toString(r0),s[r0].txt,"to",toString(r1),s[r1].txt,"?");
+            if (ch1 == 13 || ch1 == 10) {
                 Word_Insert("Right",r0,r1);
-            if(AskChar("SWS1-7B left insert",tostring(r0),s[r0].txt,"-",tostring(r1),s[r1].txt,"?")==13)
+            }
+            const char ch2 = AskChar("SWS1-7B left insert",toString(r0),s[r0].txt,"-",toString(r1),s[r1].txt,"?");
+            if (ch2 == 13 || ch2 == 10) {
                 Words_Insert("Left",0,r0,r1);
+            }
             break;
         }
     }
@@ -120,10 +128,14 @@ void sts::SWS1_8() {
             finderr(r1,&r2,"verb","SWS1-8","verb1");
             seeknounEX(r2,&r3,rwin);
             finderr(r2,&r3,"noun","SWS1-8","noun2");
-            if(AskChar("SWS1-8-v.insert",s[r2].txt,"to",s[r3].txt,"?")==13)
+            const char ch1 = AskChar("SWS1-8-v.insert",s[r2].txt,"to",s[r3].txt,"?");
+            if (ch1 == 13 || ch1 == 10) {
                 Word_Insert("Right",r2,r3);
-            if(AskChar("SWS1-8-n.insert",s[r0].txt,"-",s[r1].txt,"to",s[r3].txt,"?")==13)
+            }
+            const char ch2 = AskChar("SWS1-8-n.insert",s[r0].txt,"-",s[r1].txt,"to",s[r3].txt,"?");
+            if (ch2 == 13 || ch2 == 10) {
                 Words_Insert("Right",r3,r0,r1);
+            }
         }
     }
 }

@@ -31,6 +31,7 @@
     <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/msgwin/MessageWindowTable/table/Panel/M/MainMenuChinese.txt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/msgwin/MessageWindowTable/table/Panel/SearchName.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/msgwin/MessageWindowTable/table/Panel/SearchNumber.cpp" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/WordLab/Prerequisites/script/var/varInitArray.cpp" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsInsert/ClauseMove.cpp" charset="GB18030" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsInsert/WordInsert/InsertEX.cpp" charset="GB18030" />
     <file url="file://$PROJECT_DIR$/WordLab/program/Sentence/WordsInsert/all_bsv.h" charset="UTF-8" />

@@ -41,7 +41,7 @@ void scriptprocessor :: executeline(const char *line) {
 			lval = get_left_value_name(lval);
 			auto rval_str = trim(code_line.substr(first_pos_of_equal+1));
 			float rval = get_right_value_value(rval_str);
-			dataset.set(lval,tostring(rval));
+			dataset.set(lval,toString(rval));
 		}
 	}
 }

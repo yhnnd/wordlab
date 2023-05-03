@@ -4,21 +4,16 @@ int sts::SmartTranslater() {
 //    printChineseOfWord(s[rwout].txt, 0);
 //    printf("\"\n");
 
-    colorrecord(colorPrev);
-
     if (isalpha(s[rwout].txt[0]) == false) {
-        colorset(lightwhite);
-        cout << s[rwout].txt;
-        colorreset(colorPrev);
+        // Cannot translate non-word.
+        this->pushWordAndDefs(s[rwout], s[rwout].txt, {"wte-", "-blk"});
         return 0;
     }
 
     char def[64];
     int result = getChineseOfWord(s[rwout].txt, def, sizeof(def));
     if (result > 0) {
-        colorset(lightgreen);
-        printf("%s", def);
-        colorreset(colorPrev);
+        this->pushWordAndDefs(s[rwout], def, {"grn-", "-blk"});
         return 0;
     }
 
@@ -28,15 +23,11 @@ int sts::SmartTranslater() {
 
     result = getChineseOfWord_S(s[rwout].txt, def, sizeof(def), 1);
     if ( result > 0 ) {
-        colorset(lightyellow);
-        printf("%s", def);
-        colorreset(colorPrev);
+        this->pushWordAndDefs(s[rwout], def, {"ylw-", "-blk"});
         return 0;
     }
 
-    colorset(lightred);
-    cout << s[rwout].txt;
-    colorreset(colorPrev);
+    this->pushWordAndDefs(s[rwout], s[rwout].txt, {"red-", "-blk"});
     return 0;
 }
 
@@ -50,7 +41,9 @@ void sts::WordsOutCore() {
             return;
         }
     }
+
     SmartTranslater();
+
     for (r=0; r<maxprep; r++) {
         if (rwout==preppos1[r]) {
             cout<<preptrans1[r];
@@ -151,8 +144,7 @@ void sts::WordsOut() {
 
 
         if (improve != "") {
-            colorset(lightyellow);
-            cout << improve;
+            this->pushWordAndDefs(s[rwout].txt, improve, {"ylw-", "-blk"});
             continue;
         }
 
@@ -160,12 +152,42 @@ void sts::WordsOut() {
         WordsOutCore();
     }
 
+    // Copy Modified Sentence to sModified.
+    this->copySentence(this->sModified, this->s, this->rwout);
+    // Restore Sentence from sOriginal.
+    this->copySentence(this->s, this->sOriginal, this->rwin);
+
     if(punct=='?') {
-        InquiryEndShow();
+        this->inquiryEndFromPunct = getInquiryEndByPunct(this->punct);
+        const string inquiryEndDefs = this->getInquiryEndDefs(this->inquiryEndFromPunct);
+        this->pushDefs(inquiryEndDefs, {"ylw-", "-blk"});
+        if (show_debug_message) {
+            cout << endl << "punct = \'" << punct << "\' inquiryEndFromPunct = " << this->inquiryEndFromPunct << endl;
+        }
     }
 
     if(ispunct(punct)) {
-        cout<<punct;
+        this->pushPunctAndDefs(punct, toString(punct), {"grn-", "-blk"});
     }
 }
 
+
+
+
+void sts::PrintWordTranslation(const wordGroup currentWordGroup) {
+    const string foregroundColor = currentWordGroup.defsColor.foregroundColor;
+    const string backgroundColor = currentWordGroup.defsColor.backgroundColor;
+    setForegroundColorAndBackgroundColor(foregroundColor, backgroundColor);
+    printf("%s", currentWordGroup.defZh.c_str());
+    return;
+}
+
+
+
+
+// Wednesday May 03 Year 2023
+void sts::PrintSentenceTranslation() {
+    for (int i = 0; i  <  this->wordGroups.size(); ++i) {
+        PrintWordTranslation(this->wordGroups[i]);
+    }
+}

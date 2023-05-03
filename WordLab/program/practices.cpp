@@ -138,7 +138,7 @@ void practices() {
                 popup(string("<-#ylw>(word ")+word[key-1],0);
                 popup("<-wte>(possible translations",0);
                 for(int i=0;i<4;++i){
-                    popup(string("<-gry>(")+tostring(char('A'+i))+" "+trans[i],0);
+                    popup(string("<-gry>(")+toString(char('A'+i))+" "+trans[i],0);
                 }
                 popup("<-wte>(you have 30 seconds before you decide",0);
                 // answer question
@@ -189,9 +189,9 @@ void practices() {
                             colorStr = "<-gry>(";
                         }
                     }
-                    popup(colorStr + tostring(char('A'+i)) + " " + word[i] + " " + trans[i], 0);
+                    popup(colorStr + toString(char('A'+i)) + " " + word[i] + " " + trans[i], 0);
                 }
-                popup("<-wte>(you finished this question in " + tostring(time/1000) + " seconds", 0);
+                popup("<-wte>(you finished this question in " + toString(time/1000) + " seconds", 0);
 //                getch();
 	        }
             // result board
@@ -201,16 +201,16 @@ void practices() {
             n_corr = 0;
             for (int i = 1; i <= n; ++i) {
                 bool corr = key_answer[i-1].first==key_answer[i-1].second;
-                popup(string(corr?"<#grn-wte>(":"<#red-wte>(")+"["+tostring(i)+"] "+wordkey[i-1].first
-                    +" key \\("+tostring(key_answer[i-1].first)+" "+wordkey[i-1].first+" "+wordkey[i-1].second
+                popup(string(corr?"<#grn-wte>(":"<#red-wte>(")+"["+toString(i)+"] "+wordkey[i-1].first
+                    +" key \\("+toString(key_answer[i-1].first)+" "+wordkey[i-1].first+" "+wordkey[i-1].second
                     +"\\)"+(corr?"":
-                    " your answer \\("+tostring(key_answer[i-1].second)+" "+wordanswer[i-1].first+" "+wordanswer[i-1].second+"\\)")
+                    " your answer \\("+toString(key_answer[i-1].second)+" "+wordanswer[i-1].first+" "+wordanswer[i-1].second+"\\)")
                     ,0);
                 if (corr) {
                     ++n_corr;
                 }
             }
-            popup(string("<-wte>(total ")+tostring(n)+" correct "+tostring(n_corr),0);
+            popup(string("<-wte>(total ")+toString(n)+" correct "+toString(n_corr),0);
             // save history
             if (n > 0) {
                 ofstream fout(HistoryRoute,ios::app);

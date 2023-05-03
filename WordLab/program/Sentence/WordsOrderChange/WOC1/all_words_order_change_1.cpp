@@ -22,8 +22,9 @@ void sts::WordsOrderChange1(void) {
                     break;
                 }
             }
-            if(AskChar("WOC1-1<v.prep.>将(",s[r].txt,")后置到(",s[r0].txt,")后?")==13) {
-                Word_Insert("Right",r,r0);
+            const char ch = AskChar("WOC1-1<v.prep.>将(",s[r].txt,")后置到(",s[r0].txt,")后?");
+            if (ch == 13 || ch == 10) {
+                Word_Insert("Right", r, r0);
             }
         }
     }
@@ -55,10 +56,12 @@ void sts::WordsOrderChange1(void) {
             finderr(r2,&r3,"verb","WOC1-10","verb2");//謂語
             seeknoun(r3,&r4,rwin);
             finderr(r3,&r4,"noun","WOC1-10","noun2");//賓語
-            if(AskChar("WOC1-10A insert(",s[r].txt,")to(",s[r0].txt,")?")==13) {
+            const char ch1 = AskChar("WOC1-10A insert(",s[r].txt,")to(",s[r0].txt,")?");
+            if (ch1 == 13 || ch1 == 10) {
                 Word_Insert("Right",r,r0);
             }
-            if(AskChar("WOC1-10B insert(",s[r].txt,"-",s[r0].txt,")to(",s[r2].txt,")?")==13) {
+            const char ch2 = AskChar("WOC1-10B insert(",s[r].txt,"-",s[r0].txt,")to(",s[r2].txt,")?");
+            if (ch2 == 13 || ch2 == 10) {
                 Words_Insert("Right",r2,r,r0);
             }
             break;
@@ -99,7 +102,8 @@ void sts::WordsOrderChange1(void) {
             finderr(r3,&r4,"verb","WOC1-7","verb2");//�^�Z
             seeknoun(r4,&r5,rwin);
             finderr(r4,&r5,"noun","WOC1-7","noun3");//�e�Z
-            if(AskChar("WOC1-7 insert(",s[r].txt,"-",s[r1].txt,")to(",s[r5].txt,")?")==13) {
+            const char ch = AskChar("WOC1-7 insert(",s[r].txt,"-",s[r1].txt,")to(",s[r5].txt,")?");
+            if (ch == 13 || ch == 10) {
                 Words_Insert("Right",r5,r,r1);
             }
             break;
@@ -132,7 +136,8 @@ void sts::WordsOrderChange1(void) {
                             ) {
                         break;
                     }
-                    if(AskChar("WOC1-2<aux.+n.>後置(",tostring(r),s[r].txt,")到(",tostring(r0),s[r0].txt,")?")==13) {
+                    const char ch = AskChar("WOC1-2<aux.+n.>後置(",toString(r),s[r].txt,")到(",toString(r0),s[r0].txt,")?");
+                    if (ch == 13 || ch == 10) {
                         Word_Insert("Right",r,r0);
                     }
                 }
@@ -147,11 +152,10 @@ void sts::WordsOrderChange1(void) {
     //3:aux.+adv.
     //can not
     for(r=0; r<rwin; r++) {
-        if (
-                (WordSort(s[r].txt)==9||SortEX(s[r].txt,"verb")==0) &&
-                (strcmp(s[r+1].txt,"not")==0||strcmp(s[r+1].txt,"never")==0)
-                ) {
-            if(AskChar("WOC1-3<aux.not>调换(",s[r].txt,")与(",s[r+1].txt,")?")==13) {
+        if ((WordSort(s[r].txt)==9||SortEX(s[r].txt,"verb")==0)
+        && (strcmp(s[r+1].txt,"not")==0||strcmp(s[r+1].txt,"never")==0)) {
+            const char ch = AskChar("WOC1-3<aux.not>调换(",s[r].txt,")与(",s[r+1].txt,")?");
+            if (ch == 13 || ch == 10) {
                 WordSwitch(r,r+1);
             }
         }
@@ -168,7 +172,8 @@ void sts::WordsOrderChange1(void) {
            &&WordSort(s[r+1].txt)==3
            &&WordSort(s[r+2].txt)!=1
            &&WordSort(s[r+2].txt)!=8) {
-            if(AskChar("WOC1-4<n.adj.>调换(",s[r].txt,")与(",s[r+1].txt,")?")==13) {
+            const char ch = AskChar("WOC1-4<n.adj.>调换(",s[r].txt,")与(",s[r+1].txt,")?");
+            if (ch == 13 || ch == 10) {
                 WordSwitch(r,r+1);
             }
         }
@@ -182,7 +187,8 @@ void sts::WordsOrderChange1(void) {
     for(r=0; r<rwin; r++) {
         if(SortEX(s[r-1].txt,"VERB")==0 && WordSort(s[r].txt)==4 && strcmp(s[r].txt,"how") != 0
            &&SortEX(s[r+1].txt,"VERB")!=0&&WordSort(s[r+1].txt)!=3) {
-            if(AskChar("WOC1-5<v.adv.>调换(",s[r-1].txt,")与(",s[r].txt,")?")==13) {
+            const char ch = AskChar("WOC1-5<v.adv.>调换(",s[r-1].txt,")与(",s[r].txt,")?");
+            if (ch == 13 || ch == 10) {
                 WordSwitch(r-1,r);
             }
         }
@@ -196,7 +202,8 @@ void sts::WordsOrderChange1(void) {
     for(r=0; r<rwin; r++) {
         if(strcmp(s[r].txt,"the")==0 && strcmp(s[r+1].txt,"more")==0
            &&(WordSort(s[r+2].txt)==1||WordSort(s[r+2].txt)==8)) {
-            if(AskChar("WOC1-6<more>前置(",s[r+2].txt,")?")==13) {
+            const char ch = AskChar("WOC1-6<more>前置(",s[r+2].txt,")?");
+            if (ch == 13 || ch == 10) {
                 Word_Insert("Left",r,r+2);
             }
         }
@@ -213,8 +220,10 @@ void sts::WordsOrderChange1(void) {
         if(strcmp(s[r].txt,"when")==0&&SortEX(s[r+1].txt,"aux.")==0) {
             seeknoun(r+1,&r1,rwin);
             finderr(r+1,&r1,"noun","WOC1-8","noun1");
-            if(AskChar("WOC1-8 后置(",s[r].txt,"-",s[r+1].txt,")到(",s[r1].txt,")后?")==13)
+            const char ch = AskChar("WOC1-8 后置(",s[r].txt,"-",s[r+1].txt,")到(",s[r1].txt,")后?");
+            if (ch == 13 || ch == 10) {
                 Words_Insert("Right",r1,r,r+1);
+            }
             break;
         }
     }
@@ -224,14 +233,14 @@ void sts::WordsOrderChange1(void) {
 //#include "adj+adv.cpp"
     //9:adj.+adv.
     //更新时间 2015/10/29//adj.+adv.
-    for(r=0; r<rwin; r++) {
-        if (
-                WordSort(s[r-1].txt)==3
-                &&WordSort(s[r].txt)==4&&strcmp(s[r].txt,"how")!=0
-                &&WordSort(s[r+1].txt)!=3
-                ) {
-            if(AskChar("WOC1-9<adj.adv.>调换(",s[r-1].txt,")与(",s[r].txt,")?")==13) {
-                WordSwitch(r-1,r);
+    for (r = 0; r < rwin; r++) {
+        if (WordSort(s[r-1].txt) == 3
+            && WordSort(s[r].txt) == 4
+            && strcmp(s[r].txt,"how") != 0
+            && WordSort(s[r+1].txt) != 3) {
+            const char ch = AskChar("WOC1-9<adj.adv.>调换(",s[r-1].txt,")与(",s[r].txt,")?");
+            if (ch == 13 || ch == 10) {
+                WordSwitch(r - 1, r);
             }
         }
     }

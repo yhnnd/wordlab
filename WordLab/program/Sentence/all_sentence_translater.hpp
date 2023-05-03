@@ -1,9 +1,99 @@
 class sts {
-	private:
+public:
+    struct word {
+        char txt[32];
+        char sort[16];
+        int type;
+    };
+private:
+    struct consoleColor {
+        string foregroundColor;
+        string backgroundColor;
+    };
+
+    enum _affixSymbols {
+        _prefix_RE = 1,
+        _prefix_UN = 2,
+        _prefix_DIS = 3,
+        _prefix_ANTI = 4,
+        _postfix_S = 5,
+        _postfix_apostrophe_S = 6,
+        _postfix_ING = 7,
+        _postfix_ED = 8,
+        _postfix_LY = 9,
+        _postfix_AL = 10,
+        _postfix_ER = 11,
+        _postfix_OR = 12,
+        _postfix_ISM = 13,
+        _postfix_IST = 14,
+    };
+
+    enum _affixTypes {
+        _is_prefix = 1,
+        _is_postfix = 2,
+    };
+
+    class affix {
+    private:
+        enum _affixTypes type;
+        string text = "";
+        string defs = "";
+    public:
+        bool isPrefix() {
+            return this->type == _affixTypes::_is_prefix;
+        }
+        bool isPostfix() {
+            return this->type == _affixTypes::_is_postfix;
+        }
+        string getText() {
+            return this->text;
+        }
+        std::string::size_type length() {
+            return this->text.length();
+        }
+        affix(const enum _affixTypes affixType, const string affixText) {
+            this->type = affixType;
+            this->text = affixText;
+        }
+    };
+
+    const map<enum _affixSymbols, class affix> mapAffixSymbolsToAffix = {
+            {_prefix_RE, affix(_is_prefix, "re") },
+            {_prefix_UN, affix(_is_prefix, "un") },
+            {_prefix_DIS, affix(_is_prefix, "dis") },
+            {_prefix_ANTI, affix(_is_prefix,"anti") },
+            {_postfix_S, affix(_is_postfix, "s") },
+            {_postfix_apostrophe_S, affix(_is_postfix, "'s") },
+            {_postfix_ING, affix(_is_postfix, "ing") },
+            {_postfix_ED, affix(_is_postfix, "ed") },
+            {_postfix_LY, affix(_is_postfix, "ly") },
+            {_postfix_AL, affix(_is_postfix, "al") },
+            {_postfix_ER, affix(_is_postfix, "er") },
+            {_postfix_OR, affix(_is_postfix, "or") },
+            {_postfix_ISM, affix(_is_postfix, "ism") },
+            {_postfix_IST, affix(_is_postfix, "ist") },
+    };
+
+private:
+
 		const static int MAXIMUM = 100, maxprep = 13, preplth = 10, CheckerMax = 6;
-		word s[MAXIMUM];
+
+        struct word s[MAXIMUM], sOriginal[MAXIMUM], sModified[MAXIMUM];
+
+        struct wordGroup {
+            vector<struct word> words;
+            string defZh;
+            struct consoleColor defsColor;
+        };
+
+        vector<struct wordGroup> wordGroups;
+
 		unsigned int rwin, rwout, TheMain;
-        char punct, ma;
+        char punct;
+
+        typedef unsigned short typeInquiryEndType;
+        typeInquiryEndType inquiryEndFromPunct;
+
 		int  preppos0[maxprep];
 		int  preppos1[maxprep];
 		char preptrans0[maxprep][preplth];
@@ -14,16 +104,16 @@ class sts {
 			auto_word_translation = true;
 			rearrange_words_order = true;
 			TheMain = -1;
-			rwin = rwout = punct = ma = 0;
+			rwin = rwout = punct = 0;
 		}
 		void reset_debug() {
 			show_debug_message = true;
 			auto_word_translation = false;
 			rearrange_words_order = true;
 			TheMain = -1;
-			rwin = rwout = punct = ma = 0;
+			rwin = rwout = punct = 0;
 		}
-	public:
+public:
     // Words Insert
     void WordSwitch(int sub1, int sub2);
     void Word_Left_Insert(int a, int b);
@@ -86,19 +176,23 @@ class sts {
     int Translation(int lth, int LineNumber, char * result, const size_t size);
 
     // Words Out
-
+    int pushWordsAndDefs(const vector<struct word> words, const string def, const struct consoleColor);
+    int pushWordAndDefs(const struct word, const string def, const struct consoleColor);
+    int pushWordAndDefs(const string wordText, const string def, const struct consoleColor);
+    int pushPunctAndDefs(const char punct, const string def, const struct consoleColor);
+    int pushDefs(const string def, const struct consoleColor);
     // Get Chinese
     int getChineseOfWord(const char *word, char * def, const size_t size);
     int getChineseOfWord_S(const char *word, char * def, const size_t size, const int limit = 1);
     int printChineseOfWord(const char *word, const int limit = 0);
 
     // Inquiry Term
-    void InquiryEndCheck();
-    void InquiryEndShow();
+    typeInquiryEndType getInquiryEndByPunct(const char punct);
+    string getInquiryEndDefs(const typeInquiryEndType inquiryEnd);
 
     // Word Cutter
     void wordcuttercheck(char *s,int lth,int *n,int *de);
-    void wordcutterremove(char *s,int n);
+    void wordcutterremove(char *s, const int n);
     void fileIn(char msg[][LINEMAX],const char *route);
     bool WordCutter(char *s);
 
@@ -106,6 +200,7 @@ class sts {
     const unsigned short phraseMaxWords = 5;
     string getPhraseLine(const unsigned int phraseLth, const vector<string> phrase);
     bool PhraseCheckerAsk(const unsigned int phraseLth, const vector<string> phrase);
+    void PhraseCheckerUsePhrase(const unsigned int phraseLth, const vector<string> phrase, const string phraseDef);
     bool PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth, const vector<string> phrase, const string phraseDef);
     bool PhrasesCheckerCore(const int rwout, const unsigned int phraseLth, const char * phraseRoute);
     int PhrasesChecker(const int rwout);
@@ -113,11 +208,16 @@ class sts {
     // Words Out
     int SmartTranslater();
     void WordsOutCore();
+    // Do Not print translation
     void WordsOut();
+    // Print translation
+    void PrintWordTranslation(const wordGroup);
+    void PrintSentenceTranslation(void);
 
     // Framework
     void banner();
-    void save(bool out = true);
+    void copySentence(word *, const word *, const int);
+    void printSentence(const word *, const int, const consoleColor);
     void FrameworkCore(int x, int y);
     char Input(int x, int y);
     void Framework();
@@ -129,26 +229,3 @@ class sts {
 
 };
 
-// Words Insert
-#include "WordsInsert/all_word_insert.cpp"
-// Words Order Change
-#include "WordsOrderChange/find/all_find.cpp"
-#include "WordsOrderChange/Clause/ClauseCheck.cpp"
-#include "WordsOrderChange/Conj/ConjCheck.cpp"
-#include "WordsOrderChange/WOC1/all_words_order_change_1.cpp"
-#include "WordsOrderChange/SWS1/all_special_word_spot_1.cpp"
-#include "WordsOrderChange/SWS2/all_special_word_spot_2.cpp"
-#include "WordsOrderChange/SWS3/all_special_word_spot_3.cpp"
-#include "WordsOrderChange/Framework/all_words_order_framework.cpp"
-#include "WordsOrderChange/words_order_framework.cpp"
-#include "WordsOrderChange/all_words_order_change.cpp"
-// Translation Chinese
-#include "Chinese/all_sentence_chinese.cpp"
-// Words Out
-#include "WordsOut/GetChinese/all_get_chinese.cpp"
-#include "WordsOut/Term/all_inquiry_term.cpp"
-#include "WordsOut/WordCutter/all_word_cutter.cpp"
-#include "WordsOut/Phrase/all_phrase.cpp"
-#include "WordsOut/all_words_out.cpp"
-// Framework
-#include "Framework/all_sentence_framework.cpp"

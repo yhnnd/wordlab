@@ -5,9 +5,9 @@ string LibraryRoute(int lth,lang LANG){
     } else if(LANG == lang::CH) {
         s = chineseroute;
     } else {
-        popup("library route: unknown language ",tostring(LANG),0);
+        popup("library route: unknown language ",toString(LANG),0);
     }
-	s += tostring(lth);
+	s += toString(lth);
 	s += ".csv";
 	return s;
 }

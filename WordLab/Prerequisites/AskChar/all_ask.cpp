@@ -1,12 +1,15 @@
-void AskCharReset(){
+void AskCharReset() {
 	_AskOnce = false;
 	_AutoOnce = false;
 }
-void AskCharClear(std::string cache[]){
-	for(int r=0;r<_CacheMax;r++) cache[r] = "";
+
+void AskCharClear(std::string cache[]) {
+	for (int r = 0; r < _CacheMax; r++) {
+        cache[r] = "";
+    }
 }
 
-void AskCharRenew(std::string s,std::string cache[]) {
+void AskCharRenew(std::string s, std::string cache[]) {
     for (int r = 0; r <= _CacheMax - 2; r++) {
         cache[r] = cache[r + 1];
     }
@@ -40,18 +43,28 @@ void AskCharShow(std::string cache[]) {
     resetxy(pos);
 }
 
+
+
 int AskChar (std::string s) {
-    bool ask = true;
+    bool currentAsk = true;
     static std::string cache[_CacheMax];
-    if (!_AskOnce && (!_Show || !_Ask || _AutoOnce)) {
-        ask = false;
+
+    if (_AskOnce == true) {
+        currentAsk = true;
+    } else if (_Show == false || _Ask == false || _AutoOnce == true) {
+        currentAsk = false;
     }
+
     AskCharRenew(s,cache);
-    if (_Show) {
+
+    if (_Show == true) {
         AskCharShow(cache);
     }
-    AskCharReset();
-    if (ask) {
+
+    _AskOnce = false;
+    _AutoOnce = false;
+
+    if (currentAsk == true) {
         return getch();
     } else {
         return 13;

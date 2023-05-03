@@ -15,8 +15,8 @@ void load::PrintSoftwareInfo(){
 	// Monitor
 	monitorShow(24,0);
 	// DB security
-	if(db_is_secure(false,false)) bsvline("<back green> (SECURE)");
-	else bsvline("<back red> (INSECURE)");
+	if(db_is_secure(false,false)) bsvline("<-grn> (SECURE)");
+	else bsvline("<-red> (INSECURE)");
 	// User Account
 	User.show(0,5,1);
 }

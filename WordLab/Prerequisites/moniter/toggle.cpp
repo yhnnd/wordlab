@@ -8,7 +8,7 @@ void monitorSet(bool *lock){
 	popup("<-wte>(monitor  ",
 		(*lock)?"<grn-wte>(ON )":"<red-wte>(OFF)",
 		"  ",
-		"<grn-wte> (enabled) ",tostring(MonitorGetNumber()),
-		"<red-wte> (disabled) ",tostring(2-MonitorGetNumber()),
+		"<grn-wte> (enabled) ",toString(MonitorGetNumber()),
+		"<red-wte> (disabled) ",toString(2-MonitorGetNumber()),
 		0);
 }

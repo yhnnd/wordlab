@@ -39,10 +39,10 @@ _table & settable(_table & Table){
 	for(int r=0,h=4;r*h<max;++r){
 		for(int i=0;i<h&&r*h+i<max;++i){
 			Table.setrow(4);
-			Table.setcol(i+1==h/2?(string("Team ")+tostring(r+1)):"");
-			Table.setcol(string("#pos ")+tostring(r*h+i)+" 0 11");//name
-			Table.setcol(string("#pos ")+tostring(r*h+i)+" 2 11");//gender
-			Table.setcol(string("#pos ")+tostring(r*h+i)+" 1 11");//age
+			Table.setcol(i+1==h/2?(string("Team ")+toString(r+1)):"");
+			Table.setcol(string("#pos ")+toString(r*h+i)+" 0 11");//name
+			Table.setcol(string("#pos ")+toString(r*h+i)+" 2 11");//gender
+			Table.setcol(string("#pos ")+toString(r*h+i)+" 1 11");//age
 		}
 		Table.setrowborder();
 	}
@@ -60,7 +60,8 @@ int main(){
 	Table.readdata(_table_dir + WorkerFile);
 	Table.printtable();
 	cout<<"output table to file?"<<endl;
-	if(getch()==13){
+    const char ch = getch();
+	if (ch == 13 || ch == 10) {
 		Table.writetable(_table_dir + "table.layout.txt");
 		Table.outputlabels(_table_dir + "table.labels.txt");
 		cout<<"done."<<endl;

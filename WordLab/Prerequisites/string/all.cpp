@@ -1,4 +1,4 @@
-#include "tostring.cpp"
+#include "toString.cpp"
 #include "toInt.cpp"
 #include "maxlth.cpp"
 #include "strclr.cpp"

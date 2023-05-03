@@ -9,7 +9,7 @@ int SpecialWordCheck(char specialword[][30],int max) {
 		SortDisplay(keyword);
 		for(r=0; r<=max; r++)
 			if(strcmp(keyword,specialword[r])==0) {
-				Dialog.output("Special:"+tostring(r)+specialword[r],lightcyan);
+				Dialog.output("Special:"+toString(r)+specialword[r],lightcyan);
 				specialflag = true;
 			}
 		if(!specialflag) {

@@ -9,12 +9,20 @@ void messageblock::Adjust(){
 		std::cout<<"Message window Settings";
 		for(;;){
 			adjustshowall(r);
-			if((key=getch())==13) break;
-		    else if(key==8||key==27) goto end;
-			else if(key=='a'||key=='w') r--;
-			else r++;
-			if(_LoopLock) roll(r,r,1,7);
-			else         limit(r,r,1,7);
+			if((key=getch()) == 13 || key == 10) {
+                break;
+            } else if (key==8 || key==27 || key==127) {
+                goto end;
+            } else if(key=='a'||key=='w') {
+                r--;
+            } else {
+                r++;
+            }
+			if(_LoopLock) {
+                roll(r,r,1,7);
+            } else {
+                limit(r,r,1,7);
+            }
 		}
 		if(r==7){if(Report(x,y,aww,awh,ReportFileRoute)) break;}
 		else{

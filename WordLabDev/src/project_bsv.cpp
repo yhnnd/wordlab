@@ -9,10 +9,11 @@ template <typename T,typename T2>
 const T& project_input_with_default(bool AllowSet,T& s,const string name,const T2 default_value){
 	project_input_with_default_print_name(name,"=",AllowSet);
 	cout<<default_value;
-	if(!AllowSet||getch()==13){
+    const char ch = getch();
+	if (!AllowSet || ch == 13 || ch == 10) {
 		s = default_value;
 		cout<<endl;
-	}else{
+	} else {
 		clearline(0,getxy().Y,ScreenX);
 		project_input_with_default_print_name(name,"=",AllowSet);
 		cin>>s;

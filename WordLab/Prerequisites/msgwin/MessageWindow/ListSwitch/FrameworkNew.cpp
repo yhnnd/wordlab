@@ -6,9 +6,14 @@ int MessageWindow::ListSwitch(int rprev,int N,int x,int y,int width){
 	ListSwitchBlock(x,y,N,r,width/N,1,'*');
 	colorset(lightwhite);
 	key = getch();
-	     if(key==13) return r;
-	else if(key=='0'||key=='r'||key==27||key==8) return -1;
-	else if(key=='A'||key=='a'||key=='W'||key=='w') r--;
-	else if(key=='D'||key=='d'||key=='S'||key=='s') r++;
+    if (key == 13 || key == 10) {
+        return r;
+    } else if(key=='0'||key=='r'||key==27||key==8) {
+        return -1;
+    } else if(key=='A'||key=='a'||key=='W'||key=='w') {
+        r--;
+    } else if(key=='D'||key=='d'||key=='S'||key=='s') {
+        r++;
+    }
 	return r;
 }

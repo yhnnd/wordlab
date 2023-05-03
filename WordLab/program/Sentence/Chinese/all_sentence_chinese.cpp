@@ -85,7 +85,7 @@ int sts::Translation(int lth, int LineNumber, char * result, const size_t size) 
             }
         }
     } else {
-        errorlog("Translation","cannot connect database",tostring(lth));
+        errorlog("Translation","cannot connect database",toString(lth));
     }
     fin.close();
     return 0;

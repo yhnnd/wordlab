@@ -12,7 +12,7 @@ int WLSearchPhrase(const char *msg){
 	s[r++]=',';
 	s[r]=0;
 	char route[64]=PhraseRouteA;
-	strcat(route,tostring(n).c_str());
+	strcat(route,toString(n).c_str());
 	strcat(route,PhraseRouteB);
 	FILE *fp = fopen(route,"r");
 	do{

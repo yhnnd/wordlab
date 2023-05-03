@@ -16,7 +16,8 @@ void load::Update() {
 	cin>>msg;
 	gotoxy(1, ++y);
 	bsvline("<-wte>(update database?",73);
-	if(wait(-1,100,1)==13){
+    char c = getch();
+	if (c == 13 || c == 10) {
 		gotoxy(1, ++y);
 		bsvline("<-wte>(<-ylw>(updating) library",73);
 		UpdateDatabase(msg);
@@ -25,7 +26,8 @@ void load::Update() {
 	}
 	gotoxy(1, ++y);
 	bsvline("<-wte>(update system?",73);
-	if(wait(-1,100,1)==13){
+    c = getch();
+	if (c == 13 || c == 10) {
 		gotoxy(1,1);
 		bsvline("<-wte>(<-ylw>(updating) system",73);
 		UpdateSoftware(msg);

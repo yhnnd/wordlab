@@ -14,7 +14,7 @@ int load::mainUserInterface(const std::string foldername,int x,int y,int width,i
 		if (num_lines == 0) {
             errorlog("Menu()","Critical Error: File Lost",foldername);
         } else if (num_lines == -1) {
-            errorlog("Menu()","Critical Error: Unknown Language",tostring(LANGUAGE));
+            errorlog("Menu()","Critical Error: Unknown Language",toString(LANGUAGE));
         }
 #if defined(__APPLE__)
         getch();

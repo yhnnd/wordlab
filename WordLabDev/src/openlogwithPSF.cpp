@@ -74,7 +74,7 @@ INPUT:
 									defs = strfilter(defs,",","{");//filter bsv term tokens
 									defs = strfilter(defs,";","}");//filter bsv term tokens
 									auto result = string("<")+backcolors[i]+
-									              ">(db-"+tostring(lth)+"-"+tostring(LineNumber)+
+									              ">(db-"+toString(lth)+"-"+toString(LineNumber)+
 									              "<"+forecolors[i]+">( "+defs+" )";
 									//popup db-location and defs of word
 									popupcore(result,0,0,0,winwidth,false);

@@ -3,7 +3,8 @@ int WLFramework(void) {
     char s[32] = "", FirstLetter = 0;
 	if( VL and db_is_secure(false,true)==false ) getch();
 	if (Ctype == 0) {
-		if(popup("<-wte>(Add word Engine Authorization Was Set Off. Reset now?",-1) == WL_KEY_ENTER) {
+        const char ch = popup("<-wte>(Add word Engine Authorization Was Set Off. Reset now?", -1);
+		if (ch == KEY_CARRIAGE_RETURN || ch == KEY_NEW_LINE) {
 			Ctype = 1;
 		}
 	}

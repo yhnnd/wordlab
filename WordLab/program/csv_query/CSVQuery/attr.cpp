@@ -19,7 +19,7 @@
 				return p;
 			}
 		}value;
-		int tostring(int n) {
+		int toString(int n) {
 			if(n<0) return n;
 			gotoxy(1, getxy().Y);
 			colorrecord(colorprev);

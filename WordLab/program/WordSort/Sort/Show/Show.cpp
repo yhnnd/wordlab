@@ -1,6 +1,10 @@
 void SortDisplay(const char *keyword) {
-	popup("sort of <yellow>(",keyword,
-	      ") is <back yellow>(",sortofword(keyword),
-	      ")<back green>(",tostring(WordSort(keyword)),
-	      ")",0);
+	popup("sort of <ylw>(\"",
+          keyword,
+	      "\") is <-ylw>( ",
+          sortofword(keyword),
+	      " ) <-grn>( ",
+          toString(WordSort(keyword)),
+	      " )",
+          0);
 }

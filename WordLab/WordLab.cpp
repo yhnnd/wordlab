@@ -13,10 +13,11 @@ int main(int argc,char **argv) {
 //    getxy();
 //    gotoxy(20, 4);
 //    getxy();
-//	if(sortofword("apple")!="noun") {
-//		cout<<"error: word sort error!";
-//		getch();
-//	}
+
+	if (sortofword("apple") != "noun") {
+		cout<<"error: word sort error!";
+		getch();
+	}
 
 //	string a = "ABC";
 //	string b = nullptr;

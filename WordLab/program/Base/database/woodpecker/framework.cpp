@@ -22,8 +22,8 @@ bool db_is_secure(bool print_success,bool print_error){
 		return true;
 	} else {
 		if(print_error){
-			popup(string("<-red>( database damaged )<-ylw>( lth\\(")+tostring(lth)
-			+"\\) line\\("+tostring(nol[lang::EN])+"\\) error\\("+tostring(error)+"\\)",0);
+			popup(string("<-red>( database damaged )<-ylw>( lth\\(")+toString(lth)
+			+"\\) line\\("+toString(nol[lang::EN])+"\\) error\\("+toString(error)+"\\)",0);
 		}
 		return false;
 	}

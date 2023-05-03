@@ -47,7 +47,7 @@ int bsvlines(char **msgs,const int max,const int width,const char *folder,const 
         popup("#setMode('y++')");
         popup("#offsetY=0;");
         popup("#enableBorderTop=true;");
-        popup("BSV LINES: label chosen " + tostring(chosenLabel), 0);
+        popup("BSV LINES: label chosen " + toString(chosenLabel), 0);
         popup("BSV LINES: Press [ENTER] or [W↑] [A←] [S↓] [D→] to switch labels.", 0);
         popup("#setMode('y=1')", 0);
 

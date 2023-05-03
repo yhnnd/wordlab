@@ -6,12 +6,12 @@ int Volume(lang language,int fromlth,int tolth,std::string bufroute){
 		Library(finEN,lth,lang::EN);
 		Library(finZH,lth,lang::CH);
 	    if(!finEN){
-			errorlog("volume()","unfound English database",tostring(lth));
+			errorlog("volume()","unfound English database",toString(lth));
 			NOL[lang::EN] = -1;
 			break;
 		}// no else
 		if(!finZH){
-			errorlog("volume()","unfound chinese database",tostring(lth));
+			errorlog("volume()","unfound chinese database",toString(lth));
 			NOL[lang::CH] = -2;
 			break;
 		} else {

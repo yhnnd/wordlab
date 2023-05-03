@@ -26,7 +26,7 @@ int multitask(int x,int y,int width,char Menu[][LINEMAX],int T=0,int n=0,bool ba
     }
 
     if (a >= 0 && a < maxlength) {
-//        popup("<grn->(your choice:) ", tostring(a), -1);
+//        popup("<grn->(your choice:) ", toString(a), -1);
     } else {
         popup("<red-> (error) <ylw->(\\(illegal choice\\))",-1);
     }

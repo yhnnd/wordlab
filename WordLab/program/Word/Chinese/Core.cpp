@@ -27,6 +27,6 @@ enddef:
 	result_line += ver>0? getcolorBcmd(3):getcolorBcmd(1);
 	result_line += ">(v)<";
 	result_line += ver>0? getcolorBcmd(2):getcolorBcmd(1);
-	result_line += ">(" + tostring(ver) + ")";
+	result_line += ">(" + toString(ver) + ")";
 	return result_line;
 }

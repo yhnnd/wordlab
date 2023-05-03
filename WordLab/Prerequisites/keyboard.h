@@ -1,15 +1,17 @@
-#define WL_KEY_ENTER   13
-#define KEY_ESC     27
-#define KEY_DELETE   8
-#define BIOSKEY    -32
-#define UP          72
-#define PAGE_UP     73
-#define LEFT        75
-#define RIGHT       77
-#define DOWN        80
-#define PAGE_DOWN   81
-#define WL_CTRL(alpha) (alpha-96)
-#define UNCTRL(n)   (n+96)
+#define KEY_ENTER           13
+#define KEY_CARRIAGE_RETURN 13
+#define KEY_NEW_LINE        10
+#define KEY_ESC             27
+#define KEY_DELETE           8
+#define MAC_OS_KEY_DELETE  127
+#define BIOSKEY            -32
+#define UP                  72
+#define PAGE_UP             73
+#define LEFT                75
+#define RIGHT               77
+#define DOWN                80
+#define PAGE_DOWN           81
+
 
 
 #define  MAC_OS_BIOSKEY_1   27 // ESC

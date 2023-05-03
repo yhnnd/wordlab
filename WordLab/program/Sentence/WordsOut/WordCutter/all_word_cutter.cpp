@@ -1,156 +1,174 @@
-enum _wordCutterSymbols {
-    _prefix_RE = 1,
-    _prefix_DIS = 2,
-    _postfix_apostrophe_S = 3,
-    _postfix_S = 4,
-    _postfix_ING = 5,
-    _postfix_ED = 6,
-    _postfix_LY = 7,
-    _postfix_AL = 8,
-    _prefix_ANTI = 9,
-    _postfix_ER = 10,
-    _postfix_OR = 11,
-    _postfix_ISM = 12,
-    _postfix_IST = 13,
-    _prefix_UN = 14,
-};
+void sts::wordcuttercheck(char *currentWord, const int wordLth, int *resultAffixSymbol, int *trimLth) {
+    int nAffix = 0, deLth = 0;
 
-void sts::wordcuttercheck(char *s, int lth, int *n, int *de) {
-    if (strindex(s,"re")==0&&lth-2>-1)     {
-        *n = _wordCutterSymbols::_prefix_RE;    //re *
-        *de = 2;
-    } else if(strindex(s,"dis")==0&&lth-3>-1)    {
-        *n = _wordCutterSymbols::_prefix_DIS;    //dis *
-        *de = 3;
-    } else if(strindex(s,"'s")==lth-2&&lth-2>-1) {
-        *n = _wordCutterSymbols::_postfix_apostrophe_S;    //'s
-        *de = 2;
-    } else if(strindex(s,"s")==lth-1&&lth-1>-1)  {
-        *n = _wordCutterSymbols::_postfix_S;    //s
-        *de = 1;
-    } else if(strindex(s,"ing")==lth-3&&lth-3>-1) {
-        *n = _wordCutterSymbols::_postfix_ING;    //ing
-        *de=3;
-    } else if(strindex(s,"ed")==lth-2&&lth-2>-1) {
-        *n = _wordCutterSymbols::_postfix_ED;    //ed
-        *de = 2;
-    } else if(strindex(s,"ly")==lth-2&&lth-2>-1) {
-        *n = _wordCutterSymbols::_postfix_LY;    //ly
-        *de = 2;
-    } else if(strindex(s,"al")==lth-2&&lth-2>-1) {
-        *n = _wordCutterSymbols::_postfix_AL;    //al
-        *de = 2;
-    } else if(strindex(s,"anti")==0&&lth-4>-1)   {
-        *n = _wordCutterSymbols::_prefix_ANTI;    //anti *
-        *de = 4;
-    } else if(strindex(s,"er")==lth-2&&lth-2>-1) {
-        *n = _wordCutterSymbols::_postfix_ER;    //er
-        *de = 2;
-    } else if(strindex(s,"or")==lth-2&&lth-2>-1) {
-        *n = _wordCutterSymbols::_postfix_OR;    //or
-        *de = 2;
-    } else if(strindex(s,"ism")==lth-3&&lth-3>-1) {
-        *n = _wordCutterSymbols::_postfix_ISM;    //ism
-        *de = 3;
-    } else if(strindex(s,"ist")==lth-3&&lth-3>-1) {
-        *n = _wordCutterSymbols::_postfix_IST;    //ist
-        *de = 3;
-    } else if(strindex(s,"un")==0&&lth-2>-1)     {
-        *n = _wordCutterSymbols::_prefix_UN;    //un *
-        *de = 2;
+    for (auto it = this->mapAffixSymbolsToAffix.begin(); it != this->mapAffixSymbolsToAffix.end(); ++it) {
+        // get current affix's symbol.
+        const enum _affixSymbols currentAffixSymbol = it->first;
+        // get current affix
+        affix currentAffix = it->second;
+        // get current affix's text
+        const string affixText = currentAffix.getText();
+        // get current affix's text length
+        const unsigned short affixLth = affixText.length();
+        // check affix type
+        if (wordLth - affixLth > 0) {
+            if (currentAffix.isPrefix()) {
+                // if affix is prefix
+                if (strindex(currentWord, affixText.c_str()) == 0) {
+                    break;
+                }
+            } else if (currentAffix.isPostfix()) {
+                // if affix is postfix
+                if (strindex(currentWord, affixText.c_str()) == wordLth - affixLth) {
+                    nAffix = currentAffixSymbol;
+                    deLth = affixLth;
+                    break;
+                }
+            }
+        }
     }
+    if (nAffix > 0) {
+        *resultAffixSymbol = nAffix;
+        *trimLth = deLth;
+    }
+    return;
 }
 
 
-void sts::wordcutterremove(char *s,int n) {
-    int r;
-    if (n == _wordCutterSymbols::_prefix_RE) {
-        for(r=0; s[r+2]; r++) s[r]=s[r+2];    //re *
-        strclr(s,r);
-    } else if (n == _wordCutterSymbols::_prefix_DIS) {
-        for(r=0; s[r+3]; r++) s[r]=s[r+3];    //dis *
-        strclr(s,r);
-    } else if (n == _wordCutterSymbols::_prefix_ANTI) {
-        for(r=0; s[r+4]; r++) s[r]=s[r+4];    //anti *
-        strclr(s,r);
-    } else if (n == _wordCutterSymbols::_prefix_UN) {
-        for(r=0; s[r+2]; r++) s[r]=s[r+2];    //un *
-        strclr(s,r);
+void sts::wordcutterremove(char *word, const int nAffix) {
+    if (nAffix <= 0) {
+        return;
+    }
+    const std::map<sts::_affixSymbols, sts::affix> & theMap = this->mapAffixSymbolsToAffix;
+    const std::map<sts::_affixSymbols, sts::affix>::const_iterator iter = theMap.find((enum _affixSymbols) nAffix);
+    if (iter != theMap.end()) {
+        sts::affix affix = iter->second;
+        if (affix.isPrefix()) {
+            const unsigned short affixLth = affix.length();
+            if (affixLth > 0) {
+                // Remove the prefix of the word.
+                int i = 0;
+                for (i = 0; word[i + affixLth] != 0; i++) {
+                    word[i] = word[i + affixLth];
+                }
+                strclr(word, i);
+            }
+        }
     }
 }
 
 
 void sts::fileIn(char msg[][LINEMAX],const char *route) {
-    int r=0,r1=0;
-    char c=0;
-    FILE *fp=fopen(route,"r");
+    int r = 0, r1 = 0;
+    char c = 0;
+    FILE * fp = fopen(route, "r");
     rewind(fp);
-    while(true) {
-        c=fgetc(fp);
-        if(c==';') {
-            while(true) {
-                c=fgetc(fp);
-                if(c=='\n'||c==EOF) break;
+    while (true) {
+        c = fgetc(fp);
+        if (c == ';') {
+            // Omit chars after ';'
+            while (true) {
+                c = fgetc(fp);
+                if (c == '\n' || c == EOF) {
+                    break;
+                }
             }
         }
-        if(c==EOF) {
-            strclr(msg[r],r1);
+        if (c == EOF) {
+            strclr(msg[r], r1);
             break;
-        }
-        if(c=='\n') {
-            strclr(msg[r],r1);
+        } else if (c == '\n') {
+            strclr(msg[r], r1);
             r++;
-            r1=0;
-        } else msg[r][r1++]=c;
+            r1 = 0;
+        } else {
+            msg[r][r1++] = c;
+        }
     }
     fclose(fp);
 }
 
 
 bool sts::WordCutter(char *s) {
-    int n = 0, de = 0, lth = strlen(s), max = filelines(AffixCutRoute,true);
-    char Cut[max][LINEMAX], Add[max][LINEMAX];
-    fileIn(Cut,AffixCutRoute);
-    fileIn(Add,AffixAddRoute);
-    wordcuttercheck(s,lth,&n,&de);
-    if (n==0) {
+    int nAffix = 0, trimLth = 0, wordLth = strlen(s), max = filelines(AffixCutRoute,true);
+    char AffixTexts[max][LINEMAX], AffixDefs[max][LINEMAX];
+    fileIn(AffixTexts, AffixCutRoute);
+    fileIn(AffixDefs, AffixAddRoute);
+    wordcuttercheck(s, wordLth, &nAffix, &trimLth);
+    if (nAffix == 0) {
         return false;
     }
-    if (AskChar("remove \"", Cut[n], "\"?")==13) {
-        wordcutterremove(s,n);
-        strclr(s,lth - de);
+
+    const char ch = AskChar("remove \"", AffixTexts[nAffix], "\"?");
+    if (ch == 13 || ch == 10) {
+        wordcutterremove(s, nAffix);
+        strclr(s, wordLth - trimLth);
     } else {
         return false;
     }
 
-    if (n == _postfix_ING) {
-        char def [32];
-        if (getChineseOfWord(s, def, sizeof(def))) {
-            printf("%s", def);
+    const std::map<sts::_affixSymbols, sts::affix> & theMap = this->mapAffixSymbolsToAffix;
+    const std::map<sts::_affixSymbols, sts::affix>::const_iterator iter = theMap.find((enum _affixSymbols) nAffix);
+    sts::affix * affixPtr = nullptr;
+    if (iter != theMap.end()) {
+        affixPtr = (sts::affix *) & (iter->second);
+    } else {
+        return false;
+    }
+
+    char defsOfWordAfterTrimmed [32];
+    int searchResultOfWordAfterTrimmed = getChineseOfWord(s, defsOfWordAfterTrimmed, sizeof(defsOfWordAfterTrimmed));
+
+    if (nAffix == sts::_affixSymbols::_postfix_ING) {
+        // Specified for postfix "-ing"
+        if (searchResultOfWordAfterTrimmed > 0) {
+            // Print Definition of Word After Trimmed.
+            this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
             return true;
         } else {
-            char temp [32];
-            strcpy(temp, s);
-            strcat(s, "e");
-            if (getChineseOfWord(temp, def, sizeof(def))) {
-                printf("%s", def);
+            // If word after trimmed is not valid, search word + 'e'
+            string temp = toString(s) + "e";
+            if (getChineseOfWord(temp.c_str(), defsOfWordAfterTrimmed, sizeof(defsOfWordAfterTrimmed))) {
+                // Print definition of word after trimmed + "e"
+                this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"blu-", "-blk"});
                 return true;
+            } else {
+                // word after trimmed is not valid. word after trimmed + 'e' is not valid either.
+                return false;
             }
         }
-    } else if (n==_prefix_RE||n==_prefix_DIS||n==_prefix_ANTI||n==_prefix_UN) {
-        cout << Add[n];
-        if (printChineseOfWord(s)) {
+    } else if (affixPtr->isPrefix()) {
+        // If Prefix Matched.
+        const auto prefix_defs = AffixDefs[nAffix];
+        // Print Prefix Definition
+        this->pushWordAndDefs(affixPtr->getText(), prefix_defs, {"blk-", "-ylw"});
+        if (searchResultOfWordAfterTrimmed > 0) {
+            // Print Definition of Word After Trimmed.
+            this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
             return true;
+        } else {
+            // recursive calling.
+            return WordCutter(s);
         }
-        return WordCutter(s);
-    } else if(n==_postfix_apostrophe_S||n==_postfix_LY||n==_postfix_AL||n==_postfix_ER||n==_postfix_OR||n==_postfix_ISM||n==_postfix_IST) {
-        if (printChineseOfWord(s)) {
-            cout << Add[n];
+    } else if(affixPtr->isPostfix()) {
+        // If Postfix Matched.
+        if (searchResultOfWordAfterTrimmed > 0) {
+            // Print Definition of Word After Trimmed.
+            this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
             return true;
+        } else {
+            // recursive calling.
+            int resultValue = WordCutter(s);
+            // Print Postfix Definition
+            const auto postfix_defs = AffixDefs[nAffix];
+            this->pushWordAndDefs(affixPtr->getText(), postfix_defs, {"blk-", "-ylw"});
+            return resultValue;
         }
-        return WordCutter(s);
-    } else if (n > 0) {
-        if (printChineseOfWord(s)) {
+    } else if (nAffix > 0) {
+        // If affix is neither prefix nor postfix (God knows what's kind of affix that is).
+        if (searchResultOfWordAfterTrimmed > 0) {
+            // Print Definition of Word After Trimmed.
+            this->pushWordAndDefs(s, defsOfWordAfterTrimmed, {"pnk-", "-blk"});
             return true;
         }
     }

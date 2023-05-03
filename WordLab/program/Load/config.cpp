@@ -14,7 +14,7 @@ void load::config() {
 			case 3:  MessageWindow.init();break;
 			case 4:  User.initialize(AccountRoute);break;
 			case 5:  if(ML) MonitorActivate();break;
-			default: errorlog("config","error",tostring(r));break;
+			default: errorlog("config","error",toString(r));break;
 		}
 		if(!flag){
 			char ch = fatalerror(100);

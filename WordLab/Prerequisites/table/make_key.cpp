@@ -1,3 +1,3 @@
 std::string _table::makekey(){
-	return tostring(getnumofrow())+"."+tostring(colnow);
+	return toString(getnumofrow()) + "." + toString(colnow);
 }

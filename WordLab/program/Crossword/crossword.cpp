@@ -61,12 +61,12 @@ class crossword{
 	string word,string type,string def,string defreverse=""){
 		int r=0,lth=word.length();
 		if(word.empty()){
-			return errorlog("words.setword","cannot set empty word",tostring(n));
+			return errorlog("words.setword","cannot set empty word",toString(n));
 		}else if(!Word[n].writable()){
 			string msg="cannot rewrite ";
 			msg+=Word[n].getword();
 			msg+="(";
-			msg+=tostring(n);
+			msg+=toString(n);
 			msg+=") with";
 			return errorlog("words.setword",msg,word);
 		}
@@ -77,8 +77,8 @@ class crossword{
 				this->Board.setletter(x+xd*r,y+yd*r,word[r]);
 			}
 			if(n<max) return Word[n].set(x,y,zx,zy,xd,yd,word,type,def,defreverse);
-			else return errorlog("words.setword has no space for",word,tostring(n));
-		}else return errorlog("words.setword board not available for",word,tostring(r));
+			else return errorlog("words.setword has no space for",word,toString(n));
+		}else return errorlog("words.setword board not available for",word,toString(r));
 	}
 	int check(int n,string s){
 		return this->solved[n]=this->Word[n].check(s);
@@ -98,25 +98,40 @@ class crossword{
 		for(;;roll(i,i,0,max-1)){
 			this->show();//refresh board
 			this->Word[i].selected();
-			key=getch();
+			key = getch();
 			process:
-			if(key==13) break;
-			else if(key>='0'&&key<='9') i=key-'0';
-			else if(strchr("awe",key)){
+			if (key == 13 || key == 10) {
+                break;
+            } else if(key>='0' && key<='9') {
+                i = key - '0';
+            } else if(strchr("awe",key)) {
 				floor:
 				for(i--;i>=0;i--){
-					if(this->Word[i].accord(Board.getrotate())) break;
+					if(this->Word[i].accord(Board.getrotate())) {
+                        break;
+                    }
 				}
 			}else if(strchr("sd",key)){
 				ceil:
-				for(i++;i<max;i++){
-					if(this->Word[i].accord(Board.getrotate())) break;
+				for (i++;i<max;i++) {
+					if(this->Word[i].accord(Board.getrotate())) {
+                        break;
+                    }
 				}
-			}else return -1;
-			if(i>=0&&i<max) available=1;
-			else if(!available) break;
-			else if(i>=max){i=-1;goto ceil;}
-			else if(i<0){i=max;goto floor;}
+			} else {
+                return -1;
+            }
+			if(i>=0 && i<max) {
+                available=1;
+            } else if(!available) {
+                break;
+            } else if (i>=max) {
+                i=-1;
+                goto ceil;
+            } else if (i<0) {
+                i = max;
+                goto floor;
+            }
 		}
 		return i;
 	}

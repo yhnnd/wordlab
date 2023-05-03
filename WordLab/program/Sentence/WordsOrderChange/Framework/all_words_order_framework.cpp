@@ -1,5 +1,5 @@
 void sts::WordsOrderFindMain() {
-    int r,r0,r1;
+    int r, r0, r1;
     FindMain:
     for(r=0,r0=-1; r<=rwin; r++) {
         if(WordSort(s[r].txt)==1) {
@@ -14,20 +14,23 @@ void sts::WordsOrderFindMain() {
         }
     }
     for(;;) {
-        if(r0>=0) {
-            if(AskChar(s[r0].txt, " is the Main?") == 13) {
+        if (r0 >= 0) {
+            const char ch = AskChar(s[r0].txt, " is the Main?");
+            if (ch == 13 || ch == 10) {
                 TheMain = r0;    //n.
                 break;
             }
         }
-        if(r1>=0) {
-            if(AskChar(s[r1].txt," is the Main?")==13) {
+        if (r1 >= 0) {
+            const char ch = AskChar(s[r1].txt," is the Main?");
+            if (ch == 13 || ch == 10) {
                 TheMain = r1;    //pron.
                 break;
             }
         }
-        for(r=0; r<=rwin; r++) {
-            if(AskChar(s[r].txt," is the Main?") == 13) {
+        for (r=0; r<=rwin; r++) {
+            const char ch = AskChar(s[r].txt," is the Main?");
+            if (ch == 13 || ch == 10) {
                 TheMain = r;    //custom
                 break;
             }
@@ -71,7 +74,7 @@ void sts::WordsOrderSettings(vector<int> & ListPos,vector<string> & CheckerInfo)
     COORD pos = getxy();
     for(int r = 0; r < CheckerMax; r++ ) {
         popup("#time=reset();");
-        popup("第",tostring(r+1),"步放置的工具爲?",0);
+        popup("第",toString(r+1),"步放置的工具爲?",0);
         MessageWindow.Frame(0,2,16,30,CheckerInfo);
         ListPos[r] = MessageWindow.Switch(2,16,30,CheckerInfo,ListPos[r>0?r-1:0]+1) - 1;
     }

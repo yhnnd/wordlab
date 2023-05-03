@@ -8,8 +8,8 @@
 // DIMENSION_SIZE:	{16,32}
 void scriptprocessor::varInitArray(std::string & name, const std::string & value) {
 	std::string dimension = "", subname = "", subvalue = "";
-	int value_i = value.find("{") + 1;//”µ½M³õÊ¼»¯ÁĞ±íé_Ê¼Î»ÖÃ
-	bool ELEMENT_HAS_INIT_VALUE = value.find("{") != std::string::npos;//”µ½MÓĞ³õÊ¼»¯ÁĞ±í
+	int value_i = value.find("{") + 1;//æ•¸çµ„åˆå§‹åŒ–åˆ—è¡¨é–‹å§‹ä½ç½®
+	bool ELEMENT_HAS_INIT_VALUE = value.find("{") != std::string::npos;//æ•¸çµ„æœ‰åˆå§‹åŒ–åˆ—è¡¨
 	// GET DIMENSION STRING
 	int i = name.find("["), j = 0;
 	for( j = i; j < name.length(); j++ ) {
@@ -19,10 +19,10 @@ void scriptprocessor::varInitArray(std::string & name, const std::string & value
 	name.erase(i);
 	dataset.set(name,dimension);
 	// SET ARRAY SIZE AND DIMENSION SIZE
-	const int array_size = varInitArrayGetSize(dimension);//”µ½MÓĞ¶àÉÙÔªËØ
-	const int num_dimension = varInitArrayGetNumofDimension(dimension);//”µ½MÓĞ¶àÉÙ¾S¶È
-	int dimension_size[num_dimension];//Ã¿‚€¾S¶È¿É´æµÄÔªËØ”µ
-	int dimension_i[num_dimension];//Ã¿‚€¾S¶ÈÒÑ´æµÄÔªËØ”µ
+	const int array_size = varInitArrayGetSize(dimension);//æ•¸çµ„æœ‰å¤šå°‘å…ƒç´ 
+	const int num_dimension = varInitArrayGetNumofDimension(dimension);//æ•¸çµ„æœ‰å¤šå°‘ç¶­åº¦
+	int dimension_size[num_dimension];//æ¯å€‹ç¶­åº¦å¯å­˜çš„å…ƒç´ æ•¸
+	int dimension_i[num_dimension];//æ¯å€‹ç¶­åº¦å·²å­˜çš„å…ƒç´ æ•¸
 	// ARRAY ELEMENT INITIALIZATION
 	for(int order_dimension = num_dimension; order_dimension > 0; --order_dimension) {
 		dimension_size[order_dimension-1] = varInitArrayGetDimensionSize(dimension,order_dimension);
@@ -35,7 +35,7 @@ void scriptprocessor::varInitArray(std::string & name, const std::string & value
 		subname = name;
 		for( int order_dimension = num_dimension; order_dimension > 0; --order_dimension ) {
 			subname += "[";
-			subname += tostring(dimension_i[order_dimension-1]);
+			subname += toString(dimension_i[order_dimension-1]);
 			subname += "]";
 		}
 		// GET ELEMENT VALUE
@@ -54,7 +54,7 @@ void scriptprocessor::varInitArray(std::string & name, const std::string & value
 		dimension_i[0] += 1;
 		for(int order_dimension = 0; order_dimension < num_dimension; ++order_dimension) {
 			if(dimension_i[order_dimension] >= dimension_size[order_dimension]) {
-				dimension_i[order_dimension+1] += 1;//ßMÎ»
+				dimension_i[order_dimension+1] += 1;//é€²ä½
 				dimension_i[order_dimension] = 0;
 			}
 		}

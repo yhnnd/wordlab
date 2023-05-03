@@ -44,8 +44,8 @@ class crossword_word{
 		in.ignore(1024,'=');
 		in>>r;
 		if(r!=n){
-			errorlog("word.readfromfile","error reading word",tostring(n));
-			errorlog("detail","reading file word",tostring(r));
+			errorlog("word.readfromfile","error reading word",toString(n));
+			errorlog("detail","reading file word",toString(r));
 			return;
 		}
 		in.ignore(1024,'=');

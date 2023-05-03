@@ -17,25 +17,32 @@ void sts::banner() {
 }
 
 
-void sts::save(bool out) {
-    int r;
-    static word v[MAXIMUM];
-    if (out) {
-        for (r=0; r<=rwin; r++) {
-            strcpy(v[r].txt,s[r].txt);
-        }
-    } else {
-        for(r=0; r<=rwin; r++) {
-            strcpy(s[r].txt,v[r].txt);
-        }
+void sts::copySentence(word * wordsDst, const word * wordsSrc, const int numOfWords) {
+    for (int r = 0; r <= numOfWords; ++r) {
+            strcpy(wordsDst[r].txt, wordsSrc[r].txt);
     }
+}
+
+
+void sts::printSentence(const word * words, const int numOfWords, const struct consoleColor color) {
+    colorrecord(colorPrev);
+    setForegroundColorAndBackgroundColor(color.foregroundColor, color.backgroundColor);
+    for (int i = 0; i < numOfWords; ++i) {
+        printf("%s ", words[i].txt);
+    }
+    if (ispunct(this->punct)) {
+        printf("%c", this->punct);
+    }
+    colorreset(colorPrev);
 }
 
 
 void sts::FrameworkCore(int x, int y) {
     recordxy(pos);
-    save(1);
-    InquiryEndCheck();
+    // Backup Sentence.
+    const unsigned int numOfWords = this->rwin + 1;
+    this->copySentence(this->sOriginal, this->s, numOfWords);
+
     if (rearrange_words_order) {
         WordsOrderFramework();
     }
@@ -43,18 +50,35 @@ void sts::FrameworkCore(int x, int y) {
     {
         colorrecord(colorPrev);
         setForegroundColorAndBackgroundColor("wte-", "-#gry");
-        clearscreen(0, 0, 80, 12);
+        clearscreen(0, 6, ScreenX - 1, 16);
         colorreset(colorPrev);
     }
+
     gotoxy(x, y + 1);
+
     if (show_debug_message) {
         cout << endl << "Executing Words Out" << endl;
     }
+
+    this->wordGroups.clear();
     WordsOut();
+
     if (show_debug_message) {
         cout << endl << "Words Out Done" << endl;
+        this->printSentence(this->sOriginal, numOfWords, {"#blu-", "-wte"});
+        cout << endl;
+        this->printSentence(this->sModified, this->rwout, {"#red-", "-ylw"});
+        cout << endl << "Print Sentence Translation" << endl;
     }
-    save(0);
+
+    PrintSentenceTranslation();
+
+    if (show_debug_message) {
+        cout << endl << "All Done" << endl;
+    }
+
+    // Restore Sentence.
+    this->copySentence(this->s, this->sOriginal, numOfWords);
     resetxy(pos);
 }
 
@@ -85,7 +109,7 @@ char sts::Input(int x,int y) {
             cout<<"\b";
             WordSortSelect(s[rwin]);
             r--;
-        } else if(c==' '||c==','||c==';'||c=='.'||c=='?'||c=='!'||c==13||c==0) {
+        } else if(c==' '||c==','||c==';'||c=='.'||c=='?'||c=='!'||c == 13||c == 10||c == 0) {
             break;
         } else if( c > 0 ) {
             s[rwin].txt[r] = c;
@@ -93,7 +117,7 @@ char sts::Input(int x,int y) {
         indexCore(s[rwin].txt,12,8,green);
     }
     strclr(s[rwin].txt,r);
-    if (c==','||c==';'||c=='.'||c=='?'||c=='!'||c==13||c==0) {
+    if (c==','||c==';'||c=='.'||c=='?'||c=='!'||c == 13||c == 10||c == 0) {
         return c;
     } else {
         return ' ';
@@ -122,7 +146,8 @@ void sts::Framework() {
         if (punct == 0) {
             break;
         }
-        if (popup("Press [ENTER] to exit",-1)==13) {
+        const char c = popup("Press [ESC] to exit", -1);
+        if (c == 8 /* backspace */|| c == 127 /* delete */|| c == 27 /* escape */) {
             break;
         }
     }
@@ -205,7 +230,8 @@ void sts::FrameworkDebug() {
         memset(this->s, 0, sizeof(s));
         InputDebug();
         FrameworkCore(x, y);
-        if (popup("Press [ENTER] to exit",-1)==WL_KEY_ENTER) {
+        const char ch = popup("Press [ENTER] to exit", -1);
+        if (ch == KEY_CARRIAGE_RETURN || ch == KEY_NEW_LINE) {
             break;
         }
     }

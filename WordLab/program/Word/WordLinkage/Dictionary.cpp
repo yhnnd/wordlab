@@ -6,7 +6,7 @@ char WLDictionary(string keyword) {
 		fin.close();
 		bsvline(("<-wte>(Press <wte-#gry>( ENTER ) to check out more about <-grn>( "+keyword+" )").c_str());
 		ReturnLetter = getch();
-		if(ReturnLetter==13) {
+		if (ReturnLetter == 13 || ReturnLetter == 10) {
 			window document;
 			document.setfilename(DictionaryPageFileName);
 			document.setwindow(ScreenX-2,ScreenY);

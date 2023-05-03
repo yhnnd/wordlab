@@ -14,11 +14,38 @@ string sts::getPhraseLine(const unsigned int phraseLth, const vector<string> phr
 }
 
 bool sts::PhraseCheckerAsk(const unsigned int phraseLth, const vector<string> phrase) {
-    if (AskChar("Use Phrase (", tostring(phraseLth), ") \"", getPhraseLine(phraseLth, phrase), "\"?") == 13) {
+    ::_AskOnce = true;
+    const int keyCode = AskChar("Use Phrase (", toString(phraseLth), ") \"", getPhraseLine(phraseLth, phrase), "\"?");
+    if (show_debug_message) {
+        printf("\nPhraseCheckerAsk: keyChar = '%c' keyCode = %d\n", keyCode, keyCode);
+    }
+//    Carriage Return (Enter) = CR = 13 = '\r'
+//    Line Feed (New Line) = LF = 10 = '\n'
+    if (keyCode == 13 /* \r */|| keyCode == 10/* \n */) {
         return true;
     }
     return false;
 }
+
+
+void sts::PhraseCheckerUsePhrase(const unsigned int phraseLth, const vector<string> phrase, const string phraseDef) {
+    // Push All words in phrase to phraseWords
+    vector<word> phraseWords;
+    for(int ph = 0; ph < phraseLth; ++ph) {
+        word phraseWord;
+        strcpy(phraseWord.txt, phrase[ph].c_str());
+        phraseWords.push_back(phraseWord);
+    }
+    // Generate a temporary wordGroup
+    wordGroup tempWordGroup;
+    tempWordGroup.words = phraseWords;
+    tempWordGroup.defsColor.foregroundColor = "pnk-";
+    tempWordGroup.defsColor.backgroundColor = "-blk";
+    tempWordGroup.defZh = phraseDef;
+    // Push Current temporary wordGroup to wordGroups.
+    this->wordGroups.push_back(tempWordGroup);
+}
+
 
 bool sts::PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth, const vector<string> phrase, const string phraseDef) {
     int i;
@@ -36,10 +63,8 @@ bool sts::PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth,
         }
         const bool userReply = PhraseCheckerAsk(phraseLth, phrase);
         if (userReply == true) {
-            colorrecord(prevColor);
-            colorset(lightpurple);
-            cout << phraseDef;
-            colorreset(prevColor);
+            // Use The Matched Phrase.
+            this->PhraseCheckerUsePhrase(phraseLth, phrase, phraseDef);
         } else {
             if (show_debug_message) {
                 printf("\nPhraseCheckerCoreKernel: You reject the matched phrase: \"%s\" phraseDef = \"%s\"\n",
@@ -92,7 +117,7 @@ int sts::PhrasesChecker(const int rwout) {
     for (; currentPhraseLth > 0; --currentPhraseLth) {
         std::string phrasesRoute;
         phrasesRoute = PhraseRouteA;
-        phrasesRoute += tostring(currentPhraseLth);
+        phrasesRoute += toString(currentPhraseLth);
         phrasesRoute += PhraseRouteB;
 //        printf("PhrasesChecker: wordsNumLeft = %d, currentPhraseLth = %d, phrasesRoute = %s\n",
 //               wordsNumLeft, currentPhraseLth, phrasesRoute.c_str());

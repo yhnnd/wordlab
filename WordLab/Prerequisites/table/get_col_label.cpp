@@ -3,6 +3,6 @@ std::string & _table::getlabel(std::string key){
 }
 std::string & _table::getlabel(int r,int c){
 	if(r<getnumofrow()&&c<rows[r].getnumofcol())
-	return getlabel( tostring(r)+"."+tostring(c) );
+	return getlabel( toString(r) + "." + toString(c) );
 	else return data_str = _table_label_out_of_range;
 }
