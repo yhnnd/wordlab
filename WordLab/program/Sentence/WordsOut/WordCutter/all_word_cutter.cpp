@@ -94,12 +94,15 @@ bool sts::WordCutter(char *word) {
     char AffixTexts[max][LINEMAX], AffixDefs[max][LINEMAX];
     fileIn(AffixTexts, AffixCutRoute);
     fileIn(AffixDefs, AffixAddRoute);
+
     wordcuttercheck(word, wordLth, &nAffix, &trimLth);
+
     if (nAffix == 0) {
         return false;
     }
 
     const char ch = AskChar("remove \"", AffixTexts[nAffix], "\"?");
+
     if (ch == 13 || ch == 10) {
         wordcutterremove(word, nAffix);
         strclr(word, wordLth - trimLth);

@@ -98,7 +98,7 @@ void sts::FrameworkCore(int x, int y) {
     const unsigned int numOfWords = this->rwin + 1;
     this->copySentence(this->sOriginal, this->s, numOfWords);
 
-    if (rearrange_words_order) {
+    if (numOfWords > 1 && rearrange_words_order) {
         WordsOrderFramework();
     }
 
@@ -298,9 +298,7 @@ void sts::FrameworkDebug() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         fflush(stdin);
 
-        if (this->rwin > 0) {
-            FrameworkCore(x, y);
-        }
+        FrameworkCore(x, y);
 
         const char ch = popup("Press [ESC] to exit", -1);
         if (ch == KEY_CARRIAGE_RETURN || ch == KEY_NEW_LINE) {

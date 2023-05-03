@@ -62,8 +62,10 @@ void sts::WordsOut() {
 //        printf("\nrwin = %d\n", rwin);
 //    }
 
+    const int numOfWords = this->rwin;
+
     std::string improve = "";
-    for(rwout = 0; rwout <= rwin; rwout++) {
+    for(rwout = 0; rwout <= numOfWords; rwout++) {
 //        if (show_debug_message) {
 //            printf("\nrwin = %d, rwout = %d\n", this->rwin, rwout);
 //        }
@@ -81,11 +83,12 @@ void sts::WordsOut() {
 
 //#include "Framework/wlo-improvements/to.cpp"
         //解决 to 无法翻译成 "去" 的问题. n.(!v.) + to + v.
-        if(
+        if (
+                rwout + 1 <= numOfWords
+                &&
                 strcmp(s[rwout].txt,"to") == 0
-        && (
+                &&
                 wordSortIncludes(s[rwout+1].txt, {2, 5, 6})
-        )
         ) {
             improve = "去";
         }
@@ -93,10 +96,11 @@ void sts::WordsOut() {
 //#include "Framework/wlo-improvements/so.cpp"
         //解决 so 无法翻译成 "如此" 的问题.
         if(
-                strcmp(s[rwout].txt,"so")==0
-        && (
+                rwout + 1 <= numOfWords
+                &&
+                strcmp(s[rwout].txt,"so") == 0
+                &&
                 wordSortIncludes(s[rwout+1].txt, {3, 4})
-        )
         ) {
             improve = "如此";
         }
@@ -111,10 +115,13 @@ void sts::WordsOut() {
         //解决 have 无法翻译成 "已经" 的问题.
 //one of 2(v.) 5(vi.) 6(vt.) 9(auxil.)
         if (
-                (
+                rwout + 1 <= numOfWords
+                && (
                         strcmp(s[rwout].txt,"have") == 0
-                        || strcmp(s[rwout].txt,"has") == 0
-                        || strcmp(s[rwout].txt,"had") == 0
+                        ||
+                        strcmp(s[rwout].txt,"has") == 0
+                        ||
+                        strcmp(s[rwout].txt,"had") == 0
         )
            && wordSortIncludes(s[rwout+1].txt, {1, 3, 4, 7, 8, 10}) == 0
         ) {
@@ -124,28 +131,42 @@ void sts::WordsOut() {
 //#include "Framework/wlo-improvements/more.cpp"
         //解决More无法在形容词及副词前翻译成 "更" 的问题.//adj./adv.
         if (
+                rwout + 1 <= numOfWords
+                &&
                 strcmp(s[rwout].txt,"more") == 0
-                && wordSortIncludes(s[rwout+1].txt, {3, 4})
+                &&
+                wordSortIncludes(s[rwout+1].txt, {3, 4})
         ) {
             improve = "更";
         }
 
 //#include "Framework/wlo-improvements/be+v.cpp"
         //解决 be 无法在动词过去式前翻译成 "被" 的问题.
-        if(strcmp(s[rwout].txt,"be")==0
-        ||strcmp(s[rwout].txt,"being")==0
-        ||strcmp(s[rwout].txt,"been")==0) {
-            if (SortEX(s[rwout + 1].txt, "verb") == 0
-            || strindex(s[rwout + 1].txt, "ed") != -1) {
-                improve = "被";
-            }
+        if (
+                rwout + 1 <= numOfWords
+                && (
+                        strcmp(s[rwout].txt,"be") == 0
+                        ||
+                        strcmp(s[rwout].txt,"being") == 0
+                        ||
+                        strcmp(s[rwout].txt,"been") == 0
+                ) && (
+                        SortEX(s[rwout + 1].txt, "verb") == 0
+                        ||
+                        strindex(s[rwout + 1].txt, "ed") != -1
+                )
+        ) {
+            improve = "被";
         }
 
+
         if (strcmp(s[rwout].txt,"miss") == 0) {
-            improve = "错过";
-            if (AskChar("将",s[rwout].txt, "翻译为", improve, "?") == 13) {
-            } else {
-                improve = "想念";
+            const string tempdefs[2] = {"错过", "想念"};
+            for (int i = 0; i < 2; ++ i) {
+                const char key = AskChar("将",s[rwout].txt, "翻译为", tempdefs[i], "?");
+                if (key == KEY_CARRIAGE_RETURN || key == KEY_NEW_LINE) {
+                    improve = tempdefs[i];
+                }
             }
         }
 
