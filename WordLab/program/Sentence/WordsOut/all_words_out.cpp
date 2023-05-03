@@ -79,18 +79,23 @@ void sts::WordsOut() {
 
 //#include "Framework/wlo-improvements/to.cpp"
         //解决 to 无法翻译成 "去" 的问题. n.(!v.) + to + v.
-        if(strcmp(s[rwout].txt,"to")==0
-        &&(WordSort(s[rwout+1].txt)==2
-        ||WordSort(s[rwout+1].txt)==5
-        ||WordSort(s[rwout+1].txt)==6)) {
+        if(
+                strcmp(s[rwout].txt,"to") == 0
+        && (
+                wordSortIncludes(s[rwout+1].txt, {2, 5, 6})
+        )
+        ) {
             improve = "去";
         }
 
 //#include "Framework/wlo-improvements/so.cpp"
         //解决 so 无法翻译成 "如此" 的问题.
-        if(strcmp(s[rwout].txt,"so")==0
-        &&(WordSort(s[rwout+1].txt)==3
-        ||WordSort(s[rwout+1].txt)==4)) {
+        if(
+                strcmp(s[rwout].txt,"so")==0
+        && (
+                wordSortIncludes(s[rwout+1].txt, {3, 4})
+        )
+        ) {
             improve = "如此";
         }
 
@@ -103,23 +108,23 @@ void sts::WordsOut() {
 //#include "Framework/wlo-improvements/have.cpp"
         //解决 have 无法翻译成 "已经" 的问题.
 //one of 2(v.) 5(vi.) 6(vt.) 9(auxil.)
-        if((strcmp(s[rwout].txt,"have")==0
-            ||strcmp(s[rwout].txt,"has")==0
-            ||strcmp(s[rwout].txt,"had")==0)
-           &&WordSort(s[rwout+1].txt)!=1
-           &&WordSort(s[rwout+1].txt)!=3
-           &&WordSort(s[rwout+1].txt)!=4
-           &&WordSort(s[rwout+1].txt)!=7
-           &&WordSort(s[rwout+1].txt)!=8
-           &&WordSort(s[rwout+1].txt)!=10) {
+        if (
+                (
+                        strcmp(s[rwout].txt,"have") == 0
+                        || strcmp(s[rwout].txt,"has") == 0
+                        || strcmp(s[rwout].txt,"had") == 0
+        )
+           && wordSortIncludes(s[rwout+1].txt, {1, 3, 4, 7, 8, 10}) == 0
+        ) {
             improve = "已经";
         }
 
 //#include "Framework/wlo-improvements/more.cpp"
         //解决More无法在形容词及副词前翻译成 "更" 的问题.//adj./adv.
-        if(strcmp(s[rwout].txt,"more")==0
-        &&(WordSort(s[rwout+1].txt)==3
-        ||WordSort(s[rwout+1].txt)==4)) {
+        if (
+                strcmp(s[rwout].txt,"more") == 0
+                && wordSortIncludes(s[rwout+1].txt, {3, 4})
+        ) {
             improve = "更";
         }
 

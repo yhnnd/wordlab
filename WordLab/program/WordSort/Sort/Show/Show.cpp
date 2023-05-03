@@ -2,9 +2,9 @@ void SortDisplay(const char *keyword) {
 	popup("sort of <ylw>(\"",
           keyword,
 	      "\") is <-ylw>( ",
-          sortofword(keyword),
+          sortOfWord(keyword),
 	      " ) <-grn>( ",
-          toString(WordSort(keyword)),
+          printableSortIdsOfWord(keyword),
 	      " )",
           0);
 }

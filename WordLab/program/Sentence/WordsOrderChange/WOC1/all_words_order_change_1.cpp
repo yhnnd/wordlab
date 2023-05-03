@@ -8,7 +8,7 @@ void sts::WordsOrderChange1(void) {
     // do-for
     for (r=0; r<rwin; r++) {
         if(
-                (WordSort(s[r].txt)==2
+                (wordSortIncludes(s[r].txt, {2})
                  ||strcmp(s[r].txt,"do")==0
                  ||strcmp(s[r].txt,"did")==0
                  ||strcmp(s[r].txt,"does")==0
@@ -119,7 +119,7 @@ void sts::WordsOrderChange1(void) {
     if (punct=='?') {
         for(r=0; r<rwin; r++) {
             const bool WOC1auxn1 = (r==0||( SortEX(s[r-1].txt,"NOUN")!=0||SortEX(s[r-1].txt,"wh")==0 ) );
-            const bool WOC1auxn2 = ( SortEX(s[r].txt,"be")==0||WordSort(s[r].txt)==9 );
+            const bool WOC1auxn2 = ( SortEX(s[r].txt,"be")==0 || wordSortIncludes(s[r].txt, {9}) );
             const bool WOC1auxn3 = SortEX(s[r+1].txt,"NOUN") == 0;
             const bool WOC1auxn4 = SortEX(s[r+2].txt,"verb") == 0;
             const bool WOC1auxnSolution1 = (WOC1auxn1 && WOC1auxn2 && WOC1auxn3);//old
@@ -130,9 +130,9 @@ void sts::WordsOrderChange1(void) {
                 for (r0 = r+1; r0 <= rwin-1; r0++) {
 //                WOC1findnoun(r0);
                     if(
-                            ( SortEX(s[r0].txt,"NOUN")==0&&SortEX(s[r0+1].txt,"REALNOUN")!=0 )||
-                            ( WordSort(s[r0].txt)==8&&WordSort(s[r0+1].txt)!=1)||
-                            ( WordSort(s[r0].txt)==1&&WordSort(s[r0+1].txt)!=1)
+                            ( SortEX(s[r0].txt,"NOUN")==0 && SortEX(s[r0+1].txt,"REALNOUN")!=0 ) ||
+                            ( wordSortIncludes(s[r0].txt, {8}) && wordSortIncludes(s[r0+1].txt, {1}) == 0)||
+                            ( wordSortIncludes(s[r0].txt, {1}) && wordSortIncludes(s[r0+1].txt, {1}) == 0)
                             ) {
                         break;
                     }
@@ -152,7 +152,7 @@ void sts::WordsOrderChange1(void) {
     //3:aux.+adv.
     //can not
     for(r=0; r<rwin; r++) {
-        if ((WordSort(s[r].txt)==9||SortEX(s[r].txt,"verb")==0)
+        if ((wordSortIncludes(s[r].txt, {9}) || SortEX(s[r].txt,"verb")==0)
         && (strcmp(s[r+1].txt,"not")==0||strcmp(s[r+1].txt,"never")==0)) {
             const char ch = AskChar("WOC1-3<aux.not>调换(",s[r].txt,")与(",s[r+1].txt,")?");
             if (ch == 13 || ch == 10) {
@@ -168,10 +168,10 @@ void sts::WordsOrderChange1(void) {
     //4:n.+adj.
     //更新时间 2014/6/18//n.+adj.//house big
     for (r=0; r<rwin; r++) {
-        if(WordSort(s[r].txt)==1
-           &&WordSort(s[r+1].txt)==3
-           &&WordSort(s[r+2].txt)!=1
-           &&WordSort(s[r+2].txt)!=8) {
+        if(wordSortIncludes(s[r].txt, {1})
+           && wordSortIncludes(s[r+1].txt, {3})
+           && wordSortIncludes(s[r+2].txt, {1}) == 0
+           && wordSortIncludes(s[r+2].txt, {8}) == 0) {
             const char ch = AskChar("WOC1-4<n.adj.>调换(",s[r].txt,")与(",s[r+1].txt,")?");
             if (ch == 13 || ch == 10) {
                 WordSwitch(r,r+1);
@@ -185,8 +185,8 @@ void sts::WordsOrderChange1(void) {
     //5:v.+adv.
     //更新时间 2014/6/19//v.+adv.
     for(r=0; r<rwin; r++) {
-        if(SortEX(s[r-1].txt,"VERB")==0 && WordSort(s[r].txt)==4 && strcmp(s[r].txt,"how") != 0
-           &&SortEX(s[r+1].txt,"VERB")!=0&&WordSort(s[r+1].txt)!=3) {
+        if(SortEX(s[r-1].txt,"VERB")==0 && wordSortIncludes(s[r].txt, {4}) && strcmp(s[r].txt,"how") != 0
+           &&SortEX(s[r+1].txt,"VERB")!=0 && wordSortIncludes(s[r+1].txt, {3}) == 0) {
             const char ch = AskChar("WOC1-5<v.adv.>调换(",s[r-1].txt,")与(",s[r].txt,")?");
             if (ch == 13 || ch == 10) {
                 WordSwitch(r-1,r);
@@ -201,7 +201,7 @@ void sts::WordsOrderChange1(void) {
 //the more//Updated on 2014/6/18
     for(r=0; r<rwin; r++) {
         if(strcmp(s[r].txt,"the")==0 && strcmp(s[r+1].txt,"more")==0
-           &&(WordSort(s[r+2].txt)==1||WordSort(s[r+2].txt)==8)) {
+           &&(wordSortIncludes(s[r+2].txt, {1}) || wordSortIncludes(s[r+2].txt, {8}))) {
             const char ch = AskChar("WOC1-6<more>前置(",s[r+2].txt,")?");
             if (ch == 13 || ch == 10) {
                 Word_Insert("Left",r,r+2);
@@ -234,10 +234,10 @@ void sts::WordsOrderChange1(void) {
     //9:adj.+adv.
     //更新时间 2015/10/29//adj.+adv.
     for (r = 0; r < rwin; r++) {
-        if (WordSort(s[r-1].txt) == 3
-            && WordSort(s[r].txt) == 4
+        if (wordSortIncludes(s[r-1].txt, {3})
+            && wordSortIncludes(s[r].txt, {4})
             && strcmp(s[r].txt,"how") != 0
-            && WordSort(s[r+1].txt) != 3) {
+            && wordSortIncludes(s[r+1].txt, {3}) == 0) {
             const char ch = AskChar("WOC1-9<adj.adv.>调换(",s[r-1].txt,")与(",s[r].txt,")?");
             if (ch == 13 || ch == 10) {
                 WordSwitch(r - 1, r);

@@ -1,8 +1,8 @@
-int SortEX_DefinitelyNOUN(char s[]) { //Ãû´Ê¼Ò×å(Ğ¡)
-	if(
-	    WordSort(s)==1||//n.
-	    WordSort(s)==3||//adj.
-	    WordSort(s)==11//art.
-	)return 0;
+int SortEX_DefinitelyNOUN(char s[]) { //åè¯å®¶æ—(å°)
+	if (
+            wordSortIncludes(s, {1, 3, 11})//n.//adj.//art.
+	) {
+        return 0;
+    }
 	return -1;
 }

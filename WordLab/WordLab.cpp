@@ -14,10 +14,28 @@ int main(int argc,char **argv) {
 //    gotoxy(20, 4);
 //    getxy();
 
-	if (sortofword("apple") != "noun") {
-		cout<<"error: word sort error!";
+    vector<string> words= {
+            "apple", "retain", "harm", "abandon", "joke",
+            "who", "what", "when", "can", "how",
+            "is", "could", "for", "though", "if",
+            "your", "dad", "father", "grand", "ok",
+    };
+
+	if (sortOfWord(words[0].c_str()) != "noun") {
+		cout<<"error: word sort error!" << endl;
 		getch();
-	}
+	} else {
+        for (int i = 0; i < words.size(); ++i) {
+            const char * word = words[i].c_str();
+            const string sort = "\"" + sortOfWord(word) + "\"";
+            const string sortId = printableSortIdsOfWord(word);
+            printf("sort of word %-16s is \x1b[40;94m%-32s\x1b[;m \x1b[40;93m %s\x1b[40;97m\n",
+                   ("\"" + string(word) + "\"").c_str(),
+                   sort.c_str(),
+                   sortId.c_str());
+        }
+        getch();
+    }
 
 //	string a = "ABC";
 //	string b = nullptr;

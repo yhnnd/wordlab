@@ -215,23 +215,42 @@ bool sts::DebugSettings() {
 
 void sts::FrameworkDebug() {
     int x = 0, y = 5;
+
+    reset_debug();
+
+    if (DebugSettings() == false) {
+        return;
+    }
+
     bool AskCharPrev = _Ask;
     bool ShowMsgPrev = _Show;
+
     for(;;) {
-        reset_debug();
-        if(DebugSettings()==false) {
-            break;
-        }
         _Ask = show_debug_message;
         _Show = show_debug_message;
+
         colorset(lightwhite);
         clearScreen();
+
         banner();
+
         memset(this->s, 0, sizeof(s));
+        memset(this->sOriginal, 0, sizeof(s));
+        memset(this->sModified, 0, sizeof(s));
+
         InputDebug();
-        FrameworkCore(x, y);
-        const char ch = popup("Press [ENTER] to exit", -1);
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        fflush(stdin);
+
+        if (this->rwin > 0) {
+            FrameworkCore(x, y);
+        }
+
+        const char ch = popup("Press [ESC] to exit", -1);
         if (ch == KEY_CARRIAGE_RETURN || ch == KEY_NEW_LINE) {
+            continue;
+        } else if (ch == KEY_ESC) {
             break;
         }
     }

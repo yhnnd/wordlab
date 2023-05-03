@@ -1,11 +1,9 @@
-int SortEX_REALNOUN(char s[]) { //Ãû´Ê¼Ò×å(ÖĞ)
-	if(
-	    (WordSort(s)==1||//n.
-	     WordSort(s)==8||//pron.
-	     WordSort(s)==3||//adj.
-	     WordSort(s)==11//art.
-	    ) && SortEX_WH(s)!=0
-	)
-		return 0;
+int SortEX_REALNOUN(char s[]) { //åè¯å®¶æ—(ä¸­)
+	if (
+            wordSortIncludes(s, {1, 8, 3, 11})//n.//pron.//adj.//art.
+	        && SortEX_WH(s)!=0
+	) {
+        return 0;
+    }
 	return -1;
 }

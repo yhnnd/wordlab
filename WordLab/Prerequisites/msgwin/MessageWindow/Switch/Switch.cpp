@@ -10,7 +10,7 @@ int MessageWindow::Switch(int x,int y,int width,char *what,int max,int w,int n) 
 		nprev = n;
 		if (r == 13 || r == 10) {
             break;
-        } else if(r=='r'||r=='R'||r==8||r==27) {
+        } else if(r=='r'||r=='R'||r==KEY_DELETE||r==KEY_ESC||r==MAC_OS_KEY_DELETE) {
             return -1;
         } else if(r=='l'||r=='L') {
 			deny(_LoopLock,_LoopLock);
@@ -48,7 +48,7 @@ int MessageWindow::Switch(int x,int y,int width,std::vector<std::string> what,in
 		nprev = n;
 		if (c == 13 || c == 10)  {
             break;
-        } else if(c=='r'||c=='R'||c==8||c==27) {
+        } else if(c=='r'||c=='R'||c==KEY_DELETE||c==MAC_OS_KEY_DELETE||c==KEY_ESC) {
             return -1;
         } else if(c=='e'||c=='E'||c=='w'||c=='W') {
             n--;

@@ -6,6 +6,8 @@ int SortEX_BE(char *s) {
 	        ||strcmp(s,"were")==0
 	        ||strcmp(s,"be")==0
 	        ||strcmp(s,"been")==0
-	  ) return 0;
+	  ) {
+        return 0;
+    }
 	return -1;
 }

@@ -13,8 +13,11 @@ int SpecialWordCheck(char specialword[][30],int max) {
 				specialflag = true;
 			}
 		if(!specialflag) {
-			if(WordSort(keyword)) Dialog.output(string("Normal:(")+keyword+")",lightyellow);
-			else                  Dialog.output(string("Unknown:(")+keyword+")",lightred);
+			if (wordSort(keyword).size()) {
+                Dialog.output(string("Normal:(")+keyword+")",lightyellow);
+            } else {
+                Dialog.output(string("Unknown:(")+keyword+")",lightred);
+            }
 		}
 	}
 end:

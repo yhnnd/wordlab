@@ -13,12 +13,18 @@ void WordSortSelect(sts::word s) {
 		"pron.",
 		"aux.",
 		"conj.",
-		"art."
+		"art.",
+        "int.",
+        "num.",
+        "c.",
+        "u.",
+        "s.",
+        "pl."
 	};
 	int height = sizeof(msg) / sizeof(msg[0]);
 	MessageWindow.Show(pos.X,pos.Y,width,&msg[0][0],height,width);
 	s.type = MessageWindow.Switch(pos.X,pos.Y,width,&msg[0][0],height,width,1);
-	strcpy(s.sort,sortofword(s.type));
+	strcpy(s.sort, getWordSortNameById(s.type));
 	MessageWindow.Hide(pos.X,pos.Y,width,&msg[0][0],height,width);
 	resetxy(pos);
 }

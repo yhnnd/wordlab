@@ -168,7 +168,7 @@ int launch(string msg) {
 			cout<<"{"
 			<<"\"db-"<<lth<<"-"<<i<<'\"'
 			<<','
-			<<'\"'<<sortofword(msg.c_str())<<'\"'
+			<<'\"'<< sortOfWord(msg.c_str()) <<'\"'
 			<<','
 			<<'\"'<<Chinese(lth,i)<<'\"'
 			<<"}";

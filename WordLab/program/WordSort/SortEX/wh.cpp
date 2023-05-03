@@ -7,6 +7,8 @@ int SortEX_WH(char s[]) {
 	        ||strcmp(s,"whom")==0
 	        ||strcmp(s,"whose")==0
 	        ||strcmp(s,"how")==0
-	  )return 0;
+	  ) {
+        return 0;
+    }
 	return -1;
 }

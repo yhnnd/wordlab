@@ -2,13 +2,13 @@ void sts::WordsOrderFindMain() {
     int r, r0, r1;
     FindMain:
     for(r=0,r0=-1; r<=rwin; r++) {
-        if(WordSort(s[r].txt)==1) {
+        if(wordSortIncludes(s[r].txt, {1})) {
             r0=r;    //n.
             break;
         }
     }
     for(r=0,r1=-1; r<=rwin; r++) {
-        if(WordSort(s[r].txt)==8) {
+        if(wordSortIncludes(s[r].txt, {8})) {
             r1=r;    //pron.
             break;
         }

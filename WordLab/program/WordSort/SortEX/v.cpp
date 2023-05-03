@@ -1,9 +1,9 @@
 int SortEX_VERB(char *s) {
 	if(
-	    WordSort(s)==2||//verb
-	    WordSort(s)==5||//vt.
-	    WordSort(s)==6||//vi.
+	    wordSortIncludes(s, {2, 5, 6})||//verb //vt. //vi.
 	    strcmp(s,"do")==0
-	)return 0;
+	) {
+        return 0;
+    }
 	return -1;
 }

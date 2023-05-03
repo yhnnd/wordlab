@@ -26,21 +26,6 @@
   what n. can i do(adv.) to help you ...?
    r0  r1         r2 r3
 */
-/******************************************************************************/
-//全新疑问句型检测器 6
-//Pattern:        who    is    the    guy    who   stole   my   car?
-//Pattern: can    i    know    who  (do you think)  is ...? ->  can i know (you do think) ... is who?
-//Pattern: who is your father?
-/******************************************************************************/
-//全新疑问句型检测器 7
-//Pattern: is this n. ...? -> this n. is ...? //Updated 2015.05.31
-//exception:is this yours? -> this is yours? //Updated 2015/06/29
-/******************************************************************************/
-//全新疑问句型检测器 8
-//Pattern: whose ... n2. v. this ... n1.?     ->  this ... n1. (be)v.(by) whose ... n2.?
-//Pattern: of which ... n2. v. this ... n1.?  ->  this ... n1. (be)v.(by) of which ... n2.?
-//Pattern: of whom ... n2. v. this ... n1.?   ->  this ... n1. (be)v.(by) of whom ... n2.?
-
 
 //what which
 void sts::SWS1_5() {
@@ -55,10 +40,12 @@ void sts::SWS1_5() {
             finderr(r2, &r3, "noun", "SWS1-5", "noun2");
             seekverb(r3, &r4, rwin);
             finderr(r3, &r4, "verb", "SWS1-5", "verb2");
-            if (AskChar("SWS1-5-v.insert(", s[r2].txt, ")to(", s[r3].txt, ")?") == 13) {
+            const auto ch1 = AskChar("SWS1-5-v.insert(", s[r2].txt, ")to(", s[r3].txt, ")?");
+            if (ch1 == KEY_CARRIAGE_RETURN || ch1 == KEY_NEW_LINE) {
                 Word_Insert("Right", r2, r3);
             }
-            if (AskChar("SWS1-5-n.insert(", s[r0].txt, "-", s[r1].txt, ")to(", s[r4].txt, ")?") == 13) {
+            const auto ch2 = AskChar("SWS1-5-n.insert(", s[r0].txt, "-", s[r1].txt, ")to(", s[r4].txt, ")?");
+            if (ch2 == KEY_CARRIAGE_RETURN || ch2 == KEY_NEW_LINE) {
                 Words_Insert("Right", r4, r0, r1);
             }
             break;
@@ -67,6 +54,13 @@ void sts::SWS1_5() {
 }
 
 
+
+/******************************************************************************/
+//全新疑问句型检测器 6
+//Pattern:        who    is    the    guy    who   stole   my   car?
+//Pattern: can    i    know    who  (do you think)  is ...? ->  can i know (you do think) ... is who?
+//Pattern: who is your father?
+
 //who where
 //include: who can i turn to? except: who can help me?
 //Updated 2015.5.31
@@ -74,7 +68,7 @@ void sts::SWS1_6() {
     int r,r0,r1,r2,r3,r4;
     for(r0=0; r0<rwin; r0++)
         if((strcmp(s[r0].txt,"who")==0||strcmp(s[r0].txt,"where")==0)
-           &&(SortEX(s[r0+1].txt,"VERB")==0||(WordSort(s[r0+1].txt)==9&&SortEX(s[r0+2].txt,"VERB")!=0))
+           &&(SortEX(s[r0+1].txt,"VERB")==0||(wordSortIncludes(s[r0+1].txt, {9}) && SortEX(s[r0+2].txt,"VERB")!=0))
                 ) {
             seekverb(r0,&r1,rwin);
             finderr(r0,&r1,"verb","SWS1-6","verb1");
@@ -96,12 +90,18 @@ void sts::SWS1_6() {
 }
 
 
+
+/******************************************************************************/
+//全新疑问句型检测器 7
+//Pattern: is this n. ...? -> this n. is ...? //Updated 2015.05.31
+//exception:is this yours? -> this is yours? //Updated 2015/06/29
+
 //be+n.?
 void sts::SWS1_7() {
     int r,r0,r1,r2,r3,r4;
     for(r0=0; r0<rwin; r0++) {
         if(SortEX(s[r0-1].txt,"wh")!=0&&SortEX(s[r0].txt,"BE")==0
-           &&WordSort(s[r0+1].txt)==8&&SortEX(s[r0+1].txt,"WH")!=0) {
+           &&wordSortIncludes(s[r0+1].txt, {8}) && SortEX(s[r0+1].txt,"WH") != 0) {
             seeknounEX(r0,&r1,rwin);
             finderr(r0,&r1,"noun","SWS1-7","noun1");
             const char ch1 = AskChar("SWS1-7A right insert",toString(r0),s[r0].txt,"to",toString(r1),s[r1].txt,"?");
@@ -116,6 +116,14 @@ void sts::SWS1_7() {
         }
     }
 }
+
+
+
+/******************************************************************************/
+//全新疑问句型检测器 8
+//Pattern: whose ... n2. v. this ... n1.?     ->  this ... n1. (be)v.(by) whose ... n2.?
+//Pattern: of which ... n2. v. this ... n1.?  ->  this ... n1. (be)v.(by) of which ... n2.?
+//Pattern: of whom ... n2. v. this ... n1.?   ->  this ... n1. (be)v.(by) of whom ... n2.?
 
 //whose
 void sts::SWS1_8() {

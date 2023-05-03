@@ -2,19 +2,17 @@ sts::typeInquiryEndType sts::getInquiryEndByPunct(const char punct) {
     sts::typeInquiryEndType inquiryEnd = 0;
     if (punct != '?') {
         return 0;
-    } else if (WordSort(s[0].txt)==1//n.
-    ||WordSort(s[0].txt)==8//pron.
-    ||WordSort(s[0].txt)==9//aux.
-    ||WordSort(s[0].txt)==2//v.
-    ||WordSort(s[0].txt)==5//vt.
-    ||WordSort(s[0].txt)==6//vi.
+    } else if (
+            SortEX(s[0].txt,"wh") == 0
+            || wordSortIncludes(s[0].txt, {3, 4})//adj.//adv.
     ) {
-        inquiryEnd = 1;//吗
-    } else if (SortEX(s[0].txt,"wh") == 0
-    ||WordSort(s[0].txt)==3//adj.
-    ||WordSort(s[0].txt)==4//adv.
+        // 特殊疑问句. 用 "是" or "否" 回答.
+        inquiryEnd = 1;// "呢"
+    } else if (
+            wordSortIncludes(s[0].txt, {1, 8, 9, 2, 5, 6})//n.//pron.//aux.//v.//vt.//vi.
     ) {
-        inquiryEnd = 2;//呢
+        // 特殊疑问句. 不能用 "是" or "否" 回答.
+        inquiryEnd = 2;// "吗"
     }
     return inquiryEnd;
 }
@@ -23,10 +21,10 @@ string sts::getInquiryEndDefs(sts::typeInquiryEndType inquiryEnd) {
     string defs = "";
     switch(inquiryEnd) {
         case 1:
-            defs = "吗";
+            defs = "呢";
             break;
         case 2:
-            defs = "呢";
+            defs = "吗";
             break;
         case 3:
             defs = "呀";

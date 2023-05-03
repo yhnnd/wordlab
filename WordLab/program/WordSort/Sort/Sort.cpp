@@ -1,7 +1,9 @@
-int WordSort(const char *s) {
+std::map<int, std::string> WordSort(const char *s, const set<int> preferredSortSymbols) {
     const unsigned short delimLth = 1;
 	char c[32];
-	int sort = 0, r, k, km, lth = strlen(s);
+	int r, k, km, lth = strlen(s);
+
+    std::map<int, std::string> result;
 
 	FILE *fp = Library(lth,EN,"r");
 
@@ -19,10 +21,19 @@ int WordSort(const char *s) {
             }
         }
 		if (km == lth) {
-			sort = WordSortCore(lth,k);
+			result = WordSortCore(lth, k, preferredSortSymbols);
 			break;
 		}
 	}
 	fclose(fp);
-	return sort;
+	return result;
+}
+
+int wordSortIncludes(const char * word, const set<int> preferredSortIds) {
+    return WordSort(word, preferredSortIds).size();
+}
+
+std::map<int, std::string> wordSort(const char * word) {
+    const set<int> availableSortIds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+    return WordSort(word, availableSortIds);
 }

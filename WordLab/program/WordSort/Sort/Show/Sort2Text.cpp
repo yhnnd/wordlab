@@ -1,10 +1,10 @@
-const char *sortofword(const int n) {
+const char *getWordSortNameById(const int n) {
 	switch (n) {
 		case 0:
 			return "no type";
 			break;
 		case 1:
-			return "noun";
+            return "noun";
 			break;
 		case 2:
 			return "verb";
@@ -34,8 +34,26 @@ const char *sortofword(const int n) {
 			return "conjuction";
 			break;
 		case 11:
-			return "article";
+            return "article";
 			break;
+        case 12:
+            return "interjection";
+            break;
+        case 13:
+            return "numeral";
+            break;
+        case 14:
+            return "countable";
+            break;
+        case 15:
+            return "uncountable";
+            break;
+        case 16:
+            return "single";
+            break;
+        case 17:
+            return "plural";
+            break;
 		default:
 			return "Unknown";
 			break;
