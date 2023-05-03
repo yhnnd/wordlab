@@ -16,8 +16,8 @@ int main(int argc,char **argv) {
 
     vector<string> words= {
             "apple", "retain", "harm", "abandon", "joke",
-            "who", "what", "when", "can", "how",
-            "is", "could", "for", "though", "if",
+            "who", "what", "when", "how", "is",
+            "can", "could", "must", "for", "though", "if",
             "your", "dad", "father", "grand", "ok",
     };
 

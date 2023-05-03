@@ -24,15 +24,70 @@ void sts::copySentence(word * wordsDst, const word * wordsSrc, const int numOfWo
 }
 
 
-void sts::printSentence(const word * words, const int numOfWords, const struct consoleColor color) {
+void sts::printSentence(const word * words, const int numOfWords, const struct consoleColor color,
+        const char * mode,
+        const std::map<int, string> stops) {
+    bool showWordNumber = false;
+    bool showStops = false;
+
+    if (mode != nullptr && strlen(mode)) {
+        showWordNumber = strindex(mode, "show_word_number") >= 0;
+        showStops = strindex(mode, "show_stops") >= 0;
+    }
+
+    string stopName = "";
+
     colorrecord(colorPrev);
     setForegroundColorAndBackgroundColor(color.foregroundColor, color.backgroundColor);
+
     for (int i = 0; i < numOfWords; ++i) {
-        printf("%s ", words[i].txt);
+        if (showStops) {
+            // Print Stops.
+            if (showWordNumber) {
+                setForegroundColorAndBackgroundColor("#gry-", "-blk");
+                printf("%d", i);
+                setForegroundColorAndBackgroundColor(color.foregroundColor, color.backgroundColor);
+            }
+
+            const auto cursor = stops.find(i);
+            stopName = "";
+            if (cursor != stops.end()) {
+                stopName = cursor->second;
+            }
+            const int wordLth = strlen(words[i].txt);
+            // Print whitespaces and stopName(if stopName is available).
+            for (int j = 0; j < wordLth; ++j) {
+                if (stopName.length() && j == 0) {
+                    // Print StopName for current word.
+                    if (wordLth < stopName.length()) {
+                        // Super Short Word.
+                        stopName.erase(wordLth);
+                    }
+                    printf("%s", stopName.c_str());
+                    j = stopName.length() - 1;
+                    stopName = "";
+                    continue;
+                } else {
+                    // No StopName for current word.
+                    putc(' ', stdout);
+                }
+            }
+            // Print a whitespace to for separating words.
+            putc(' ', stdout);
+        } else {
+            // Print Sentence.
+            if (showWordNumber) {
+                setForegroundColorAndBackgroundColor("blk-", "-wte");
+                printf("%d", i);
+                setForegroundColorAndBackgroundColor(color.foregroundColor, color.backgroundColor);
+            }
+            printf("%s ", words[i].txt);
+        }
     }
     if (ispunct(this->punct)) {
         printf("%c", this->punct);
     }
+
     colorreset(colorPrev);
 }
 

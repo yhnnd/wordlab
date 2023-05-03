@@ -8,7 +8,9 @@
 //8: whose ... n2. v. this ... n1.?     ->  this ... n1. (be)v.(by) whose ... n2.?
 //   of which ... n2. v. this ... n1.?  ->  this ... n1. (be)v.(by) of which ... n2.?
 //   of whom ... n2. v. this ... n1.?   ->  this ... n1. (be)v.(by) of whom ... n2.?
+
 /******************************************************************************/
+
 //全新疑问句型检测器 5
 // 2015/06/13
 /*(wh.)+(n./ad.)+(v./aux./be)+(n.)
@@ -30,7 +32,7 @@
 //what which
 void sts::SWS1_5() {
     int r,r0,r1,r2,r3,r4;
-    for(r0=0; r0<rwin; r0++) {
+    for (r0 = 0; r0 < rwin; r0++) {
         if (SortEX(s[r0].txt, "wh") == 0 && (strcmp(s[r0].txt, "what") == 0 || strcmp(s[r0].txt, "which") == 0)) {
             seeknoun(r0, &r1, rwin);
             finderr(r0, &r1, "noun", "SWS1-5", "noun1");
@@ -40,14 +42,61 @@ void sts::SWS1_5() {
             finderr(r2, &r3, "noun", "SWS1-5", "noun2");
             seekverb(r3, &r4, rwin);
             finderr(r3, &r4, "verb", "SWS1-5", "verb2");
-            const auto ch1 = AskChar("SWS1-5-v.insert(", s[r2].txt, ")to(", s[r3].txt, ")?");
+
+            int y = 2;
+            if (this->show_debug_message) {
+                clearscreen(0, 5, ScreenX, 15);
+                gotoxy(0, y += 4);
+                this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
+                printf("\n");
+                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {r1, "r1"}, {r2, "r2"}, {r3, "r3"}, {r4, "r4"}});
+                printf("\nSWS1-5 insert s[r2] \"%s\" to r[3] \"%s\"\n", s[r2].txt, s[r3].txt);
+            }
+
+//             0    1    2  3  4  5   6   7   8   9
+//            what else can i do for you to help you ?
+//            r1 = 1, r2 = 4, r3 = 6, r4 = 8
+//            1 insert s[r2] "do" to r[3] "you"
+//            what else can i for you do to help you ?
+
+            const auto ch1 = AskChar("SWS1-5-v.insert r2(", s[r2].txt, ") to r3(", s[r3].txt, ")?");
             if (ch1 == KEY_CARRIAGE_RETURN || ch1 == KEY_NEW_LINE) {
                 Word_Insert("Right", r2, r3);
             }
-            const auto ch2 = AskChar("SWS1-5-n.insert(", s[r0].txt, "-", s[r1].txt, ")to(", s[r4].txt, ")?");
-            if (ch2 == KEY_CARRIAGE_RETURN || ch2 == KEY_NEW_LINE) {
-                Words_Insert("Right", r4, r0, r1);
+
+
+
+
+            const int endPoint = r3;
+
+            if (this->show_debug_message) {
+                gotoxy(0, y += 4);
+                this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
+                printf("\n");
+                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {r1, "r1"}, {r2, "r2"}, {r3, "r3"}, {r4, "r4"}});
+                printf("\nSWS1-5 insert s[r0] \"%s\" - s[r1] \"%s\" to s[r3End] \"%s\"\n", s[r0].txt, s[r1].txt, s[endPoint].txt);
             }
+
+//             0    1    2   3   4    5    6     7     8    9
+//            what else can  i  for  you   do    to   help you ?
+//            r1 = 1,        r2 = 4,     r3 = 6,     r4 = 8
+//            2 insert s[r0] "what" - s[r1] "else" to s[r4] "help"
+//            can i for you do to help what else you ?
+
+            const auto ch2 = AskChar("SWS1-5-n.insert r0(", s[r0].txt, ") - r1(", s[r1].txt, ") to r3End(", s[endPoint].txt, ")?");
+            if (ch2 == KEY_CARRIAGE_RETURN || ch2 == KEY_NEW_LINE) {
+                Words_Insert("Right", endPoint, r0, r1);
+            }
+
+            if (this->show_debug_message) {
+                gotoxy(0, y += 4);
+                this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
+                printf("\n");
+                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {r1, "r1"}, {r2, "r2"}, {r3, "r3"}, {r4, "r4"}});
+                printf("\nSWS1-5 Done. Press Any Key To Continue.\n");
+                getch();
+            }
+
             break;
         }
     }

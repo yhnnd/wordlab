@@ -217,7 +217,9 @@ public:
     // Framework
     void banner();
     void copySentence(word *, const word *, const int);
-    void printSentence(const word *, const int, const consoleColor);
+    void printSentence(const word *, const int, const consoleColor,
+                       const char * mode = "",
+                       const std::map<int, string> stops = {});
     void FrameworkCore(int x, int y);
     char Input(int x, int y);
     void Framework();
