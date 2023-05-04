@@ -191,7 +191,8 @@ void gotoxy(const int x, const int y);
 void gotoxy(COORD pos);
 void movexy(const int offsetX,const int offsetY);
 void clearline(const int x, const int y,const int n, const char c = ' ');
-void clearline(const int n, const char c = ' ');
+void clearline(const int x, const int y);
+void clearline(const int n);
 void clearscreen(const int x,const int y,const int width,const int height,const char fill=' ');
 //string
 int bitsof(int val);

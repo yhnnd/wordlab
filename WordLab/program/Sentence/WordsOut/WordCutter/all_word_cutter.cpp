@@ -15,6 +15,8 @@ void sts::wordcuttercheck(char *currentWord, const int wordLth, int *resultAffix
             if (currentAffix.isPrefix()) {
                 // if affix is prefix
                 if (strindex(currentWord, affixText.c_str()) == 0) {
+                    nAffix = currentAffixSymbol;
+                    deLth = affixLth;
                     break;
                 }
             } else if (currentAffix.isPostfix()) {

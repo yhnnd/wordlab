@@ -18,6 +18,10 @@ void clearline(const int x, const int y, const int lth, const char c) {
     }
 }
 
-void clearline(const int lth, const char c) {
-    clearline(-1, -1, lth, c);
+void clearline(const int x, const int y) {
+    clearline(x, y, ScreenX - 1, ' ');
+}
+
+void clearline(const int lth) {
+    clearline(-1, -1, lth, ' ');
 }

@@ -28,7 +28,25 @@ int sts::SmartTranslater() {
         return 0;
     }
 
-    this->pushWordAndDefs(s[rwout], s[rwout].txt, {"red-", "-blk"});
+    if (
+            this->wordGroups.size() == 0 // Is First Word.
+            ||
+            (this->wordGroups.end() - 1)->defZh.size() == 0 // Previous Word has no Defs.
+            || (
+                    (this->wordGroups.end() - 1)->defZh.size()// Previous Word has Defs.
+                    && (
+                    // Previous Word's Defs ends with alpha.
+                    isalpha( *( (this->wordGroups.end() - 1)->defZh.end() - 1) )
+                    ||
+                    // Previous Word's Defs is not valid.
+                    (this->wordGroups.end() - 1)->defsColor.foregroundColor == "red-"
+                    )
+            )
+    ) {
+        this->pushWordAndDefs(s[rwout], string(s[rwout].txt) + " ", {"red-", "-blk"});
+    } else {
+        this->pushWordAndDefs(s[rwout], "_" + string(s[rwout].txt) + " ", {"red-", "-blk"});
+    }
 
     return 0;
 }
