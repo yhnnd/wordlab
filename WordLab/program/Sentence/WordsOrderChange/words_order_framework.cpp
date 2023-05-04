@@ -11,22 +11,25 @@ void sts::WordsOrderFramework() {
 	}
 	fin.close();
 	WordsOrderFindMain();
-	if( show_debug_message==true && auto_word_translation==false ) {
-		WordsOrderSettings(ListPos,CheckerInfo);
+
+	if (this->configs.rearrange_words_order.manually_set_checkers == true) {
+		WordsOrderSettings(ListPos, CheckerInfo);
 	}
+
 	for(int n = 0; n < CheckerMax; n++ ) {
-		status(toString(ListPos[n])," ",CheckerInfo[ListPos[n]+1]);
-		if(show_debug_message) {
-			cout<<endl<<CheckerInfo[ListPos[n]+1]<<" => ";
-		}
+		if(this->configs.show_debug_message) {
+			printf("\n[%d] ListPos [%d] CheckerInfo \"%s\"\n", n, ListPos[n], CheckerInfo[ListPos[n]+1].c_str());
+		} else {
+            status(toString(ListPos[n]), " ", CheckerInfo[ListPos[n]+1]);
+        }
+
 		WordsOrderFrameworkCore(n,ListPos);
-		if(show_debug_message) {// print sentence rearranged
-			for(int r = 0; r < rwin; r++ ) {
-                cout<<s[r].txt<<" ";
-            }
-			if (ispunct(punct)) {
-                cout<<"\b"<<punct;
-            }
+
+		if(this->configs.show_debug_message) {
+            // print sentence rearranged
+            printf("\n=>");
+            this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number");
+            printf("\n");
 		}
 	}
 }

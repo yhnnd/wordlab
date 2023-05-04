@@ -190,7 +190,8 @@ COORD getxy();
 void gotoxy(const int x, const int y);
 void gotoxy(COORD pos);
 void movexy(const int offsetX,const int offsetY);
-void clearline(int x=-1,int y=-1,int n=ScreenX-1,const char c=' ');
+void clearline(const int x, const int y,const int n, const char c = ' ');
+void clearline(const int n, const char c = ' ');
 void clearscreen(const int x,const int y,const int width,const int height,const char fill=' ');
 //string
 int bitsof(int val);
@@ -439,7 +440,7 @@ class MessageWindow{
 	void Selectup  (char *,int,int,int,int,int,char*);
 	void Selectdown(char *,int,int,int,int,int,char*);
 	int Select(int,int,int,int,const char *,const char *,const char *);
-}MessageWindow;
+} MessageWindow;
 // table row
 class tablerow{
 	private:

@@ -1,6 +1,7 @@
 void MessageWindow::Highlight(const char *msg){
 	colorset(_background ? backlightwhite : lightwhite);
-	bsvline(msg,0,"<",">","(",")",",;");
+//    bsvline(msg,0,"<",">","(",")",",;");
+	bsvlineDisableColors(msg,0,"<",">","(",")",",;");
 }
 void MessageWindow::init(){
 	SetStyle(1,0,1,0,0);

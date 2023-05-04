@@ -75,7 +75,7 @@ int sts::Translation(int lth, int LineNumber, char * result, const size_t size) 
                 // IF LINE HAS MULTIPLE ITEMS THEN SELECT ITEM
                 int ATail = stroccurtimes(line.c_str(),"@");
                 int ItemNumber = 1;
-                if ( auto_word_translation == false && ATail > 1 ) {
+                if ( ATail > 1 && this->configs.word_translation.manually_select_definition == true ) {
                     // SELECT ITEM
                     ItemNumber = TranslationSelectItem(ATail, line, 2, 16, 20, 2);
                 }

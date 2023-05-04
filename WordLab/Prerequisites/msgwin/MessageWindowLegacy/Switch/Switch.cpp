@@ -28,11 +28,11 @@ int MessageWindow::Switch(int x,int y,int width,char *what,int max,int w,int n) 
             SwitchLoop(x,y,width,what,max,w,&n);
         }
 	}
-	if(!_background) {
+	if (!_background) {
         Highlight(what+n*w);
     }
-	if(n==0) {
-        if((n=Search(0,x,y,width,what,max,w))==-2) {
+	if (n == 0) {
+        if ((n = Search(0,x,y,width,what,max,w))==-2) {
             goto begin;
         }
     }

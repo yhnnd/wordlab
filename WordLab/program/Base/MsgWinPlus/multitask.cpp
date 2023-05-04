@@ -25,11 +25,11 @@ int multitask(int x,int y,int width,char Menu[][LINEMAX],int T=0,int n=0,bool ba
         a = MessageBlock.Switcher(Menu);
     }
 
-    if (a >= 0 && a < maxlength) {
-//        popup("<grn->(your choice:) ", toString(a), -1);
-    } else {
-        popup("<red-> (error) <ylw->(\\(illegal choice\\))",-1);
-    }
+//    if (a >= 0 && a < maxlength) {
+////        popup("<grn->(your choice:) ", toString(a), -1);
+//    } else {
+////        popup("<red-> (error) <ylw->(\\(illegal choice\\)) ", string("\'") + toString(a) + "\'", -1);
+//    }
 #endif
 	MessageWindow.SetBackground(backcolorold);
 	return a;

@@ -189,7 +189,7 @@ void sts::WordsOut() {
         this->inquiryEndFromPunct = getInquiryEndByPunct(this->punct);
         const string inquiryEndDefs = this->getInquiryEndDefs(this->inquiryEndFromPunct);
         this->pushDefs(inquiryEndDefs, {"ylw-", "-blk"});
-        if (show_debug_message) {
+        if (this->configs.show_debug_message) {
             cout << endl << "punct = \'" << punct << "\' inquiryEndFromPunct = " << this->inquiryEndFromPunct << endl;
         }
     }

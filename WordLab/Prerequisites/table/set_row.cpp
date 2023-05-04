@@ -15,7 +15,7 @@ _table & _table::setrow(int numofcol){
 	return *this;
 }
 
-_table & _table::setrow(int colwidth,std::string coltext){
+_table & _table::setrow(const int colwidth, const std::string coltext) {
 	setrow(1);
 	setcol(colwidth,coltext);
 	return *this;

@@ -236,7 +236,7 @@ void sts::WordsOrderChange1(void) {
                 }
 
                 int y = 2;
-                if (this->show_debug_message) {
+                if (this->configs.show_debug_message) {
                     clearscreen(0, 5, ScreenX, 15);
                     gotoxy(0, y += 4);
                     this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
@@ -256,7 +256,7 @@ void sts::WordsOrderChange1(void) {
                 }
 
 
-                if (this->show_debug_message) {
+                if (this->configs.show_debug_message) {
                     gotoxy(0, y += 4);
                     this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
                     printf("\n");

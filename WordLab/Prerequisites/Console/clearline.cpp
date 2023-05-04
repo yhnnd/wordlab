@@ -1,17 +1,23 @@
-void clearline(int x,int y,int n,const char c) {
+void clearline(const int x, const int y, const int lth, const char c) {
     int r;
     bool flag = (x >= 0 && y >= 0);
+
 	if (flag) {
         gotoxy(x, y);
-    } else {
-        n = x;// pass only 1 parameter n, but is recognized as x
     }
-    for (r=1;r<=n;r++) {
-        std::cout<<c;
+    for (r = 0; r < lth; r++) {
+        printf("%c", c);
     }
+
     if (flag) {
         gotoxy(x,y);
-    } else for (r = 1; r <= n; r++) {
-        std::cout<<"\b";
+    } else {
+        for (r = 0; r < lth; r++) {
+            printf("\b");
+        }
     }
+}
+
+void clearline(const int lth, const char c) {
+    clearline(-1, -1, lth, c);
 }

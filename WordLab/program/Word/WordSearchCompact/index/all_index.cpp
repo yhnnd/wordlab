@@ -15,10 +15,13 @@ bool indexerror(){
 void indexCore(const std::string msg, int x, int y, WORD color){
     recordxy(pos);
     char wordbase[LINEMAX];
+
     colorset(color);
-    clearscreen(x,y,60,10);
-    gotoxy(x,y);
-    cout << msg;
+    clearscreen(x, y, 60, 10);
+
+    gotoxy(x , y);
+    printf("%s", msg.c_str());
+
     if(!indexerror() && IL) {
         Select(msg.c_str(), wordbase, x, y);
     }

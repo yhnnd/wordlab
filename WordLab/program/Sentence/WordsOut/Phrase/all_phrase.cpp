@@ -16,7 +16,7 @@ string sts::getPhraseLine(const unsigned int phraseLth, const vector<string> phr
 bool sts::PhraseCheckerAsk(const unsigned int phraseLth, const vector<string> phrase) {
     ::_AskOnce = true;
     const int keyCode = AskChar("Use Phrase (", toString(phraseLth), ") \"", getPhraseLine(phraseLth, phrase), "\"?");
-    if (show_debug_message) {
+    if (this->configs.show_debug_message) {
         printf("\nPhraseCheckerAsk: keyChar = '%c' keyCode = %d\n", keyCode, keyCode);
     }
 //    Carriage Return (Enter) = CR = 13 = '\r'
@@ -56,7 +56,7 @@ bool sts::PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth,
     }
     if (i == phraseLth) {
         // Phrase Matched
-        if (show_debug_message) {
+        if (this->configs.show_debug_message) {
             printf("\nPhraseCheckerCoreKernel: Matched Phrase: \"%s\" phraseDef = \"%s\"\n",
                    sts::getPhraseLine(phraseLth, phrase).c_str(), phraseDef.c_str());
             printf("\ncurrentCursor: x = \"%d\", y = \"%d\"\n", getxy().X, getxy().Y);
@@ -66,7 +66,7 @@ bool sts::PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth,
             // Use The Matched Phrase.
             this->PhraseCheckerUsePhrase(phraseLth, phrase, phraseDef);
         } else {
-            if (show_debug_message) {
+            if (this->configs.show_debug_message) {
                 printf("\nPhraseCheckerCoreKernel: You reject the matched phrase: \"%s\" phraseDef = \"%s\"\n",
                        sts::getPhraseLine(phraseLth, phrase).c_str(), phraseDef.c_str());
             }

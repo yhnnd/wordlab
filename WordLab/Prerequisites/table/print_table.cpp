@@ -1,4 +1,4 @@
-_table & _table::printtable(int LeftIndent, int TopIndent) {
+_table & _table::printtable(const int LeftIndent, const int TopIndent) {
 	if (TopIndent >= 0) {
         gotoxy(0, TopIndent);
     }

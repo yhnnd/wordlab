@@ -38,7 +38,6 @@ void sts::printSentence(const word * words, const int numOfWords, const struct c
     string stopName = "";
 
     colorrecord(colorPrev);
-    setForegroundColorAndBackgroundColor(color.foregroundColor, color.backgroundColor);
 
     for (int i = 0; i < numOfWords; ++i) {
         if (showStops) {
@@ -72,106 +71,190 @@ void sts::printSentence(const word * words, const int numOfWords, const struct c
                     putc(' ', stdout);
                 }
             }
-            // Print a whitespace to for separating words.
-            putc(' ', stdout);
+            if (i != numOfWords - 1) {
+                // If current word is not the last word.
+                // Print a whitespace to for separating words.
+                putc(' ', stdout);
+            }
         } else {
-            // Print Sentence.
+            // If Not Print Stops, Print Sentence .
             if (showWordNumber) {
                 setForegroundColorAndBackgroundColor("blk-", "-wte");
                 printf("%d", i);
                 setForegroundColorAndBackgroundColor(color.foregroundColor, color.backgroundColor);
             }
-            printf("%s ", words[i].txt);
+
+            // Print Word.
+            setForegroundColorAndBackgroundColor(color.foregroundColor, color.backgroundColor);
+            printf("%s", words[i].txt);
+
+            if (i + 1 < numOfWords && (ispunct(this->punct) && i + 1 >= numOfWords -1) == false) {
+                // If current word is not the last word.
+                // Print a whitespace to for separating words.
+//                setForegroundColorAndBackgroundColor("blk-", "-#gry");
+                printf(" ");
+            }
         }
     }
     if (ispunct(this->punct)) {
+//        setForegroundColorAndBackgroundColor("blk-", "-wte");
         printf("%c", this->punct);
     }
+
+//    printf("            punct is = %d '%c'", this->punct, this->punct);
 
     colorreset(colorPrev);
 }
 
 
-void sts::FrameworkCore(int x, int y) {
+// width = ScreenX - 1, height = 16.
+int sts::FrameworkCore(int x, int y, const int width, const int height) {
     recordxy(pos);
     // Backup Sentence.
     const unsigned int numOfWords = this->rwin + 1;
     this->copySentence(this->sOriginal, this->s, numOfWords);
 
-    if (numOfWords > 1 && rearrange_words_order) {
+    if (numOfWords > 1 && this->configs.rearrange_words_order.enabled) {
         WordsOrderFramework();
     }
 
     {
         colorrecord(colorPrev);
         setForegroundColorAndBackgroundColor("wte-", "-#gry");
-        clearscreen(0, 6, ScreenX - 1, 16);
+        clearscreen(0, 6, width, height);
         colorreset(colorPrev);
     }
 
     gotoxy(x, y + 1);
 
-    if (show_debug_message) {
+    if (this->configs.show_debug_message) {
         cout << endl << "Executing Words Out" << endl;
     }
 
     this->wordGroups.clear();
     WordsOut();
 
-    if (show_debug_message) {
-        cout << endl << "Words Out Done" << endl;
+    if (this->configs.show_debug_message) {
+        printf("\nWords Out Done\n");
+        printf("\noriginal sentence: ");
         this->printSentence(this->sOriginal, numOfWords, {"#blu-", "-wte"});
-        cout << endl;
+        printf("\nmodified sentence: ");
         this->printSentence(this->sModified, this->rwout, {"#red-", "-ylw"});
-        cout << endl << "Print Sentence Translation" << endl;
+    }
+
+
+    // Generate Summary
+    const int cols = 6, cw[cols] = {5, 13, 13, 10 ,10, 16};
+    int tw = 2 * (cols - 1);
+    for (int i = 0; i < cols; ++i) {
+        tw += cw[i];
+    }
+    _table t;
+    t.clear();
+    t.setrowborder(tw + 1);
+    t.setrow(tw,"Summary").setrowborder();
+    t.setrow(cols);
+    t.setcol(cw[0], "#");
+    t.setcol(cw[1],"before");
+    t.setcol(cw[2],"after");
+    t.setcol(cw[3],"trimmed");
+    t.setcol(cw[4],"affix");
+    t.setcol(cw[5],"definition");
+    t.setrowborder();
+    for (int i = 0; i < numOfWords; ++i) {
+        t.setrow(cols);
+        t.setcol(toString(i));// #
+        t.setcol(string("\"") + this->s[i].txt + "\"");// words before.
+        t.setcol(string("\"") + this->sModified[i].txt + "\"");// words after.
+        t.setcol("trimmed");// Status
+        t.setcol("affix");// Times
+        t.setcol("def");// Result
+    }
+    t.setrowborder();
+    t.setrow(2).setcol(cw[0]+cw[1]+2, "punctuation").setcol(tw-cw[0]-cw[1]-4,'\''+toString(this->punct)+'\'').setrowborder();
+    t.setcolborder('|');
+
+    if (this->configs.show_table_summary) {
+        t.printtable(0,9);
+    }
+
+    if (this->configs.show_debug_message) {
+        printf("\nPrint Sentence Translation\n");
+        setForegroundColorAndBackgroundColor("blk-", "-grn");
+        printf("Translation");
+        setForegroundColorAndBackgroundColor("wte-", "-blk");
+        fputc(' ', stdout);
     }
 
     PrintSentenceTranslation();
 
-    if (show_debug_message) {
-        cout << endl << "All Done" << endl;
-    }
+//    if (show_debug_message) {
+//        cout << endl << "All Done" << endl;
+//    }
 
     // Restore Sentence.
     this->copySentence(this->s, this->sOriginal, numOfWords);
     resetxy(pos);
+
+    return numOfWords;
 }
 
 
-char sts::Input(int x,int y) {
-    int r;
+char sts::Input(const COORD inputPos, const COORD indexPos, const COORD translationPos) {
+    int r = 0;
+
+    auto applyInput = [&] () {
+        strclr(s[rwin].txt, r);
+        // Print Translation
+        FrameworkCore(translationPos.X, translationPos.Y, ScreenX - 1, 1);
+        // Print Input Suggestions
+        indexCore(s[rwin].txt, indexPos.X, indexPos.Y, green);
+        // Print Input Sentence.
+        gotoxy(inputPos);
+        colorset(lightgreen);
+        clearline(inputPos.X, inputPos.Y, ScreenX - inputPos.X - 1);
+        this->printSentence(this->s, this->rwin + 1, {"grn-", "-blk"});
+        // Print Cursor.
+//        setForegroundColorAndBackgroundColor("blk-", "-#gry");
+//        printf(" ");
+    };
+
     char c;
-    for(r=0,c=0,strclr(s[rwin].txt);; r++) {
+    for (r = 0, c = 0, strclr(s[rwin].txt); ; ) {
+
         begin:
-        colorset(lightwhite);
-        c = getche();
-        if(c==8) {
-            cout<<" \b";
+        applyInput();
+        c = getch();
+
+        if (c == KEY_DELETE || c == MAC_OS_KEY_DELETE) {
             c = 0;
             punct = 0;
             if( r > 0 ) {
-                s[rwin].txt[--r]=0;
-            } else if(rwin) {
-                strclr(s[rwin].txt);
-                r = strlen(s[--rwin].txt);
-                FrameworkCore(x,y);
+                s[rwin].txt[--r] = 0;
             } else {
-                break;
+                // r == 0
+                strclr(s[rwin].txt);
+                if (rwin) {
+                    r = strlen(s[--rwin].txt);
+                } else {
+                    break;
+                }
             }
-            indexCore(s[rwin].txt,12,8,green);
             goto begin;
         } else if(c=='#'||c=='@') {
-            cout<<"\b";
             WordSortSelect(s[rwin]);
             r--;
         } else if(c==' '||c==','||c==';'||c=='.'||c=='?'||c=='!'||c == 13||c == 10||c == 0) {
             break;
-        } else if( c > 0 ) {
+        } else if (isalpha(c) || isdigit(c) || ispunct(c)) {
             s[rwin].txt[r] = c;
         }
-        indexCore(s[rwin].txt,12,8,green);
+
+        r++;
     }
-    strclr(s[rwin].txt,r);
+
+    applyInput();
+
     if (c==','||c==';'||c=='.'||c=='?'||c=='!'||c == 13||c == 10||c == 0) {
         return c;
     } else {
@@ -181,27 +264,25 @@ char sts::Input(int x,int y) {
 
 
 void sts::Framework() {
-    int x = 0, y = 5;
+    const COORD pos = {0, 5};
     const bool Askprev = _Ask;
     _Ask = false;
     for(;;) {
-        reset();
+        reset(false);
         colorset(lightwhite);
         clearScreen();
         banner();
         for (rwin = 0; ; rwin++) {
-            punct = Input(x, y);
-            if (punct == 0) {
-                break;
-            } else if (punct == 13) {
+            punct = Input(pos, {12, 8}, pos);
+            if (punct == 0 || punct == KEY_DELETE || punct == MAC_OS_KEY_DELETE || punct == KEY_ESC) {
+                if (this->rwin == 0 && strlen(this->s[this->rwin].txt) == 0) {
+                    break;
+                }
+            } else if (punct == 13 || punct == 10) {
                 break;
             }
-            FrameworkCore(x, y);
         }
-        if (punct == 0) {
-            break;
-        }
-        const char c = popup("Press [ESC] to exit", -1);
+        const char c = popup("Press [ESC] or [BACKSPACE] to exit.", -1);
         if (c == 8 /* backspace */|| c == 127 /* delete */|| c == 27 /* escape */) {
             break;
         }
@@ -236,29 +317,64 @@ void sts::InputDebug() {
 
 
 bool sts::DebugSettings() {
-    bool Continue = true;
-    int x = 20, y = 0, width = 40, r = 0, rprev = 0, total = 3;
     char msgs[][LINEMAX] = {
-            "<-gry>(configuration",
-            "<-gry>(show debug information",
-            "<-gry>(translate automatically",
-            "<-gry>(rearrange words order",
-            "<-gry>(done"
+            {" <wte-gry>(configuration"},
+            {" <wte-gry>([1] show debug message"},
+            {" <wte-gry>([2] show summary table"},
+            {" <#red-ylw>([3.1] enable rearrange words order"},
+            {" <wte-gry>([3.2] rearrange words order man set checkers"},
+            {" <wte-gry>([3.3] rearrange words order man change words order ask"},
+            {" <wte-gry>([3.4] rearrange words order man change words order show"},
+            {" <wte-#grn>([4] word translating man select definition"},
+            {" <blk-red>(quit"},
+            {" <wte-gry>(done"}
     };
-    int max = sizeof(msgs) / sizeof(msgs[0]);
+    const int max = sizeof(msgs) / sizeof(msgs[0]);
+    const int x = 12, y = 0, width = 60, numOfToggles = max - 3;
+#ifdef __APPLE__
+    const int xSwitch = x - 1;
+#elifdef _WIN32
+    const int xSwitch = x;
+#endif
     bool background = MessageWindow.SetBackground(true);
     bool monochrome = MessageWindow.SetMonochrome(true);
+
     MessageWindow.Show(x,y,width,&msgs[0][0],max,LINEMAX);
-    for(;; rprev=r) {
-        togglesShow(x,y,width,false,total,show_debug_message,auto_word_translation,rearrange_words_order);
-        r = MessageWindow.Switch(x,y,width,&msgs[0][0],max,LINEMAX,rprev);
-        toggles(x,y,width,false,r,total,&show_debug_message,&auto_word_translation,&rearrange_words_order);
-        if ( r <= 0 ) {// quit
+
+    bool Continue = true;
+    int r = 0, rprev = 0;
+
+    for(;; rprev = r) {
+        togglesShow (
+                x, y, width, false, numOfToggles,
+                this->configs.show_debug_message,
+                this->configs.show_table_summary,
+                this->configs.rearrange_words_order.enabled,
+                this->configs.rearrange_words_order.manually_set_checkers,
+                this->configs.rearrange_words_order.manually_change_words_order_ask,
+                this->configs.rearrange_words_order.manually_change_words_order_show,
+                this->configs.word_translation.manually_select_definition
+        );
+        r = MessageWindow.Switch(xSwitch, y, width, &msgs[0][0], max, LINEMAX, rprev);
+        if (r <= 0 || r == numOfToggles + 1/* quit */) {
             Continue = false;
             break;
-        } else if( r >= max-1 ) {
+        } else if ( r == numOfToggles + 2/* done */) {
             Continue = true;
             break;
+        } else if (r > numOfToggles + 2) {
+            popup(" DebugSettings: [Error] choice = ", toString(r), -1);
+        } else {
+            toggles (
+                    x, y, width, false, r, numOfToggles,
+                    &(this->configs.show_debug_message),
+                    &(this->configs.show_table_summary),
+                    &(this->configs.rearrange_words_order.enabled),
+                    &(this->configs.rearrange_words_order.manually_set_checkers),
+                    &(this->configs.rearrange_words_order.manually_change_words_order_ask),
+                    &(this->configs.rearrange_words_order.manually_change_words_order_show),
+                    &(this->configs.word_translation.manually_select_definition)
+            );
         }
     }
     MessageWindow.Hide(x,y,width,max,LINEMAX);
@@ -271,7 +387,7 @@ bool sts::DebugSettings() {
 void sts::FrameworkDebug() {
     int x = 0, y = 5;
 
-    reset_debug();
+    this->reset(true);
 
     if (DebugSettings() == false) {
         return;
@@ -281,8 +397,8 @@ void sts::FrameworkDebug() {
     bool ShowMsgPrev = _Show;
 
     for(;;) {
-        _Ask = show_debug_message;
-        _Show = show_debug_message;
+        _Ask = this->configs.rearrange_words_order.manually_change_words_order_ask;
+        _Show = this->configs.rearrange_words_order.manually_change_words_order_show;
 
         colorset(lightwhite);
         clearScreen();
@@ -298,12 +414,15 @@ void sts::FrameworkDebug() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         fflush(stdin);
 
-        FrameworkCore(x, y);
+        const int result = FrameworkCore(x, y, ScreenX - 1, 16);
+        if (result == 0) {
+            break;
+        }
 
-        const char ch = popup("Press [ESC] to exit", -1);
+        const char ch = popup("Press [ESC] or [BACKSPACE] to exit", -1);
         if (ch == KEY_CARRIAGE_RETURN || ch == KEY_NEW_LINE) {
             continue;
-        } else if (ch == KEY_ESC) {
+        } else if (ch == 8 /* backspace */|| ch == 127 /* delete */|| ch == KEY_ESC /* escape */) {
             break;
         }
     }

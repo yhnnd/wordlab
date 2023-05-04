@@ -1,4 +1,4 @@
-class _table{
+class _table {
 	private:
 		std::vector<_tablerow> rows;
 		std::map<std::string,std::string> labels;
@@ -39,7 +39,7 @@ class _table{
 		void outputlabels(std::string const & filename);
 		void readlabels(std::istream & is);
 		void readlabels(std::string const & filename);
-		_table & printtable(int LeftIndent = 0,int TopIndent =-1);
+		_table & printtable(int LeftIndent = 0, int TopIndent =-1);
 		void writetable( std::ostream & os );
 		void writetable(std::string const & filename);
 		void readtable( std::istream & is );

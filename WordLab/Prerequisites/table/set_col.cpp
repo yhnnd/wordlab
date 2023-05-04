@@ -11,7 +11,8 @@ _table & _table::setcol(int colwidth,std::string coltext){
 	}else colmax=0;
 	return * this;
 }
-_table & _table::setcol(std::string coltext){
+
+_table & _table::setcol(std::string coltext) {
 	int width = 0;
 	if( colnow<getrow(getnumofrow()-1).getnumofcol() ){
 		width = getwidth(getnumofrow()-1,colnow);

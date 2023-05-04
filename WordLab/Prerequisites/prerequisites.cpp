@@ -28,7 +28,7 @@ std::string getCurrentTime(){
 #include "script/all.cpp"//requires Maths & dataContainer
 #include "bsv/all_bsv.cpp"//requires script
 #include "input.cpp"
-#include "msgwin/all.cpp"//requires askchar & bsv & launch() & input
+#include "msgwin/all_message_window.cpp"//requires askchar & bsv & launch() & input
 #include "progress/all.cpp"//requires messagewindow
 #include "popup/all.cpp"//requires bsv & messagewindow
 #include "moniter/all.cpp"//requires progress & popup

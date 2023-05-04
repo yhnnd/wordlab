@@ -98,20 +98,44 @@ private:
 		int  preppos1[maxprep];
 		char preptrans0[maxprep][preplth];
 		char preptrans1[maxprep][preplth];
-		bool show_debug_message, auto_word_translation, rearrange_words_order;
-		void reset() {
-			show_debug_message = false;
-			auto_word_translation = true;
-			rearrange_words_order = true;
+
+        struct {
+            bool show_debug_message = false;
+            bool show_table_summary = false;
+            struct {
+                bool enabled = false;
+                bool manually_set_checkers = false;
+                bool manually_change_words_order_ask = false;
+                bool manually_change_words_order_show = false;
+            } rearrange_words_order;
+            struct {
+                bool manually_select_definition = false;
+            } word_translation;
+        } configs;
+
+		void reset(const bool isDebugging) {
+            if (isDebugging) {
+                // Is Debugging
+                configs.show_debug_message = true;
+                configs.show_table_summary = false;
+                configs.rearrange_words_order.enabled = true;
+                configs.rearrange_words_order.manually_set_checkers = false;
+                configs.rearrange_words_order.manually_change_words_order_ask = true;
+                configs.rearrange_words_order.manually_change_words_order_show = true;
+                configs.word_translation.manually_select_definition = true;
+            } else {
+                // Is Not Debugging
+                configs.show_debug_message = false;
+                configs.show_table_summary = false;
+                configs.rearrange_words_order.enabled = true;
+                configs.rearrange_words_order.manually_set_checkers = false;
+                configs.rearrange_words_order.manually_change_words_order_ask = false;
+                configs.rearrange_words_order.manually_change_words_order_show = false;
+                configs.word_translation.manually_select_definition = false;
+            }
 			TheMain = -1;
-			rwin = rwout = punct = 0;
-		}
-		void reset_debug() {
-			show_debug_message = true;
-			auto_word_translation = false;
-			rearrange_words_order = true;
-			TheMain = -1;
-			rwin = rwout = punct = 0;
+			rwin = rwout = 0;
+            punct = 0;
 		}
 public:
     // Words Insert
@@ -220,8 +244,8 @@ public:
     void printSentence(const word *, const int, const consoleColor,
                        const char * mode = "",
                        const std::map<int, string> stops = {});
-    void FrameworkCore(int x, int y);
-    char Input(int x, int y);
+    int FrameworkCore(int x, int y, int width, int height);
+    char Input (COORD inputPos, COORD suggestionsPos, COORD translationPos);
     void Framework();
 
     int InputDebugTerm();
