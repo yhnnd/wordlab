@@ -19,80 +19,145 @@
   how are you?
 */
 // 2015/06/15
-/*what color is this pen...?
-   r0   r1   r2      r3
-  what color does he like most?
-   r0   r1   r2            r3
-  what n. can i do(adv.) for you to ...?
-   r0  r1         r2         r3
-  what n. can i do(adv.) to help you ...?
-   r0  r1         r2 r3
+/*
+  what color is this pen ...?  =>  this pen  is  what color
+   r0   n1   v1  adj  n2       =>   n2  n2_  v1   r0   n1
+  what color does  he like most? =>   he does like most what color
+   r0   n1   v1aux n2  v1  v1adv      n2 v1aux v1 v1adv  r0   n1
+  what else  can    my   friend  do(adv.) for  our  team  to help you ? =>  my  friend  can  (do for your team) what else (to help you ?
+   r0   n1  v1aux   n2adj  n2    v1      conj  n3adj n3      ...        =>  n2adj  n2  v1aux (v1 conj n3adj n3)  r0   n1  (  ...
 */
+/*
+0what 1else 2can 3my 4good 5friend 6do 7for 8your 9good 10team 11to 12help 13you?
+ (what else) can (my good friend)   do  (for your good team)     to   help  you
+   r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
+   my  good  friend  can  do (for your good team)  what else  (to help you ?
+   n2adj       n2   v1aux v1 (conj n3adj     n3 )   r0   n1   (to help you ?
+ */
 
 //what which
 void sts::SWS1_5() {
-    int r,r0,r1,r2,r3,r4;
+    int r0, n1, v1aux, n2, v1, conj, n3;
     for (r0 = 0; r0 < rwin; r0++) {
         if (SortEX(s[r0].txt, "wh") == 0 && (strcmp(s[r0].txt, "what") == 0 || strcmp(s[r0].txt, "which") == 0)) {
-            seeknoun(r0, &r1, rwin);
-            finderr(r0, &r1, "noun", "SWS1-5", "noun1");
-            seekverb(r1, &r2, rwin);
-            finderr(r1, &r2, "verb", "SWS1-5", "verb1");
-            seeknounEX(r2, &r3, rwin);
-            finderr(r2, &r3, "noun", "SWS1-5", "noun2");
-            seekverb(r3, &r4, rwin);
-            finderr(r3, &r4, "verb", "SWS1-5", "verb2");
+/*
+0what 1else 2can 3my 4good 5friend 6do 7for 8your 9good 10team 11to 12help 13you?
+ (what else) can (my good friend)   do  (for your good team)     to   help  you
+   r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
+   my  good  friend  can  do (for your good team)  what else  (to help you ?
+   n2adj       n2   v1aux v1 (conj n3adj     n3 )   r0   n1   (to help you ?
+ */
+            findNoun(r0, &n1, rwin);
+            findCheck(r0, &n1, {"noun"}, "SWS1-5", "noun1");
+
+/*
+0what 1else 2can 3my 4good 5friend 6do 7for 8your 9good 10team 11to 12help 13you?
+ (what else) can (my good friend)   do  (for your good team)     to   help  you
+   r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
+       [^      ^]
+*/
+            findAux(n1, &v1aux, rwin);
+            findCheck(n1, &v1aux, {"auxil", "verb"}, "SWS1-5", "v1aux");
+
+            if (n1 == r0 && v1aux > r0 + 1) {
+                n1 = v1aux - 1;
+            }
+
+/*
+0what 1else 2can 3my 4good 5friend 6do 7for 8your 9good 10team 11to 12help 13you?
+ (what else) can (my good friend)   do  (for your good team)     to   help  you
+   r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
+           [  ^              ^ ]
+*/
+            findNoun(v1aux, &n2, rwin);
+            findCheck(v1aux, &n2, {"noun", "adjective", "pronoun"}, "SWS1-5", "noun2");
+
+/*
+0what 1else 2can 3my 4good 5friend 6do 7for 8your 9good 10team 11to 12help 13you?
+ (what else) can (my good friend)   do  (for your good team)     to   help  you
+   r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
+                         [  ^        ^ ]
+*/
+            findVerb(n2, &v1, rwin);
+            findCheck(n2, &v1, {"verb"}, "SWS1-5", "verb1");
+
+/*
+0what 1else 2can 3my 4good 5friend 6do 7for 8your 9good 10team 11to 12help 13you?
+ (what else) can (my good friend)   do  (for your good team)     to   help  you
+   r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
+                                  [  ^      ^               ]
+*/
+            findConj(v1, &conj, rwin);
+            findCheck(v1, &conj, {"conjunction"}, "SWS1-5", "verb1");
+
+//            printf("v1 = %d, conj = %d\n", v1, conj);
+//            getch();
+/*
+0what 1else 2can 3my 4good 5friend 6do 7for 8your 9good 10team 11to 12help 13you?
+ (what else) can (my good friend)   do  (for your good team)     to   help  you
+   r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
+                                 [          ^            ^   ]
+*/
+            if (conj > v1) {
+                findNoun(conj, &n3, rwin + 1);
+                findCheck(conj, &n3, {"noun"}, "SWS1-5", "noun3");
+//                printf("v1 = %d, conj = %d, n3 = %d\n", v1, conj, n3);
+//                getch();
+            }
 
             int y = 2;
+
+            if (n3 > v1) {
+                if (this->configs.show_debug_message) {
+                    clearscreen(0, 5, ScreenX, 15);
+                    gotoxy(0, y += 4);
+                    this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
+                    printf("\n");
+                    this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops",  {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
+                    printf("\nSWS1-5 insert s[r2] \"%s\" to r[n3] \"%s\"\n", s[v1].txt, s[n3].txt);
+                }
+/*
+0what 1else 2can 3my 4good 5friend 6do 7for 8your 9good 10team   11to 12help 13you?
+ (what else) can (my good friend)   do  (for your good team )    (to   help  you
+   r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ( *
+
+   1 insert s[v1] "do" to s[n3] "team"
+
+   (what else)  can   (my good friend)  (for your good team)  do    (to help you ?
+   [ r0   n1 ] v1aux  [ n2adj     n2 ]  (conj n3adj     n3 )  v1    (to help you ?
+ */
+                const auto ch1 = AskChar("SWS1-5-v.insert v1(", s[v1].txt, ") to n3(", s[n3].txt, ")?");
+                if (ch1 == KEY_CARRIAGE_RETURN || ch1 == KEY_NEW_LINE) {
+                    Word_Insert("Right", v1, n3);
+                }
+            }
+
+
+            const int max_v1_n3 = max(v1, n3);
+
             if (this->configs.show_debug_message) {
-                clearscreen(0, 5, ScreenX, 15);
                 gotoxy(0, y += 4);
                 this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
                 printf("\n");
-                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {r1, "r1"}, {r2, "r2"}, {r3, "r3"}, {r4, "r4"}});
-                printf("\nSWS1-5 insert s[r2] \"%s\" to r[3] \"%s\"\n", s[r2].txt, s[r3].txt);
+                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
+                printf("\nSWS1-5 insert s[r0] \"%s\" - s[n1] \"%s\" to s[max_v1_n3] \"%s\"\n", s[r0].txt, s[n1].txt, s[max_v1_n3].txt);
             }
 
-//             0    1    2  3  4  5   6   7   8   9
-//            what else can i do for you to help you ?
-//            r1 = 1, r2 = 4, r3 = 6, r4 = 8
-//            1 insert s[r2] "do" to r[3] "you"
-//            what else can i for you do to help you ?
-
-            const auto ch1 = AskChar("SWS1-5-v.insert r2(", s[r2].txt, ") to r3(", s[r3].txt, ")?");
-            if (ch1 == KEY_CARRIAGE_RETURN || ch1 == KEY_NEW_LINE) {
-                Word_Insert("Right", r2, r3);
-            }
-
-
-
-
-            const int endPoint = r3;
-
-            if (this->configs.show_debug_message) {
-                gotoxy(0, y += 4);
-                this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
-                printf("\n");
-                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {r1, "r1"}, {r2, "r2"}, {r3, "r3"}, {r4, "r4"}});
-                printf("\nSWS1-5 insert s[r0] \"%s\" - s[r1] \"%s\" to s[r3End] \"%s\"\n", s[r0].txt, s[r1].txt, s[endPoint].txt);
-            }
-
-//             0    1    2   3   4    5    6     7     8    9
-//            what else can  i  for  you   do    to   help you ?
-//            r1 = 1,        r2 = 4,     r3 = 6,     r4 = 8
-//            2 insert s[r0] "what" - s[r1] "else" to s[r4] "help"
-//            can i for you do to help what else you ?
-
-            const auto ch2 = AskChar("SWS1-5-n.insert r0(", s[r0].txt, ") - r1(", s[r1].txt, ") to r3End(", s[endPoint].txt, ")?");
+/*
+            0what 1else 2can 3my 4good 5friend 6for 7your 8good 9team 10do     11to 12help13you?
+            [ r0    n1] v1aux n2adj       n2   (conj n3adj       n3  )  v1      ( *
+            SWS1-5 insert s[r0] "what" - s[n1] "else" to s[max_v1_n3] "do"
+*/
+            const auto ch2 = AskChar("SWS1-5-n.insert r0(", s[r0].txt, ") - n1(", s[n1].txt, ") to max_v1_n3(", s[max_v1_n3].txt, ")?");
             if (ch2 == KEY_CARRIAGE_RETURN || ch2 == KEY_NEW_LINE) {
-                Words_Insert("Right", endPoint, r0, r1);
+                Words_Insert("Right", max_v1_n3, r0, n1);
             }
 
             if (this->configs.show_debug_message) {
                 gotoxy(0, y += 4);
                 this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
                 printf("\n");
-                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {r1, "r1"}, {r2, "r2"}, {r3, "r3"}, {r4, "r4"}});
+                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
                 printf("\nSWS1-5 Done. Press Any Key To Continue.\n");
                 getch();
             }

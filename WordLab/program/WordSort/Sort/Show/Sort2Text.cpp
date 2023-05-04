@@ -31,7 +31,7 @@ const char *getWordSortNameById(const int n) {
 			return "auxil";
 			break;
 		case 10:
-			return "conjuction";
+			return "conjunction";
 			break;
 		case 11:
             return "article";

@@ -11,21 +11,23 @@ void sts::WordSwitch(int sub1, int sub2) {
 
 //移動一个单词(双向).
 void sts::Word_Left_Insert(int a, int b) {
-    int r, lth = b-a;
-    char scopy[31];
+    int r, lth = b - a;
+    char scopy[32];
     strcpy(scopy,s[b].txt);
-    for(r=lth-1; r>=0; r--) {
+    for (r = lth-1; r>=0; r--) {
         strcpy(s[a+r+1].txt,s[a+r].txt);
     }
     strcpy(s[a].txt,scopy);
     return;
 }
 
-void sts::Word_Right_Insert(int a,int b) {
-    int r,lth=b-a;
-    char scopy[31];
+void sts::Word_Right_Insert (int a,int b) {
+    int r,lth = b - a;
+    char scopy[32];
     strcpy(scopy,s[a].txt);
-    for(r=0; r<=lth-1; r++) strcpy(s[a+r].txt,s[a+r+1].txt);
+    for(r=0; r <= lth-1; r++) {
+        strcpy(s[a+r].txt,s[a+r+1].txt);
+    }
     strcpy(s[b].txt,scopy);
     return;
 }
@@ -35,12 +37,16 @@ void sts::Word_Insert(const char Message[],int a,int b) {
        ||strcmp(Message,"Left")==0
        ||strcmp(Message,"-1")==0
        ||strcmp(Message,"l")==0
-       ||strcmp(Message,"L")==0) Word_Left_Insert(a,b);
+       ||strcmp(Message,"L")==0) {
+        Word_Left_Insert(a,b);
+    }
     else if(strcmp(Message,"right")==0
             ||strcmp(Message,"Right")==0
             ||strcmp(Message,"1")==0
             ||strcmp(Message,"r")==0
-            ||strcmp(Message,"R")==0) Word_Right_Insert(a,b);
+            ||strcmp(Message,"R")==0) {
+        Word_Right_Insert(a,b);
+    }
 }
 
 void sts::Words_Insert(const char *Message,int where,int begin,int end) {

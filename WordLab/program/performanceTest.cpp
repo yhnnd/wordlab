@@ -6,11 +6,12 @@ int performanceTest (void) {
 //    getch();
 
     const auto words = {
+            "color", "colour", "honor", "honour",
             "cloud", "could", "bread", "beard", "board", "broad", "aboard", "abroad", "kitchen",
             "apple", "business", "remind", "solitude", "deputy", "department", "heavy", "substitute",
             "mansion", "hostile", "tranquil", "derive", "hover", "event", "issue", "atomic", "molecular",
             "despite", "require", "postpone", "divine", "render", "remedy", "orphan", "demure", "decent",
-            "arrive", "honour", "quick", "maintain", "attain", "contain", "include", "compensate", "redeem",
+            "arrive", "quick", "maintain", "attain", "contain", "include", "compensate", "redeem",
             "attraction", "attractive", "confirm", "reconcile", "replicate", "reply", "revenge", "avenge",
             "report", "admonish", "advice", "advocate", "dislike", "respect", "retire", "relax", "condemn",
             "complain", "convenient", "reservoir", "unite", "deceive", "conceive", "conduct", "convey",

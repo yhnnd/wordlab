@@ -15,16 +15,17 @@ int main(int argc,char **argv) {
 //    getxy();
 
     vector<string> words= {
-            "apple", "retain", "harm", "abandon", "joke",
-            "who", "what", "when", "how", "is",
-            "can", "could", "must", "for", "though", "if",
-            "your", "dad", "father", "grand", "ok",
+            "can", "could", "must",
+            "do", "did", "does",
+            "be", "is", "are", "was", "were",
+            "for", "by",
+            "who", "what", "when", "how",
+//            "apple", "retain", "harm", "abandon", "joke", "ok",
+//            "though", "if",
+//            "your", "dad", "father", "grand",
     };
 
-	if (sortOfWord(words[0].c_str()) != "noun") {
-		cout<<"error: word sort error!" << endl;
-		getch();
-	} else {
+    {
         for (int i = 0; i < words.size(); ++i) {
             const char * word = words[i].c_str();
             const string sort = "\"" + sortOfWord(word) + "\"";
@@ -33,6 +34,9 @@ int main(int argc,char **argv) {
                    ("\"" + string(word) + "\"").c_str(),
                    sort.c_str(),
                    sortId.c_str());
+        }
+        if (sortOfWord("apple") != "noun") {
+            printf("\nerror: word sort error!\n");
         }
         getch();
     }

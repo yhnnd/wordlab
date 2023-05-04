@@ -101,8 +101,8 @@ void sts::WordsOrderChange1(void) {
                 &&(SortEX(s[r].txt,"BE")!=0)
                 &&(strcmp(s[r+1].txt,"with")==0
                    ||strcmp(s[r+1].txt,"by")==0)
-                ) {
-            for(r0=r+1; r0<=rwin-1; r0++) {
+        ) {
+            for (r0=r+1; r0<=rwin-1; r0++) {
                 if(SortEX(s[r0+1].txt,"NOUN")!=0) {
                     break;
                 }
@@ -222,18 +222,19 @@ void sts::WordsOrderChange1(void) {
 
             if (WOC1auxnSolution1 || WOC1auxnSolution2 || WOC1auxnSolution3) {
 
-//                seeknoun(r, &r0, rwin);
-                for (r0 = r + 1; r0 < this->rwin; r0++) {
-                    if(
-                            ( SortEX(s[r0].txt,"NOUN")==0 && SortEX(s[r0+1].txt,"REALNOUN") != 0 )
-                            ||
-                            ( wordSortIncludes(s[r0].txt, {8}) && wordSortIncludes(s[r0+1].txt, {1}) == 0)
-                            ||
-                            ( wordSortIncludes(s[r0].txt, {1}) && wordSortIncludes(s[r0+1].txt, {1}) == 0)
-                            ) {
-                        break;
-                    }
-                }
+                findNoun(r, &r0, rwin);
+                findCheck(r, &r0, {"noun"}, "WOC1-2", "Aux+N");
+//                for (r0 = r + 1; r0 < this->rwin; r0++) {
+//                    if(
+//                            ( SortEX(s[r0].txt,"NOUN")==0 && SortEX(s[r0+1].txt,"REALNOUN") != 0 )
+//                            ||
+//                            ( wordSortIncludes(s[r0].txt, {8}) && wordSortIncludes(s[r0+1].txt, {1}) == 0)
+//                            ||
+//                            ( wordSortIncludes(s[r0].txt, {1}) && wordSortIncludes(s[r0+1].txt, {1}) == 0)
+//                            ) {
+//                        break;
+//                    }
+//                }
 
                 int y = 2;
                 if (this->configs.show_debug_message) {

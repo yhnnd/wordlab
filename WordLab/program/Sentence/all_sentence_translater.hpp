@@ -122,7 +122,7 @@ private:
                 configs.rearrange_words_order.manually_set_checkers = false;
                 configs.rearrange_words_order.manually_change_words_order_ask = true;
                 configs.rearrange_words_order.manually_change_words_order_show = true;
-                configs.word_translation.manually_select_definition = true;
+                configs.word_translation.manually_select_definition = false;
             } else {
                 // Is Not Debugging
                 configs.show_debug_message = false;
@@ -150,10 +150,14 @@ public:
 
     // Words Order Change => Find
     void seekverb(int r0,int *r1,int rwin);
+    void findVerb(int r0, int * r1, int rwin);
     void seekverbEX(int r0,int *r1,int rwin);
+
+    void findConj(int r0, int * r1, int rwin);
 
     void seeknoun(int r0,int *r1,int rwin);
     void seeknounEX(int r0,int *r1,int rwin);
+    void findNoun(int r0, int * r1, int rwin);
     void skipnoun(int r0,int *r1,int rwin);
 
     void seekad(int r0,int *r1,int rwin);
@@ -162,9 +166,11 @@ public:
     void skipadEX(int r0,int *r1,int rwin);
 
     void seekaux(int r0,int *r1,int rwin);
+    void findAux(int r0, int *r1, int rwin);
     void skipaux(int r0,int *r1,int rwin);
 
-    int finderr(int r0,int *r1,const char * sort,const char * tool,const char * alias);
+    int finderr(int r0, int *r1, const char * sort,const char * tool,const char * alias);
+    int findCheck(const int r0, int * r1, vector<string>sort, const char * tool,const char * alias);
 
 
     void ClauseCheck();
