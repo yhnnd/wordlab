@@ -29,10 +29,12 @@ void sts::printSentence(const word * words, const int numOfWords, const struct c
         const std::map<int, string> stops) {
     bool showWordNumber = false;
     bool showStops = false;
+    bool isInputting = false;
 
     if (mode != nullptr && strlen(mode)) {
         showWordNumber = strindex(mode, "show_word_number") >= 0;
         showStops = strindex(mode, "show_stops") >= 0;
+        isInputting = strindex(mode, "is_inputting") >= 0;
     }
 
     string stopName = "";
@@ -88,11 +90,14 @@ void sts::printSentence(const word * words, const int numOfWords, const struct c
             setForegroundColorAndBackgroundColor(color.foregroundColor, color.backgroundColor);
             printf("%s", words[i].txt);
 
-            if (i + 1 < numOfWords && (ispunct(this->punct) && i + 1 >= numOfWords -1) == false) {
+
+            if (i + 1 < numOfWords) {
                 // If current word is not the last word.
-                // Print a whitespace to for separating words.
-//                setForegroundColorAndBackgroundColor("blk-", "-#gry");
-                printf(" ");
+                if ( isInputting == false ||  ispunct(this->punct) == false || i + 2 < numOfWords ) {
+                    // Print a whitespace to for separating words.
+//                    setForegroundColorAndBackgroundColor("blk-", "-#gry");
+                    printf(" ");
+                }
             }
         }
     }
@@ -213,7 +218,7 @@ char sts::Input(const COORD inputPos, const COORD indexPos, const COORD translat
         gotoxy(inputPos);
         colorset(lightgreen);
         clearline(inputPos.X, inputPos.Y, ScreenX - inputPos.X - 1);
-        this->printSentence(this->s, this->rwin + 1, {"grn-", "-blk"});
+        this->printSentence(this->s, this->rwin + 1, {"grn-", "-blk"}, "is_inputting");
         // Print Cursor.
 //        setForegroundColorAndBackgroundColor("blk-", "-#gry");
 //        printf(" ");
