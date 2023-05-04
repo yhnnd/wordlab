@@ -1,5 +1,0 @@
-#include "Reference.cpp"
-#include "Classify.cpp"
-#include "Core.cpp"
-#include "Sort.cpp"
-#include "Show/all.cpp"
