@@ -18,7 +18,7 @@ int messageblock::Switcher(char what[][LINEMAX],bool LoadDefaultSettings) {
 	bh=height/(max/npl+1);
 	xcleft=cleftindex;
 	ycleft=cleftindex;
-	for(n=1,nbefore=1;;){
+	for(n=1,nbefore=1;;) {
 	    Fillall(what,nbefore,n,max);
 	    nbefore = n;
 	    key = getch();

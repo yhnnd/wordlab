@@ -164,7 +164,6 @@ bool _ReverseColor = false;
 
 int bsv_cmd_msg_lth_max = 64;
 PKC MsgWinNewDefaultsRoute=_data_dir"settings/msgwin/MsgBlkDefaults.dat";
-PKC TableTitleRoute=_data_dir"settings/msgwin/table/titles.dat";
 PKC ReportFileRoute=_data_dir"logs/errors/general.bsv";
 
 class host{
@@ -436,10 +435,10 @@ class MessageWindow{
 	int ListSwitch(int,int,int,int,int);
 	void SelectErase(int,int,int,const char*);
 	void SelectShow(int,int,int,int,const char*,const char*);
-	int SelectFrame(int,int,int,const char *,int,int);
+	void SelectFrame(int,int,int,const char *,int,int);
 	void SelectShowChange(int,int,int,int);
-	void Selectup  (char *,int,int,int,int,int,char*);
-	void Selectdown(char *,int,int,int,int,int,char*);
+	void Selectup  (char *, const int, const int, const int, const int);
+	void Selectdown(char *, const int, const int, const int, const int);
 	int Select(int,int,int,int,const char *,const char *,const char *);
 } MessageWindow;
 // table row

@@ -336,11 +336,6 @@ bool sts::DebugSettings() {
     };
     const int max = sizeof(msgs) / sizeof(msgs[0]);
     const int x = 12, y = 0, width = 60, numOfToggles = max - 3;
-#ifdef __APPLE__
-    const int xSwitch = x - 1;
-#elifdef _WIN32
-    const int xSwitch = x;
-#endif
     bool background = MessageWindow.SetBackground(true);
     bool monochrome = MessageWindow.SetMonochrome(true);
 
@@ -360,7 +355,7 @@ bool sts::DebugSettings() {
                 this->configs.rearrange_words_order.manually_change_words_order_show,
                 this->configs.word_translation.manually_select_definition
         );
-        r = MessageWindow.Switch(xSwitch, y, width, &msgs[0][0], max, LINEMAX, rprev);
+        r = MessageWindow.Switch(x, y, width, &msgs[0][0], max, LINEMAX, rprev);
         if (r <= 0 || r == numOfToggles + 1/* quit */) {
             Continue = false;
             break;

@@ -1,16 +1,25 @@
-int tablerow::setcol(int x,int y,char *col){
-	gotoxy(x,y);
-	if(col[0]){
-		std::cout<<col;
+int tablerow::setcol(int x, int y, char *col) {
+
+#ifdef __APPLE__
+    x = x + 1;
+#endif
+
+	gotoxy(x, y);
+	if (col[0]) {
+		printf("%s", col);
 		gotoxy(x,y);
 	}
-	scanf("%s",col);
+    fflush(stdin);
+	scanf("%s[^\n]", col);
+    fflush(stdin);
     return 0;
 }
 
-int tablerow::Add(int x,int y,int width){
+int tablerow::Add(int x,int y,int width) {
 	char msg[3][LINEMAX]={
-#include "M/AddNewItem.txt"
+            "name  value  info",
+            " ",
+            "  1   2   3   4   5   6   7   8   9  10  11  12"
 	};
 	MessageWindow.Frame(0,x,y,width,&msg[0][0],3);
 	setcol(x+4,y+2,col[1]);

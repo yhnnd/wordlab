@@ -10,14 +10,9 @@ string AddWordSortSelect(int x, int y) {
 	"<ylw->(set word sort) ",
 	"<red->(cancel)",
 	""};
-#ifdef __APPLE__
-    const int xSwitch = x - 1;
-#else
-    const int xSwitch = x;
-#endif
 
 	MessageWindow.Frame(0,x,y,20,&optionsmenu[0][0],0);
-	r = MessageWindow.Switch(xSwitch,y,20,&optionsmenu[0][0],0,LINEMAX,r);
+	r = MessageWindow.Switch(x,y,20,&optionsmenu[0][0],0,LINEMAX,r);
 	MessageWindow.SetMonochrome(Monoprev);
 	switch(r){
 	    case 1:  return "n.";   break;
