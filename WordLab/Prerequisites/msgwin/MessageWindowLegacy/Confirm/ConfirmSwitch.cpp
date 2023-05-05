@@ -23,7 +23,7 @@ int MessageWindow::ConfirmSwitch(int n,int x,int y,int width,int height) {
 		key = getch();
         if (key == 13 || key == 10) {
             break;
-        } else if(key=='0'||key==27||key==8||key=='r') {
+        } else if(key=='0'||key==27||key==8||key==127||key=='r') {
             r = 0;
             goto end;
         } else if(key>='1'&&key<='9') {

@@ -9,7 +9,7 @@ int MessageWindow::ListSwitch(int N,int x,int y,int width){
 		key = getch();
         if (key == 13 || key == 10) {
             break;
-        } else if(key=='0'||key=='r'||key==27||key==8) {
+        } else if(key=='0'||key=='r'||key==27||key==8 || key == 127) {
             return 0;
         } else if(key=='A'||key=='a'||key=='W'||key=='w') {
             r--;

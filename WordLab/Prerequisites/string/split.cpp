@@ -1,16 +1,16 @@
-std::vector<std::string> split(const std::string &line, const std::string &seperator) {
+std::vector<std::string> split(const std::string &line, const std::string &separators) {
 	using namespace std;
 	vector<string> result;
 	typedef string::size_type string_size;
 	string_size i = 0;
 
 	while(i != line.size()) {
-		// find first char which is not seperator
+		// find first char which is not separator
 		int flag = 0;
 		while(i != line.size() && flag == 0) {
 			flag = 1;
-			for(string_size x = 0; x < seperator.size(); ++x) {
-				if (line[i] == seperator[x]) {
+			for(string_size x = 0; x < separators.size(); ++x) {
+				if (line[i] == separators[x]) {
 					++i;
 					flag = 0;
 					break;
@@ -18,12 +18,12 @@ std::vector<std::string> split(const std::string &line, const std::string &seper
 			}
 		}
 
-		// find another seperator
+		// find another separator
 		flag = 0;
 		string_size j = i;
-		while(j != line.size() && flag == 0) {
-			for(string_size x = 0; x < seperator.size(); ++x) {
-				if(line[j] == seperator[x]) {
+		while (j != line.size() && flag == 0) {
+			for (string_size x = 0; x < separators.size(); ++x) {
+				if (line[j] == separators[x]) {
 					flag = 1;
 					break;
 				}
@@ -33,9 +33,30 @@ std::vector<std::string> split(const std::string &line, const std::string &seper
             }
 		}
 		if (i != j) {
-			result.push_back(line.substr(i, j-i));
+			result.push_back(line.substr(i, j - i));
 			i = j;
 		}
 	}
 	return result;
+}
+
+std::string join(const std::vector<std::string> src, const char * c) {
+    using namespace std;
+    std::string res = "";
+    if(src.size() == 0) {
+        return res;
+    }
+
+    std::vector<std::string>::const_iterator it = src.begin();
+    res += *it;
+
+    for (it++; it!=src.end(); it++) {
+        res += c;
+        res += *it;
+    }
+    return res;
+}
+
+std::string replace(const std::string src, const std::string separators, const char * replaceWith) {
+    return join(split(src, separators), replaceWith);
 }

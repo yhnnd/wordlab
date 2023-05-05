@@ -43,7 +43,9 @@ char popupcore(const std::string msg, const int life, const int x, const int y, 
 #else
 	    std::ofstream fout(_data_dir"buf.bsv",std::ios::app);
 #endif
-		if(fout.is_open()) fout<<msg.c_str()<<std::endl;
+		if(fout.is_open()) {
+            fout<<msg.c_str()<<std::endl;
+        }
 		fout.close();
 	}
 //    printf("\nInput key is [%c] (%d)\n", key, key);

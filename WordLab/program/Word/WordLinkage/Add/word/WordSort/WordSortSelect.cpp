@@ -1,5 +1,5 @@
-string AddWordSortSelect(int x=0,int y=0){
-	static int r=1;
+string AddWordSortSelect(int x, int y) {
+	static int r = 1;
 	bool Monoprev=MessageWindow.SetMonochrome(1);
 	char optionsmenu[][LINEMAX]={
 	"select word sort",
@@ -10,16 +10,28 @@ string AddWordSortSelect(int x=0,int y=0){
 	"<ylw->(set word sort) ",
 	"<red->(cancel)",
 	""};
+#ifdef __APPLE__
+    const int xSwitch = x - 1;
+#else
+    const int xSwitch = x;
+#endif
+
 	MessageWindow.Frame(0,x,y,20,&optionsmenu[0][0],0);
-	r=MessageWindow.Switch(x,y,20,&optionsmenu[0][0],0,LINEMAX,r);
+	r = MessageWindow.Switch(xSwitch,y,20,&optionsmenu[0][0],0,LINEMAX,r);
 	MessageWindow.SetMonochrome(Monoprev);
 	switch(r){
 	    case 1:  return "n.";   break;
 	    case 2:  return "v.";   break;
 	    case 3:  return "adj."; break;
 	    case 4:  return "adv."; break;
-	    case 5:  char s[16];listen(s,0,1,{13,0,EOF},16);return s;break;
-	    default: AddWordPrintErrorMessage(5);break;
+	    case 5:
+            char s[16];
+            listen(s,0,1,{13,0,EOF},16);
+            return s;
+            break;
+	    default:
+            AddWordPrintErrorMessage(5);
+            break;
 	}
 	return "";
 }

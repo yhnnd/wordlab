@@ -13,7 +13,7 @@ int MessageWindow::Line(int x,int y,int width,const char *what,int n){
 	colorset(backdarkwhite);
 	std::cout<<"   ";
 	LineColorful(n);
-	bsvline(what,width,"<",">","(",")",",;");
+	bsvline(what, width, "<", ">", "(", ")", ",;");
 	colorset(bothlightblue);
 	std::cout<<"*";
 	return y;

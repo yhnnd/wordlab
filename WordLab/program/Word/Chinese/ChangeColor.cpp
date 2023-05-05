@@ -15,7 +15,7 @@ void changeColor(int x,int y,int *ColorNum) {
 		key = getch();
 		if (key == 13 || key == 10) {
             break;
-        } else if(key==8||key==27||key=='r'||key=='R') {
+        } else if(key==8||key==127||key==27||key=='r'||key=='R') {
             return;
         } else if(key=='a'||key=='A'||key=='w'||key=='W') {
             omit(n,n,-1,2);

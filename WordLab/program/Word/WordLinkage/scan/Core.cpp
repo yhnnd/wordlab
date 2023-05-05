@@ -15,9 +15,14 @@ void WLscancore(int lth,int NOL,FILE *fp1){
 	    	cout<<setw(bits)<<i+1<<" "<<word[i]<<" "<<WLchinese(lth,lineNumber,2);
 			cout<<" "<<setw(bits)<<lineNumber<<" "<<Chinese(lth,lineNumber)<<endl;
 		}
-		if(pagemax > pagemin) page = MessageWindow.ListSwitch(page,pagemax,0,vol+1,40);
-		else break;
-		if(page < 0) break;
+		if (pagemax > pagemin) {
+            page = MessageWindow.ListSwitch(page,pagemax,0,vol+1,40);
+        } else {
+            break;
+        }
+		if(page < 0) {
+            break;
+        }
 		roll(page,page,1,pagemax);
 	}
 }

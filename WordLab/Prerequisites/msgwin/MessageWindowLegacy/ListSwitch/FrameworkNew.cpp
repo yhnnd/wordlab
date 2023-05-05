@@ -8,7 +8,7 @@ int MessageWindow::ListSwitch(int rprev,int N,int x,int y,int width){
 	key = getch();
     if (key == 13 || key == 10) {
         return r;
-    } else if(key=='0'||key=='r'||key==27||key==8) {
+    } else if (key=='0' || key=='r' || key == 27 || key == 8 || key == 127) {
         return -1;
     } else if(key=='A'||key=='a'||key=='W'||key=='w') {
         r--;

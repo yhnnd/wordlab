@@ -28,7 +28,7 @@ void sts::WordsOrderFramework() {
 		if(this->configs.show_debug_message) {
             // print sentence rearranged
             printf("\n=>");
-            this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number");
+            this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number);
             printf("\n");
 		}
 	}

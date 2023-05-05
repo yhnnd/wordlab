@@ -111,9 +111,9 @@ void sts::SWS1_5() {
                 if (this->configs.show_debug_message) {
                     clearscreen(0, 5, ScreenX, 15);
                     gotoxy(0, y += 4);
-                    this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
+                    this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, show_word_number);
                     printf("\n");
-                    this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops",  {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
+                    this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number_and_stops,  {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
                     printf("\nSWS1-5 insert s[r2] \"%s\" to r[n3] \"%s\"\n", s[v1].txt, s[n3].txt);
                 }
 /*
@@ -137,9 +137,9 @@ void sts::SWS1_5() {
 
             if (this->configs.show_debug_message) {
                 gotoxy(0, y += 4);
-                this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
+                this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, show_word_number);
                 printf("\n");
-                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
+                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number_and_stops, {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
                 printf("\nSWS1-5 insert s[r0] \"%s\" - s[n1] \"%s\" to s[max_v1_n3] \"%s\"\n", s[r0].txt, s[n1].txt, s[max_v1_n3].txt);
             }
 
@@ -155,9 +155,9 @@ void sts::SWS1_5() {
 
             if (this->configs.show_debug_message) {
                 gotoxy(0, y += 4);
-                this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
+                this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, show_word_number);
                 printf("\n");
-                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
+                this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number_and_stops, {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
                 printf("\nSWS1-5 Done. Press Any Key To Continue.\n");
                 getch();
             }

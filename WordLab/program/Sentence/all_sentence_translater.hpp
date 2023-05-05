@@ -137,6 +137,11 @@ private:
 			rwin = rwout = 0;
             punct = 0;
 		}
+
+        const char * is_inputting =  "i;";
+        const char * show_word_number = "n;";
+        const char * show_stops = "s;";
+        const char * show_word_number_and_stops = "n;s;";
 public:
     // Words Insert
     void WordSwitch(int sub1, int sub2);

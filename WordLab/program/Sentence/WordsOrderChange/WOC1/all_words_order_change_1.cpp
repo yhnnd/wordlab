@@ -240,9 +240,9 @@ void sts::WordsOrderChange1(void) {
                 if (this->configs.show_debug_message) {
                     clearscreen(0, 5, ScreenX, 15);
                     gotoxy(0, y += 4);
-                    this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
+                    this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, show_word_number);
                     printf("\n");
-                    this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r, "r"}, {r0, "r0"}});
+                    this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number_and_stops, {{r, "r"}, {r0, "r0"}});
 //                    printf("r = %d, r0 = %d\n", r, r0);
 //                    printf("\nWOC1auxnSolution1 = %d, WOC1auxnSolution2 = %d, WOC1auxnSolution3 = %d\n",
 //                           WOC1auxnSolution1, WOC1auxnSolution2, WOC1auxnSolution3);
@@ -259,9 +259,9 @@ void sts::WordsOrderChange1(void) {
 
                 if (this->configs.show_debug_message) {
                     gotoxy(0, y += 4);
-                    this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, "show_word_number");
+                    this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, show_word_number);
                     printf("\n");
-                    this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, "show_word_number;show_stops", {{r, "r"}, {r0, "r0"}});
+                    this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number_and_stops, {{r, "r"}, {r0, "r0"}});
                     printf("\nWOC1-2Aux+N Done. Press any key to continue.\n");
                     getch();
                 }
