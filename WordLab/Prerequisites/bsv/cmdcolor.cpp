@@ -159,7 +159,9 @@ int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd, c
 
     const std::string colorCode = [&] (void) /* lambda */ {
         std::string foregroundColorCode = "";
-        if (foregroundColorCmd == "blk-" || foregroundColorCmd == "black-") {
+        if (isdigit(foregroundColorCmd[0]) == true) {
+            foregroundColorCode = foregroundColorCmd;
+        } else if (foregroundColorCmd == "blk-" || foregroundColorCmd == "black-") {
             foregroundColorCode = "30";// dark black => black
         } else if (foregroundColorCmd == "gry-" || foregroundColorCmd == "gray-") {
             foregroundColorCode = "37";// dark white => gray
@@ -173,7 +175,9 @@ int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd, c
         return foregroundColorCode;
     }()/* call */ + [&] (void) /* lambda */ {
         std::string backgroundColorCode = "";
-        if (backgroundColorCmd == "-blk" || backgroundColorCmd == "-black") {
+        if (isdigit(backgroundColorCmd[0]) == true || backgroundColorCmd[0] == ';') {
+            backgroundColorCode = backgroundColorCmd;
+        } else if (backgroundColorCmd == "-blk" || backgroundColorCmd == "-black") {
             backgroundColorCode = ";40";// dark black => black
         } else if (backgroundColorCmd == "-gry" || backgroundColorCmd == "-gray") {
             backgroundColorCode = ";47";// dark white => gray

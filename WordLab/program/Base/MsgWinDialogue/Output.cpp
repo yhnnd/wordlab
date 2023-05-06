@@ -15,15 +15,27 @@ void dialog::output(const string msg,bool Times,WORD color,string title,int x,in
 		memoryout[0] = msg;
 		already_reseted = false;
 	}
-	colorset(lightwhite);
+//	colorset(lightwhite);
+    setForegroundColorAndBackgroundColor("wte-", "-blk");
 	for( int ln = 1; ln <= 3; ln++ ) {
 		clearline(x+5,y+1+ln*(1+SayStyle),60);
 		if( ln == 3 and not Times ) {
             bar(msg.length(),LINEMAX);
         }
-		colorset( ln == 3 ? lightyellow : yellow );
+//		colorset( ln == 3 ? lightyellow : yellow );
+        if (ln == 3) {
+            setForegroundColorAndBackgroundColor("ylw-", "-blk");
+        } else {
+            setForegroundColorAndBackgroundColor("#ylw-", "-blk");
+        }
 		cout<<title<<": ";
-		colorset( ln == 3 ? color : green );
+//		colorset( ln == 3 ? color : green );
+        if (ln == 3) {
+            std::string get_mac_os_foreground_color_code(WORD color);
+            setForegroundColorAndBackgroundColor(get_mac_os_foreground_color_code(color), "-blk");
+        } else {
+            setForegroundColorAndBackgroundColor("grn-", "-blk");
+        }
         const int i = 3 - ln;
 //        printf("\ndialog::output title = %s, memeoryout[i] = %s, Times = %d, ln = %d, i = %d\n", title.c_str(), memoryout[i].c_str(), Times, ln, i);
         if (memoryout[i].length()) {
