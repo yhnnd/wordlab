@@ -88,7 +88,7 @@ void sts::findNoun(const int findFrom, int *stopAt, const int max) {
         if (
                 wordSortIncludes(s[pos].txt, {1, 3, 8}) > 0
                 && (
-                        pos + 1 == max
+                        pos == max
                         ||
                         wordSortIncludes(s[pos + 1].txt,{1, 3, 8}) == 0
                 )
