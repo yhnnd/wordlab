@@ -9,8 +9,8 @@ syntax of ch.csv of skyside database
 
 old: word ,/sort./@def;,/syn/@syn_word;
 new: word ,/class="def" sort="sort" syn="syn_word"/@def;
-{"word":[{"sort":"n.","ch":"×Ö"},{"sort":"n.","ch":"µ¥´Ê"}]},
-{"dark":[{"sort":"adj.","ch":"°µµÄ"}]}
+{"word":[{"sort":"n.","ch":"å­—"},{"sort":"n.","ch":"å•è¯"}]},
+{"dark":[{"sort":"adj.","ch":"æš—çš„"}]}
 -------------------------------------------------------------------------------
 bsv designer
 
