@@ -208,27 +208,51 @@ int sts::FrameworkCore(int x, int y, const int width, const int height) {
 char sts::Input(const COORD inputPos, const COORD indexPos, const COORD translationPos) {
     int r = 0;
 
-    auto applyInput = [&] () {
+    const COORD indicatorPos = {static_cast<short>(inputPos.X + 40), static_cast<short>(inputPos.Y - 1)};
+
+    auto applyInput = [&] (const char mode, const char inputChar) {
         strclr(s[rwin].txt, r);
-        // Print Translation
-        FrameworkCore(translationPos.X, translationPos.Y, ScreenX - 1, 1);
-        // Print Input Suggestions
-        indexCore(s[rwin].txt, indexPos.X, indexPos.Y, green);
+
+        colorrecord( colorPrev );
+
+        gotoxy(indicatorPos);
+        if (mode == 'i') {
+            printf("%-16s", "inputting..");
+            if (isalpha(inputChar)) {
+                // Print Input Suggestions
+                indexCore(s[rwin].txt, indexPos.X, indexPos.Y, green);
+            }
+        }
+        if (mode == 't' || (mode == 'i' && (inputChar == KEY_DELETE || inputChar == MAC_OS_KEY_DELETE))) {
+            if (ispunct(inputChar)) {
+                this->punct = inputChar;
+            }
+            printf("%-16s", "translating..");
+            // Print Translation
+            FrameworkCore(translationPos.X, translationPos.Y, ScreenX - 1, 1);
+        }
+
         // Print Input Sentence.
         gotoxy(inputPos);
-        colorset(lightgreen);
+//        colorset(lightgreen);
+        setForegroundColorAndBackgroundColor("grn-", "-blk");
         clearline(inputPos.X, inputPos.Y, ScreenX - inputPos.X - 1);
         this->printSentence(this->s, this->rwin + 1, {"grn-", "-blk"}, is_inputting);
-        // Print Cursor.
-//        setForegroundColorAndBackgroundColor("blk-", "-#gry");
-//        printf(" ");
+
+//        Print Cursor.
+        setForegroundColorAndBackgroundColor("#wte-", "-#wte");
+        printf(" ");
+
+        colorreset(colorPrev);
     };
 
-    char c;
+    char c = 0;
     for (r = 0, c = 0, strclr(s[rwin].txt); ; ) {
+        applyInput('i', c);
 
-        begin:
-        applyInput();
+        gotoxy(indicatorPos);
+        printf("%-16s", "listening");
+        fflush(stdin);
         c = getch();
 
         if (c == KEY_DELETE || c == MAC_OS_KEY_DELETE) {
@@ -245,10 +269,10 @@ char sts::Input(const COORD inputPos, const COORD indexPos, const COORD translat
                     break;
                 }
             }
-            goto begin;
+            continue;
         } else if(c=='#'||c=='@') {
             WordSortSelect(s[rwin]);
-            r--;
+            continue;
         } else if(c==' '||c==','||c==';'||c=='.'||c=='?'||c=='!'||c == 13||c == 10||c == 0) {
             break;
         } else if (isalpha(c) || isdigit(c) || ispunct(c)) {
@@ -258,7 +282,7 @@ char sts::Input(const COORD inputPos, const COORD indexPos, const COORD translat
         r++;
     }
 
-    applyInput();
+    applyInput('t', c);
 
     if (c==','||c==';'||c=='.'||c=='?'||c=='!'||c == 13||c == 10||c == 0) {
         return c;

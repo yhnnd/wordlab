@@ -76,9 +76,10 @@ private:
 
 private:
 
-		const static int MAXIMUM = 100, maxprep = 13, preplth = 10, CheckerMax = 6;
+		const static int MAXIMUM = 100, CheckerMax = 6;
 
         struct word s[MAXIMUM], sOriginal[MAXIMUM], sModified[MAXIMUM];
+        bool wordIsPhrase[MAXIMUM];
 
         struct wordGroup {
             vector<struct word> words;
@@ -94,10 +95,17 @@ private:
         typedef unsigned short typeInquiryEndType;
         typeInquiryEndType inquiryEndFromPunct;
 
-		int  preppos0[maxprep];
-		int  preppos1[maxprep];
-		char preptrans0[maxprep][preplth];
-		char preptrans1[maxprep][preplth];
+        struct preposition {
+            struct {
+                int pos;
+                string defs;
+            } begin;
+            struct {
+                int pos;
+                string defs;
+            } end;
+        };
+		vector<preposition>  prepositions;
 
         struct {
             bool show_debug_message = false;
@@ -235,8 +243,8 @@ public:
     const unsigned short phraseMaxWords = 5;
     string getPhraseLine(const unsigned int phraseLth, const vector<string> phrase);
     bool PhraseCheckerAsk(const unsigned int phraseLth, const vector<string> phrase);
-    void PhraseCheckerUsePhrase(const unsigned int phraseLth, const vector<string> phrase, const string phraseDef);
-    bool PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth, const vector<string> phrase, const string phraseDef);
+    void PhraseCheckerUsePhrase(const unsigned int phraseLth, const vector<string> phrase, const vector<string> phraseDefs);
+    bool PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth, const vector<string> phrase, const vector<string> phraseDefs);
     bool PhrasesCheckerCore(const int rwout, const unsigned int phraseLth, const char * phraseRoute);
     int PhrasesChecker(const int rwout);
 

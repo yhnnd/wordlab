@@ -37,8 +37,9 @@
 
 //what which
 void sts::SWS1_5() {
+    const int max = this->rwin + 1;
     int r0, n1, v1aux, n2, v1, conj, n3;
-    for (r0 = 0; r0 < rwin; r0++) {
+    for (r0 = 0; r0 < max; r0++) {
         if (SortEX(s[r0].txt, "wh") == 0 && (strcmp(s[r0].txt, "what") == 0 || strcmp(s[r0].txt, "which") == 0)) {
 /*
 0what 1else 2can 3my 4good 5friend 6do 7for 8your 9good 10team 11to 12help 13you?
@@ -47,7 +48,7 @@ void sts::SWS1_5() {
    my  good  friend  can  do (for your good team)  what else  (to help you ?
    n2adj       n2   v1aux v1 (conj n3adj     n3 )   r0   n1   (to help you ?
  */
-            findNoun(r0, &n1, rwin);
+            findNoun(r0, &n1, max);
             findCheck(r0, &n1, {"noun"}, "SWS1-5", "noun1");
 
 /*
@@ -56,7 +57,7 @@ void sts::SWS1_5() {
    r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
        [^      ^]
 */
-            findAux(n1, &v1aux, rwin);
+            findAux(n1, &v1aux, max);
             findCheck(n1, &v1aux, {"auxil", "verb"}, "SWS1-5", "v1aux");
 
             if (n1 == r0 && v1aux > r0 + 1) {
@@ -69,22 +70,24 @@ void sts::SWS1_5() {
 //            r0 = 0, n1 = 1, v1aux = 1, n2 = 1, v1 = 2, conj = 2,
             if (v1aux == n1 || (wordSortIsAuxil(this->s[v1aux].txt) == false && wordSortIsVerb(this->s[v1aux].txt) == true)) {
                 // No aux. matched. Try pattern [what + n1. + v1. + n2.] "what color is your pen?"
-                findVerb(n1, &v1, rwin);
+                findVerb(n1, &v1, max);
                 findCheck(n1, &v1, {"verb"}, "SWS1-5", "verb1");
 
                 if (v1 > n1) {
-                    findNoun(v1, &n2, rwin);
+                    findNoun(v1, &n2, max);
                     findCheck(v1, &n2, {"noun", "adjective", "pronoun"}, "SWS1-5", "noun2");
+
+//                    printf("\nr0 = %d, n1 = %d, v1 = %d, n2 = %d, max = %d\n", r0, n1, v1, n2, max);
+//                    getch();
 
                     if (n2 > v1) {
                         if (this->configs.show_debug_message) {
                             clearscreen(0, 5, ScreenX, 15);
-                            gotoxy(0, y);
-                            y += 4;
-                            this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, show_word_number);
+                            gotoxy(0, y += 4);
+                            this->printSentence(this->s, max, {"#red-", "-ylw"}, show_word_number);
                             printf("\n");
-                            this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number_and_stops,  {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
-                            printf("\nr0 = %d, n1 = %d, v1 = %d, n2 = %d,\n", r0, n1, v1, n2);
+                            this->printSentence(this->s, max, {"ylw-", "-blk"}, show_word_number_and_stops,  {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
+                            printf("\nr0 = %d, n1 = %d, v1 = %d, n2 = %d, max = %d\n", r0, n1, v1, n2, max);
                         }
 
                         const auto ch1 = AskChar("SWS1-5 ptn1 insert n1+1(", s[n1+1].txt, ") - v1(", s[v1].txt, ") to n2(", s[n2].txt, ")?");
@@ -106,7 +109,7 @@ void sts::SWS1_5() {
    r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
            [  ^              ^ ]
 */
-                findNoun(v1aux, &n2, rwin);
+                findNoun(v1aux, &n2, max);
                 findCheck(v1aux, &n2, {"noun", "adjective", "pronoun"}, "SWS1-5", "noun2");
 
 /*
@@ -115,7 +118,7 @@ void sts::SWS1_5() {
    r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
                          [  ^        ^ ]
 */
-                findVerb(n2, &v1, rwin);
+                findVerb(n2, &v1, max);
                 findCheck(n2, &v1, {"verb"}, "SWS1-5", "verb1");
 
 /*
@@ -124,7 +127,7 @@ void sts::SWS1_5() {
    r0   n1  v1aux n2adj     n2      v1    conj   n3adj  n3       ...
                                   [  ^      ^               ]
 */
-                findConj(v1, &conj, rwin);
+                findConj(v1, &conj, max);
                 findCheck(v1, &conj, {"conjunction"}, "SWS1-5", "verb1");
 
 //            printf("v1 = %d, conj = %d\n", v1, conj);
@@ -136,7 +139,7 @@ void sts::SWS1_5() {
                                  [          ^            ^   ]
 */
                 if (conj > v1) {
-                    findNoun(conj, &n3, rwin + 1);
+                    findNoun(conj, &n3, max);
                     findCheck(conj, &n3, {"noun"}, "SWS1-5", "noun3");
 //                printf("v1 = %d, conj = %d, n3 = %d\n", v1, conj, n3);
 //                getch();
@@ -146,9 +149,9 @@ void sts::SWS1_5() {
                     if (this->configs.show_debug_message) {
                         clearscreen(0, 5, ScreenX, 15);
                         gotoxy(0, y += 4);
-                        this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, show_word_number);
+                        this->printSentence(this->s, max, {"#red-", "-ylw"}, show_word_number);
                         printf("\n");
-                        this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number_and_stops,  {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
+                        this->printSentence(this->s, max, {"ylw-", "-blk"}, show_word_number_and_stops,  {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
                         printf("\nSWS1-5 insert s[r2] \"%s\" to r[n3] \"%s\"\n", s[v1].txt, s[n3].txt);
                     }
 /*
@@ -168,13 +171,13 @@ void sts::SWS1_5() {
                 }
 
 
-                const int max_v1_n3 = max(v1, n3);
+                const int max_v1_n3 = std::max(v1, n3);
 
                 if (this->configs.show_debug_message) {
                     gotoxy(0, y += 4);
-                    this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, show_word_number);
+                    this->printSentence(this->s, max, {"#red-", "-ylw"}, show_word_number);
                     printf("\n");
-                    this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number_and_stops, {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
+                    this->printSentence(this->s, max, {"ylw-", "-blk"}, show_word_number_and_stops, {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
                     printf("\nSWS1-5 insert s[r0] \"%s\" - s[n1] \"%s\" to s[max_v1_n3] \"%s\"\n", s[r0].txt, s[n1].txt, s[max_v1_n3].txt);
                 }
 
@@ -190,9 +193,9 @@ void sts::SWS1_5() {
 
                 if (this->configs.show_debug_message) {
                     gotoxy(0, y += 4);
-                    this->printSentence(this->s, this->rwin + 1, {"#red-", "-ylw"}, show_word_number);
+                    this->printSentence(this->s, max, {"#red-", "-ylw"}, show_word_number);
                     printf("\n");
-                    this->printSentence(this->s, this->rwin + 1, {"ylw-", "-blk"}, show_word_number_and_stops, {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
+                    this->printSentence(this->s, max, {"ylw-", "-blk"}, show_word_number_and_stops, {{r0, "r0"}, {n1, "n1"}, {v1aux, "x1"}, {n2, "n2"}, {v1, "v1"}, {conj, "c1"}, {n3, "n3"}});
                     printf("\nSWS1-5 Done. Press Any Key To Continue.\n");
                     getch();
                 }

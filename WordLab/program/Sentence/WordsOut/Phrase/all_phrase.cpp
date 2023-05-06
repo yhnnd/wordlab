@@ -3,21 +3,24 @@ string sts::getPhraseLine(const unsigned int phraseLth, const vector<string> phr
         return "#[Invalid Phrase]#";
     } else {
         std::string phraseLine = "";
-        for(auto iter = phrase.begin(); iter != phrase.end(); ++iter) {
-            if (iter != phrase.begin()) {
+        for (int i = 0; i < phraseLth; ++i) {
+            if (i > 0) {
                 phraseLine += " ";
             }
-            phraseLine += *iter;
+            phraseLine += phrase[i];
         }
         return phraseLine;
     }
 }
 
 bool sts::PhraseCheckerAsk(const unsigned int phraseLth, const vector<string> phrase) {
-    ::_AskOnce = true;
+    if (this->configs.show_debug_message) {
+        ::_Show = true;
+        ::_AskOnce = true;
+    }
     const int keyCode = AskChar("Use Phrase (", toString(phraseLth), ") \"", getPhraseLine(phraseLth, phrase), "\"?");
     if (this->configs.show_debug_message) {
-        printf("\nPhraseCheckerAsk: keyChar = '%c' keyCode = %d\n", keyCode, keyCode);
+        printf("\nPhraseCheckerAsk: keyCode = %d\n", keyCode);
     }
 //    Carriage Return (Enter) = CR = 13 = '\r'
 //    Line Feed (New Line) = LF = 10 = '\n'
@@ -28,7 +31,7 @@ bool sts::PhraseCheckerAsk(const unsigned int phraseLth, const vector<string> ph
 }
 
 
-void sts::PhraseCheckerUsePhrase(const unsigned int phraseLth, const vector<string> phrase, const string phraseDef) {
+void sts::PhraseCheckerUsePhrase(const unsigned int phraseLth, const vector<string> phrase, const vector<string> phraseDefs) {
     // Push All words in phrase to phraseWords
     vector<word> phraseWords;
     for(int ph = 0; ph < phraseLth; ++ph) {
@@ -41,13 +44,25 @@ void sts::PhraseCheckerUsePhrase(const unsigned int phraseLth, const vector<stri
     tempWordGroup.words = phraseWords;
     tempWordGroup.defsColor.foregroundColor = "pnk-";
     tempWordGroup.defsColor.backgroundColor = "-blk";
-    tempWordGroup.defZh = phraseDef;
+
+    int choice = 0;
+    if (phraseDefs.size() > 1) {
+        if (this->configs.word_translation.manually_select_definition) {
+            vector<string> menu;
+            menu.push_back("choose one definition");
+            for (vector<string>::const_iterator it = phraseDefs.begin(); it != phraseDefs.end(); ++it) {
+                menu.push_back(*it);
+            }
+            choice = chooseFromMenu({6, 8}, 40, phraseDefs);
+        }
+    }
+    tempWordGroup.defZh = phraseDefs[choice];
     // Push Current temporary wordGroup to wordGroups.
     this->wordGroups.push_back(tempWordGroup);
 }
 
 
-bool sts::PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth, const vector<string> phrase, const string phraseDef) {
+bool sts::PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth, const vector<string> phrase, const vector<string> phraseDefs) {
     int i;
     for (i = 0; i < phraseLth; ++i) {
         if (phrase[i] != s[rwout + i].txt) {
@@ -58,17 +73,17 @@ bool sts::PhraseCheckerCoreKernel(const int rwout, const unsigned int phraseLth,
         // Phrase Matched
         if (this->configs.show_debug_message) {
             printf("\nPhraseCheckerCoreKernel: Matched Phrase: \"%s\" phraseDef = \"%s\"\n",
-                   sts::getPhraseLine(phraseLth, phrase).c_str(), phraseDef.c_str());
+                   sts::getPhraseLine(phraseLth, phrase).c_str(), join(phraseDefs, ",").c_str());
             printf("\ncurrentCursor: x = \"%d\", y = \"%d\"\n", getxy().X, getxy().Y);
         }
         const bool userReply = PhraseCheckerAsk(phraseLth, phrase);
         if (userReply == true) {
             // Use The Matched Phrase.
-            this->PhraseCheckerUsePhrase(phraseLth, phrase, phraseDef);
+            this->PhraseCheckerUsePhrase(phraseLth, phrase, phraseDefs);
         } else {
             if (this->configs.show_debug_message) {
                 printf("\nPhraseCheckerCoreKernel: You reject the matched phrase: \"%s\" phraseDef = \"%s\"\n",
-                       sts::getPhraseLine(phraseLth, phrase).c_str(), phraseDef.c_str());
+                       sts::getPhraseLine(phraseLth, phrase).c_str(), join(phraseDefs, ",").c_str());
             }
         }
         return true;
@@ -85,20 +100,31 @@ bool sts::PhrasesCheckerCore(const int rwout, unsigned int phraseLth, const char
     }
     while (std::getline(fin, line)) {
         vector<string> phrase = split(line, ",;");
-        if (phrase.size() == phraseLth + 1) {
-            const string phraseDef = phrase[phraseLth];
-//            if (show_debug_message) {
+        if (phrase.size() < phraseLth + 1) {
+            printf("\n%s: %s\n", "PhrasesCheckerCore: phrase line is in bad format", line.c_str());
+            getch();
+            return false;
+        } else {
+            // phrase.size() > phraseLth + 1 means that the phrase has more than one definition.
+            vector<string> phraseDefs;
+            for (int i = phraseLth; i < phrase.size(); ++i) {
+                const string phraseDef = phrase[i];
+                phraseDefs.push_back(phraseDef);
+            }
+            if (phraseDefs.empty()) {
+                printf("\n%s: %s\n", "PhrasesCheckerCore: phrase defs loading failed", line.c_str());
+                getch();
+                return false;
+            }
+//            if (this->configs.show_debug_message) {
 //                printf("PhrasesCheckerCore: phrase: \"%s\" phraseDef = \"%s\"\n",
-//                       sts::getPhraseLine(phraseLth, phrase).c_str(), phraseDef.c_str());
+//                       sts::getPhraseLine(phraseLth, phrase).c_str(), join(phraseDefs, ",").c_str());
+//                getch();
 //            }
-            if (PhraseCheckerCoreKernel(rwout, phraseLth, phrase, phraseDef)) {
+            if (PhraseCheckerCoreKernel(rwout, phraseLth, phrase, phraseDefs)) {
                 fin.close();
                 return true;
             }
-        } else {
-            cout << "PhrasesCheckerCore: phrase line is in bad format: " << line << endl;
-            getch();
-            break;
         }
     }
     fin.close();

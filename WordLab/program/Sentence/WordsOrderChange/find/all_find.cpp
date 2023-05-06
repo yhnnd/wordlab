@@ -10,7 +10,7 @@ void sts::seekverb(int r0,int *r1,int rwin) {
 
 void sts::findVerb(const int r0, int *r1, const int max) {
     int pos = r0;
-    for(; pos < max; ++pos) {
+    for(*r1 = pos; pos < max; ++pos) {
         const char * word = s[pos].txt;
         const char * wordNext = s[pos + 1].txt;
         if (wordSortIsVerb(word) == true && wordSortIsVerb(wordNext) == false) {
@@ -24,7 +24,7 @@ void sts::findVerb(const int r0, int *r1, const int max) {
 
 void sts::findConj(const int r0, int * r1, const int max) {
     int pos = r0;
-    for(; pos < max; ++pos) {
+    for(*r1 = pos; pos < max; ++pos) {
         const char * word = s[pos].txt;
         const char * wordNext = s[pos + 1].txt;
         if (wordSortIsConj(word) == true && wordSortIsConj(wordNext) == false) {
@@ -66,7 +66,7 @@ void sts::seeknoun(int r0,int *r1,int rwin) {
 // n. = 1, adj. = 3, pron. = 8
 void sts::seeknounEX(int findFrom,int *stopAt,int rwin) {
     int pos = findFrom;
-    for (; pos < rwin; ++pos) {
+    for (*stopAt = pos; pos < rwin; ++pos) {
         if (SortEX(s[pos].txt,"NOUN") == 0 && SortEX(s[pos + 1].txt,"REALNOUN") != 0) {
             *stopAt = pos;
             break;
@@ -84,7 +84,7 @@ void sts::seeknounEX(int findFrom,int *stopAt,int rwin) {
 // n. = 1, adj. = 3, pron. = 8
 void sts::findNoun(const int findFrom, int *stopAt, const int max) {
     int pos = findFrom;
-    for (; pos < max; ++pos) {
+    for (*stopAt = pos; pos < max; ++pos) {
         if (
                 wordSortIncludes(s[pos].txt, {1, 3, 8}) > 0
                 && (
@@ -162,7 +162,7 @@ void sts::seekaux(int r0,int *r1,int rwin) {
 
 void sts::findAux(const int r0, int * r1, int max) {
     int pos = r0;
-    for (; pos < max; ++pos) {
+    for (*r1 = pos; pos < max; ++pos) {
         if (wordSortIsAuxil(s[pos].txt) == true && wordSortIsAuxil(s[pos + 1].txt) == false) {
             *r1 = pos;
             break;

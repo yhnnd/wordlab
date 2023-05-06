@@ -54,19 +54,28 @@ int sts::SmartTranslater() {
 
 
 void sts::WordsOutCore() {
+    if (this->wordIsPhrase[this->rwout] == true) {
+        return;
+    }
+
     int r;
-    for (r=0; r < maxprep; r++) {
-        if(rwout == preppos0[r]) {
-            cout << preptrans0[r];
+    for (r = 0; r < this->prepositions.size(); r++) {
+        if (this->rwout == this->prepositions[r].begin.pos) {
+            this->pushWordAndDefs("", this->prepositions[r].begin.defs, {"cyn-", "-blk"});
             return;
         }
     }
 
     SmartTranslater();
 
-    for (r=0; r<maxprep; r++) {
-        if (rwout==preppos1[r]) {
-            cout<<preptrans1[r];
+    if (strlen(this->s[this->rwout].txt) == 0 && this->wordIsPhrase[this->rwout - 1] == true) {
+        // Scenario: "pass" + "on" + "".
+        return;
+    }
+
+    for (r = 0; r < this->prepositions.size(); r++) {
+        if (this->rwout == this->prepositions[r].end.pos) {
+            this->pushWordAndDefs("", this->prepositions[r].end.defs, {"cyn-", "-blk"});
         }
     }
 }
@@ -82,13 +91,22 @@ void sts::WordsOut() {
 
     const int numOfWords = this->rwin;
 
+    memset(this->wordIsPhrase, 0, sizeof (this->wordIsPhrase));
+
     std::string improve = "";
-    for(rwout = 0; rwout <= numOfWords; rwout++) {
-//        if (show_debug_message) {
-//            printf("\nrwin = %d, rwout = %d\n", this->rwin, rwout);
+    for (this->rwout = 0; this->rwout <= numOfWords;) {
+//        if (this->configs.show_debug_message) {
+//            printf("\nrwin = %d, rwout = %d, word = \"%s\"\n", this->rwin, this->rwout, this->s[this->rwout].txt);
 //        }
 
-        rwout += PhrasesChecker(rwout);// pink
+        int phraseLth = PhrasesChecker(rwout);// pink
+        if (phraseLth > 0) {
+            for (int i = 0; i < phraseLth; ++i) {
+                this->wordIsPhrase[this->rwout + i] = true;
+            }
+            this->rwout += phraseLth;
+            continue;
+        }
 
 //        if (show_debug_message) {
 //            printf("\nPhrases Check Done.\n");
@@ -191,11 +209,14 @@ void sts::WordsOut() {
 
         if (improve != "") {
             this->pushWordAndDefs(s[rwout].txt, improve, {"ylw-", "-blk"});
+            this->rwout++;
             continue;
         }
 
 
         WordsOutCore();
+
+        this->rwout++;
     }
 
     // Copy Modified Sentence to sModified.
@@ -208,7 +229,7 @@ void sts::WordsOut() {
         const string inquiryEndDefs = this->getInquiryEndDefs(this->inquiryEndFromPunct);
         this->pushDefs(inquiryEndDefs, {"ylw-", "-blk"});
         if (this->configs.show_debug_message) {
-            cout << endl << "punct = \'" << punct << "\' inquiryEndFromPunct = " << this->inquiryEndFromPunct << endl;
+            printf("\npunct = %d '%c' inquiryEndFromPunct = %d\n", this->punct, this->punct, this->inquiryEndFromPunct);
         }
     }
 
