@@ -66,5 +66,6 @@ int addWordScript() {
     } else {
         popup("<-gry>(<-red>( error ) word not found", -1);
     }
+    remove("out.dat");
 	return 0;
 }
