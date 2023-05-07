@@ -7,8 +7,10 @@ int prefixcore(int lth,string &word,int affixmax,int affixlth,char affix[][8]) {
 				colorset(light|yellow);
 				cout<<" + ";
 			}
-			for(int r=affixlth; r<lth; r++) word[r-affixlth]=word[r];
-			lth-=affixlth;
+			for(int r=affixlth; r<lth; r++) {
+                word[r-affixlth]=word[r];
+            }
+			lth -= affixlth;
 			word.erase(lth);//exprimt'l
 			// attention: word must be passed by reference not by value
 		}
