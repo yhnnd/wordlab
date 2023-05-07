@@ -1,4 +1,7 @@
-int scriptprocessor::scriptline(const char *line,const char *functname) {
+int scriptprocessor::scriptline(const char *line, const char *functname) {
+
+    this->scriptTextLines.push_back(line);
+
 	static bool flagif = false;
 	static bool flagfor = false;
 	// function fname(){...}
@@ -9,14 +12,22 @@ int scriptprocessor::scriptline(const char *line,const char *functname) {
 			functname2[r++] = line[i];
 		}
 		strclr(functname2,r);
-		if(strcmp(functname2,functname)==0) Run.activate(brlv);
+		if (strcmp(functname2,functname)==0) {
+            Run.activate(brlv);
+        }
 	}
 	// if (statement) {...} else {...}
 	if( find(line,"if(")>=0 ) {
 		name = getparam(line);
-		if(name[0]=='\"') removebrackets(name,"\"","\"");
-		if(isalpha(name[0])) value = dataset.getvalue(name);
-		if(isdigit(name[0])) value = name;
+		if (name[0]=='\"') {
+            removebrackets(name,"\"","\"");
+        }
+		if (isalpha(name[0])) {
+            value = dataset.getvalue(name);
+        }
+		if (isdigit(name[0])) {
+            value = name;
+        }
 		if((flagif=(maths::calc(value)>0))==0) {// ignore scope = if scope
 			Ignore.activate(brlv);
 		}
@@ -34,8 +45,12 @@ int scriptprocessor::scriptline(const char *line,const char *functname) {
 		}
 	}
 
-	if(find(line,"{")>=0) brlv++;
-	if(find(line,"}")>=0) brlv--;
+	if (find(line,"{") >= 0) {
+        brlv++;
+    }
+	if (find(line,"}") >= 0) {
+        brlv--;
+    }
 
 	if(Run.isEnabled()==true&&Run.inScope(brlv)==false) {// not in function scope
 		Run.setInScopeFalse();

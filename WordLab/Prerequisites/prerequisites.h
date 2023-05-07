@@ -268,10 +268,10 @@ class maths{
 };
 //datacontainer
 class datacontainer{
-	struct data{
+	struct data {
 		std::string name;
 		std::string value;
-	}*dataset;
+	} * dataset;
 	int max;
 	int number;
 	bool debug;
@@ -283,7 +283,7 @@ class datacontainer{
 		bool has(const std::string & name);
 		int update(const std::string & oldname,const std::string & name,const std::string & value);
 		int duplicate(const std::string & destname,const std::string & srcname);
-		int showall();
+		int printAllData();
 	};
 std::string dataContainerVersion();
 //scope
@@ -301,14 +301,17 @@ class ScopeLevel{
 		bool inScope(int brlv);
 };
 //script
-class scriptprocessor{
+class scriptprocessor {
+public:
+    std::vector<std::string> scriptTextLines;
+private:
 	datacontainer dataset;
 	int maxdata;
 	bool _log, _debug;
 	std::string name, value;
 	int brlv;
 	ScopeLevel Run,Ignore,inInitClassFunct,ForLoop;
-	std::string LogFolder,CurrentScriptLine;// used in console.log
+	std::string LogFolder, CurrentScriptLine;// used in console.log
 	//parse
 	int find(const char *s,const char *sub);
 	std::string getname(const std::string & line);
@@ -365,6 +368,8 @@ class scriptprocessor{
 		scriptprocessor(bool debug,int datamax,std::string logfolder="logs\\");
 		int scriptline_div(std::string line,std::string functname);
 		int scriptlines(const std::string FunctName,const std::vector<std::string> lines);
+        int printAllScriptLines();
+        std::string getDataByName(const std::string &);
 };
 int scriptshell(std::string,int,int,COORD,int,int);
 int scriptshell(int print_debug_msg);
@@ -374,10 +379,10 @@ int bsvMatchCommand(const char * c,const char pattern, int i,...);
 WORD bsvcmdcolor(const char * msg);
 int colorsetcmd(const std::string msg);
 int bsvmaxlth(PKC msg,PKC br1,PKC br2,PKC omit,PKC term);
-void bsvline(PKC what,int width=0,PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",PKC tokens_term=";");
+void bsvline(PKC what, int width = 0, PKC brcmdbegin="<", PKC brcmdend=">", PKC fieldbegin="(", PKC fieldend=")", PKC tokens_term=";", scriptprocessor *spptr = nullptr);
 void bsvlineDisableColors(PKC what,int width,PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",PKC tokens_term=";");
 int bsverror(PKC s1,PKC s2,PKC s3);
-int bsvLabelEnter(PKC folder,PKC label,int x,int y,int width,PKC color="wte-blu",void *spptr=NULL);
+int bsvLabelEnter(PKC folder,PKC label,int x,int y,int width,PKC color="wte-blu",void *spptr = nullptr);
 int bsvLineLabels(PKC what,const int labelchosen,int labelnow,const bool enter,PKC folder,const int x,const int y,const int width=0,PKC labelcolor="wte-gry",PKC entercolor="wte-blu",PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",void *spptr= nullptr);
 int bsvlines(char **msgs,const int max,int width,PKC folder,int x,int y,void *spptr=NULL);
 

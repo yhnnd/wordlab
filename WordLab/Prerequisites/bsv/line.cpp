@@ -1,5 +1,5 @@
 //copy this "<",">","(",")"
-void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fieldend,PKC tokens_term) {
+void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fieldend,PKC tokens_term, scriptprocessor *spptr) {
 
 	int r = 0, r1 = 0, romit = 0, rmsg = 0;
 	char msg[stroccurtimes(what,"<")][bsv_cmd_msg_lth_max];
@@ -7,9 +7,11 @@ void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC f
 	color = colorold = color_colorful_foreground = colornow();
 	bool ColorChange = false, ColorfulForeground = false;
 
-	for(r=0; what[r]!='\n'&&strchr(tokens_term,what[r])==NULL&&what[r]!=0; r++) {
+	for (r=0; what[r] != '\n' && strchr(tokens_term, what[r]) == NULL && what[r] != 0; r++) {
 		if(what[r-1]!='\\'&&strchr(brcmdbegin,what[r])) {
-			for(r++,r1=0; what[r-1]=='\\'||!strchr(brcmdend,what[r]); r++,r1++) msg[rmsg][r1]=what[r];
+			for (r++,r1=0; what[r-1]=='\\'||!strchr(brcmdend,what[r]); r++,r1++) {
+                msg[rmsg][r1]=what[r];
+            }
 			strclr(msg[rmsg],r1);
 			if((color = bsvcmdcolor(msg[rmsg]))!=0) {
                 ColorChange = true;
@@ -36,7 +38,7 @@ void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC f
 				ColorfulForeground = false;
 				colorset(colorold);
 			}
-		} else if(what[r]=='\\'&&strchr("()<>",what[r+1])) {
+		} else if(what[r]=='\\' && strchr("()<>", what[r+1])) {
 			romit++;
 		} else {
 			if(ColorfulForeground) {
@@ -44,11 +46,23 @@ void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC f
 				color_colorful_foreground = color_colorful_foreground < 9 ? 9 : color_colorful_foreground;
 				colorset(color_colorful_foreground);
 			}
-			std::cout<<what[r];
+            char * ptrBegin = (char *) (what + r);
+            char * ptrEnd = nullptr;
+            if (what[r] == '$' && spptr != nullptr && (ptrEnd = strpbrk(ptrBegin, " );")) != nullptr) {
+                const int varNameLth = ptrEnd - ptrBegin;
+                r += varNameLth;
+                const std::string varName = std::string(ptrBegin, varNameLth);
+                const std::string varValue = spptr->getDataByName(varName);
+                romit += varNameLth + 1;
+                romit -= varValue.length();
+                printf("%s", varValue.c_str());
+            } else {
+                printf("%c", what[r]);
+            }
 		}
 	}
-	for (r-=romit; r<=width; r++) {
-        std::cout<<" ";
+	for (r -= romit; r <= width; r++) {
+        printf("%c", ' ');
     }
 	colorreset(colorold);
 }

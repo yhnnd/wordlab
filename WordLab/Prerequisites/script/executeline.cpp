@@ -2,11 +2,11 @@ void scriptprocessor :: executeline(const char *line) {
 	// execute single-line script
 	consolelogline(line);
 	if(find(line,"function ")>=0) {
-	} else if(find(line,"gotoxy")>=0) {
+	} else if(find(line,"gotoxy(")>=0) {
 		scriptgotoxy(line);
 	} else if(find(line,"getch()")>=0) {
 		scriptgetch(line);//getch()
-	} else if(find(line,"fgets")>=0) {
+	} else if(find(line,"fgets(")>=0) {
 		scriptfgets(line);//fgets(route)
 	} else if(find(line,"gets()")>=0) {
 		scriptgetsvoid(line);//name=gets()
@@ -14,16 +14,18 @@ void scriptprocessor :: executeline(const char *line) {
 		scriptgets(line);//gets(name)
 	} else if(find(line,"fputs(")>=0) {
 		scriptfputs(line);
-	} else if(find(line,"var")>=0) {
+	} else if(find(line,"var ")>=0) {
 		var(line);
-	} else if(find(line,"print")>=0) {
+	} else if(find(line,"print(")>=0) {
 		prints(line);
 	} else if(find(line,"remove(")>=0) {
 		remove(line);
-	} else if(find(line,"select")>=0) {
+	} else if(find(line,"select(")>=0) {
 		select(line);
-	} else if(find(line,"showalldata()")>=0) {
-		dataset.showall();
+	} else if(find(line,"showAllData()") >= 0 || find(line, "printAllData()") >= 0) {
+        dataset.printAllData();
+    } else if(find(line, "printAllScriptLines()") >= 0) {
+        this->printAllScriptLines();
 	} else if(find(line,"strclr(")>=0) {
 		scriptstrclr(line);
 	} else {// execute expression

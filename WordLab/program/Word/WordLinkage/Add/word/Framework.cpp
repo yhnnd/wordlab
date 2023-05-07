@@ -1,4 +1,4 @@
-void AddWord(const string word){
+void AddWord(const string word) {
 	int lth = word.length();
 	if(word.length()==0) {
 		return;

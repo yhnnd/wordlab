@@ -15,7 +15,7 @@ scriptprocessor::scriptprocessor(bool debug,int datamax,std::string logfolder) {
 	this->maxdata = datamax;
 	this->_log = true;
 	this->LogFolder = logfolder;
-	dataset.init(datamax,debug);
+	dataset.init(datamax, debug);
 }
 //codes above are in class script
 #include "shell.cpp"

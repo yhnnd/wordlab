@@ -8,12 +8,16 @@ std::string datacontainer::getvalue(const std::string & name) {
 			break;
 		}
 	}
-	if(debug) {
-		if(i<number) printf("getting data[%d] %s=%s\n",i,name.c_str(),value.c_str());
-		else printf("getting data (%s) failed\n",name.c_str());
+	if (debug) {
+		if (i < number) {
+            printf("getting data[%d] %s=%s\n",i,name.c_str(),value.c_str());
+        } else {
+            printf("getting data (%s) failed\n",name.c_str());
+        }
 	}
 	return value;
 }
+
 // return true if name is defined
 bool datacontainer::has(const std::string & name) {
 	int i = 0;

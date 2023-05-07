@@ -6,7 +6,7 @@ int scriptprocessor::scriptgets(const char *line){
 		printf(" input ");
 		colorreset(ogcolor);
 	}
-	std::cin>>value;
+	std::cin >> value;
 	dataset.set(name,value);
 	return 0;
 }

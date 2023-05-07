@@ -67,7 +67,7 @@ int launch(string msg) {
 		AddNew(words());
 		return 8;
 	} else if(msg==FunctionName[9]) {
-		WordInsert();
+		addWordScript();
 		return 9;
 	} else if(msg==FunctionName[10]) {
 		auto words=[] {

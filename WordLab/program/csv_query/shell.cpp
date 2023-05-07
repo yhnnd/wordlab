@@ -11,8 +11,12 @@ int csvqueryshell(){
 		cout<<">>> ";
 		beginpoint=0;
 		begin:
-		if(csvQueryInput(query, beginpoint, 256, backdarkwhite, backlight | backyellow) == 0) goto end;
-		if(query[0]=='\0') goto end;
+		if(csvQueryInput(query, beginpoint, 256, backdarkwhite, backlight | backyellow) == 0) {
+            goto end;
+        }
+		if(query[0]=='\0') {
+            goto end;
+        }
 		if(strindex(query,"repeat")==0){
 			strcpy(query,queryprev);
 			beginpoint=strlen(query);

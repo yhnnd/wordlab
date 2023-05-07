@@ -23,5 +23,5 @@ function structConstruct(){
 }
 
 function ShowAll(){
-    showalldata()
+    printAllData()
 }

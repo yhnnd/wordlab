@@ -18,5 +18,5 @@ function button(){
     print("\n")
 }
 function ShowAll(){
-    showalldata()
+    printAllData()
 }
