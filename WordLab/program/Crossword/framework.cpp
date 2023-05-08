@@ -2,8 +2,8 @@ int CrosswordFramework(){
 	clearScreen();
 	colorset(lightwhite);
 
-	string folder=CrosswordDataFolder;
-	string folder2=CrosswordSelectFolder(folder);
+	string folder = CrosswordDataFolder;
+	string folder2 = CrosswordSelectFolder(folder);
 
 	if(folder2.empty()) {
         return errorlog("CrosswordFramework()","no game folder in",folder);
