@@ -1,7 +1,9 @@
-class crossword_word{
+class crossword_word {
+private:
 	board *Board;
 	int lth,x,y,zx,zy,xd,yd;
 	string letter,type,def,defreverse;
+
 	public:
 	void setz(int zx,int zy){
 		this->zx=zx;
@@ -15,7 +17,7 @@ class crossword_word{
 		this->def="";
 		this->defreverse="";
 	}
-	crossword_word& operator=(board& Board){
+	crossword_word& operator = (board& Board) {
 		this->Board=&Board;
 		return *this;
 	}
@@ -36,14 +38,14 @@ class crossword_word{
 		os<<" defr="<<setw(32)<<((this->defreverse.empty())?"NULL":this->defreverse);
 		os<<endl;
 	}
-	void operator<<(tuple<ifstream&,int> info){//read from file
-		ifstream& in=get<0>(info);
+	void operator << (tuple<ifstream&,int> info) {//read from file
+		ifstream& in = get<0>(info);
 		int r,n=get<1>(info);
 		int x,y,zx,zy,xd,yd;
 		string word,type,def,defr;
 		in.ignore(1024,'=');
-		in>>r;
-		if(r!=n){
+		in >> r;
+		if (r != n) {
 			errorlog("word.readfromfile","error reading word",toString(n));
 			errorlog("detail","reading file word",toString(r));
 			return;
@@ -70,12 +72,24 @@ class crossword_word{
 		in.ignore(1024,'=');
 		in>>defreverse;
 		in.ignore(1024,'\n');
+
 		this->set(x,y,zx,zy,xd,yd,word,type,def,defr);
-		if(this->Board==nullptr) errorlog("word.readfromfile","board not set");
-		else{
-			for(int i=0;i<word.length();i++){
-				if(this->Board->getwritable(x+xd*i,y+yd*i))
-				this->Board->setcolor(x+xd*i,y+yd*i, backlightwhite);
+
+		if(this->Board == nullptr) {
+            errorlog("word.readfromfile","board not set");
+        } else {
+			for (int i = 0; i < word.length(); i++) {
+                if (x + xd * i >= this->Board->getWidth()) {
+                    printf("word \"%s\" char num %d exceeds the board width %d\n", word.c_str(), i, this->Board->getWidth());
+                    return;
+                } else if (y + yd * i >= this->Board->getHeight()) {
+                    printf("word \"%s\" char num %d exceeds the board height %d\n", word.c_str(), i, this->Board->getHeight());
+                    return;
+                } else {
+                    if (this->Board->getwritable(x + xd * i, y + yd * i)) {
+                        this->Board->setcolor(x + xd * i, y + yd * i, backlightwhite);
+                    }
+                }
 			}
 		}
 	}
@@ -101,18 +115,18 @@ class crossword_word{
 		return (this->Board->getvisible(xt,yt))
 		&&!(this->Board->getwritable(xt,yt))
 		&&isalpha(this->Board->getletter(xt,yt))
-		&&(this->Board->getcolor(xt,yt)==(backlight|backgreen));
+		&&(this->Board->getcolor(xt,yt)==(backlightgreen));
 	}
 	int check(const int r,const char c){
 		int xt=x+xd*r,yt=y+yd*r;
-		if(c==letter[r]){
+		if (c==letter[r]) {
 			this->Board->setvisible(xt,yt,1);
 			this->Board->setletter(xt,yt,letter[r]);
-			this->Board->setcolor(xt,yt,backlight|backgreen);
+			this->Board->setcolor(xt,yt,backlightgreen);
 			return 1;
-		}else{
+		} else {
 			this->Board->setvisible(xt,yt,0);
-			this->Board->setcolor(xt,yt,backlight|backred);
+			this->Board->setcolor(xt,yt,backlightred);
 		}
 		return 0;
 	}
@@ -137,33 +151,61 @@ class crossword_word{
 		this->Board->show({x+xd*r,y+yd*r,zx,zy});
 	}
 	int show(){
-		if(this->Board==nullptr) return errorlog("word.show","invalid board");
+		if(this->Board==nullptr) {
+            return errorlog("word.show", "invalid board");
+        }
 		colorrecord(colorprev);
-		for(int r=0;r<lth;r++) this->show(r);
+		for(int r = 0; r < lth; r++) {
+            this->show(r);
+        }
 		colorreset(colorprev);
 		return 0;
 	}
-	void selected(int r){
-		WORD color=this->Board->getcolor(x+xd*r,y+yd*r);//record
-		this->Board->setcolor(x+xd*r,y+yd*r,backyellow|backlight);//set
-		this->Board->show({x+xd*r,y+yd*r,zx,zy});
-		this->Board->setcolor(x+xd*r,y+yd*r,color);//reset
-		int x=this->x,y=this->y;
-		this->Board->getpos(&x,&y,zx,zy);
-		gotoxy(x,y+zy);
-		colorset(backlight|backcyan);
-		cout<<this->def;
-		colorreset(lightwhite);
+
+    void answerLetter(int r, const char userInput, const WORD color) {
+        WORD ogColor = this->Board->getcolor(x+xd*r, y+yd*r);//record
+        this->Board->setcolor(x+xd*r, y+yd*r, color);//set
+        this->Board->showUserInput({x + xd * r, y + yd * r, zx, zy}, userInput);
+        this->Board->setcolor(x+xd*r,y+yd*r, ogColor);//reset
+    }
+
+	void selected(int r) {
+        WORD color= this->Board->getcolor(x+xd*r, y+yd*r);//record
+		this->Board->setcolor(x+xd*r,y+yd*r, backlightyellow);//set
+		this->Board->show({x + xd * r, y + yd * r, zx, zy});
+		this->Board->setcolor(x+xd*r,y+yd*r, color);//reset
 	}
-	int selected(){
-		if(this->Board==nullptr) return errorlog("word.selected","invalid board");
-		colorrecord(colorprev);
-		for(int r=0;r<lth;r++) this->selected(r);
-		colorreset(colorprev);
+
+	int selected() {
+		if(this->Board==nullptr) {
+            return errorlog("word.selected","invalid board");
+        }
+
+        colorrecord(colorprev);
+
+        this->Board->clearPreviousDefinition();
+
+        this->Board->prevDef = this->def;
+
+		for(int r = 0; r < lth; r++) {
+            this->selected(r);
+        }
+
+        int x = this->x, y = this->y;
+        this->Board->prevPos = {static_cast<short>(x), static_cast<short>(y)};
+
+        this->Board->getpos(&x, &y, zx, zy);
+        gotoxy(x, y + zy);
+        colorset(backlightcyan);
+        cout << this->def;
+//        colorreset(lightwhite);
+        colorreset(colorprev);
+
+        this->Board->prevDefPos = {static_cast<short>(x), static_cast<short>(y + zy)};
 		return 0;
 	}
-	bool accord(int rotate_index){
-		switch(rotate_index%4){
+	bool accord(const int rotate_index) {
+		switch (rotate_index % 4) {
 			case 0: return (xd>0);break;
 			case 1: return (yd<0);break;
 			case 2: return (xd<0);break;

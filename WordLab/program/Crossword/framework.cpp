@@ -35,39 +35,42 @@ int CrosswordFramework(){
 
 	//Crossword.check({"pineapple","elbow","apples","pear","bowl","ear","horse","arrow","sow"});
 
-	int key = 0, n = 0;
+	char key = 13;
+    int n = 0;
 
-	popup("Answer[A] Hint[H] Rotate[Q/R] Settings[S]", 0);
+	popup("Answer[A/W/S/D/Enter] Rotate[Q/R]", 0);
 
-	for (;Crossword.show();) {
-		Crossword.info(key);
-		Crossword.save();
-		if ((key=getch())=='0' || key == 8 || key == 27 || key == 127) {
+	for (;;) {
+        if (key != 'q' && key != 'r' && key != 13) {
+            fflush(stdin);
+            cin.clear();
+            cin.sync();
+            key = getch();
+        }
+        if (key == '0' || key == 8 || key == 27 || key == 127) {
             break;
         }
-		switch (key) {
-			case 'a':
-            case 13:// Carriage Return
-            case 10:// Line Feed
-                //answer
-				n = Crossword.SelectWord();
-				Crossword.AnswerWord(n);
-				break;
-			case 'h'://hint
-				Crossword.hint(n);
-				break;
-			case 'q'://anticlockwise rotate
-				Crossword.rotate(-1);
-				break;
-			case 'r'://clockwise rotate
-				Crossword.rotate(1);
-				break;
-			case 's'://settings
-				Crossword.settings();
-				break;
-			default:
-				break;
-			}
+        if (key == 'q') {
+            // anticlockwise rotate
+            Crossword.rotate(-1);
+            n = -1;
+        } else if (key == 'r') {
+            // clockwise rotate
+            Crossword.rotate(1);
+            n = -1;
+        }
+        Crossword.show();
+        Crossword.info(key);
+        key = 0;
+        n = Crossword.SelectWord(key, n);
+        if (n != -1) {
+            Crossword.AnswerWord(n);
+            Crossword.save();
+            Crossword.show();
+            Crossword.info(key);
+            Crossword.showSelectedWord(n);
+            key = 0;
+        }
 	}
 	return 0;
 }
