@@ -27,10 +27,18 @@ char popupcore(const std::string msg, const int life, const int x, const int y, 
 	    	Sleep(10);
 		}
 #endif
+        fflush(stdin);
+        std::cin.clear();
+        std::cin.sync();
+
 		key = getch();
 		BreakWait:
 		MessageWindow.Erase(x,0,width,y);
 	} else if (life < 0) {
+        fflush(stdin);
+        std::cin.clear();
+        std::cin.sync();
+
         key = getch();
     }
 	// reset

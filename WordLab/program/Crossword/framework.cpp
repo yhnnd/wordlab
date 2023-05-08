@@ -24,7 +24,7 @@ int CrosswordFramework(){
 
 	in.close();
 
-    const char c = popup("load previous progress?",-1);
+    const char c = popup("load previous progress?", -1);
 	bool LoadPrev= (c == 13 || c == 10);
 
 	crossword Crossword(folder2,LoadPrev,4,4,2,w,h);
