@@ -22,5 +22,5 @@ n=20 word=meditation       lth=10 x=12 y=5  zx=2  zy=2  xd=0  yd=1  type=normal 
 n=21 word=assessment       lth=10 x=14 y=5  zx=2  zy=2  xd=0  yd=1  type=normal   def=14_Everyman's_among_fools,_ultimately_preposterous_in_prevalent_estimation_(10) defr=NULL                            
 n=22 word=aalarge          lth=7  x=8  y=8  zx=2  zy=2  xd=0  yd=1  type=normal   def=19_A_type_of_informal_shirt,_big_and_loose_(2,5) defr=NULL                            
 n=23 word=bred             lth=4  x=0  y=11 zx=2  zy=2  xd=0  yd=1  type=normal   def=21_Produced_some_sombre_dirges_(4) defr=NULL                            
-Mon May  8 16:52:12 2023
+Mon May  8 16:54:13 2023
 
