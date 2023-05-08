@@ -47,9 +47,10 @@ int chooseFromMenu (COORD displayPos, const int width, const vector<string> menu
         }
         gotoxy(displayPos.X, displayPos.Y + max + 1);
         setForegroundColorAndBackgroundColor("blu-", "-blu");
-        std::cout << "+" << std::right << std::setfill('-') << std::setw(outerWidth) << "+" << endl;
+        std::cout << "+" << std::right << std::setfill('-') << std::setw(outerWidth) << "+";
         std::cout << std::setfill(' ') << std::left;
         setForegroundColorAndBackgroundColor("wte-", "-blk");
+        gotoxy(displayPos.X, displayPos.Y + max + 2);
         printf("your input: '%c'", ch);
 
         ch = getch();

@@ -26,42 +26,31 @@ string CrosswordSelectFolder(const string folder) {
 		remove(tempfilename);
 		//user select a puzzle
 		cout<<"choose one of the puzzles below"<<endl;
-        const char * tipsStyled = "input a <grn->(number) or <ylw->(name):";
-        const char * tipsPlain = "input a number or name:";
-		string selectOneFromManyOptions (const vector<string>, const char *, const char *);
-		string filename = selectOneFromManyOptions(lines, tipsStyled, tipsPlain);
-		return folder + filename;
+        const char * tipsStyled = "press <grn-blk>([W] [A] [S] [D]) to switch and press <grn-blk>([Enter]) to confirm";
+		string selectOneFromManyOptions (const vector<string>, const char *);
+		string filename = selectOneFromManyOptions(lines, tipsStyled);
+        if (filename.empty()) {
+            return "";
+        } else {
+            return folder + filename;
+        }
 	}
-	return folder;
 }
 
-string selectOneFromManyOptions (const vector<string> lines, const char * messageStyled, const char * messagePlainText) {
-	int nol = 0;
-    colorrecord(colorPrev);
-	for_each(lines.begin(), lines.end(), [&nol](string line) {
-		nol++;
-        colorset(lightgreen);
-        std::cout << std::setfill(' ') << std::setw(3) << "" << nol;
-        colorset(lightyellow);
-        std::cout << std::setfill(' ') << std::setw(3) << "" << line << endl;
-	});
-    colorreset(colorPrev);
-	bsvline(messageStyled, strlen(messagePlainText));
-	string line;
-	cin >> line;
-	int n = toInt(line);
-	if (n > 0 && n <= lines.size()) {
-		// user input an order number of an option
-		return lines[n - 1];
-	} else {
-		// user input a name of an option
-		auto it = lines.begin();
-		while (it != lines.end()) {
-			if (*it == line) {
-				return *it;
-			}
-			it++;
-		}
-	}
-	return line;
+string selectOneFromManyOptions (const vector<string> lines, const char * message) {
+	const int x = 2, y = 1;
+    gotoxy(x, y + lines.size() + 3);
+	bsvline(message);
+    vector<string> menu;
+    char s[128];
+    for (const auto & line: lines) {
+        snprintf(s, sizeof(s), "%-58s", line.c_str());
+        menu.push_back(s);
+    }
+    const int n = chooseFromMenu({x, y}, 60, menu);
+	if (n >= 0 && n < lines.size()) {
+        return lines[n];
+    } else {
+        return "";
+    }
 }
