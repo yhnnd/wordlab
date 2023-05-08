@@ -232,13 +232,10 @@ class crossword{
         } else {
             printf("%d", key);
         }
-
-//        setForegroundColorAndBackgroundColor("wte-", "-gry");
-        for (r = 0; r < h; r++) {
-            clearscreen(x + 2 * zx * w, y + zy * r, 12, zy);
-        }
-//        setForegroundColorAndBackgroundColor("wte-", "-blk");
         int m = ::max(w, h) + 1, xt = x + 2 * zx * m + 1, yt = y + zy * m / 2;
+//        setForegroundColorAndBackgroundColor("wte-", "-#blu");
+        clearscreen(x + 2 * zx * (m - 1), y, 12, zy * (m - 1));
+//        setForegroundColorAndBackgroundColor("wte-", "-blk");
 		clearscreen(xt - 1, yt - 1, 5, 3);
 		gotoxy(xt,yt);
 		cout<<"top";
