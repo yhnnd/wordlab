@@ -5,7 +5,7 @@ int prefix(string word) {
 		{"e","a","#"},
 		{"ab","ac","as","co","de","di","en","ex","in","im","il","ir","is","ob","oc","re","un","#"},
 		{"col","com","con","dis","mid","non","ori","pro","pre","sub","sur","sim","syn","iso","uni","imi","#"},
-		{"over","post","anti","dict","para","hypo","semi","#"},
+		{"arch","over","post","anti","dict","para","hypo","semi","#"},
 		{"extra","inter","intro","intel","infra","initi","trans","hyper","under","#"},
 		{"antici","circum","contra","#"},
 		{"counter","#"}
