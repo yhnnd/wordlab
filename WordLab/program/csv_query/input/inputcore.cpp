@@ -1,4 +1,4 @@
-int inputcore(char *msg,int BEGIN,bool DISPLAY,char term0,char term1,char term2,char *suggests,bool AllowNull,const COORD SuggestsWindowPos) {
+int inputcore(char *msg,int BEGIN,bool DISPLAY,char term0,char term1,char term2,const char *suggests,bool AllowNull,const COORD SuggestsWindowPos) {
 	int r;
 	char c;
 

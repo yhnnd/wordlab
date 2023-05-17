@@ -2,16 +2,18 @@
 // updated on 2023.04.29
 
 void launchTips(char *msg, const sts::consoleColor colorStart, const sts::consoleColor colorEnd) {
-    char suggests[]=
+    const char suggests[]=
             "query(),volume(),checkupdate(),update(),database(),software(),clearcache(),"
             "addnew(),addword(),addphrase(),script(),sortlib(),"
             "crossword(),lastlaunch(),searchcompact(),wordlinkage(),translater(),translaterpro(),"
             "settings.engines(),settings.values(),settings.system(),settings.history(),"
             "user.login(),list(),help(),settings.version(),"
             "wordsortcheck(),searchreverse(),searchsimilar(),"
-            "practices(),similar(),tips();";
-    const auto pos = getxy();
+            "practices(),similar(),tips(),wlscan(),checksafety();";
+
     colorrecord(colorprev);
+
+    const auto pos = getxy();
 
     setForegroundColorAndBackgroundColor(colorStart.foregroundColor, colorStart.backgroundColor);
     inputcore(msg,0,true,13,KEY_ESC,'=',suggests,true, pos);
