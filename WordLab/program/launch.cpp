@@ -16,7 +16,7 @@ void launchTips(char *msg, const sts::consoleColor colorStart, const sts::consol
     const auto pos = getxy();
 
     setForegroundColorAndBackgroundColor(colorStart.foregroundColor, colorStart.backgroundColor);
-    inputcore(msg,0,true,13,KEY_ESC,'=',suggests,true, pos);
+    inputcore(msg,0,true,{13,10,KEY_ESC,'='},suggests,true, pos);
 
     gotoxy(pos);
     setForegroundColorAndBackgroundColor(colorEnd.foregroundColor, colorEnd.backgroundColor);

@@ -1,8 +1,8 @@
-int inputcore(char *msg,int BEGIN,bool DISPLAY,char term0,char term1,char term2,const char *suggests,bool AllowNull,const COORD SuggestsWindowPos) {
+int inputcore(char *msg,int BEGIN,bool DISPLAY,const vector<char> terms,const char *suggests,bool AllowNull,const COORD SuggestsWindowPos) {
 	int r;
 	char c;
 
-    auto listenDelete = [&SuggestsWindowPos](int &r, char * msg) {
+    auto listenDelete = [](int &r, char * msg) {
         if (r > 0) {
 //            setForegroundColorAndBackgroundColor("blk-", "-red");
             printf("\b \b");
@@ -42,31 +42,20 @@ int inputcore(char *msg,int BEGIN,bool DISPLAY,char term0,char term1,char term2,
             } else {
                 goto begin;
             }
-        } else if (c == term0) {
-            strclr(msg,r);
-            if (AllowNull||r>0) {
-                return 0;
-            } else {
-                goto begin;
-            }
-        } else if(c==term1) {
-            strclr(msg, r);
-            if(AllowNull||r>0) {
-                return 1;
-            } else {
-                goto begin;
-            }
-        } else if(c==term2) {
-            strclr(msg,r);
-            if (AllowNull||r>0) {
-                return 2;
-            } else {
-                goto begin;
-            }
         } else {
-            msg[r] = c;
-            msg[r + 1] = '\0';
+            for (int t = 0; t < terms.size(); ++t) {
+                if (c == terms[t]) {
+                    strclr(msg, r);
+                    if (AllowNull || r > 0) {
+                        return t;
+                    } else {
+                        goto begin;
+                    }
+                }
+            }
         }
+        msg[r] = c;
+        msg[r + 1] = '\0';
 		if (suggests != NULL) {
             inputsuggests(suggests,msg,30,SuggestsWindowPos);
             gotoxy(SuggestsWindowPos.X + r + 1, SuggestsWindowPos.Y);

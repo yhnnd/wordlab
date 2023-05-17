@@ -1,6 +1,10 @@
-int csvQueryInput(char *query,int begin,int lthmax,WORD clr1,WORD clr2) {
-	int i;
-    short WindowX = 2;
+int csvQueryInput(char *query,const int beginPoint,int lthmax,const vector<sts::consoleColor> colors) {
+#ifdef __APPLE__
+    const COORD inputPos = getxy();
+#else
+    const short WindowX = 2;
+    const COORD inputPos = {static_cast<short>(WindowX), getxy().Y};
+#endif
 	char msg[32];
 	char suggests[]=
 	    "if,else,where,from,to,in,of,between,and,or,not,"
@@ -9,33 +13,41 @@ int csvQueryInput(char *query,int begin,int lthmax,WORD clr1,WORD clr2) {
 	    "word:en,word:en-ch,phrase:en-ch,voca:en,lth=,sort=,word=,value=,text=,"
 	    "affix=,substr=,index=,prefix=,begin=,start=,suffix=,postfix=,end=,infix=,inside=,mid=,"
 	    "regex=,match=,like=,pattern=,contains=,subset=,strorder=;";
-	strclr(query,begin);
+	strclr(query, beginPoint);
 	recordxy(pos);
-	if(begin>0) {
-		colorset(backlight|backcyan);
-		cout<<query;
+	if (beginPoint > 0) {
+        setForegroundColorAndBackgroundColor("blk-", "-cyn");
+        gotoxy(inputPos);
+		printf("%s", query);
 	}
-	for(i=0;; i++) {
-		colorset(clr1);
-		if(inputcore(msg,0,true,13,13,i>0?' ':13,suggests,i>0,{WindowX, getxy().Y})==-1) {
-			if (i==0&&query[0]=='\0') {
+	for (int i = 0; ; ++i) {
+		setForegroundColorAndBackgroundColor(colors[0].foregroundColor, colors[0].backgroundColor);
+        vector<char> terms = {13, 10};
+        if (i > 0) {
+            terms.push_back(' ');
+        }
+		if (inputcore(msg, 0, true, terms, suggests, true, {static_cast<short>(inputPos.X + strlen(query)), inputPos.Y}) == -1) {
+			if (i == 0 && msg[0] == '\0' && query[0] == '\0') {
                 return 0;
+            } else {
+                setForegroundColorAndBackgroundColor("blk-", "-red");
+                cout<<"\b \b";
+                setForegroundColorAndBackgroundColor("blu-", "-gry");
+                if (inputcore(query, strlen(query), true, {13, 10}, suggests, true, inputPos) == -1) {
+                    strcat(query," ");
+                    return 0;
+                }
+                break;
             }
-			cout<<"\b \b";
-			if(inputcore(query,strlen(query)-1,true,13,13,13,suggests,i>0,{WindowX, getxy().Y})==-1) {
-				strcat(query," ");
-				return 0;
-			}
-			break;
 		}
-		if (msg[0]=='\0') {
+		if (msg[0] == '\0') {
             break;
         }
 		strcat(query,msg);
 		strcat(query," ");
 		gotoxy(pos);
-		colorset(clr2);
-		cout<<query;
+		setForegroundColorAndBackgroundColor(colors[1].foregroundColor, colors[1].backgroundColor);
+		cout << query;
 	}
 	resetxy(pos);
 	return 1;
