@@ -1,8 +1,11 @@
 void load::System() {
 	int x=0,y=9,width=30,n=0,nprev=0,T=0;
 	char Menu[MAXLINES][LINEMAX];
-	if(LANGUAGE==0) loadmsg((char*)Menu,SetSystemRoute"en.csv",MAXLINES,LINEMAX,1,1);
-	if(LANGUAGE==1) loadmsg((char*)Menu,SetSystemRoute"ch.csv",MAXLINES,LINEMAX,1,1);
+	if (LANGUAGE == lang::EN) {
+        loadmsg((char*)Menu,SetSystemRoute"en.csv",MAXLINES,LINEMAX,1,1);
+    } else if (LANGUAGE == lang::CH) {
+        loadmsg((char*)Menu,SetSystemRoute"ch.csv",MAXLINES,LINEMAX,1,1);
+    }
 	for(T=0;;nprev=n,++T){
 	    n=multitask(x,y,width,Menu,T,nprev,true);
 	    switch(n){
@@ -10,10 +13,10 @@ void load::System() {
 				VolumeTable(_data_dir"buf_table.dat");
 			break;
 	        case  2:
-				AL ? WLscan() : popup("permission denied",0);
+                launch("wlscan()");
 			break;
 	        case  3:
-				db_is_secure(true,true);
+				launch("checksafety()");
 			break;
 			case  4:
 				MessageWindow.bsvviewer(ReportFileRoute,false);

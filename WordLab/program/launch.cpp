@@ -199,6 +199,16 @@ int launch(const std::string msg) {
         if (command[0]) {
             return launch(command);
         }
+    } else if (msg == functionNames[33]) {
+        if (AL) {
+            WLscan();
+        } else {
+            popup("permission denied", 0);
+        }
+        return 33;
+    } else if (msg == functionNames[34]) {
+        db_is_secure(true, true);
+        return 34;
 	} else { //translate msg as a word
 		int i = 0, lth = msg.length();
 		if ((i = Search(msg.c_str(),lth)) > 0) {

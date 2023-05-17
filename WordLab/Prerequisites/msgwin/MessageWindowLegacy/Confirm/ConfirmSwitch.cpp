@@ -9,12 +9,19 @@ int MessageWindow::ConfirmSwitch(int n,int x,int y,int width,int height) {
 		ListSwitchErase(x,y,n,blockwidth,height);
 		ColorfulAll(r);
 		ListSwitchBlock(x,y,n,r,blockwidth,height,'*');
-		// Wait keyboard hit and show time remains
-		colorsetcmd("gry-blu");
+
+        if (n > 5) {
+            ColorfulBackground(r);
+            printf("\b\b%-2d", r);
+        }
 #ifdef _WIN32
-		while(!kbhit()){
-			time_t time_passed=clock()-timeA;
-			if(time_passed>tolerance) goto end;
+        // Wait keyboard hit and show time remains
+        setForegroundColorAndBackgroundColor("gry-", "-blu");
+		while (!kbhit()) {
+			time_t time_passed = clock() - timeA;
+			if (time_passed > tolerance) {
+                goto end;
+            }
 			gotoxy(x,y+height);
 			std::cout<<std::setw(2)<<std::setiosflags(std::ios::right)<<1+(tolerance-time_passed)/1000<<"s";
 			Sleep(10);

@@ -178,7 +178,7 @@ void Colorful(int t);
 void Colorfuldim(int t);
 void ColorfulAll(int t);
 void ColorfulAllDim(int t);
-void ColorfulB(int t);
+void ColorfulBackground(int t);
 void ColorfulBdim(int t);
 void printColorful(const char *msg);
 //cursor

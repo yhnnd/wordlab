@@ -6,7 +6,7 @@ void MessageWindow::SelectFrame(int x, int y, int width, const char *msg, const 
     for (int lineNo = 0; lineNo < lineMax; ++lineNo) {
         gotoxy(x + 5, y + 1 + lineNo);
         if (_background) {
-            ColorfulB(strsum(msg + lineNo * lineCharMax));
+            ColorfulBackground(strsum(msg + lineNo * lineCharMax));
         } else {
             Colorful(strsum(msg + lineNo * lineCharMax));
         }

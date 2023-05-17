@@ -1,4 +1,4 @@
-bool db_is_secure(bool print_success,bool print_error){
+bool db_is_secure(const bool print_success, const bool print_error){
 	int lth = 0, nol[2] = {0,0}, error = 0;
 	// check if db-en-lth.nol equals db-zh-lth.nol
 	status("db error locater is running");
