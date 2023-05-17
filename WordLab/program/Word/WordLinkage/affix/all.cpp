@@ -4,4 +4,4 @@
 #include "prefixcore.cpp"
 #include "prefix.cpp"
 //affix -> prefix -> prefixcore
-//                -> posfix -> postfixcore -> infix
+//                -> postfix -> postfixcore -> infix

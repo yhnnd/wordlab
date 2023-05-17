@@ -7,7 +7,7 @@ int csvQueryInput(char *query,int begin,int lthmax,WORD clr1,WORD clr2) {
 	    "select,create,delete,insert,update,drop,add,open,set,alter,var,"
 	    "order by,group by,join,check,print,system info,library,source,"
 	    "word:en,word:en-ch,phrase:en-ch,voca:en,lth=,sort=,word=,value=,text=,"
-	    "affix=,substr=,index=,prefix=,begin=,start=,suffix=,posfix=,end=,infix=,inside=,mid=,"
+	    "affix=,substr=,index=,prefix=,begin=,start=,suffix=,postfix=,end=,infix=,inside=,mid=,"
 	    "regex=,match=,like=,pattern=,contains=,subset=,strorder=;";
 	strclr(query,begin);
 	recordxy(pos);
