@@ -1,7 +1,11 @@
 //Attention: noKbhit should differ from Kbhit
-char wait(int Life, int Interval, bool Getch, char noKbhit, int Kbhit) {
+char wait(const int Life, const int Interval, const bool Getch, const char noKbhit, const int Kbhit) {
 #ifdef __APPLE__
-    return Getch ? getch() : Kbhit;
+    if (Life < 0 || Getch == true) {
+        return getch();
+    } else {
+        return Kbhit;
+    }
 #elif defined(_WIN32)
     time_t BeginTime = clock();
 	while (!kbhit()) {
@@ -12,11 +16,12 @@ char wait(int Life, int Interval, bool Getch, char noKbhit, int Kbhit) {
             Sleep(Interval);
         }
 	}
-	return Getch ? getch() : Kbhit;
+	if (Getch == true) {
+        return getch();
+    } else {
+        return Kbhit;
+    }
 #endif
 }
-//if kbhit(){
-//	if Getch return getch()
-//	else return Kbhit
-//}else return noKbhit
+
 

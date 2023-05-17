@@ -229,7 +229,7 @@ int DeleteLine(const std::string route,const int n,bool LastLineNoReturn=1);
 int DeleteChar(const char *route,const int n);
 //time
 std::string getCurrentTime();
-char wait(int Life,int Interval,bool Getch,char NoKbhit=0,int Kbhit=-1);
+char wait(int Life, int Interval, bool Getch, char NoKbhit = 0, int Kbhit = -1);
 //USER INTERFACE
 //chart
 class chart{
