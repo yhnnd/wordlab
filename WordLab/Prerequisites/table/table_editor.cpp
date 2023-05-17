@@ -49,6 +49,9 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
             if (this->iserror(r_prev, c_prev) == false) {
                 gotoxy(deltaX, y + r_prev);
                 colorreset(lightwhite);
+#ifdef __APPLE__
+                printf("%c", ' ');
+#endif
                 std::cout << std::setw(this->getwidth(r_prev, c_prev)) << (this->getdata(r_prev, c_prev));
             }
             // display selected label
@@ -67,6 +70,9 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
             }
             if (this->iserror(r, c) == false) {
                 colorsetcmd("-wte");
+#ifdef __APPLE__
+                printf("%c", ' ');
+#endif
                 std::cout << std::setw(this->getwidth(r, c)) << (this->getdata(r, c));
                 colorreset(lightwhite);
                 // record previous selected label
