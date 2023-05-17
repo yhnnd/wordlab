@@ -1,6 +1,6 @@
-ßx†Î,menu,search();
-ÓÃ‘ôµÇä›,launch,user.login();
-ÓÃ‘ôÖúÊÖ,launch,her();
-ˆDĞÎ½çÃæ,launch,settings.version();
-ÓÃ‘ôÖ¸Œ§,launch,help();
-ÍË³ö,menu,quit();
+é¸å–®,menu,search();
+ç”¨æˆ¶ç™»éŒ„,launch,user.login();
+åŠŸèƒ½åˆ—è¡¨,launch,list();
+åœ–å½¢ç•Œé¢,launch,settings.version();
+ç”¨æˆ¶æŒ‡å°,launch,help();
+é€€å‡º,menu,quit();

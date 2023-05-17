@@ -4,7 +4,7 @@ void InputForLaunch(char *msg,WORD colorStart,WORD colorEnd) {
 	    "addnew(),addword(),addphrase(),script(),sortlib(),"
 	    "crossword(),lastlaunch(),searchcompact(),wordlinkage(),translater(),translaterpro(),"
 	    "settings.engines(),settings.values(),settings.system(),settings.history(),"
-	    "user.login(),her(),help(),settings.version(),"
+	    "user.login(),list(),help(),settings.version(),"
 	    "wordsortcheck(),searchreverse(),searchsimilar(),"
 	    "practices(),similar();";
 	auto pos = getxy();

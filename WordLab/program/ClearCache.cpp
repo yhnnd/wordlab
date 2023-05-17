@@ -15,5 +15,7 @@ int clearCache(){
     // Structured Dictionary Values
     std::__fs::filesystem::remove_all("SDV_BSV_TEMP");
     rmdir("SDV_BSV_TEMP");
+    // Molecular db
+    remove(_data_dir"buf_molecular_db_gen.tmp");
 	return 0;
 }

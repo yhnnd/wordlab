@@ -1,6 +1,6 @@
 Menu,menu,search();
 Login,launch,user.login();
-Assistant,launch,her();
+Functions List,launch,list();
 GUI,launch,settings.version();
 Help,launch,help();
 Quit,menu,quit();
