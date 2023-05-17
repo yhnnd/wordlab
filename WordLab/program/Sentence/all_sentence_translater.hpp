@@ -5,12 +5,13 @@ public:
         char sort[16];
         int type;
     };
-private:
+
     struct consoleColor {
         string foregroundColor;
         string backgroundColor;
     };
 
+private:
     enum _affixSymbols {
         _prefix_RE = 1,
         _prefix_UN = 2,

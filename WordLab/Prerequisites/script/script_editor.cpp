@@ -1,5 +1,6 @@
 // Used by Prerequisites::scriptShell()
-void ScriptEditor(std::string filename){
+int ScriptEditor(std::string filename) {
+    int returnValue = 0;
 	window document;
 	document.setfilename(filename);
 	document.setwindow(ScreenX/2,ScreenY);
@@ -9,6 +10,7 @@ void ScriptEditor(std::string filename){
 	document.setcoloractive("#blu-wte","-wte","#blu-wte","-wte","wte-grn","-grn","ylw-red","-red");
 	document.alloc();
 	document.load("",";");
-	document.Editor();
+	returnValue = document.Editor();
 	document.save("",";");
+    return returnValue;
 }

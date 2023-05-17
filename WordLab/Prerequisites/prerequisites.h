@@ -168,7 +168,6 @@ PKC ReportFileRoute=_data_dir"logs/errors/general.bsv";
 
 class host{
 	public:
-	static std::string name;
 	static std::string datafolder;
 };
 //color

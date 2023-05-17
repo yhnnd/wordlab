@@ -1,13 +1,16 @@
-int inputcore(char *msg,int BEGIN,bool DISPLAY,char term0,char term1,char term2,char *suggests,bool AllowNull,int SuggestWindowX) {
+int inputcore(char *msg,int BEGIN,bool DISPLAY,char term0,char term1,char term2,char *suggests,bool AllowNull,const COORD SuggestsWindowPos) {
 	int r;
 	char c;
 
-    auto listenDelete = [](int &r, char * msg) {
+    auto listenDelete = [&SuggestsWindowPos](int &r, char * msg) {
         if (r > 0) {
-            std::cout<<" \b";
+//            setForegroundColorAndBackgroundColor("blk-", "-red");
+            printf("\b \b");
         } else {
-            std::cout<<" ";
-        } if (r) {
+//            setForegroundColorAndBackgroundColor("blk-", "-blu");
+            printf(" ");
+        }
+        if (r) {
             msg[r-1] = 0;
             r--;
         } else {
@@ -20,10 +23,19 @@ int inputcore(char *msg,int BEGIN,bool DISPLAY,char term0,char term1,char term2,
 
     for (r = BEGIN; ; r++) {
 		begin:
-        c = getche();
-		if (!DISPLAY && isprint(c)) {
-            cout << "\b*";
+        c = getch();
+
+        if (isprint(c) == true) {
+            gotoxy(SuggestsWindowPos.X + r, SuggestsWindowPos.Y);
+            if (DISPLAY == false) {
+//                setForegroundColorAndBackgroundColor("wte-", "-blk");
+                printf("*");
+            } else {
+//                setForegroundColorAndBackgroundColor("blk-", "-cyn");
+                printf("%c", c);
+            }
         }
+
 		if (c == 8 || c == 127 || c == 27) {
             if (listenDelete(r, msg) == true) {
                 return -1;
@@ -46,14 +58,18 @@ int inputcore(char *msg,int BEGIN,bool DISPLAY,char term0,char term1,char term2,
             }
         } else if(c==term2) {
             strclr(msg,r);
-            if(AllowNull||r>0) return 2;
-            else goto begin;
+            if (AllowNull||r>0) {
+                return 2;
+            } else {
+                goto begin;
+            }
         } else {
             msg[r] = c;
+            msg[r + 1] = '\0';
         }
-		msg[r+1]='\0';
 		if (suggests != NULL) {
-            inputsuggests(suggests,msg,30,SuggestWindowX);
+            inputsuggests(suggests,msg,30,SuggestsWindowPos);
+            gotoxy(SuggestsWindowPos.X + r + 1, SuggestsWindowPos.Y);
         }
     }
 	return 0;

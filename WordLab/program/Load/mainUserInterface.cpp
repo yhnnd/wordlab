@@ -39,11 +39,11 @@ int load::mainUserInterface(const std::string foldername,int x,int y,int width,i
 			if(pos!=std::string::npos) {
 				auto msg=temp_menu.substr(pos+temp_cmd.length());
 				if(i==0) {//menu
-					if(msg.find("new_menu(")==0) {
+					if(msg.find("new_menu(") == 0) {
 						auto a=msg.find("("),b=msg.find(")");
 //                        cout << "about to load menu. folder =" << _data_dir + msg.substr(a+1,b-a-1);
 //                        getch();
-						mainUserInterface(_data_dir+msg.substr(a+1,b-a-1),x,y,width,0,0);//RECURSIVE
+						mainUserInterface(_data_dir + msg.substr(a+1,b-a-1),x,y,width,0,0);//RECURSIVE
 					} else if(msg.find("quit(")==0) {
                         return n;
                     }
@@ -51,6 +51,7 @@ int load::mainUserInterface(const std::string foldername,int x,int y,int width,i
 					scriptprocessor sp(0,32);
 					sp.scriptline_div(msg,"");
 				} else if(i==2) {//launch
+                    int launch(std::string);
 					launch(msg);
 				}
 			}

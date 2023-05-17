@@ -4,7 +4,7 @@ int scriptshell(std::string filename,int print_debug_msg,int data_capacity,COORD
 	lines.clear();
 	if(filename=="new") { //new file
 		std::string filename = host::datafolder+"temp.js";
-		if (system((host::name+" ScriptEditor "+filename).c_str())) {
+		if (ScriptEditor(filename) == 0) {
             return 1;
         }
 		std::ifstream fin(filename);

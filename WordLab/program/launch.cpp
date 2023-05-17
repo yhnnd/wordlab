@@ -1,6 +1,28 @@
 // updated on 2017.03.09
 // updated on 2023.04.29
 
+void launchTips(char *msg, const sts::consoleColor colorStart, const sts::consoleColor colorEnd) {
+    char suggests[]=
+            "query(),volume(),checkupdate(),update(),database(),software(),clearcache(),"
+            "addnew(),addword(),addphrase(),script(),sortlib(),"
+            "crossword(),lastlaunch(),searchcompact(),wordlinkage(),translater(),translaterpro(),"
+            "settings.engines(),settings.values(),settings.system(),settings.history(),"
+            "user.login(),list(),help(),settings.version(),"
+            "wordsortcheck(),searchreverse(),searchsimilar(),"
+            "practices(),similar(),tips();";
+    const auto pos = getxy();
+    colorrecord(colorprev);
+
+    setForegroundColorAndBackgroundColor(colorStart.foregroundColor, colorStart.backgroundColor);
+    inputcore(msg,0,true,13,KEY_ESC,'=',suggests,true, pos);
+
+    gotoxy(pos);
+    setForegroundColorAndBackgroundColor(colorEnd.foregroundColor, colorEnd.backgroundColor);
+    printf("%s=", msg);
+
+    colorreset(colorprev);
+}
+
 int launchPrintList(vector<string> functionNames) {
     //print a list of all function names
     _table t;
@@ -25,7 +47,7 @@ int launchPrintList(vector<string> functionNames) {
 //  0 function List() or Translate()
 // -1 unknown function name (default)
 // -2 cannot open function name file
-int launch(string msg) {
+int launch(const std::string msg) {
 	vector<string> functionNames;
 	functionNames.push_back("list()");
 	//read function names
@@ -163,17 +185,23 @@ int launch(string msg) {
 		practices();
 		return 30;
 	} else if(msg.find(functionNames[31]) == 0) {
-		if(msg.find(",")==string::npos||msg.find(")")==string::npos) {
-			errorlog("similar","error","parameter unrecognizable");
-		} else {
-			string word=msg.substr(msg.find("(")+1,msg.find(",")-msg.find("(")-1);
-			int amount = toInt(msg.substr(msg.find(",")+1,msg.find(")")-msg.find(",")-1));
-			WLSearchSimilarSpelling(word,amount);
-		}
-		return 31;
+        if (msg.find(",") == string::npos || msg.find(")") == string::npos) {
+            errorlog("similar", "error", "parameter unrecognizable");
+        } else {
+            string word = msg.substr(msg.find("(") + 1, msg.find(",") - msg.find("(") - 1);
+            int amount = toInt(msg.substr(msg.find(",") + 1, msg.find(")") - msg.find(",") - 1));
+            WLSearchSimilarSpelling(word, amount);
+        }
+        return 31;
+    } else if (msg == functionNames[32]) {
+        char command[256];
+        launchTips(command, {"wte-", "-blk"}, {"wte-", "-#gry"});
+        if (command[0]) {
+            return launch(command);
+        }
 	} else { //translate msg as a word
 		int i = 0, lth = msg.length();
-		if((i=Search(msg.c_str(),lth))>0) {
+		if ((i = Search(msg.c_str(),lth)) > 0) {
 			cout<<"{"
 			<<"\"db-"<<lth<<"-"<<i<<'\"'
 			<<','
@@ -182,7 +210,10 @@ int launch(string msg) {
 			<<'\"'<<Chinese(lth,i)<<'\"'
 			<<"}";
 			return 0;
-		}
+		} else {
+            std::cout << maths::calc(msg);
+            return 0;
+        }
 	}
 	errorlog("launch","unknown function name",msg);
 	return -1;

@@ -37,9 +37,9 @@ void window::applysettings(){
 				n=0;
 			}
 		}else if(strstr(text.line(n),"#launch ")==text.line(n)){
-			if(!text.iscmd[n]){
-				text.iscmd[n]=1;
-				system((host::name+" "+(text.line(n)+1)).c_str());
+			if (!text.iscmd[n]) {
+				text.iscmd[n] = 1;
+				launch(text.line(n) + strlen("#launch "));
 			}
 		}else if(strstr(text.line(n),"#left")==text.line(n)){
 			if(!text.iscmd[n]){

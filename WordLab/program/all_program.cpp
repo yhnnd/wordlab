@@ -43,8 +43,6 @@
 #include "Load/all_load.cpp"
 #include "practices.cpp"
 #include "launch.cpp"
-#include "launch-input.cpp"
-#include "ScriptEditor.cpp"
 #include "MainLoop.cpp"
 #include "molecular.cpp"
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *

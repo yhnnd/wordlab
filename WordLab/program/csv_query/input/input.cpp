@@ -1,5 +1,6 @@
 int csvQueryInput(char *query,int begin,int lthmax,WORD clr1,WORD clr2) {
-	int i, WindowX = 2;
+	int i;
+    short WindowX = 2;
 	char msg[32];
 	char suggests[]=
 	    "if,else,where,from,to,in,of,between,and,or,not,"
@@ -16,12 +17,12 @@ int csvQueryInput(char *query,int begin,int lthmax,WORD clr1,WORD clr2) {
 	}
 	for(i=0;; i++) {
 		colorset(clr1);
-		if(inputcore(msg,0,true,13,13,i>0?' ':13,suggests,i>0,WindowX)==-1) {
+		if(inputcore(msg,0,true,13,13,i>0?' ':13,suggests,i>0,{WindowX, getxy().Y})==-1) {
 			if (i==0&&query[0]=='\0') {
                 return 0;
             }
 			cout<<"\b \b";
-			if(inputcore(query,strlen(query)-1,true,13,13,13,suggests,i>0,WindowX)==-1) {
+			if(inputcore(query,strlen(query)-1,true,13,13,13,suggests,i>0,{WindowX, getxy().Y})==-1) {
 				strcat(query," ");
 				return 0;
 			}

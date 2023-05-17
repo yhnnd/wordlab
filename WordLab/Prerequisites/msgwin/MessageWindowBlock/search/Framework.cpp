@@ -20,19 +20,15 @@ int messageblock::Search(char what[][LINEMAX],int N) {
 		n = SearchCore(what,max,keyword);
 		colorset(backlight|((n>0&&n<max)?backgreen:(r<lth/2)?backyellow:backred));
 		clearline(x+(width-lth)/2,y-1,lth);
-		std::cout<<keyword;
+		std::cout << keyword;
 		if (keyword[strlen(keyword)-1]=='=') {
-			keyword[strlen(keyword)-1]=0;
+			keyword[strlen(keyword)-1] = 0;
 			colorreset(colorprev);
-			if (host::name.length()&&strindex(keyword,"tips")==0) {
-				colorset(lightwhite | backlight);
-				clearline(x+(width-lth)/2,y-1,lth);
-				system((host::name+" tips ").c_str());
-			} else if(host::name.length()&&system((host::name+" launch "+keyword).c_str())>=0) {
-
-            } else {
-                std::cout<<maths::calc(keyword);
+			if (strindex(keyword, "tips()") == 0) {
+                setForegroundColorAndBackgroundColor("wte-", "-#gry");
+                clearline(x + (width - lth) / 2, y - 1, lth);
             }
+            launch(keyword);
 		} else {
             Fillall(what,nprev,n,max);
         }
