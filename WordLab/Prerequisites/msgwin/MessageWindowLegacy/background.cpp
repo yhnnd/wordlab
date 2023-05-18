@@ -23,9 +23,9 @@ bool  MessageWindow::GetBackground(bool flag) {
 	return _background;
 }
 bool  MessageWindow::SetMonochrome(bool flag) {
-	bool flagprev=_Monochrome;
-	_Monochrome=flag;
-	return flagprev;
+	bool flagPrev = _Monochrome;
+	_Monochrome = flag;
+	return flagPrev;
 }
 bool  MessageWindow::GetMonochrome(bool flag) {
 	return _Monochrome;

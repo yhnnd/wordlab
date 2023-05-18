@@ -165,11 +165,11 @@ int MessageWindow::Switch(int x,int y,int width,char *what,int max,int w,int n) 
 
 
 int MessageWindow::Switch(int x,int y,int width,std::vector<std::string> what,int n) {
-    char c, nprev=-1;
+    char c, nprev = -1;
     int max = what.size();
     for(;;) {
-        limit(n,n,0,max-1);
-        c = Pointer(x+1,y+1,max,n,nprev);
+        limit(n, n, 0, max - 1);
+        c = Pointer(x, y + 1, max, n, nprev);
         nprev = n;
         if (c == 13 || c == 10)  {
             break;
@@ -180,11 +180,11 @@ int MessageWindow::Switch(int x,int y,int width,std::vector<std::string> what,in
         } else if(n<max-1||_LoopLock) {
             n++;
         }
-        if(_LoopLock) {
-            roll(n,n,0,max-1);
+        if (_LoopLock) {
+            roll(n, n, 0, max - 1);
         }
     }
-    if(!_background) {
+    if (!_background) {
         Highlight(what[n].c_str());
     }
     return n;

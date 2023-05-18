@@ -26,6 +26,6 @@ void AddWord(const string word) {
 		foutCH.close();
         flog.close();
 	}
-	wait(-1,100,0);
+	wait(-1, 100, 0);
 	Dialog.output("reset");
 }

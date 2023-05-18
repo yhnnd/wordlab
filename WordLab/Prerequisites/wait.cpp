@@ -2,6 +2,7 @@
 char wait(const int Life, const int Interval, const bool Getch, const char noKbhit, const int Kbhit) {
 #ifdef __APPLE__
     if (Life < 0 || Getch == true) {
+        fflush(stdin);
         return getch();
     } else {
         return Kbhit;

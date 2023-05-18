@@ -1,17 +1,17 @@
-void MessageWindow::Erase(int x,int y,int width,int max,WORD color){
-    int n,r;
+void MessageWindow::Erase(const int x,const int y,const int width,const int max,const WORD color) {
+    int n;
     colorrecord(colorprev);
     colorset(color);
-    for(n=0;n<=max+1;n++) {
-        gotoxy(x,y++);
-        for(r=0;r<=width+5;r++) std::cout<<" ";
+    for (n = 0; n <= max + 1; n++) {
+        gotoxy(x, y + n);
+        std::cout << std::setfill(' ') << std::setw(width + 6) << "";
     }
     colorreset(colorprev);
 }
 
 
 
-int MessageWindow::Edge(int x,int y,int width){
+int MessageWindow::Edge(int x,int y,int width) {
     int r;
     colorrecord(colorprev);
     colorset(bothlightblue);
@@ -106,17 +106,19 @@ void MessageWindow::Frame(int begin,int x,int y,int width,const char *what,int h
 
 
 // message type: C++ vector<string>
-void MessageWindow::Frame(int begin,int x,int y,int width,std::vector<std::string> msgs) {
+void MessageWindow::Frame(const int begin, const int x, int y, const int width, const std::vector<std::string> msgs) {
     colorrecord(colorprev);
     int max = msgs.size();
-    if(begin==-1) {
-        Erase(x,y,width,max);
+    if (begin == -1) {
+        Erase(x, y, width, max);
     } else {
-        if(begin==0) y = Edge(x,y,width);
-        for( int n = begin; n < max; n++ ) {
-            y = Line(x,y,width,msgs[n].c_str(),n);
+        if (begin == 0) {
+            y = Edge(x, y, width);
         }
-        Edge(x,y,width);
+        for ( int n = begin; n < max; n++ ) {
+            y = Line(x, y, width, msgs[n].c_str(), n);
+        }
+        Edge(x, y, width);
     }
     colorreset(colorprev);
 }
@@ -126,14 +128,20 @@ void MessageWindow::Frame(int begin,int x,int y,int width,std::vector<std::strin
 void MessageWindow::Frame(int begin,int x,int y,int width,int max,int h) {
     int n;
     colorrecord(colorprev);
-    if(h==0) h = max;
-    if(begin==-1) {
+    if (h == 0) {
+        h = max;
+    }
+    if (begin == -1) {
         Erase(x,y,width,max);
         colorreset(colorprev);
         return;
     }
-    if(begin==0) y = Edge(x,y,width);
-    for(n=begin; n<max&&n<h; n++) y = line(x,y,width);
+    if (begin == 0) {
+        y = Edge(x,y,width);
+    }
+    for (n = begin; n < max && n < h; n++) {
+        y = line(x, y, width);
+    }
     Edge(x,y,width);
     colorreset(colorprev);
 }
