@@ -113,10 +113,9 @@ func main() {
 		serveWs(hub, w, r)
 	})
 	// Run HTTP Server
+	log.Printf("server is running on localhost:8080\n")
 	err2 := http.ListenAndServe("localhost:8080", nil)
 	if err2 != nil {
 		log.Fatal("ListenAndServe: ", err2)
-	} else {
-		log.Printf("server is running on localhost:8080\n")
 	}
 }
