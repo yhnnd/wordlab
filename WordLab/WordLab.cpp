@@ -5,7 +5,9 @@ using namespace std;
 #include "program/all_program.cpp"
 #include "program/performanceTest.cpp"
 int main(int argc,char **argv) {
-
+//    cout << "strcmp(\"mat\", \"may\") = " << strncmp("mat", "may", 3) << endl;
+//    cout << "strcmp(\"may\", \"May\") = " << strncmp("may", "May", 3) << endl;
+//    getch();
 //    gotoxy(1,2);
 //    getxy();
 //    printf("   ");
