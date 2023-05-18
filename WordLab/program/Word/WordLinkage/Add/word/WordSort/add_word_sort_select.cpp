@@ -1,8 +1,8 @@
 string AddWordSortSelect(const int x, const int y) {
-	static int choice = 1;
-	bool isMonochromePrev = MessageWindow.SetMonochrome(true);
+    static int choice = 1;
+    const bool isMonochromePrev = MessageWindow.SetMonochrome(true);
     const int width = 20;
-	vector<string> optionsMenu = {
+	const vector<string> optionsMenu = {
         "select word sort",
         "set word sort n.",
         "set word sort v.",
