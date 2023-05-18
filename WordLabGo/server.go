@@ -51,7 +51,7 @@ func main() {
 	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/translate", handler)
 	http.HandleFunc("/suggestions", handleSuggests)
-	fmt.Println("server is running")
+	fmt.Println("server is running on localhost:8000")
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
