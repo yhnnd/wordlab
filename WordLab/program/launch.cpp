@@ -116,20 +116,22 @@ int launch(const std::string msg) {
 		scriptshell(false);
 		return 11;
 	} else if(msg.find(functionNames[12]) == 0) {
-		string param[4];
+		vector<string> params;
 		string::size_type i = 0, j = 0, r = 0;
 		i = msg.find("(") + 1;
-		for(r = 0; r < 4; r++) {
-			if ((j=msg.find_first_of(",)",i))==string::npos) {
+		for(r = 0; r < 2; r++) {
+			if ((j = msg.find_first_of(",)", i)) == string::npos) {
                 break;
             }
-			param[r].assign(msg, i, j-i);
+			params.push_back(msg.substr(i, j - i));
 			i = j + 1;
 		}
-		if (r < 4) {
-            cout<<"[Error] 4 parameters required: begin, end, admin, pwd";
+		if (params.size() != 2) {
+            cout<<"[Error] 2 parameters required: begin, end";
         } else {
-            if (sortlib(stoi(param[0]),stoi(param[1]),param[2],param[3]) == 0) {
+            params.push_back(DatabaseAdminName);
+            params.push_back(DatabaseAdminPassword);
+            if (sortlib(stoi(params[0]), stoi(params[1]), params[2], params[3]) == 0) {
                 cout << "done";
             } else {
                 cout << "error";
