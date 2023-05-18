@@ -4,7 +4,7 @@ int sortlib(int beginLth, int endLth, const string admin, const string password)
 	if (beginLth > endLth) {
         return sortLibError(-8);
     }
-	for(wordLth = beginLth; wordLth <= endLth; wordLth++) {
+	for (wordLth = beginLth; wordLth <= endLth; wordLth++) {
 		// validate
 		if (!LibraryAdminValidate(wordLth, EN, admin, password)) {
             return sortLibError(-7, admin);
