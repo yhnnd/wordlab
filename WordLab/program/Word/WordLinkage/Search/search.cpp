@@ -46,7 +46,7 @@ int WLSearch(string keyword, bool ignoreCase, bool printResult, char mode, bool 
 		if (ignoreCase == true) {
             compareResult = strnicmp(keyword.c_str(), currentCheckingWord, wordLth);
         } else {
-            compareResult = strncmp(keyword.c_str(), currentCheckingWord, wordLth);//Xprmt'l updated 2017.03.14
+            compareResult = compare(keyword.c_str(), currentCheckingWord, wordLth);
         }
 
 //        const int sign = ((compareResult >> 31) - (-compareResult >> 31));// get the sign of compareResult

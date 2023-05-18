@@ -38,19 +38,10 @@ int sortlib(const int beginLth, const int endLth, const string admin, const stri
 		// sort
 		for (int r = 0; r < maxLines - 1; r++) {
 			for (int j = r + 1; j < maxLines; j++) {
-                bool shouldSwap = false;
-                const int compareResult = strnicmp(s_en[r], s_en[j], wordLth);
-				if (compareResult > 0) {
-                    shouldSwap = true;
-				} else if (compareResult == 0) {
-                    if (strncmp(s_en[r], s_en[j], wordLth) < 0) {
-                        shouldSwap = true;
-                    }
-                }
-                if (shouldSwap == true) {
+				if (compare(s_en[r], s_en[j], wordLth) > 0) {
                     strswap(s_en[r], s_en[j], 32);
                     strswap(s_ch[r], s_ch[j], 256);
-                }
+				}
 			}
 		}
 		// record

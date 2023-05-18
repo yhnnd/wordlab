@@ -7,6 +7,8 @@ using namespace std;
 int main(int argc,char **argv) {
 //    cout << "strcmp(\"mat\", \"may\") = " << strncmp("mat", "may", 3) << endl;
 //    cout << "strcmp(\"may\", \"May\") = " << strncmp("may", "May", 3) << endl;
+//    cout << "compare(\"mat\", \"may\") = " << compare("mat", "may", 3) << endl;
+//    cout << "compare(\"may\", \"May\") = " << compare("may", "May", 3) << endl;
 //    getch();
 //    gotoxy(1,2);
 //    getxy();
