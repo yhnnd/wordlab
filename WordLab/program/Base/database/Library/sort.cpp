@@ -1,4 +1,4 @@
-int sortlib(int beginLth, int endLth, const string admin, const string password) {
+int sortlib(const int beginLth, const int endLth, const string admin, const string password) {
 	int wordLth = 0, maxLines = 0;
 	char **s_en = nullptr, **s_ch = nullptr;
 	if (beginLth > endLth) {
@@ -43,7 +43,7 @@ int sortlib(int beginLth, int endLth, const string admin, const string password)
 				if (compareResult > 0) {
                     shouldSwap = true;
 				} else if (compareResult == 0) {
-                    if (strncmp(s_en[r], s_en[j], wordLth) > 0) {
+                    if (strncmp(s_en[r], s_en[j], wordLth) < 0) {
                         shouldSwap = true;
                     }
                 }
