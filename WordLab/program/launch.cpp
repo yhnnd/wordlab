@@ -117,16 +117,24 @@ int launch(const std::string msg) {
 		return 11;
 	} else if(msg.find(functionNames[12]) == 0) {
 		string param[4];
-		string::size_type i=0,j=0,r=0;
-		i=msg.find("(")+1;
-		for(r=0; r<4; r++) {
-			if((j=msg.find_first_of(",)",i))==string::npos) break;
-			param[r].assign(msg,i,j-i);
-			i=j+1;
+		string::size_type i = 0, j = 0, r = 0;
+		i = msg.find("(") + 1;
+		for(r = 0; r < 4; r++) {
+			if ((j=msg.find_first_of(",)",i))==string::npos) {
+                break;
+            }
+			param[r].assign(msg, i, j-i);
+			i = j + 1;
 		}
-		if(r<4) cout<<"[Error] 4 parameters required: begin, end, admin, pwd";
-		else if(sortlib(stoi(param[0]),stoi(param[1]),param[2],param[3])==0) cout<<"done";
-		else cout<<"error";
+		if (r < 4) {
+            cout<<"[Error] 4 parameters required: begin, end, admin, pwd";
+        } else {
+            if (sortlib(stoi(param[0]),stoi(param[1]),param[2],param[3]) == 0) {
+                cout << "done";
+            } else {
+                cout << "error";
+            }
+        }
 		return 12;
 	} else if(msg == functionNames[13]) {
 		CrosswordFramework();

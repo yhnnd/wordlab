@@ -43,7 +43,7 @@ int WLSearch(string keyword, bool ignoreCase, bool printResult, char mode, bool 
             return -1;
         }
 
-		if (ignoreCase) {
+		if (ignoreCase == true) {
             compareResult = strnicmp(keyword.c_str(), currentCheckingWord, wordLth);
         } else {
             compareResult = strncmp(keyword.c_str(), currentCheckingWord, wordLth);//Xprmt'l updated 2017.03.14
