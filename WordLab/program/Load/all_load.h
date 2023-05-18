@@ -17,7 +17,7 @@ public:
     int mainUserInterface(const std::string foldername,int x,int y,int width,int Times,int nprev);
     string lastlaunch();
     void UpdateCheck(string msg);
-    void UpdateDatabase(string route);
+    int UpdateDatabase(string route);
     void UpdateSoftware(string route);
     void Update();
 };

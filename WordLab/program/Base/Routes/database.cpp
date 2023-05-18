@@ -8,5 +8,5 @@ const string InformationRoute1 = _data_dir"data/info/dev/ch.dat";
 const string InstructionRoute0 = _data_dir"data/info/user/en.dat";
 const string InstructionRoute1 = _data_dir"data/info/user/ch.dat";
 
-const string DatabaseAdminName="admin";
-const string DatabaseAdminPassword="#override";
+const string DatabaseAdminName = "admin";
+const string DatabaseAdminPassword = "#override";
