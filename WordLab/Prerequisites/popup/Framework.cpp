@@ -60,3 +60,6 @@ template <typename... Args>
 char popup(std::string msg, std::string s, const Args&... rest) {
     return popup(msg + s, rest...);
 }
+
+
+const char * set_mode_y_is_constant = "#setMode('y=1');";

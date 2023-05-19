@@ -71,7 +71,7 @@ void practices() {
                 "                                                <wte->("
             };
             popup("#time=reset();");
-            popup("#setMode('y=1');");
+            popup(set_mode_y_is_constant);
             popup("<-ylw>(step 1 of 3)<-grn>( set word.Length.Base )",0);
             key = MessageWindow.Confirm(5,15,5,52,&msgs1[0][0],9,128);
             fout<<"LengthBase = "<<(key>0&&key<5?key+2:5)<<";"<<endl;
@@ -234,7 +234,7 @@ void practices() {
         }
     }// main loop
     popup("#record=reset();");
-    popup("#setMode('y=1');");
+    popup(set_mode_y_is_constant);
     popup("#offsetY=1;", 0);
     popup("#enableBorderTop=true;");
 }

@@ -27,7 +27,7 @@ int addWordScript() {
                 popup("#offsetY=0;");
                 popup("<wte-gry>(<#blu-ylw>(word):<blk-wte>(" + word + ")", 0);
                 popup("<wte-gry>(<#blu-ylw>(def):<blk-wte>(" + replace(line_of_defs, ",;", ") <blk-wte>(") + ")", 0);
-                popup("#setMode('y=1');");
+                popup(set_mode_y_is_constant);
                 popup("#offsetY=0;");
                 if (MessageWindow.alert("<-wte>(add this defs?", 2, 20, 5, 36, 4, 10) == 1) {
                     // add def to library
