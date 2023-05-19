@@ -1,7 +1,7 @@
 int WLFramework(void) {
 	int lth = 0;
     char s[32] = "", FirstLetter = 0;
-	if( VL and db_is_secure(false,true)==false ) {
+	if (VL and db_is_secure(false, true) == false) {
         getch();
     }
 	if (Ctype == 0) {
@@ -14,7 +14,7 @@ int WLFramework(void) {
 	clearScreen();
     setForegroundColorAndBackgroundColor("wte-", "-blk");
 
-	for(;;) {
+	for (;;) {
         // INPUT DATA
 		if (FirstLetter != 13 && FirstLetter != 10) {
 			memset(s,0,sizeof(s));
