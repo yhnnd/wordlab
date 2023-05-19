@@ -30,17 +30,17 @@ int WLFramework(void) {
 			lth = strlen(s);
 		}
 		// PROCESS DATA
-		char * ptr_token = strstr(s,"#");
+		char * ptr_token = strstr(s, "#");
 		if (ptr_token != nullptr) {
-			(*ptr_token) = 0;//remove #
-			if (*(ptr_token+1) != '\0') {
-                strcpy(ptr_token,ptr_token + 1);
+			(*ptr_token) = 0;// remove #
+			if (*(ptr_token + 1) != '\0') {
+                strcpy(ptr_token, ptr_token + 1);
             }
 			// re-order the word after removing #
 			FirstLetter = WLTools(s) ? 13 : 0;
 		} else if (strindex(s, " ") >= 0) {
 			if (!WLSearchPhrase(s) && CL) {
-                AddNew(s);
+                FirstLetter = AddNew(s);
             }
 		} else if (lth <= 0 || lth > 30) {
             return -1;

@@ -1,6 +1,6 @@
-void AddNew(const string s) {
+char AddNew(const string s) {
 	if(s.empty()) {
-        return;
+        return 0;
     }
 //    printf("\nadd new begin\n");
 	Dialog.output("start");
@@ -29,6 +29,7 @@ void AddNew(const string s) {
 		AddWord(s);
 	}
 	end:
-	wait(-1,10,0);
+	const char key = getch();
 	Dialog.output("reset");
+    return key;
 }
