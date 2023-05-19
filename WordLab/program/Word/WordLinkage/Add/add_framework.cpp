@@ -31,5 +31,5 @@ char AddNew(const string s) {
 	end:
 	const char key = getch();
 	Dialog.output("reset");
-    return key;
+	return key;
 }
