@@ -141,11 +141,16 @@ inline double maths::evaluate(const std::string Operator, const std::vector<doub
         case operatorNames::Modulo:
             result = fmod(a, b);
             break;
-        case operatorNames::Exponentiation:
-            result = pow(a, b);
+        case operatorNames::Exponentiation: {
+                const long long powerResult = pow(a, b);
+                if (powerResult == 9223372036854775807) {
+                    result = std::numeric_limits<double>::quiet_NaN();
+                } else {
+                    result = powerResult;
+                }
+            }
             break;
-        case operatorNames::Factorial:
-            {
+        case operatorNames::Factorial: {
                 if (a == std::numeric_limits<double>::infinity()) {
                     result = std::numeric_limits<double>::infinity();
                 } else {
