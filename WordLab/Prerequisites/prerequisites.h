@@ -256,13 +256,34 @@ void AskCharRenew(std::string s,std::string cache[]);
 void AskCharShow(std::string cache[]);
 int AskChar(std::string);
 //Maths
-class maths{
-	static inline constexpr int fact(const int n);
-	static int operatorright(PKC s,int br,PKC operators,PKC br1,PKC br2);
+class maths {
+    private:
+    enum operatorNames {
+        Unknown = 0,
+        Addition = 1,
+        Subtraction = 2,
+        Multiplication = 3,
+        Division = 4,
+        Not = 5,
+        Modulo = 6,
+        Exponentiation = 7,
+        Factorial = 8,
+        Equal = 9,
+        LessThan = 10,
+        GreaterThan = 11,
+        PrefixIncrement = 12,
+        PrefixDecrement = 13,
+        PostfixIncrement = 14,
+        PostfixDecrement = 15
+    };
+    static inline std::map<enum operatorNames, std::vector<std::string>> getOperatorsMap();
+    static inline std::string getOperator(enum operatorNames const operatorName);
+    static inline std::vector<std::set<std::string>> getOperatorsGroupedByPrecedence();
+    static inline int operatorsRight(const std::string s, int br, const std::set<std::string> operators, PKC br1, PKC br2);
+    static inline constexpr int factorial(const int n);
 	public:
-	static float calc(const float,const float,const char);
-	static float calc(PKC s);
-	static float calc(const std::string & s){return calc(s.c_str());}
+	static inline float evaluate(const std::string Operator, const std::vector<float> parameters, const std::vector<bool> isParameterValid);
+	static inline float calc(const std::string s);
 	static int filter(int n, int *flags, int *length);
 };
 //datacontainer
