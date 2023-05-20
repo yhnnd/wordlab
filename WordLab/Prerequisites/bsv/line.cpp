@@ -13,7 +13,7 @@ void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC f
                 msg[rmsg][r1]=what[r];
             }
 			strclr(msg[rmsg],r1);
-			if((color = bsvcmdcolor(msg[rmsg]))!=0) {
+			if((color = bsvcmdcolor(msg[rmsg])) != 0) {
                 ColorChange = true;
             } else if(strindex(msg[rmsg],"clrful-") >= 0) {
 				ColorfulForeground = true;

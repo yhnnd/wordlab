@@ -85,27 +85,27 @@ inline int maths::operatorsRight(const std::string s, int br, const std::set<std
     }
 }
 
-inline constexpr int maths::factorial(const int n) {
+inline constexpr long long maths::factorial(const int n) {
     if ( n > 1 ) {
         return n * factorial(n - 1);
     } else if ( n == 1 ) {
         return 1;
     } else {
-        return std::numeric_limits<int>::quiet_NaN();
+        return std::numeric_limits<long long>::quiet_NaN();
     }
 }
 
-inline float maths::evaluate(const std::string Operator, const std::vector<float> parameters, const std::vector<bool> isParameterValid) {
-    float a = 0, b = 0;
+inline double maths::evaluate(const std::string Operator, const std::vector<double> parameters, const std::vector<bool> isParameterValid) {
+    double a = 0, b = 0;
     if (isParameterValid[0] == true) {
         a = parameters[0];
     } else {
-        a = std::numeric_limits<float>::quiet_NaN();
+        a = std::numeric_limits<double>::quiet_NaN();
     }
     if (isParameterValid[1] == true) {
         b = parameters[1];
     } else {
-        b = std::numeric_limits<float>::quiet_NaN();
+        b = std::numeric_limits<double>::quiet_NaN();
     }
 
     enum operatorNames operatorName = operatorNames::Unknown;
@@ -116,7 +116,7 @@ inline float maths::evaluate(const std::string Operator, const std::vector<float
         }
     }
 
-    float result = 0;
+    double result = 0;
 
     switch (operatorName) {
         case operatorNames::Addition:
@@ -153,13 +153,13 @@ inline float maths::evaluate(const std::string Operator, const std::vector<float
             result = (a > b);
             break;
         default:
-            result = std::numeric_limits<float>::quiet_NaN();
+            result = std::numeric_limits<double>::quiet_NaN();
             break;
     }
     return result;
 }
 
-inline float maths::calc(const std::string expression) {
+inline double maths::calc(const std::string expression) {
     const auto operatorsMap = maths::getOperatorsMap();
     const static std::vector<std::set<std::string>> operators = maths::getOperatorsGroupedByPrecedence();
     PKC br1 = "(", br2 = ")";
@@ -177,8 +177,12 @@ inline float maths::calc(const std::string expression) {
             {
                 volatile unsigned short operatorLth = 1;
                 for (;; ++operatorLth) {
+                    const volatile char cPrev = expression[i + operatorLth - 1];
                     const volatile char c = expression[i + operatorLth];
                     if (c == '\0' || isdigit(c) || delimiters.find(c) != std::string::npos) {
+                        break;
+                    }
+                    if (isalpha(cPrev) == false && isalpha(c) == true) {
                         break;
                     }
                 }
@@ -252,11 +256,13 @@ inline float maths::calc(const std::string expression) {
         if (expression == "()") {
             return 0;
         } else if (expression == "inf") {
-            return std::numeric_limits<float>::infinity();
+            return std::numeric_limits<double>::infinity();
         } else if (expression == "pi") {
-            return M_PI;// boost::math::constants::pi<float>();
+            return M_PI;
         } else if (expression == "e") {
-            return M_E;// boost::math::constants::e<float>();
+            return M_E;
+        } else if (expression == "sqrt2") {
+            return M_SQRT2;
         } else if (strchr(br1, expression[0]) != nullptr) {
             return calc(expression.substr(1));// recursive
         } else {
@@ -264,7 +270,7 @@ inline float maths::calc(const std::string expression) {
             return atof(expression.c_str());// evaluate
         }
     } else {
-        float a = 0, b = 0;
+        double a = 0, b = 0;
         bool hasA = false, hasB = false;
         if (i > 0) {
             expressionLeft = std::string(expression).substr(0, i);
@@ -280,7 +286,7 @@ inline float maths::calc(const std::string expression) {
             if (hasA == true && hasB == true) {
                 return (a == b);
             } else {
-                return std::numeric_limits<float>::quiet_NaN();
+                return std::numeric_limits<double>::quiet_NaN();
             }
         } else if (currentOperator == "++") {
             if (hasA == true) {
@@ -288,7 +294,7 @@ inline float maths::calc(const std::string expression) {
             } else if (hasB == true) {
                 return (b + 1);
             } else {
-                return std::numeric_limits<float>::quiet_NaN();
+                return std::numeric_limits<double>::quiet_NaN();
             }
         } else if (currentOperator == "--") {
             if (hasA == true) {
@@ -296,12 +302,78 @@ inline float maths::calc(const std::string expression) {
             } else if (hasB == true) {
                 return (b - 1);
             } else {
-                return std::numeric_limits<float>::quiet_NaN();
+                return std::numeric_limits<double>::quiet_NaN();
             }
         } else {
             return evaluate(currentOperator, {a, b}, {hasA, hasB});
         }
     }
+}
+
+
+inline std::string maths::calculateWithBSVSupported(const std::string expression) {
+    const static double M_1_10 = maths::calc("1/10");
+    const static double M_1_9 = maths::calc("1/9");
+    const static double M_1_8 = maths::calc("1/8");
+    const static double M_1_7 = maths::calc("1/7");
+    const static double M_1_6 = maths::calc("1/6");
+    const static double M_1_5 = maths::calc("1/5");
+    const static double M_2_7 = maths::calc("2/7");
+    const static double M_3_10 = maths::calc("3/10");
+    const static double M_1_3 = maths::calc("1/3"), M_7_3_7 = maths::calc("7/3/7");
+    const static double M_3_5 = maths::calc("3/5");
+    const static double M_2_3 = maths::calc("2/3");
+
+    const double result = maths::calc(expression);
+
+    const char * format = "<blk-grn>( %s ) <ylw-blk>(\\(%s\\))<blk-blk>(  )";
+
+    char s[128] = "";
+
+    if (result == std::numeric_limits<double>::infinity()) {
+        snprintf(s, sizeof(s), format, "inf", "infinity");
+    } else if (result == M_PI) {
+        snprintf(s, sizeof(s), format, "pi", "3.14159265358979323846264338327950288");
+    } else if (result == M_PI_2) {
+        snprintf(s, sizeof(s), format, "pi/2", "1.57079632679489661923132169163975144");
+    } else if (result == M_1_PI) {
+        snprintf(s, sizeof(s), format, "1/pi", "0.318309886183790671537767526745028724");
+    } else if (result == M_2_PI) {
+        snprintf(s, sizeof(s), format, "2/pi", "0.636619772367581343075535053490057448");
+    } else if (result == M_E) {
+        snprintf(s, sizeof(s), format, "e", "2.71828182845904523536028747135266250");
+    } else if (result == M_SQRT2) {
+        snprintf(s, sizeof(s), format, "sqrt2", "1.41421356237309504880168872420969808");
+    } else if (result == M_SQRT1_2) {
+        snprintf(s, sizeof(s), format, "sqrt2/2", "0.707106781186547524400844362104849039");
+    } else if (result == M_1_10) {
+        snprintf(s, sizeof(s), format, "1/10", "0.1");
+    } else if (result == M_1_9) {
+        snprintf(s, sizeof(s), format, "1/9", "0.111111111111111111111111111111111111");
+    } else if (result == M_1_8) {
+        snprintf(s, sizeof(s), format, "1/8", "0.125");
+    } else if (result == M_1_7) {
+        snprintf(s, sizeof(s), format, "1/7", "0.142857142857142857142857142857142857");
+    } else if (result == M_2_7) {
+        snprintf(s, sizeof(s), format, "2/7", "0.285714285714285714285714285714285714");
+    } else if (result == M_1_6) {
+        snprintf(s, sizeof(s), format, "1/6", "0.16666666666666666666666666666666666");
+    } else if (result == M_1_5) {
+        snprintf(s, sizeof(s), format, "1/5", "0.2");
+    } else if (result == M_3_10) {
+        snprintf(s, sizeof(s), format, "3/10", "0.3");
+    } else if (result == M_1_3 || result == M_7_3_7) {
+        snprintf(s, sizeof(s), format, "1/3", "0.33333333333333333333333333333333333");
+    } else if (result == M_3_5) {
+        snprintf(s, sizeof(s), format, "3/5", "0.6");
+    } else if (result == M_2_3) {
+        snprintf(s, sizeof(s), format, "2/3", "0.66666666666666666666666666666666666");
+    } else if (std::floor(result) != result) {
+        snprintf(s, sizeof(s), "%lf <red-blk>(\\(%.*f\\))<blk-blk>(  )", result, 17, result);
+    } else {
+        snprintf(s, sizeof(s), "%ld", static_cast<long>(result));
+    }
+    return s;
 }
 
 

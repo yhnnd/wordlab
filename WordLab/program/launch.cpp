@@ -233,7 +233,7 @@ int launch(const std::string msg) {
 			<<"}";
 			return 0;
 		} else {
-            std::cout << maths::calc(msg);
+            bsvline(maths::calculateWithBSVSupported(msg).c_str());
             return 0;
         }
 	}

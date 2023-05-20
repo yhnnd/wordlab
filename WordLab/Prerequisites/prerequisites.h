@@ -280,10 +280,11 @@ class maths {
     static inline std::string getOperator(enum operatorNames const operatorName);
     static inline std::vector<std::set<std::string>> getOperatorsGroupedByPrecedence();
     static inline int operatorsRight(const std::string s, int br, const std::set<std::string> operators, PKC br1, PKC br2);
-    static inline constexpr int factorial(const int n);
+    static inline constexpr long long factorial(const int n);
 	public:
-	static inline float evaluate(const std::string Operator, const std::vector<float> parameters, const std::vector<bool> isParameterValid);
-	static inline float calc(const std::string s);
+	static inline double evaluate(const std::string Operator, const std::vector<double> parameters, const std::vector<bool> isParameterValid);
+	static inline double calc(const std::string s);
+    static inline std::string calculateWithBSVSupported(const std::string s);
 	static int filter(int n, int *flags, int *length);
 };
 //datacontainer
