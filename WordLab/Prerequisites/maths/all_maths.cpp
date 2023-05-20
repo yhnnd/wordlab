@@ -325,6 +325,9 @@ inline std::string maths::calculateWithBSVSupported(const std::string expression
     const static double M_3_5 = maths::calc("3/5");
     const static double M_2_3 = maths::calc("2/3");
 
+    const static double M_1_SQRT2 = maths::calc("1/sqrt2");
+    const static double M_2_SQRT2 = maths::calc("2/sqrt2");
+
     const double result = maths::calc(expression);
 
     const char * format = "<blk-grn>( %s ) <ylw-blk>(\\(%s\\))<blk-blk>(  )";
@@ -343,10 +346,10 @@ inline std::string maths::calculateWithBSVSupported(const std::string expression
         snprintf(s, sizeof(s), format, "2/pi", "0.636619772367581343075535053490057448");
     } else if (result == M_E) {
         snprintf(s, sizeof(s), format, "e", "2.71828182845904523536028747135266250");
-    } else if (result == M_SQRT2) {
+    } else if (result == M_SQRT2 || result == M_2_SQRT2) {
         snprintf(s, sizeof(s), format, "sqrt2", "1.41421356237309504880168872420969808");
-    } else if (result == M_SQRT1_2) {
-        snprintf(s, sizeof(s), format, "sqrt2/2", "0.707106781186547524400844362104849039");
+    } else if (result == M_SQRT1_2 || result == M_1_SQRT2) {
+        snprintf(s, sizeof(s), format, "1/sqrt2", "0.707106781186547524400844362104849039");
     } else if (result == M_1_10) {
         snprintf(s, sizeof(s), format, "1/10", "0.1");
     } else if (result == M_1_9) {
