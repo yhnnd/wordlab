@@ -321,6 +321,7 @@ inline std::string maths::calculateWithBSVSupported(const std::string expression
     const static double M_2_7 = maths::calc("2/7");
     const static double M_3_10 = maths::calc("3/10");
     const static double M_1_3 = maths::calc("1/3"), M_7_3_7 = maths::calc("7/3/7");
+    const static double M_2_5 = maths::calc("2/5");
     const static double M_3_5 = maths::calc("3/5");
     const static double M_2_3 = maths::calc("2/3");
 
@@ -364,6 +365,8 @@ inline std::string maths::calculateWithBSVSupported(const std::string expression
         snprintf(s, sizeof(s), format, "3/10", "0.3");
     } else if (result == M_1_3 || result == M_7_3_7) {
         snprintf(s, sizeof(s), format, "1/3", "0.33333333333333333333333333333333333");
+    } else if (result == M_2_5) {
+        snprintf(s, sizeof(s), format, "2/5", "0.4");
     } else if (result == M_3_5) {
         snprintf(s, sizeof(s), format, "3/5", "0.6");
     } else if (result == M_2_3) {
