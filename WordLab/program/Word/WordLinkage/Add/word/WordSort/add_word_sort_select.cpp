@@ -1,7 +1,6 @@
-string AddWordSortSelect(const int x, const int y) {
+string AddWordSortSelect(const int x, const int y, const int width) {
     static int choice = 1;
     const bool isMonochromePrev = MessageWindow.SetMonochrome(true);
-    const int width = 20;
 	const vector<string> optionsMenu = {
         "select word sort",
         "set word sort n.",

@@ -1,7 +1,7 @@
-string AddWordGetSort() {
-	string msg = AddWordSortSelect(getxy().X, getxy().Y);
+string AddWordGetSort(const int x, const int y, const int width) {
+	string msg = AddWordSortSelect(x, y, width);
 	if(msg.length()) {
-        AddWordPrintMessage(7,msg);
+        AddWordPrintMessage(7, msg);
     } else {
         AddWordPrintErrorMessage(6);
     }

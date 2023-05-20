@@ -1,17 +1,19 @@
 string AddWordGetTranslation(string word) {
+    const vector<string> msgs = {"", "", "", "    continue appending definitions ?", "", "", "", "", ""};
+    const int x = 20, y = 8, width = 40;
 	// WARNING !
 	// SHOULD AND MUST ONLY append word definitions to chinese database
 	// SHOULD NOT AND MUST NOT add endl or add word to chinese database
-	AddWordPrintMessage(3,word);// start editing definition
+	AddWordPrintMessage(3, word);// start editing definition
 	string line_of_defs="", item_sort, item_trans;
-	for(int i=0;;){// i is item NUMBER_OF_ORDER
-		item_sort = AddWordGetSort();// select word sort item
-	    if(item_sort.length()){
-			AddWordPrintMessage(4,toString(++i));// enter translation item
-			cin>>item_trans;
-			if (item_trans.length()>=2) {
-				AddWordPrintMessage(5,item_sort+" "+item_trans);//confirm definition item
-				char ch = getch();
+	for(int i = 0;;){// i is item NUMBER_OF_ORDER
+		item_sort = AddWordGetSort(x, y + 1, width);// select word sort item
+	    if (item_sort.length()) {
+			AddWordPrintMessage(4, toString(++i));// enter translation item
+			cin >> item_trans;
+			if (item_trans.length() >= 2) {
+				AddWordPrintMessage(5, item_sort + " " + item_trans);//confirm definition item
+				const char ch = getch();
 //                printf("\nyou pressed '%c' (%d)\n", ch, ch);
 				if (ch == 13/* Windows ENTER */ || ch == 10/* Mac OS ENTER */) {
 					// append definition item to line_of_defs
@@ -31,8 +33,8 @@ string AddWordGetTranslation(string word) {
 			AddWordPrintErrorMessage(2);
 			break;
 		}
-		AddWordPrintMessage(6);// continue appending definitions ?
-		if (getch() != 13) {
+        const int choice = MessageWindow.Confirm(2, x, y, width, msgs);
+		if (choice != 1) {
 			break;
 		}
 	}
