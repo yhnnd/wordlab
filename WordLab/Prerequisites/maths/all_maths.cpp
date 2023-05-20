@@ -123,7 +123,11 @@ inline double maths::evaluate(const std::string Operator, const std::vector<doub
             result = (a + b);
             break;
         case operatorNames::Subtraction:
-            result = (a - b);
+            if (isParameterValid[0] == false) {
+                result = (-b);
+            } else {
+                result = (a - b);
+            }
             break;
         case operatorNames::Multiplication:
             result = (a * b);
@@ -141,7 +145,18 @@ inline double maths::evaluate(const std::string Operator, const std::vector<doub
             result = pow(a, b);
             break;
         case operatorNames::Factorial:
-            result = maths::factorial(a);
+            {
+                if (a == std::numeric_limits<double>::infinity()) {
+                    result = std::numeric_limits<double>::infinity();
+                } else {
+                    const long long factorialResult = maths::factorial(a);
+                    if (factorialResult == std::numeric_limits<long long>::quiet_NaN()) {
+                        result = std::numeric_limits<double>::quiet_NaN();
+                    } else {
+                        result = factorialResult;
+                    }
+                }
+            }
             break;
         case operatorNames::Equal:
             result = (a == b);
@@ -374,6 +389,9 @@ inline std::string maths::calculateWithBSVSupported(const std::string expression
         snprintf(s, sizeof(s), format, "3/5", "0.6");
     } else if (result == M_2_3) {
         snprintf(s, sizeof(s), format, "2/3", "0.66666666666666666666666666666666666");
+    } else if (snprintf(s, sizeof(s), "%lf", result), std::string(s) == "nan") {
+        memset(s, 0, sizeof(s));
+        snprintf(s, sizeof(s), format, "NaN", "not a number");
     } else if (std::floor(result) != result) {
         snprintf(s, sizeof(s), "%lf <red-blk>(\\(%.*f\\))<blk-blk>(  )", result, 17, result);
     } else {
