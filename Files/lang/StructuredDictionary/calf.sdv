@@ -1,0 +1,30 @@
+#comments: Structured Dictionary Values;
+#sources[1]: New Oxford American Dictionary on Apple Dictionary App
+#sources[2]: https://www.ldoceonline.com/dictionary/calf
+
+<word>
+value = "calf";
+
+<sort[1]>
+value = "n.";
+
+<sort[1].def[1]>
+English = "a young bovine animal, especially a domestic cow or bull in its first year."
+<sort[1].def[1].example[1]>
+English = "a heifer calf.";
+Chinese = "";
+
+<sort[1].def[2]>
+English = "the young of some other large mammals, such as elephants, rhinoceroses, large deer and antelopes, and whales.";
+
+<sort[1].def[3]>
+English = "short for calfskin.";
+
+<sort[1].def[4]>
+English = "the fleshy part at the back of a person's leg below the knee.";
+Chinese = "";
+<sort[1].def[4].example[1]>
+English = "the calf muscles.";
+
+<sort[1].def[5]>
+English = "a floating piece of ice detached from an iceberg.";

@@ -1,4 +1,5 @@
 #comments: Structured Dictionary Values;
+#sources[1]: https://www.ldoceonline.com/dictionary/object
 
 <word>
 value = "object";
@@ -6,7 +7,7 @@ value = "object";
 <sort[1]>
 value = "n.";
 <sort[1].def[1]>
-English = "a solid thing that you can hold, touch, or see but that is not alive"
+English = "a solid thing that you can hold, touch, or see but that is not alive";
 <sort[1].def[1].example[1]>
 English = "an everyday object such as a spoon";
 Chinese = "";
@@ -28,7 +29,7 @@ value = "goal";
 <sort[1].def[2].also[2]>
 value = "aim";
 <sort[1].def[2].example[1]>
-English = "The object of the game is to improve children��s math skills.";
+English = "The object of the game is to improve children's math skills.";
 Chinese = "";
 <sort[1].def[2].example[2]>
 English = "My object was to explain the decision simply.";
@@ -67,6 +68,9 @@ Chinese = "";
 <sort[2].def[1].example[3]>
 English = "I objected to having to rewrite the article.";
 Chinese = "";
+<sort[2].def[1].example[4]>
+English = "Mr Chairman, I object. That is an unfair allegation.";
+Chinese = "";
 
 <sort[3]>
 value = "vt.";
@@ -77,5 +81,5 @@ Chinese = "";
 English = "The group objected that the policy would prevent patients from receiving the best treatment.";
 Chinese = "";
 <sort[3].def[1].example[2]>
-English = "��My name��s not Sonny,�� the child objected.";
+English = "‘My name's not Sonny.’ the child objected.";
 Chinese = "";
