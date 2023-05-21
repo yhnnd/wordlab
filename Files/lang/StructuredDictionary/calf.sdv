@@ -9,20 +9,23 @@ value = "calf";
 value = "n.";
 
 <sort[1].def[1]>
-English = "a young bovine animal, especially a domestic cow or bull in its first year."
+English = "a young bovine animal, especially a domestic cow or bull in its first year.";
+Chinese = "牛犊";
 <sort[1].def[1].example[1]>
 English = "a heifer calf.";
 Chinese = "";
 
 <sort[1].def[2]>
 English = "the young of some other large mammals, such as elephants, rhinoceroses, large deer and antelopes, and whales.";
+Chinese = "幼兽";
 
 <sort[1].def[3]>
 English = "short for calfskin.";
+Chinese = "小牛皮";
 
 <sort[1].def[4]>
 English = "the fleshy part at the back of a person's leg below the knee.";
-Chinese = "";
+Chinese = "腿肚子";
 <sort[1].def[4].example[1]>
 English = "the calf muscles.";
 
