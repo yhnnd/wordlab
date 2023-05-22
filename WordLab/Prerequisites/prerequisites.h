@@ -412,24 +412,23 @@ int bsvlines(char **msgs,const int max,int width,PKC folder,int x,int y,void *sp
 int listen(char *msg,int index,bool display,std::initializer_list<char> term,int max);
 //message window
 int MaxLength(const char *what,int width);
-class MessageWindow{
+class MessageWindow {
 	void Highlight(const char *msg);
 	public:
-	bool _LoopLock;
-	bool _AutoColorful;
-	bool _Monochrome;
-	bool _foreground;
-	bool _background;
+	bool _LoopLock = 0;
+	bool _AutoColorful = 0;
+	bool _Monochrome = 0;
+	bool _foreground = 0;
+	bool _background = 0;
 	bool  SetAutoColorful(bool flag);
-	bool  GetAutoColorful(bool flag);
+	bool  GetAutoColorful();
 	bool  SetForeground(bool flag);
-	bool  GetForeground(bool flag);
+	bool  GetForeground();
 	bool  SetBackground(bool flag);
-	bool  GetBackground(bool flag);
+	bool  GetBackground();
 	bool  SetMonochrome(bool flag);
-	bool  GetMonochrome(bool flag);
-	void  SetStyle(bool AutoColorful,bool Monochrome,bool ForeColor,bool BackColor,bool EnableRoller);
-	void init();
+	bool  GetMonochrome();
+    void init();
 	void Erase(int,int,int,int,WORD color=lightwhite);
 	int  Edge(int,int,int);
 	void LineColorful(int);
@@ -488,7 +487,7 @@ class tablerow{
 	int CheckSame(const tablerow,const tablerow,int);
 };
 // table
-class Table:MessageWindow{
+class Table:MessageWindow {
 	public:
 	int Scroll(int,int,int,int,int);
 	int Add(tablerow*,int,int,int,int,int);
@@ -502,7 +501,7 @@ class Table:MessageWindow{
 	int PanelMenu(int,int,int);
 	int Panel(tablerow*,int,int,PKC,int*,int*,int*,int*);
 	void table(const char *filename,int x=0,int y=0,int width=50);
-}Table;
+} Table;
 
 // message window blocks
 class messageblock: public MessageWindow{

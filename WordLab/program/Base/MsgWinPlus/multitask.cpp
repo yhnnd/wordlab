@@ -88,9 +88,8 @@ vector<string> getVectorOfString(const char * ptr, const int lineMax, const int 
 }
 
 
-int multitask(const int x, const int y, const int width, char Menu[][LINEMAX], const int T, const int n, const bool backColor) {
+int multitask(const int x, const int y, const int width, char Menu[][LINEMAX], const int T, const int n) {
 	int a = -1;
-	bool backColorOld = MessageWindow.SetBackground(backColor);
 #if defined(_WIN32)
 	if (version==OLD) {
 	    if (T==0) {
@@ -127,6 +126,5 @@ int multitask(const int x, const int y, const int width, char Menu[][LINEMAX], c
 ////        popup("<red-> (error) <ylw->(\\(illegal choice\\)) ", string("\'") + toString(a) + "\'", -1);
 //    }
 #endif
-	MessageWindow.SetBackground(backColorOld);
 	return a;
 }

@@ -1,11 +1,11 @@
 Ask = 1
-Show = 0
+Show = 1
 EnableColor = 1
 Language = 0
 MessageWindow._LoopLock = 0
-MessageWindow._AutoColorful = 1
-MessageWindow._Monochrome = 0
-MessageWindow._foreground = 1
+MessageWindow._AutoColorful = 0
+MessageWindow._Monochrome = 1
+MessageWindow._foreground = 0
 MessageWindow._background = 1
 SayStyle = 1
 GUI.Version = 0

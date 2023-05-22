@@ -3,9 +3,7 @@ void MessageWindow::Highlight(const char *msg){
 //    bsvline(msg,0,"<",">","(",")",",;");
 	bsvlineDisableColors(msg,0,"<",">","(",")",",;");
 }
-void MessageWindow::init(){
-	SetStyle(1,0,1,0,0);
-}
+
 #include "background.cpp"
 #include "bsvmaxlths.cpp"
 #include "bsvviewer.cpp"

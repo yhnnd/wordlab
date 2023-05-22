@@ -26,7 +26,7 @@ int MessageWindow::Edge(int x,int y,int width) {
 
 
 void MessageWindow::LineColorful(int n) {
-    if (_background) {
+    if (this->_background) {
         ColorfulBackground((_Monochrome || !_AutoColorful) ? 0 : n);
     } else {
         Colorful ((_Monochrome||!_AutoColorful)?0:n);

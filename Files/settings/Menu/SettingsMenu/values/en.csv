@@ -4,6 +4,8 @@
 <-gry>(_AskOnce
 <-wte>(_AutoOnce
 <-gry>(_ReverseColor
+<-wte>(MessageWindow._AutoColorful
+<-gry>(MessageWindow._foreground
 <-wte>(MessageWindow._background
 <-gry>(MessageWindow._Monochrome
 <-wte>(MessageWindow._LoopLock

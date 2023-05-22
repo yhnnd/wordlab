@@ -25,7 +25,7 @@ int load::mainUserInterface(const std::string foldername,int x,int y,int width,i
 		colorset(lightwhite);
 		clearScreen();
 		PrintSoftwareInfo();
-		n = multitask(x, y, width, menu, Times, nprev, MessageWindow._background);
+		n = multitask(x, y, width, menu, Times, nprev);
 		if(n == -1) {
             return n;
         }

@@ -12,8 +12,10 @@ void Table::table(const char *filename,int x,int y,int width) {
 	int Total = MessageWindowLoad(item,filename);
 	int a=1,Class=0,colmax=8;
 	int begin=0,max=(Total>18)?18:Total;
-	init();
-	for(;;){
+
+	MessageWindow::init();
+
+	for (;;) {
 	    ShowAll(item,begin,max,Class,x,y,width);
 	    a = Scroll(x,y+2,width,max+2,a);
         if (a == 0) {
