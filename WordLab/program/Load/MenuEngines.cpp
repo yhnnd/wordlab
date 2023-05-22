@@ -6,7 +6,6 @@ void load::Engines() {
     } else if (LANGUAGE == lang::CH) {
         Menu = loadFile(SetEnginesRoute"ch.csv", {";"});
     }
-	const bool background = MessageWindow.SetBackground(true);
 
 	MessageWindow.Frame(0, x, y, width, Menu);
 
@@ -32,5 +31,4 @@ void load::Engines() {
         load::systemDefaults(SystemDefaultsRoute, load::mode::saveDefaults);
 	}
 
-	MessageWindow.SetBackground(background);
 }

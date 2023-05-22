@@ -7,7 +7,7 @@ void load::System() {
         loadmsg((char*)Menu,SetSystemRoute"ch.csv",MAXLINES,LINEMAX,1,1);
     }
 	for(T=0;;nprev=n,++T){
-	    n=multitask(x,y,width,Menu,T,nprev,true);
+	    n = multitask(x,y,width,Menu,T,nprev);
 	    switch(n){
 	        case  1:
 				VolumeTable(_data_dir"buf_table.dat");
