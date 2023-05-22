@@ -114,7 +114,9 @@ void MessageWindow::Change(int x,int y,int width,char *msg,int max,int w) {
     int xSelector = x + 1, ySelector = y + 1;
 
 #ifdef __APPLE__
-    xSelector = x + 2;
+    if (x == 0) {
+        xSelector += 1;
+    }
 #endif
 
     r1 = Select(xSelector, ySelector, max, 0, "[=]", "[A]", "[0]");

@@ -36,7 +36,7 @@ namespace prerequisites {
 #include "msgwin/all_message_window.cpp"//requires askchar & bsv & launch() & input
 #include "progress/all.cpp"//requires messagewindow
 #include "popup/all.cpp"//requires bsv & messagewindow
-#include "moniter/all.cpp"//requires progress & popup
+#include "monitor/all_monitor.cpp"//requires progress & popup
 #include "window/all_window.cpp"
 #include "wait.cpp"
 }

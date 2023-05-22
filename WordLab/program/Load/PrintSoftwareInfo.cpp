@@ -13,10 +13,13 @@ void load::PrintSoftwareInfo(){
 	// Version
 	PrintSoftwareVersion(40,0);
 	// Monitor
-	monitorShow(24,0);
+	monitorShow(24, 0);
 	// DB security
-	if(db_is_secure(false,false)) bsvline("<-grn> (SECURE)");
-	else bsvline("<-red> (INSECURE)");
+	if (db_is_secure(false,false)) {
+        bsvline("<-grn> (SECURE)");
+    } else {
+        bsvline("<-red> (INSECURE)");
+    }
 	// User Account
 	User.show(0,5,1);
 }

@@ -40,19 +40,23 @@ int MessageWindow::Pointer(const int x, const int y, const int max, const int n,
 
 // "Roller"
 void MsgWinSwiShwChsCore(int radius,int x,int y,int width,const char *what){
-    int r;
     colorrecord(colorprev);
-    colorset((radius) ? lightwhite : lightwhite | backlightblue);
-    clearline(x,y,width);
-    switch(abs(radius)){
-        case  0: colorset(lightwhite | backlightblue);break;
-        case  1: colorset(darkwhite);break;
-        case  2: colorset(blue);break;
-        default: colorset(lightred);break;
+    switch(abs(radius)) {
+        case  0:
+            setForegroundColorAndBackgroundColor("wte-", "-blu");
+            break;
+        case  1:
+            setForegroundColorAndBackgroundColor("#wte", "-blk");
+            break;
+        case  2:
+            setForegroundColorAndBackgroundColor("#blu-", "-blk");
+            break;
+        default:
+            setForegroundColorAndBackgroundColor("red-", "-blk");
+            break;
     }
-    for(r=0;r<=width&&what[r]!=','&&what[r]!=';'&&what[r]!='\0';r++){
-        std::cout<<what[r];
-    }
+    clearline(x, y, width);
+    bsvlineDisableColors(what, width, "<", ">", "(", ")", ",;");
     colorreset(colorprev);
 }
 
@@ -113,8 +117,15 @@ int MessageWindow::Search(int showpos,int x,int y,int width,const char *msg,int 
 
 
 void MessageWindow::SwitchLoop(int x,int y,int width,const char *what,int max,int w,int *n) {
-    roll(*n,*n,0,max-1);
-    if(_background) {
+    roll(*n, *n, 0, max - 1);
+
+#ifdef __APPLE__
+    if (x == 0) {
+        x = x + 1;
+    }
+#endif
+
+    if(this->_background) {
         MsgWinSwiShowChoosed(0, x + 4, y + max + 1, width, *n, what, max, w);
     } else if(max<=8) {
         MsgWinSwiShowChoosed(1, x + width + 6, y + max + 1,width,*n,what,max,w);

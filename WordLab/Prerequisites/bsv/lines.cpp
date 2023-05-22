@@ -1,10 +1,10 @@
 // display a bsv file
 int bsvlines(char **msgs,const int max,const int width,const char *folder,const int x,const int y,void *spptr) {
-    PKC brcmdbegin="<";
-    PKC brcmdend=">";
-    PKC fieldbegin="(";
-    PKC fieldend=")";
-    PKC tokens_term=";";
+    PKC brcmdbegin = "<";
+    PKC brcmdend = ">";
+    PKC fieldbegin = "(";
+    PKC fieldend = ")";
+    PKC tokens_term = ";";
 
 	char key;
 	bool enterKeyPressed = false, bsvStylesDisabled = false;
@@ -18,7 +18,7 @@ int bsvlines(char **msgs,const int max,const int width,const char *folder,const 
 //            std::cout << "bsv line: " << clock();
             if (bsvStylesDisabled == true) {
                 setForegroundColorAndBackgroundColor("red-", "-wte");
-                bsvlineDisableColors(msgs[i], width);
+                bsvlineDisableColors(msgs[i], width, brcmdbegin, brcmdend, fieldbegin, fieldend, tokens_term);
             } else {
                 bsvline(msgs[i], width, brcmdbegin, brcmdend, fieldbegin, fieldend, tokens_term, (scriptprocessor *) spptr);
             }

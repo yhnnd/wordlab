@@ -70,12 +70,12 @@ void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC f
 
 
 
-//copy this "<",">","(",")"
-void bsvlineDisableColors(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fieldend,PKC tokens_term) {
+//copy this "<", ">", "(", ")", ";"
+void bsvlineDisableColors(PKC what, const int width, PKC brcmdbegin, PKC brcmdend, PKC fieldbegin, PKC fieldend, PKC tokens_term) {
 
     int r = 0, r1 = 0, romit = 0;
 
-    for(r=0; what[r]!='\n'&&strchr(tokens_term,what[r])==NULL&&what[r]!=0; r++) {
+    for (r = 0; what[r] != '\n' && what[r] != 0 && strchr(tokens_term, what[r]) == nullptr; r++) {
         if(what[r-1]!='\\'&&strchr(brcmdbegin,what[r])) {
             for(r++,r1=0; what[r-1]=='\\'||!strchr(brcmdend,what[r]); r++,r1++) {
             }
@@ -87,10 +87,13 @@ void bsvlineDisableColors(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fie
         } else if(what[r]=='\\'&&strchr("()<>",what[r+1])) {
             romit++;
         } else {
-            std::cout<<what[r];
+            printf("%c", what[r]);
+        }
+        if (r - romit >= width) {
+            break;
         }
     }
-    for (r-=romit; r<=width; r++) {
-        std::cout<<" ";
+    for (r -= romit; r < width; r++) {
+        printf("%c", ' ');
     }
 }

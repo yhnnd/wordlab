@@ -575,14 +575,14 @@ struct popupConfigs {
 char popupcore(const std::string msg, const int life, const int x,const int y,const int width, popupConfigs &);
 char popup(const std::string msg, const int life = 0);
 
-//moniter
+// monitor
 bool error_monitor_lock = 0;
 bool buffer_monitor_lock = 0;
-int MoniterActivate();
-int MoniterDisable();
-int MoniterGetNumber();
-int moniterShow(int x,int y);
-void moniterSet(bool *lock);
+int MonitorActivate();
+int MonitorDisable();
+int MonitorGetNumber();
+int monitorShow(int x,int y);
+void monitorSet(bool *lock);
 #include "./window/declaration.cpp"
 }//namespace prerequisites
 
