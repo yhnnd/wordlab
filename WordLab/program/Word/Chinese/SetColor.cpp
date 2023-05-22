@@ -1,7 +1,10 @@
 void SetChineseColor(int * ColorFlags) {
-	for(int i = 0; i <= 1; i++) {
+    int i = 0;
+	for(i = 0; i < 2; ++i) {
 		clearline(0, i * 2);
-		cout<<"Please choose a color for <translation "<<i<<">";
+		printf("Please choose a color for <translation %d>", i);
 		changeColor(0, i * 2 + 1, ColorFlags + i);
 	}
+    clearline(0, i * 2);
+    printf("done");
 }

@@ -182,7 +182,7 @@ int launch(const std::string msg) {
 		Help();
 		return 25;
 	} else if(msg == functionNames[26]) {
-		setversion();
+		setGUIVersion();
 		return 26;
 	} else if(msg == functionNames[27]) {
 		WordSortCheck();

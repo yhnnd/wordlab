@@ -2,13 +2,19 @@ BOOL colorset(WORD wAttributes) {
 #if defined(_WIN32)
 	CurrentColorForWIN32 = wAttributes;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	if( ColorL == false ) return SetConsoleTextAttribute(hConsole,15);//white
+	if( enableColor == false ) {
+        return SetConsoleTextAttribute(hConsole,15);//white
+    }
 	return SetConsoleTextAttribute(hConsole, wAttributes);
 #elif defined(__APPLE__)
     https://stackoverflow.com/questions/33309136/change-color-in-os-x-console-output/33311700
-    CurrentColorForMacOS = wAttributes;
-    const std::string color = get_mac_os_color_code(wAttributes);
-    printf("\x1b[%sm", color.c_str());
+    if (enableColor == false) {
+        printf("\x1b[%sm", "97;40");
+    } else {
+        CurrentColorForMacOS = wAttributes;
+        const std::string color = get_mac_os_color_code(wAttributes);
+        printf("\x1b[%sm", color.c_str());
+    }
 #endif
     return 0;
 }

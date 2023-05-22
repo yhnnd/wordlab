@@ -25,7 +25,7 @@ char AddNew(const string s) {
 		}
 	}
     // printf("\ncheck user login\n");
-	if (Ctype) {
+	if (CType) {
         if(!User.login()) {
             goto end;
         }

@@ -23,9 +23,9 @@ START:
 			} else if(redirect_times) {
 				return "<ylw-#red>( REDIRECT )" +
 				       ( redirect_times>1 ? "<#red-ylw>( " + toString(redirect_times) + " )" : "" )
-				       + WLChineseCore(line.substr(lth),fontcolor);
+				       + WLChineseCore(line.substr(lth), fontcolor);
 			} else {
-                return WLChineseCore(line.substr(lth),fontcolor);//PLAIN DEFINITION
+                return WLChineseCore(line.substr(lth), fontcolor);//PLAIN DEFINITION
             }
 			break;
 		}

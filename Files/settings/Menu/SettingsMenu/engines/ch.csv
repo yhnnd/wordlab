@@ -4,12 +4,11 @@
 <-wte>(模糊搜索引擎\(SL\);
 <-wte>(英語詞綴引擎\(DL\);
 <-wte>(數據添加引擎\(CL\);
-<-wte>(數據添加引擎類型\(Ctype\);
+<-wte>(數據添加引擎類型\(CType\);
 <-wte>(單詞索引引擎\(IL\);
-<-wte>(彩色\(ColorL\);
+<-wte>(彩色\(enableColor\);
 <-wte>(系統語言\(LANG\);
 <-wte>(用戶界面\(version\);
-<-wte>(系統信息\(Show\);
-<-wte>(顏色\(CLRL\);
+<-wte>(顏色\(definitionsColors\);
 <-wte>(監控\(ML\);
 <ylw-red>(退出;

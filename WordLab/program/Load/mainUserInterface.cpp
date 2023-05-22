@@ -25,17 +25,17 @@ int load::mainUserInterface(const std::string foldername,int x,int y,int width,i
 		colorset(lightwhite);
 		clearScreen();
 		PrintSoftwareInfo();
-		n = multitask(x,y,width,menu,Times,nprev);
-		if(n==-1) {
+		n = multitask(x, y, width, menu, Times, nprev, MessageWindow._background);
+		if(n == -1) {
             return n;
         }
 		std::string temp_menu(menu[n]),temp_cmd;
 		std::string::size_type pos;
-		const unsigned int num_cmds=3;
+		const unsigned int num_cmds = 3;
 		std::string cmds[num_cmds] = {"menu","scripts","launch"};
 		for(int i=0;i<num_cmds;i++) {
 			temp_cmd=","+cmds[i]+",";
-			pos=temp_menu.find(temp_cmd);
+			pos = temp_menu.find(temp_cmd);
 			if(pos!=std::string::npos) {
 				auto msg=temp_menu.substr(pos+temp_cmd.length());
 				if(i==0) {//menu

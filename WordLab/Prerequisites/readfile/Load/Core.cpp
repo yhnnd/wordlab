@@ -1,4 +1,4 @@
-int loadmsg(char *msg,FILE *fp,int maxlines,int linemax,bool close,bool modify){
+int loadmsg(char *msg,FILE *fp,int maxlines,int linemax,bool close,bool modify) {
 	int n=0;
 	do{
 		char *p=msg+n*linemax;

@@ -1,6 +1,13 @@
-char load::defaultseek(char *msgs,int m,int n,char *msg) {
+string load::defaultSeek(const vector<string> msgs, const string varName) {
+    const string prefix = varName + this->delimiter;
     int r;
-    for(r=0;r<m;r++) if(strindex(msgs+n*r,msg)==0) break;
-	if(strlen(msgs+n*r)<strlen(msg)+1) return 0;
-    return *(msgs+n*r+strlen(msg))-'0';
+    for (r = 0; r < msgs.size(); r++) {
+        if (msgs[r].find(prefix) == 0) {
+            break;
+        }
+    }
+	if (msgs[r].length() < prefix.length() + 1) {
+        return "";
+    }
+    return msgs[r].substr(prefix.length());
 }

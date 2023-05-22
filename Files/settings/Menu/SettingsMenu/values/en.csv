@@ -1,11 +1,12 @@
 <-wte>(menu
-<-gry>(msg ask lock
-<-wte>(msg ask once
-<-gry>(msg ask auto once
-<-wte>(msg ask background
-<-gry>(msg win background
-<-wte>(msg win monochrome
-<-gry>(msg win roller lock
-<-wte>(database verification
-<-gry>(dialogue display style
+<-gry>(_Show
+<-wte>(_Ask
+<-gry>(_AskOnce
+<-wte>(_AutoOnce
+<-gry>(_ReverseColor
+<-wte>(MessageWindow._background
+<-gry>(MessageWindow._Monochrome
+<-wte>(MessageWindow._LoopLock
+<-gry>(database verification \(VL\)
+<-wte>(dialogue SayStyle
 <-red>(exit;

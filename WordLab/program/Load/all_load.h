@@ -1,9 +1,12 @@
 class load {
 private:
-    char defaultseek(char *msgs, int m, int n, char *msg);
-    int defaultload(char *msgs, int m, int n, int i, ...);
-    int defaultsave(const char *route, int i, ...);
-    bool defaults(const char *route, bool in);
+    enum mode { loadDefaults, saveDefaults };
+    enum types {Void, Bool, Char, Int, Long, Short, Float, Double, String};
+    const string delimiter = " = ";
+    string defaultSeek(const vector<string> msgs, const string msg);
+    int defaultsLoad(const vector<string> msgs, int i, ...);
+    int defaultsSave(const char *route, const int i, ...);
+    bool systemDefaults(const char *route, const enum mode Mode);
     bool writeTime(const string fileroute);
     void animation(int r,int max);// called by Config
     void PrintSoftwareVersion(const int x, const int y);// called by PrintSoftwareInfo

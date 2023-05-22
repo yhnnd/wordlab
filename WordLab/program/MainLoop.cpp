@@ -1,6 +1,6 @@
 void MainLoop(){
 	Load.config();
-	const int x=0,y=9,width=26;
+	const int x = 0, y = 9, width = 26;
 	int T=0,n=0,np=0;
 	for(n=0;;T=1,np=n) {
 		n = Load.mainUserInterface(MainMenuRoute,x,y,width,T,np);//step 3

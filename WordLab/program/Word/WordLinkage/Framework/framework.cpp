@@ -4,10 +4,10 @@ int WLFramework(void) {
 	if (VL and db_is_secure(false, true) == false) {
         getch();
     }
-	if (Ctype == 0) {
+	if (CType == 0) {
         const char ch = popup("<-wte>(Add word Engine Authorization Was Set Off. Reset now?", -1);
 		if (ch == KEY_CARRIAGE_RETURN || ch == KEY_NEW_LINE) {
-			Ctype = 1;
+            CType = 1;
 		}
 	}
 

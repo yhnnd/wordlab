@@ -88,9 +88,9 @@ vector<string> getVectorOfString(const char * ptr, const int lineMax, const int 
 }
 
 
-int multitask(int x,int y,int width,char Menu[][LINEMAX],int T=0,int n=0,bool backcolor = 0) {
+int multitask(const int x, const int y, const int width, char Menu[][LINEMAX], const int T, const int n, const bool backColor) {
 	int a = -1;
-	bool backcolorold = MessageWindow.SetBackground(backcolor);
+	bool backColorOld = MessageWindow.SetBackground(backColor);
 #if defined(_WIN32)
 	if (version==OLD) {
 	    if (T==0) {
@@ -104,16 +104,19 @@ int multitask(int x,int y,int width,char Menu[][LINEMAX],int T=0,int n=0,bool ba
     }
 #elif defined(__APPLE__)
     const int maxlength = MaxLength(&Menu[0][0],LINEMAX);
-    if (version==OLD) {
-        if (T==0) {
+    if (gui.version == versions::OLD) {
+        if (T == 0) {
             MessageWindow.Show(x,y,width,&Menu[0][0],0,LINEMAX);
         } else {
             MessageWindow.Frame(0,x,y,width,&Menu[0][0],0);
         }
         a =  MessageWindow.Switch (x,y,width,&Menu[0][0],0,LINEMAX,n);
-    } else if (version == NEW) {
+    } else if (gui.version == versions::NEW) {
         a = MessageBlock.Switcher(Menu);
-    } else if (version == COMPACT) {
+    } else if (gui.version == versions::COMPACT) {
+        const COORD pos = {static_cast<short>(x), static_cast<short>(y)};
+        a = chooseFromMenu(pos, width, getVectorOfString(&Menu[0][0], maxlength, LINEMAX));
+    } else if (gui.version == versions::V_2023) {
         const COORD pos = {static_cast<short>(x), static_cast<short>(y)};
         a = chooseFromMenu(pos, width, getVectorOfString(&Menu[0][0], maxlength, LINEMAX));
     }
@@ -124,6 +127,6 @@ int multitask(int x,int y,int width,char Menu[][LINEMAX],int T=0,int n=0,bool ba
 ////        popup("<red-> (error) <ylw->(\\(illegal choice\\)) ", string("\'") + toString(a) + "\'", -1);
 //    }
 #endif
-	MessageWindow.SetBackground(backcolorold);
+	MessageWindow.SetBackground(backColorOld);
 	return a;
 }

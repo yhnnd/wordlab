@@ -1,15 +1,16 @@
-void setversion(){
-	char msgs[8][LINEMAX]={
+void setGUIVersion() {
+	std::vector<std::string> msgs = {
 	" ",
 	" ",
 	" ",
-	"    OLD        NEW        COMPACT",
+	"    OLD         NEW         COMPACT       V_2023",
 	" ",
 	" ",
 	" ",
-	" "};
-	auto n = MessageWindow.Confirm(3,20,6,36,&msgs[0][0],8,LINEMAX);
+	" "
+    };
+	auto n = MessageWindow.Confirm(4, 14, 6, 52, msgs);
 	if (n > 0) {
-        version = (enum versions)(n - 1);
+        gui.version = (enum versions)(n - 1);
     }
 }

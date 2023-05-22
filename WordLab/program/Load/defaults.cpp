@@ -1,30 +1,71 @@
-bool load::defaults(const char *route,bool in) {
-	FILE *fp=fopen(route,"rb");
-	if(fp==NULL){
-        popup("<red->(config error) default file not found",-1);
+bool load::systemDefaults(const char *route, const enum mode Mode) {
+	FILE *fp = fopen(route, "rb");
+	if (fp == NULL) {
+        popup("<red->(config error) default file not found", -1);
         return false;
     }
 	fclose(fp);
-	int max=17,n=filelines(route,true);
-	if (in) {
-		char s[n][LINEMAX];
-    	if(loadmsg((char*)s,route,n,LINEMAX,1,1)<=0){
+
+	const int max = 22;
+
+	if (Mode == load::mode::loadDefaults) {
+		std::vector<std::string> defaults = loadFile(route, {});
+    	if (defaults.size() == 0) {
 			popup("<red->(config error) default file is empty",-1);
 			return false;
 		}
-    	defaultload(&s[0][0],n,LINEMAX,max,
-			"bool","Ask=",&_Ask,"bool","Show=",&_Show,"bool","Color=",&ColorL,
-			"bool","Language=",&LANGUAGE,"bool","SayStyle=",&SayStyle,"bool","Version=",&version,
-			"int","Color[0]=",&CLRL[0],"int","Color[1]=",&CLRL[1],"bool","Ctype=",&Ctype,
-			"bool","VL=",&VL,"bool","AL=",&AL,"bool","BL=",&BL,"bool","CL=",&CL,"bool","DL=",&DL,
-			"bool","SL=",&SL,"bool","IL=",&IL,"bool","ML=",&ML);
+    	load::defaultsLoad(defaults, max,
+			types::Bool, "Ask", &_Ask,
+            types::Bool, "Show", &_Show,
+            types::Bool, "EnableColor", &enableColor,
+			types::Bool, "Language", &LANGUAGE,
+            types::Bool, "MessageWindow._LoopLock", &(MessageWindow._LoopLock),
+            types::Bool, "MessageWindow._AutoColorful", &(MessageWindow._AutoColorful),
+            types::Bool, "MessageWindow._Monochrome", &(MessageWindow._Monochrome),
+            types::Bool, "MessageWindow._foreground", &(MessageWindow._foreground),
+            types::Bool, "MessageWindow._background", &(MessageWindow._background),
+            types::Bool, "SayStyle", &SayStyle,
+            types::Int, "GUI.Version", &(gui.version),
+			types::Int, "DefinitionsColors[0]", &definitionsColors[0],
+            types::Int, "DefinitionsColors[1]", &definitionsColors[1],
+            types::Bool, "CType", &CType,
+			types::Bool, "VL", &VL,
+            types::Bool, "AL", &AL,
+            types::Bool, "BL", &BL,
+            types::Bool, "CL", &CL,
+            types::Bool, "DL", &DL,
+			types::Bool, "SL", &SL,
+            types::Bool, "IL", &IL,
+            types::Bool, "ML", &ML
+        );
+        return true;
+    } else if (Mode == load::mode::saveDefaults) {
+        load::defaultsSave(route, max,
+           types::Bool, "Ask", _Ask,
+           types::Bool, "Show", _Show,
+           types::Bool, "EnableColor", enableColor,
+           types::Bool, "Language", LANGUAGE,
+           types::Bool, "MessageWindow._LoopLock", MessageWindow._LoopLock,
+           types::Bool, "MessageWindow._AutoColorful", MessageWindow._AutoColorful,
+           types::Bool, "MessageWindow._Monochrome", MessageWindow._Monochrome,
+           types::Bool, "MessageWindow._foreground", MessageWindow._foreground,
+           types::Bool, "MessageWindow._background", MessageWindow._background,
+           types::Bool, "SayStyle", SayStyle,
+           types::Int, "GUI.Version", gui.version,
+           types::Int, "DefinitionsColors[0]", definitionsColors[0],
+           types::Int, "DefinitionsColors[1]", definitionsColors[1],
+           types::Bool, "CType", CType,
+           types::Bool, "VL", VL,
+           types::Bool, "AL", AL,
+           types::Bool, "BL", BL,
+           types::Bool, "CL", CL,
+           types::Bool, "DL", DL,
+           types::Bool, "SL", SL,
+           types::Bool, "IL", IL,
+           types::Bool, "ML", ML
+        );
+        return true;
     } else {
-        defaultsave(route,max,
-            "bool","Ask=",_Ask,"bool","Show=",_Show,"bool","Color=",ColorL,
-            "bool","Language=",LANGUAGE,"bool","SayStyle=",SayStyle,"bool","Version=",version,
-            "int","Color[0]=",CLRL[0],"int","Color[1]=",CLRL[1],"bool","Ctype=",Ctype,
-            "bool","VL=",VL,"bool","AL=",AL,"bool","BL=",BL,"bool","CL=",CL,"bool","DL=",DL,
-            "bool","SL=",SL,"bool","IL=",IL,"bool","ML=",ML);
+        return false;
     }
-	return true;
 }

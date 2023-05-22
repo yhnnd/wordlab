@@ -144,7 +144,7 @@ typedef const char * PKC;//pointer to const char
 
 namespace prerequisites
 {
-bool ColorL=1;
+bool enableColor = 1;
 WORD CurrentColorForWIN32 = lightwhite;
 WORD CurrentColorForMacOS = lightwhite;
 inline WORD colornow() {
@@ -214,6 +214,7 @@ int errorlog(std::string s1,std::string s2,std::string s3="");
 int loadmsg(char *msg,FILE *fp,int maxlines,int linemax,bool close,bool modify);
 int loadmsg(char *msg,std::string route,int maxlines,int linemax,bool close,bool modify=1);
 int loadmsg(char **msg,std::string route,int maxlines,int linemax,bool close,bool modify=1);
+std::vector<std::string> loadFile(std::string route, std::set<std::string> terms);
 int filelines(FILE *fp,bool close,bool debug=1);
 int filelines(const std::string route,bool debug=1);
 void folderdir(const char path[],FILE *fp,int level=0);

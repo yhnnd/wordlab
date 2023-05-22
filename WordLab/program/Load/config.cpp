@@ -8,13 +8,13 @@ void load::config() {
 	bool flag = 1;
 	for(r=0;r<max;animation(r++,max)){
 		switch(r){
-			case 0:  setscreen(ScreenX,ScreenY);break;
-			case 1:  flag*=writeTime(LastLaunchRoute);break;
-			case 2:  flag*=defaults(DefaultsRoute,true);break;
-			case 3:  MessageWindow.init();break;
-			case 4:  User.initialize(AccountRoute);break;
-			case 5:  if(ML) MonitorActivate();break;
-			default: errorlog("config","error",toString(r));break;
+			case 0:  setscreen(ScreenX,ScreenY); break;
+			case 1:  flag *= writeTime(LastLaunchRoute); break;
+            case 2:  flag *= systemDefaults(SystemDefaultsRoute, load::mode::loadDefaults); break;
+			case 3:  MessageWindow.init(); break;
+			case 4:  User.initialize(AccountRoute); break;
+			case 5:  if(ML) MonitorActivate(); break;
+			default: errorlog("config","error",toString(r)); break;
 		}
 		if(!flag){
 			char ch = fatalerror(100);

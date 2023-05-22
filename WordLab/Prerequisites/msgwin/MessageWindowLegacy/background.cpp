@@ -7,16 +7,16 @@ bool  MessageWindow::GetAutoColorful(bool flag) {
 	return _AutoColorful;
 }
 bool  MessageWindow::SetForeground(bool flag) {
-	bool flagprev=_foreground;
-	_foreground=flag;
+	bool flagprev = _foreground;
+	_foreground = flag;
 	return flagprev;
 }
 bool  MessageWindow::GetForeground(bool flag) {
 	return _foreground;
 }
 bool  MessageWindow::SetBackground(bool flag) {
-	bool flagprev=_background;
-	_background=flag;
+	bool flagprev = _background;
+	_background = flag;
 	return flagprev;
 }
 bool  MessageWindow::GetBackground(bool flag) {

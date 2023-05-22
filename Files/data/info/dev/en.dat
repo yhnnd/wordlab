@@ -25,7 +25,7 @@ W L:          Word Links
 A L:          Scan Engine Lock
 B L:          Search Engine Lock
 C L:          Add New Engine Lock
-Ctype:        Add New Engine type
+CType:        Add New Engine type
 D L:          Affix Engine Lock
 E L:          Similar Engine Lock
 S L:          Similar Engine Lock

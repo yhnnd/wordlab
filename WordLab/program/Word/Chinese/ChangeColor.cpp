@@ -2,7 +2,7 @@ void changeColor(int x,int y,int *ColorNum) {
 	int n = *ColorNum;
 	char key;
 	for(;;) {
-		clearline(x,y);
+		clearline(x, y);
 		for(int r=0; r<=7; r++) {
 			colorset(lightwhite);
 			if(n==r) cout<<"(";

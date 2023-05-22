@@ -9,5 +9,5 @@ void toggles(int x,int y,int width,bool showdigit,int r,int n,...) {
 		flagptr = va_arg(argv,bool *);
 	}
 	va_end(argv);
-	toggle(x+width-1,y+1+r,flagptr,true,showdigit);
+	toggle(x + width, y + 1 + r, flagptr, true, showdigit);
 }
