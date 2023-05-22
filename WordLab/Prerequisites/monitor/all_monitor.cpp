@@ -21,12 +21,11 @@ int monitorShow(int x,int y) {
     } else {
         colorset(backred);
     }
-    char s[32];
-    memset(s, 0, sizeof(s));
-    snprintf(s, sizeof(s), " %d monitor%s on ", n, (n > 1 ? "s" : ""));
+    std::string s = " ";
+    s += toString(n) + " monitor" + (n > 1 ? "s" : "") + " on ";
     gotoxy(x, y);
-    printf(s);
-    gotoxy(x + strlen(s), y);
+    puts(s.c_str());
+    gotoxy(x + s.length(), y);
     colorset(colorPrev);
     return n;
 }
