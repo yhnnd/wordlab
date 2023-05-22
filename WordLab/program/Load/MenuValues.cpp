@@ -1,5 +1,5 @@
 void load::Values() {
-	const int x = 0, y = 9, width = 36;
+	const int x = 12, y = 9, width = 36;
 	const int total = filelines(SetValuesRoute"en.csv",true) - 2;
 	if (total <= 0) {
         popup("<Critical Error> SetValues menu file lost",-1);
@@ -15,7 +15,7 @@ void load::Values() {
 
     int r = 0, rprev = 0;
 	for (;;) {
-	    togglesShow(x, y, width, _Show, total,
+	    toggles::showAll (x, y, width, _Show, total,
             _Show,
             _Ask,
             _AskOnce,
@@ -33,7 +33,7 @@ void load::Values() {
 		if (r < 1 || r > total) {
             break;
         }
-        toggles(x, y, width, _Show, r, total,
+        toggles::toggle (x, y, width, _Show, r, total,
             &_Show,
             &_Ask,
             &_AskOnce,

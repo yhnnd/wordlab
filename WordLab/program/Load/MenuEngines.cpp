@@ -11,13 +11,13 @@ void load::Engines() {
 
     int r = 0, rprev = 0;
 	for (;;) {
-		togglesShow(x, y, width, _Show, total + 3, AL, BL, SL, DL, CL, CType, IL, enableColor, LANGUAGE, true, true, ML);
+		toggles::showAll (x, y, width, _Show, total + 3, AL, BL, SL, DL, CL, CType, IL, enableColor, LANGUAGE, true, true, ML);
 
 		r = MessageWindow.Switch(x, y, width, Menu, rprev);
         if (r == 0) {
 
         } else if (r > 0 && r <= total) {
-            toggles(x, y, width, _Show, r, total, &AL, &BL, &SL, &DL, &CL, &CType, &IL, &enableColor, &LANGUAGE);
+            toggles::toggle (x, y, width, _Show, r, total, &AL, &BL, &SL, &DL, &CL, &CType, &IL, &enableColor, &LANGUAGE);
         } else if (r == total + 1) {
             setGUIVersion();
         } else if (r == total + 2) {

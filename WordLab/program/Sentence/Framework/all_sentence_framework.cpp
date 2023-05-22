@@ -369,7 +369,7 @@ bool sts::DebugSettings() {
     int r = 0, rprev = 0;
 
     for(;; rprev = r) {
-        togglesShow (
+        toggles::showAll (
                 x, y, width, false, numOfToggles,
                 this->configs.show_debug_message,
                 this->configs.show_table_summary,
@@ -389,7 +389,7 @@ bool sts::DebugSettings() {
         } else if (r > numOfToggles + 2) {
             popup(" DebugSettings: [Error] choice = ", toString(r), -1);
         } else {
-            toggles (
+            toggles::toggle (
                     x, y, width, false, r, numOfToggles,
                     &(this->configs.show_debug_message),
                     &(this->configs.show_table_summary),

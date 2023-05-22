@@ -246,10 +246,18 @@ class chart{
 	~chart();
 };
 //toggles
-void toggleShow(int x,int y,bool lock,bool delay,bool showdigit);
-void togglesShow(int x,int y,int width,bool showdigit,int n,...);
-void toggle(int x,int y,bool *lock,bool delay,bool showdigit);
-void toggles(int x,int y,int width,bool showdigit,int r,int n,...);
+class toggles {
+    private:
+    class toggle {
+        public:
+        static void showToggle(int x,int y,bool lock,bool delay,bool showDigit);
+        static void toggleToggle(int x,int y,bool *lock,bool delay,bool showDigit);
+    };
+    static inline int getLeft(const int x, const int width);
+    public:
+    static void showAll(int x,int y,int width,bool showDigit,int n,...);
+    static void toggle(int x,int y,int width,bool showDigit,int r,int n,...);
+};
 //askchar
 void AskCharReset();
 void AskCharClear(std::string cache[]);
