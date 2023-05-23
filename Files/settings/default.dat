@@ -1,5 +1,5 @@
 Ask = 0
-Show = 1
+Show = 0
 EnableColor = 1
 Language = 0
 MessageWindow._LoopLock = 0
@@ -19,4 +19,4 @@ CL = 1
 DL = 1
 SL = 1
 IL = 1
-ML = 1
+ML = 0

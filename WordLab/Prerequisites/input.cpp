@@ -1,4 +1,4 @@
-int listen(char *msg,int INDEX,bool DISPLAY,std::initializer_list<char> TERM,int MAX) {
+int listen(char *msg, const int INDEX, const bool DISPLAY, const std::initializer_list<char> TERM, const int MAX) {
 	char c;
 	for(int r = INDEX; r >= 0 && r < MAX; msg[++r] = 0 ) {
 		begin:

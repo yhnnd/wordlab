@@ -1,7 +1,10 @@
-void MessageWindow::Highlight(const char *msg){
-	colorset(_background ? backlightwhite : lightwhite);
-//    bsvline(msg,0,"<",">","(",")",",;");
-	bsvlineDisableColors(msg,0,"<",">","(",")",",;");
+void MessageWindow::Highlight(const char *msg) {
+    if (this->_background) {
+        setForegroundColorAndBackgroundColor("blk-", "-wte");
+    } else {
+        setForegroundColorAndBackgroundColor("wte-", "-blk");
+    }
+	bsvlineDisableColors(msg, 0, "<", ">", "(", ")", ",;");
 }
 
 #include "background.cpp"

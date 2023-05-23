@@ -1,4 +1,4 @@
-//copy this "<",">","(",")"
+// copy this "<", ">", "(", ")", ";"
 void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fieldend,PKC tokens_term, scriptprocessor *spptr) {
 
 	int r = 0, r1 = 0, romit = 0, rmsg = 0;
@@ -89,11 +89,13 @@ void bsvlineDisableColors(PKC what, const int width, PKC brcmdbegin, PKC brcmden
         } else {
             printf("%c", what[r]);
         }
-        if (r - romit >= width) {
+        if (width > 0 && r - romit >= width) {
             break;
         }
     }
-    for (r -= romit; r < width; r++) {
-        printf("%c", ' ');
+    if (width > 0) {
+        for (r -= romit; r < width; r++) {
+            printf("%c", ' ');
+        }
     }
 }
