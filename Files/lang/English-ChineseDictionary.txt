@@ -4648,7 +4648,7 @@ muscle  /n./筋;肌肉
 muscular  /adj./肌肉发达的
 muse  /v./沉思;默想
 museum  /n./博物馆;陈列馆
-mushroom  /n./“蘑菇
+mushroom  /n./蘑菇
 music  /n./音乐;乐曲
 musical  /adj./音乐的/n./歌舞片
 musician  /n./音乐家;作曲家
