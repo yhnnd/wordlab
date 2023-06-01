@@ -39,7 +39,7 @@ int WLFramework(void) {
                 strcpy(ptr_token, ptr_token + 1);
             }
 			// re-order the word after removing #
-			FirstLetter = WLTools(s) ? 13 : 0;
+			FirstLetter = WLTools(s);
 		} else if (strindex(s, " ") >= 0) {
 			if (!WLSearchPhrase(s) && CL) {
                 FirstLetter = AddNew(s);

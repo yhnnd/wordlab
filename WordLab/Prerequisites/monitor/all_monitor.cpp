@@ -30,7 +30,7 @@ int monitorShow(int x,int y) {
     return n;
 }
 
-void monitorSet(bool *lock){
+void monitorSet(bool *lock) {
     int x=0,y=1,width=ScreenX-10-x;
     if (deny(*lock, *lock)) {
         MonitorActivate();

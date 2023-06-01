@@ -1,8 +1,8 @@
-void WordUpdate(const string word){
+char WordUpdate(const string word){
 	int i,lth=word.length(),n=Search(word.c_str(),lth);
-	if(n<=0){
+	if (n <= 0) {
 		popup(word," was not in the database, please add it first",-1);
-		return;
+		return 0;
 	}
 	char trans[256],route[64];
 	FILE *fp = Library(lth,CH,"r");
@@ -20,13 +20,13 @@ void WordUpdate(const string word){
             break;
         }
 	}
-    if(DeleteLine(LibraryRoute(lth,EN),n,1)!=0){
+    if (DeleteLine(LibraryRoute(lth,EN),n,1) != 0) {
 	    popup("cannot delete word <fore red>(",word,")",-1);
-		return;
+		return 0;
 	}
-	if(DeleteLine(LibraryRoute(lth,CH),n,1)!=0){
+	if (DeleteLine(LibraryRoute(lth,CH),n,1) != 0) {
 	    popup("cannot delete definition of <fore red>(",word,")",-1);
-		return;
+		return 0;
 	}
 	//add word to English database
     ofstream fout, flog;
@@ -60,6 +60,9 @@ void WordUpdate(const string word){
     //sort words in db-lth
 	sortlib(lth,lth,DatabaseAdminName,DatabaseAdminPassword);
     popup("updating of <fore yellow>(",word,") is completed",0);
-    wait(-1,100,0);
-    Dialog.output("reset");
+    {
+        const char ch = wait(-1, 100, 0);
+        Dialog.output("reset");
+        return ch;
+    }
 }

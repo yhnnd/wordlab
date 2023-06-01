@@ -101,7 +101,6 @@ char getche(void) {
 unsigned int Sleep(unsigned int n){return 0;}
 
 #define WORD unsigned short
-#define BOOL long
 #define SHORT short
 #define HANDLE void *
 #define DWORD unsigned long
@@ -134,12 +133,12 @@ typedef struct _COORD {
 #include "Colour/colordefs.h"
 #include "keyboard.h"
 
-#define _CacheMax 3
-#define LINEMAX  80
-#define MAXLINES 20
+const int _CacheMax = 3;
+const int LINEMAX = 80;
+const int MAXLINES = 20;
 
-typedef char * str;
 typedef unsigned int uint;
+typedef unsigned long ulong;
 typedef const char * PKC;//pointer to const char
 
 namespace prerequisites
@@ -172,8 +171,8 @@ class host{
 };
 //color
 WORD getcolor();
-BOOL colorset(WORD wAttributes);
-BOOL colorreset(WORD color);
+bool colorset(WORD wAttributes);
+bool colorreset(WORD color);
 void Colorful(int t);
 void Colorfuldim(int t);
 void ColorfulAll(int t);
@@ -588,10 +587,10 @@ void monitorSet(bool *lock);
 
 #endif
 
-#define  limit(n,i,min,max)  n=((i)>(max))?(max):(((i)<(min))?(min):(i))
-#define  roll(n,i,min,max)   n=((i)>(max))?(min):(((i)<(min))?(max):(i))
-#define  omit(n,i,var,omit)  n+=(var)*(((i)+(var)==(omit))?2:1)
-#define  deny(n,i)           n=((i)==true)?false:true
-#define  _min(a,b)           ((a)>(b)?(b):(a))
-#define  _max(a,b)           ((a)>(b)?(a):(b))
+#define  limit(n,i,min,max)  (n=((i)>(max))?(max):(((i)<(min))?(min):(i)))
 
+#define  roll(n,i,min,max)   (n=((i)>(max))?(min):(((i)<(min))?(max):(i)))
+
+#define  omit(n,i,var,omit)  (n+=(var)*(((i)+(var)==(omit))?2:1))
+
+#define  deny(n,i)           (n=((i)==true)?false:true)

@@ -1,11 +1,12 @@
-void AddWord(const string word) {
+char AddWord(const string word) {
 	int lth = word.length();
-	if(word.length() == 0) {
-		return;
+	if (word.length() == 0) {
+		return 0;
 	}
 	Dialog.output("start");
 	if (Search(word.c_str(), word.length()) > 0) {
-		return AddWordPrintErrorMessage(7,word);//already added
+        AddWordPrintErrorMessage(7, word);// already added
+        return 0;
 	}
 	// initializing database writer
 	ofstream foutEN, foutCH, flog;
@@ -26,6 +27,7 @@ void AddWord(const string word) {
 		foutCH.close();
         flog.close();
 	}
-	wait(-1, 100, 0);
+	const char ch = wait(-1, 100, 0);
 	Dialog.output("reset");
+    return ch;
 }

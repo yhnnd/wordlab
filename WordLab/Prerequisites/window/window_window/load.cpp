@@ -4,7 +4,7 @@ void window::load(std::string begin,std::string end){
 	for(int n=0;n<text.capacity()&&!fin.eof();text.setsize(++n)){
 		if(getline(fin,line)){
 			//get line
-			strncpy(text.line(n),line.c_str(),_min(line.length(),text.linecapacity()));
+			strncpy(text.line(n), line.c_str(), std::min(line.length(), static_cast<ulong> (text.linecapacity())));
 			//begin found
 			if(strncmp(text.line(n),begin.c_str(),begin.length())==0){
 				strcpy(text.line(n),text.line(n)+begin.length());//erase begin

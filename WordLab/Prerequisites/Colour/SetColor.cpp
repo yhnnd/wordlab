@@ -1,4 +1,4 @@
-BOOL colorset(WORD wAttributes) {
+bool colorset(WORD wAttributes) {
 #if defined(_WIN32)
 	CurrentColorForWIN32 = wAttributes;
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -19,7 +19,7 @@ BOOL colorset(WORD wAttributes) {
     return 0;
 }
 
-BOOL colorreset(WORD color) {
+bool colorreset(WORD color) {
 	return colorset(color);
 }
 
