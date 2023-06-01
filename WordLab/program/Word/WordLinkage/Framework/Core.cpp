@@ -1,4 +1,4 @@
-int WLFrameworkCore(string s) {
+int WLFrameworkCore(const string s) {
 	int n = 0, ReturnLetter = 0;
 	string s2(s);
 
@@ -29,8 +29,7 @@ int WLFrameworkCore(string s) {
     }
 	if (CL && n == 0) {
 //        printf("\nAddNew s = %s\n", s.c_str());
-		AddNew(s);
-		ReturnLetter = 13;
+        ReturnLetter = AddNew(s);
 	}
 //    printf("\nWLFrameworkCore returns %d\n", ReturnLetter);
 	return ReturnLetter;

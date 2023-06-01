@@ -27,6 +27,8 @@ int WLFramework(void) {
             }
 
 			FirstLetter = 0;
+
+            strcpy(s, trim(s).c_str());
 			lth = strlen(s);
 		}
 		// PROCESS DATA
