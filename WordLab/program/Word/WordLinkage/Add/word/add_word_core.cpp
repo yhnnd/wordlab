@@ -54,6 +54,8 @@ void AddWordCore(const string word, ofstream &foutEN, ofstream &foutCH, ofstream
 		AddWordPrintMessage(8, word + " " + line_of_defs);
 
         ::fflush(stdin);
+        std::cin.clear();
+        std::cin.sync();
         const char key = getch();
 
 		if (key == 13 || key == 10) {
