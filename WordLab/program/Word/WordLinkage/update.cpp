@@ -21,11 +21,11 @@ char WordUpdate(const string word){
         }
 	}
     if (DeleteLine(LibraryRoute(lth,EN),n,1) != 0) {
-	    popup("cannot delete word <fore red>(",word,")",-1);
+	    popup("cannot delete word <red-blk>(",word,")",-1);
 		return 0;
 	}
 	if (DeleteLine(LibraryRoute(lth,CH),n,1) != 0) {
-	    popup("cannot delete definition of <fore red>(",word,")",-1);
+	    popup("cannot delete definition of <red-blk>(",word,")",-1);
 		return 0;
 	}
 	//add word to English database
@@ -59,7 +59,7 @@ char WordUpdate(const string word){
     flog.close();//close log file
     //sort words in db-lth
 	sortlib(lth,lth,DatabaseAdminName,DatabaseAdminPassword);
-    popup("updating of <fore yellow>(",word,") is completed",0);
+    popup("updating of <ylw-blk>(",word,") is completed",0);
     {
         const char ch = wait(-1, 100, 0);
         Dialog.output("reset");

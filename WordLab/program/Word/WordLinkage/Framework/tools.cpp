@@ -2,9 +2,10 @@ char WLTools(string s) {
     popup("#setMode('y++');");
     popup("#enableBorderTop=true;");
     popup("#offsetY=0;");
-	popup("press [A] to add <fore yellow>(",s,")",0);
-	popup("press [D] to delete <fore red>(",s,")",0);
-	popup("press [U] to update <fore cyan>(",s,")",0);
+	popup("press [A] to add <ylw-blk>(", s, ")", 0);
+    popup("press [R] to redirect <ylw-blk>(", s, ")", 0);
+	popup("press [D] to delete <red-blk>(", s, ")", 0);
+	popup("press [U] to update <cyn-blk>(", s, ")", 0);
     popup(set_mode_y_is_constant);
 
     const char choice = ::tolower(getch());
@@ -12,7 +13,10 @@ char WLTools(string s) {
 
 	switch (choice) {
 		case 'a':
-            returnKey = AddWord(s);
+            returnKey = AddWord(s, AddWordMode::Add);
+            break;
+        case 'r':
+            returnKey = AddWord(s, AddWordMode::Redirect);
             break;
 		case 'd':
             returnKey = WordDelete(s);

@@ -35,9 +35,18 @@ int addWordAndDefs(const string word, const int lth, const string defs) {
     }
 }
 
-void AddWordCore(string word, ofstream &foutEN, ofstream &foutCH, ofstream &flog) {
-	// start entering definition
-	string line_of_defs = AddWordGetTranslation(word);
+void AddWordCore(const string word, ofstream &foutEN, ofstream &foutCH, ofstream &flog, const AddWordMode mode) {
+    string line_of_defs = "";
+    if (mode == AddWordMode::Add) {
+        // start entering definition
+        line_of_defs = AddWordGetTranslation(word);
+    } else if (mode == AddWordMode::Redirect) {
+        Dialog.output("input target:");
+        string target = "";
+        ::fflush(stdin);
+        cin >> target;
+        line_of_defs = ",/redirected./@target=\"" + target + "\";";
+    }
 //	cout<< "you are going to add word '" << word << "' and defs '" << line_of_defs << "' to db";
 //	getch();
 	if (line_of_defs.length()) {

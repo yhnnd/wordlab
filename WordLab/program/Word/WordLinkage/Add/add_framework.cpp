@@ -37,7 +37,7 @@ char AddNew(const string s) {
 	} else {
 //        printf("\nadd new word\n");
 		popup("Add word <ylw->(", s, 0);
-		AddWord(s);
+		AddWord(s, AddWordMode::Add);
 	}
 	end:
 	const char key = getch();
