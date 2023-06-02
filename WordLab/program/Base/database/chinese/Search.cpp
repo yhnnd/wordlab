@@ -1,4 +1,4 @@
-int Search(const char *s, int lth = 0) {
+int Search(const char *s, int lth, const bool ignoreCase) {
 	char c[32];
 
     if (lth <= 0) {
@@ -28,7 +28,11 @@ int Search(const char *s, int lth = 0) {
 		fread(&c, lth, 1, fp);
 		rewind(fp);
 
-		flag = strnicmp(s, c, lth);
+        if (ignoreCase == true) {
+            flag = strnicmp(s, c, lth);
+        } else {
+            flag = strncmp(s, c, lth);
+        }
 
 		if (flag < 0) {
             z = k;

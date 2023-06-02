@@ -223,7 +223,7 @@ int launch(const std::string msg) {
         return 34;
 	} else { //translate msg as a word
 		int i = 0, lth = msg.length();
-		if ((i = Search(msg.c_str(),lth)) > 0) {
+		if ((i = Search(msg.c_str(), lth, false)) > 0) {
 			cout<<"{"
 			<<"\"db-"<<lth<<"-"<<i<<'\"'
 			<<','

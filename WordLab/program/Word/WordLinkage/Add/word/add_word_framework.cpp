@@ -4,7 +4,7 @@ char AddWord(const string word, const AddWordMode mode) {
 		return 0;
 	}
 	Dialog.output("start");
-	if (Search(word.c_str(), word.length()) > 0) {
+	if (Search(word.c_str(), word.length(), false) > 0) {
         AddWordPrintErrorMessage(7, word);// already added
         return 0;
 	}

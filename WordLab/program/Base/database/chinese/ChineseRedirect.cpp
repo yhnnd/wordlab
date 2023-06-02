@@ -1,4 +1,7 @@
-string ChineseRedirect(const string line, int &lth, int &LineNumber){
+string ChineseRedirect(const string line, int &lth, int &LineNumber) {
+
+    const bool ignoreCase = false;
+
 	string target_cmd_name = "@target=\"",target_cmd_value = "";
 	auto target_cmd_begin = line.find(target_cmd_name);
 	auto target_cmd_value_begin = target_cmd_begin + target_cmd_name.length();
@@ -12,7 +15,7 @@ string ChineseRedirect(const string line, int &lth, int &LineNumber){
 				return "TARGET IS ILLEGAL";
 			}
 			lth = target_cmd_value_lth;
-			LineNumber = Search(target_cmd_value.c_str(),target_cmd_value_lth);
+			LineNumber = Search(target_cmd_value.c_str(), target_cmd_value_lth, ignoreCase);
 			if(LineNumber>0){
 				return "";//TARGET REDIRECT SUCCESS
 			} else if( LineNumber==0 ){

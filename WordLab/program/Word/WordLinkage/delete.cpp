@@ -1,5 +1,5 @@
 char WordDelete(const string word) {
-	int lth = word.length(), n = Search(word.c_str(), lth);
+	const int lth = word.length(), n = Search(word.c_str(), lth, false);
     char ch = 0;
 	Dialog.output("start");
 	if (n == 0) {

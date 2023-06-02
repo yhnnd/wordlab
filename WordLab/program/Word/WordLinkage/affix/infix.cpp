@@ -1,8 +1,8 @@
 int infix(int lth,string word) {
 	int i;
 	colorset(lightpurple);
-	for(i = lth / 2; i <= lth; i++) {
-		if(i > 1 && Search(word.c_str(),i)) {
+	for (i = lth / 2; i <= lth; i++) {
+		if (i > 1 && Search(word.c_str(), i, false)) {
 			for (int j = 0; j < i; j++) {
                 cout << word[j];
             }

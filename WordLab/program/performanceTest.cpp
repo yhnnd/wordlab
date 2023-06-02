@@ -62,7 +62,7 @@ int performanceTest (void) {
                 } else if (round == ROUND::WL_SEARCH_IGNORE_CASE_PLUS_CHINESE) {
                     k = WLSearch(word, true, false, 'k', false);
                 } else if (round == ROUND::SEARCH_PLUS_CHINESE) {
-                    k = Search(word);
+                    k = Search(word, 0, false);
                 }
                 if (k > 0) {
                     chinese = Chinese(lth, k);

@@ -22,7 +22,7 @@ int load::UpdateDatabase(const string route) {
                     char def[32] = "";
                     const int result1 = Molecular.getWordDefinitions(def, sizeof(def));
                     if (result1 <= 0 || def[0] == '\0') {
-                        const int result2 = Search(word.c_str(), word.length());
+                        const int result2 = Search(word.c_str(), word.length(), false);
                         if (result2 <= 0) {
 //                            cout << "word \"" << word << "\" def \"" << lineDef << "\"" << endl;
 //                            getch();
