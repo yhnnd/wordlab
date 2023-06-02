@@ -52,7 +52,10 @@ void AddWordCore(const string word, ofstream &foutEN, ofstream &foutCH, ofstream
 	if (line_of_defs.length()) {
 		// Prepare to Add word and Definition to DB
 		AddWordPrintMessage(8, word + " " + line_of_defs);
+
+        ::fflush(stdin);
         const char key = getch();
+
 		if (key == 13 || key == 10) {
 			foutEN << endl << word;// Add word to DB
 			foutCH << endl << word << " " << line_of_defs;// Add Def to DB

@@ -8,7 +8,7 @@ void AddWordPrintMessage(int r,const string s = "") {
 		case  5:  Dialog.output("APPEND DEFINITION " + s + " ?");             break;
         case  6:  Dialog.output("ADD PHRASE \"" + s + "\" ?");                break;
 		case  7:  Dialog.output("WORD SORT \"" + s + "\" SELECTED");          break;
-		case  8:  Dialog.output("ADD \""+s+"\" ?");                           break;
+		case  8:  Dialog.output("ADD \"" + s + "\" ?");                       break;
 		case  9:  Dialog.output("EDITING OF DEFINITION ITEM "+s+" COMPLETED");break;
 		default:  break;
 	}
