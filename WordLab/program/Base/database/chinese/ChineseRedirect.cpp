@@ -1,4 +1,4 @@
-string ChineseRedirect(string line,int &lth,int &LineNumber){
+string ChineseRedirect(const string line, int &lth, int &LineNumber){
 	string target_cmd_name = "@target=\"",target_cmd_value = "";
 	auto target_cmd_begin = line.find(target_cmd_name);
 	auto target_cmd_value_begin = target_cmd_begin + target_cmd_name.length();
