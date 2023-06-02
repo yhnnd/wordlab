@@ -1,10 +1,10 @@
 char WordUpdate(const string word){
 	const int lth = word.length(), n = Search(word.c_str(), lth, false);
 	if (n <= 0) {
-		popup(word," was not in the database, please add it first",-1);
+		popup(word, " was not in the database. please add it first", -1);
 		return 0;
 	}
-	char trans[256],route[64];
+	char trans[256], route[64];
 	FILE *fp = Library(lth,CH,"r");
 	for (int i = 1; i <= n; i++) {
         fgets(trans, 256, fp);

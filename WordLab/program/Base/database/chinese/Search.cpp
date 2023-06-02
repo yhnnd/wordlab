@@ -31,7 +31,7 @@ int Search(const char *s, int lth, const bool ignoreCase) {
         if (ignoreCase == true) {
             flag = strnicmp(s, c, lth);
         } else {
-            flag = strncmp(s, c, lth);
+            flag = compare(s, c, lth);
         }
 
 		if (flag < 0) {
