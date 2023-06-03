@@ -19,12 +19,10 @@ std::string sortOfWord (const char *keyword, const set<int> preferedSortSymbols)
 }
 
 std::string sortOfWord (const char *keyword) {
-    const set<int> availableSortIds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
     return sortOfWord(keyword, availableSortIds);
 }
 
 set<int> sortIdsOfWord (const char * keyword) {
-    const set<int> availableSortIds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
     set<int> resultSet;
     std::map<int, std::string> sorts = WordSort(keyword, availableSortIds);
     for (const auto item: sorts) {

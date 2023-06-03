@@ -1,25 +1,5 @@
 std::map<int, std::string> SortClassify(const char * defLine, const set<int> preferredSortSymbols) {
 
-    static std::map<int, std::string> mapSortSymbols = {
-            {1, "n."},
-            {2, "v."},
-            {3, "adj."},
-            {4, "adv."},
-            {5, "vt."},
-            {6, "vi."},
-            {7, "prep."},
-            {8, "pron."},
-            {9, "aux."},
-            {10, "conj."},
-            {11, "art."},
-            {12, "int."},
-            {13, "num."},
-            {14, "c."},
-            {15, "u."},
-            {16, "s."},
-            {17, "pl."}
-    };
-
     std::map<int, std::string> resultsMap;
 
 //    cout << "\nSortClassify: defLine = \"" << std::string(defLine) << "\"" << endl;

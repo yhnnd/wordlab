@@ -54,6 +54,15 @@ const char *getWordSortNameById(const int n) {
         case 17:
             return "plural";
             break;
+        case 18:
+            return "abbreviation";
+            break;
+        case 19:
+            return "prefix";
+            break;
+        case 20:
+            return "postfix";
+            break;
 		default:
 			return "Unknown";
 			break;
