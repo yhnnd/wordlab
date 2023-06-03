@@ -1,5 +1,6 @@
-string Chinese(int lth,int lineNumber,int defNumber = 1);
-string Chinese(int lth,int lineNumber,int defNumber) {
+string Chinese(int lth, int lineNumber, int defNumber = 1);
+
+string Chinese(int lth, int lineNumber, int defNumber) {
 	int NOL = 0;
 	string line, def;
 	ifstream fin;

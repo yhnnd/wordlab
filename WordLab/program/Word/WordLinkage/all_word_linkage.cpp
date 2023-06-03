@@ -1,15 +1,14 @@
-#include "Declarations.cpp"
-#include "History/all.cpp"		//H engine
-#include "scan/framework.cpp"    //A engine
-#include "Search/all.cpp"		//B engine
-#include "Add/all_add.cpp"		//C engine
-#include "add_word_script.cpp"	//C-NEW engine
-#include "affix/all.cpp"		//D engine
-#include "SimilarSpelling.cpp"	//E engine
-#include "delete.cpp"			//F engine
-#include "sdv_to_bsv.cpp"		//G engine Core
-#include "Dictionary.cpp"		//G engine
-#include "update.cpp"			//U engine
+#include "History/all.cpp"          // H engine
+#include "scan/framework.cpp"       // A engine
+#include "Search/all_search.cpp"    // B engine
+#include "Add/all_add.cpp"          // C engine
+#include "add_word_script.cpp"      // C-NEW engine
+#include "affix/all.cpp"            // D engine
+#include "SimilarSpelling.cpp"      // E engine
+#include "delete.cpp"               // F engine
+#include "sdv_to_bsv.cpp"           // G engine Core
+#include "Dictionary.cpp"           // G engine
+#include "update.cpp"               // U engine
 #include "Framework/all.cpp"
 //------------------------------------------------------------
 // version 0.1.0

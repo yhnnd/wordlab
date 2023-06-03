@@ -1,4 +1,4 @@
-string WLChineseCore(string line,int fontcolor) {
+string WLChineseCore(string line, const int fontcolor) {
 	string result_line = "";
 	int ver = 0;
 	bool flagdef = false, flagsort = false;

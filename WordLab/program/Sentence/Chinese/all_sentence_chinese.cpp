@@ -61,14 +61,37 @@ int sts::Translation(int lth, int LineNumber, char * result, const size_t size) 
     if (fin) {
         while(getline(fin,line)) {
             ++NOL;
-            if(NOL == LineNumber) { //LINE FOUND
-                if(line.find("/redirected./") != string::npos) { //LINE REDIRECTED
-                    string result_msg = ChineseRedirect(line,lth,LineNumber);
-                    if (lth > 0 && LineNumber > 0) {
-                        return Translation(lth, LineNumber, result, size);
+            if (NOL == LineNumber) { // LINE FOUND
+                if (line.find("/redirected./") != string::npos) { // LINE REDIRECTED
+
+                    const std::string result_msg = ChineseRedirect(line, lth, LineNumber);
+
+                    if (result_msg.empty() == true) {
+                        // Result Message is Empty.
+                        if (lth > 0 && LineNumber > 0) {
+                            return Translation(lth, LineNumber, result, size);
+                        } else {
+                            memset(result, 0, size);
+                            strcpy(result, "unknown error");
+                            return 0;
+                        }
                     } else {
+                        // Result Message is not Empty
                         memset(result, 0, size);
-                        strncpy(result, result_msg.c_str(), result_msg.length());
+
+                        const std::string indicator_phrase = "PHRASE ";
+                        if (result_msg.find(indicator_phrase) == 0) {
+                            const std::string target_phrase = result_msg.substr(indicator_phrase.length());
+                            phraseSearchResult phResult = getPhraseDefinitions(target_phrase);
+                            if (phResult.status == phraseSearchResultStatus::succeeded) {
+                                const std::string phraseDefinition = phResult.defsVector[0];
+                                strncpy(result, phraseDefinition.c_str(), phraseDefinition.length());
+                            } else {
+                                strncpy(result, target_phrase.c_str(), target_phrase.length());
+                            }
+                        } else {
+                            strncpy(result, result_msg.c_str(), result_msg.length());
+                        }
                         return LineNumber;
                     }
                 }

@@ -21,7 +21,7 @@ void load::Engines() {
         } else if (r == total + 1) {
             setGUIVersion();
         } else if (r == total + 2) {
-            SetChineseColor(definitionsColors);
+            setChineseColor(definitionsColors);
         } else if (r == total + 3) {
             monitorSet(&ML);
         } else {

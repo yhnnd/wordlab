@@ -44,7 +44,7 @@ void AddWordCore(const string word, ofstream &foutEN, ofstream &foutCH, ofstream
         Dialog.output("input target:");
         string target = "";
         ::fflush(stdin);
-        cin >> target;
+        getline(cin, target);
         line_of_defs = ",/redirected./@target=\"" + target + "\";";
     }
 //	cout<< "you are going to add word '" << word << "' and defs '" << line_of_defs << "' to db";
