@@ -73,13 +73,17 @@ int WLSearchPhrase(const char *msg) {
 
         gotoxy(0, BeginY);
         setForegroundColorAndBackgroundColor("grn-", "-blk");
-        printf(" %d / %d \"%s\" ", result.phraseLth, result.lineNo, msg);
+        printf(" %d / %d \"%s\"", result.phraseLth, result.lineNo, msg);
         setForegroundColorAndBackgroundColor("ylw-", "-blk");
 
         for (const std::string & defItem: result.defsVector) {
             printf(" \"%s\"", defItem.c_str());
         }
-        printf("\n");
+
+        setForegroundColorAndBackgroundColor("blk-", "-grn");
+        printf("v");
+        setForegroundColorAndBackgroundColor("blk-", "-ylw");
+        printf("%zu\n", result.defsVector.size());
 
         colorreset(colorPrev);
 
