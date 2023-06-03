@@ -61,7 +61,7 @@ const char *getWordSortNameById(const int n) {
             return "prefix";
             break;
         case 20:
-            return "postfix";
+            return "suffix";
             break;
 		default:
 			return "Unknown";

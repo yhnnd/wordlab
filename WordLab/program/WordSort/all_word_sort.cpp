@@ -17,8 +17,8 @@ const std::map<int, std::string> mapSortSymbols = {
         {16, "s."},
         {17, "pl."},
         {18, "abbr."},
-        {19, "prefix"},
-        {20, "suffix"}
+        {19, "pref."},
+        {20, "suff."}
 };
 
 const set<int> availableSortIds = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
