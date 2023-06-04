@@ -25,8 +25,29 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
                 result.status = phraseSearchResultStatus::succeeded;
                 result.defsLine = line;
                 result.defs = line.erase(line.find_last_not_of(";") + 1).substr(searchKey.length());
-                result.defsVector = split(result.defs, ";");
-                return result;
+                result.defsVector = split(result.defs, ",");
+                if (result.defsVector.size() && result.defsVector[0].find("/redirected./") != std::string::npos) {
+                    const std::string defItem = result.defsVector[0];
+                    const std::string beginTerm = "@target=\"";
+                    const std::string::size_type beginPos = defItem.find(beginTerm);
+                    if (beginPos != std::string::npos) {
+                        const std::string target = trim(defItem.substr(beginPos + beginTerm.length()), "\"");
+                        result.message = target;
+//                        printf("target = \"%s\"\n", target.c_str());
+//                        getch();
+                        const struct phraseSearchResult targetResult = getPhraseDefinitions(target);
+                        result.defsLine = targetResult.defsLine;
+                        result.defs = targetResult.defs;
+                        result.defsVector = targetResult.defsVector;
+                        return result;
+                    } else {
+                        result.status = phraseSearchResultStatus::failed;
+                        result.message = "invalid definition \"" + defItem + "\"";
+                        return result;
+                    }
+                } else {
+                    return result;
+                }
             }
         }
 
@@ -74,16 +95,24 @@ int WLSearchPhrase(const char *msg) {
         gotoxy(0, BeginY);
         setForegroundColorAndBackgroundColor("grn-", "-blk");
         printf(" %d / %d \"%s\"", result.phraseLth, result.lineNo, msg);
-        setForegroundColorAndBackgroundColor("ylw-", "-blk");
 
-        for (const std::string & defItem: result.defsVector) {
-            printf(" \"%s\"", defItem.c_str());
+        if (result.message.empty() == false) {
+            setForegroundColorAndBackgroundColor("#red-", "-ylw");
+            printf(" %s ", result.message.c_str());
         }
 
-        setForegroundColorAndBackgroundColor("blk-", "-grn");
-        printf("v");
-        setForegroundColorAndBackgroundColor("blk-", "-ylw");
-        printf("%zu\n", result.defsVector.size());
+        if (result.defsVector.size()) {
+            setForegroundColorAndBackgroundColor("ylw-", "-blk");
+
+            for (const std::string & defItem: result.defsVector) {
+                printf(" \"%s\"", defItem.c_str());
+            }
+
+            setForegroundColorAndBackgroundColor("blk-", "-grn");
+            printf("v");
+            setForegroundColorAndBackgroundColor("blk-", "-ylw");
+            printf("%zu\n", result.defsVector.size());
+        }
 
         colorreset(colorPrev);
 
