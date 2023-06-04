@@ -475,18 +475,24 @@ class MessageWindow {
 	void Selectdown(char *, const int, const int, const int, const int);
 	int Select(int,int,int,int,const char *,const char *,const char *);
 } MessageWindow;
+
 // table row
-class tablerow{
+
+const struct {
+    const uint colMax = 8, colMaxWidth = 10;
+    const std::string::size_type colMaxChar = 128;
+} tableRowConfigs;
+
+class tablerow {
 	private:
 	int order;
-	char col[8][128];//class,number,name,info
+	char col[8][128];// class, number, name, info
 	public:
-	int colmaxwidth;
 	int setcol(int,int,char*);
 	int Add(int,int,int);
-	int Load(int,char *);
+	int Load(const int, const char *);
 	void Save(int,FILE*);
-	void Out(int,int);
+	void printRow(int x, int y, uint colMax);
 	int copy(tablerow row);
 	bool IsClass(const int n);
 	int SearchName(PKC);

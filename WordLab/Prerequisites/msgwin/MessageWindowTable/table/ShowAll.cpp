@@ -1,4 +1,4 @@
-void Table::ShowAll(tablerow item[],int begin,int max,int Class,int x,int y,int width) {
+void Table::ShowAll(tablerow item[],int begin,int max,int Class,int x,int y, const int width) {
 
 	int xOffset = 0;
 #ifdef __APPLE__
@@ -6,15 +6,16 @@ void Table::ShowAll(tablerow item[],int begin,int max,int Class,int x,int y,int 
 #endif
 
 	int r;
-	this->Title(x,y,width,max);
+	this->Title(x, y, width, max);
 	for (r = 1; r <= max; r++) {
-	    gotoxy(x + 4 + xOffset, y + 2 + r);
+        const int indentLeft = x + 4 + xOffset, indentTop = y + 2 + r;
+	    gotoxy(indentLeft, indentTop);
 		colorset(backlightwhite);
 		std::cout << std::right << std::setw(4) << r + begin << " ";
 		std::cout << std::left;
 		colorset(backdarkwhite);
 		if (item[r+begin].IsClass(Class)) {
-			item[r+begin].Out();
+			item[r+begin].printRow(indentLeft + 5, indentTop, width / tableRowConfigs.colMaxWidth - 2);
 		}
 	}
 	colorset(lightwhite);

@@ -10,10 +10,10 @@ int queryselect() {
 			int lthto=stoi(attr[n].value.to);
 			for(l=lthfrom; l<=lthto; l++) {
 				Library(fin,l,CH);
-				while(getline(fin,ln)) {
-					fout<<ln<<",$lth="<<l<<",$n="<<i++<<endl;
+				while (getline(fin,ln)) {
+					fout << ln << ", $lth=" << l << ", $n=" << i++ << endl;
 				}
-				fout<<endl;
+				fout << endl;
 				fin.close();
 			}
 			fout.close();
@@ -31,7 +31,9 @@ int queryselect() {
 				fout.open("buf.csv",ios::trunc);
 			}
 			while(getline(fin,ln)) {
-				if(ln.find(attr[n].value.self)!=std::string::npos) fout<<ln<<endl;
+				if(ln.find(attr[n].value.self)!=std::string::npos) {
+                    fout << ln << endl;
+                }
 			}
 			fin.close();
 			fout.close();
@@ -62,7 +64,7 @@ int queryselect() {
 				fin.open("buf2.csv");
 				fout.open("buf.csv",ios::trunc);
 			}
-			l=attr[n].value.self.length();
+			l = attr[n].value.self.length();
 			while(getline(fin,ln)) {
 				i=ln.find(attr[n].value.self);
 				j=ln.find(" ");
@@ -82,6 +84,6 @@ int queryselect() {
 			nbuf++;
 		}
 	}
-	Table.table((nbuf%2)?"buf.csv":"buf2.csv",0,0,ScreenX-6);
+	Table.table((nbuf % 2) ? "buf.csv" : "buf2.csv", 0, 0, ScreenX - 6);
     return 0;
 }

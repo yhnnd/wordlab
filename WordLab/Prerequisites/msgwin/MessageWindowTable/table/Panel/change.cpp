@@ -20,13 +20,17 @@ int Table::Change(tablerow *item,int row,int rowmax,int colmax,int x,int y,int w
 		case 2:
 			rowmax++;
 			item = (tablerow *)realloc(item,sizeof(tablerow)*(rowmax+1));
-			for(int r=rowmax;r>row;r--) item[r].copy(item[r-1]);
+			for (int r = rowmax; r > row; r--) {
+                item[r].copy(item[r - 1]);
+            }
 			item[row].Add(x,y,width);
         break;
 		case 4:
 			rowmax--;
 			(*begin)-=(*begin)?1:0;
-			for(int r=row;r<=rowmax;r++) item[r].copy(item[r+1]);
+			for(int r=row;r<=rowmax;r++) {
+                item[r].copy(item[r+1]);
+            }
 			item = (tablerow *)realloc(item,sizeof(tablerow)*(rowmax+1));
 		break;
 		default:

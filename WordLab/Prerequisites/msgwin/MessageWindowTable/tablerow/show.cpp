@@ -1,15 +1,43 @@
-void tablerow::Out(int colmax=4,int colwidth=10){
-	int c,b[colmax],p[colmax];
-	for(c=0;c<colmax;c++){
-		b[c]=(colwidth-strlen(col[c]))/2;
-		p[c]=(colwidth-strlen(col[c]))%2;
+void tablerow::printRow(const int x, const int y, const uint colMax) {
+
+    WORD prevColor = colornow();
+
+    const uint columnMax = std::min(tableRowConfigs.colMax, colMax);
+
+    std::vector<std::string> cols {}, vars {};
+
+    for (int c = 0; c < columnMax; ++c) {
+        const std::string s = this->col[c];
+        if (s.empty() == false) {
+            if (s.find("$") == 0) {
+                vars.push_back(s);
+            } else {
+                cols.push_back(s);
+            }
+        }
+    }
+
+	for (int c = 0; c < columnMax; c++) {
+        const int colWidth = tableRowConfigs.colMaxWidth * (1 + (c == 0));
+        const int left = x + (c == 0 ? 0 : (c + 1) * colWidth);
+        clearline(left, y, colWidth, ' ');
+        if (c < cols.size()) {
+            setForegroundColorAndBackgroundColor("blk-", "-#gry");
+            printf(" ");
+            colorset(prevColor);
+            printf("%s", cols[c].substr(0, colWidth * 2).c_str());
+        }
 	}
-	for(c=0;c<colmax;c++){
-		if(b[c]<0) b[c+1]-=abs(b[c]);
-	}
-	for(c=0;c<colmax;c++){
-		for(int i=0;i<b[c];i++) std::cout<<" ";
-		std::cout<<col[c];
-		for(int i=0;i<b[c]+p[c];i++) std::cout<<" ";
-	}
+
+    for (int c = 0; c < vars.size(); ++c) {
+        const int colWidth = tableRowConfigs.colMaxWidth;
+        const int left = x + (colMax + c) * colWidth;
+        clearline(left, y, colWidth, ' ');
+        setForegroundColorAndBackgroundColor("blk-", "-#gry");
+        printf(" ");
+        setForegroundColorAndBackgroundColor("#blu-", "-gry");
+        printf("$");
+        colorset(prevColor);
+        printf("%s", vars[c].substr(1).c_str());
+    }
 }
