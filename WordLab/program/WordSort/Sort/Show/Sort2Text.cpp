@@ -49,7 +49,7 @@ const char *getWordSortNameById(const int n) {
             return "uncountable";
             break;
         case 16:
-            return "single";
+            return "singular";
             break;
         case 17:
             return "plural";
