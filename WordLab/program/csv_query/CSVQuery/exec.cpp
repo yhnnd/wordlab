@@ -10,7 +10,7 @@ int exec(){
 		switch(cmds[n]){
 			case 101:if(i<=attr_n&&attr[i].req) i+=queryselect(); break;
 			case 105:if(i<=attr_n&&attr[i].req) i+=queryupdate(); break;
-			case 114:if(i<=attr_n&&attr[i].req) i+=queryprint(); break;
+			case 114:if(i<=attr_n&&attr[i].req) i+=queryPrint(); break;
 			case 115:if(i<=attr_n&&attr[i].req) i+=querysystem(); break;
 			default: error++; execError(n); break;
 		}

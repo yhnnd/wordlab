@@ -1,6 +1,6 @@
 int infix(int lth,string word) {
 	int i;
-	colorset(lightpurple);
+    setColor(lightpurple, "infix");
 	for (i = lth / 2; i <= lth; i++) {
 		if (i > 1 && Search(word.c_str(), i, false)) {
 			for (int j = 0; j < i; j++) {
@@ -15,8 +15,8 @@ int infix(int lth,string word) {
         }
 		return infix(lth - i, word.substr(i));
 	}
-	colorset(lightblue);
+    setColor(lightblue, "infix");
 	cout << word;
-	colorreset(lightwhite);
+    setColor(lightwhite, "infix");
 	return lth;
 }

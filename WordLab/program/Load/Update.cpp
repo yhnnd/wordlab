@@ -69,7 +69,7 @@ void load::Update() {
     const int width1 = 73;
 
 	gotoxy(x, y);
-    bsvline("<-wte>(select a file route", width1);
+    bsvLine("<-wte>(select a file route", width1);
 
     ::fflush(stdin);
     gotoxy(x + 17, y);
@@ -77,51 +77,51 @@ void load::Update() {
 
     if (folder.empty()) {
         gotoxy(x, ++y);
-        bsvline("<-wte>(update cancelled", width1);
+        bsvLine("<-wte>(update cancelled", width1);
     } else {
         gotoxy(x, ++y);
-        bsvline("<-wte>(update database?", width1);
+        bsvLine("<-wte>(update database?", width1);
 
         ::fflush(stdin);
         char c = getch();
 
         if (c == 13 || c == 10) {
             gotoxy(x, ++y);
-            bsvline("<-wte>(<-ylw>(updating) database", width1);
+            bsvLine("<-wte>(<-ylw>(updating) database", width1);
             const int numOfWordsUpdated = UpdateDatabase(folder);
             if (numOfWordsUpdated > 0) {
                 gotoxy(x, ++y);
                 const string msg1 = "<-wte>(<-grn>(completed.) " + toString(numOfWordsUpdated) + " words updated.";
-                bsvline(msg1.c_str(), width1);
+                bsvLine(msg1.c_str(), width1);
             } else if (numOfWordsUpdated == 0) {
                 gotoxy(x, ++y);
-                bsvline("<-wte>(<-grn>(database is up to date.) no need to update.", width1);
+                bsvLine("<-wte>(<-grn>(database is up to date.) no need to update.", width1);
             } else {
                 gotoxy(x, ++y);
-                bsvline("<-wte>(<-red>(update failed)", width1);
+                bsvLine("<-wte>(<-red>(update failed)", width1);
             }
         }
 
         gotoxy(x, ++y);
-        bsvline("<-wte>(update system?", width1);
+        bsvLine("<-wte>(update system?", width1);
 
         ::fflush(stdin);
         c = getch();
 
         if (c == 13 || c == 10) {
             gotoxy(x, ++y);
-            bsvline("<-wte>(<-ylw>(updating) system", width1);
+            bsvLine("<-wte>(<-ylw>(updating) system", width1);
             UpdateSoftware(folder);
             gotoxy(x, ++y);
-            bsvline("<-wte>(<-grn>(complete)", width1);
+            bsvLine("<-wte>(<-grn>(complete)", width1);
         }
     }
 
 	gotoxy(x, ++y);
-	bsvline("<-wte>(all done", width1);
+	bsvLine("<-wte>(all done", width1);
 	wait(-1, 100, 0);
-	colorreset(lightwhite);
-	clearscreen(0,0,76,3);//erase the popup
-	clearscreen(0,2,76,18);//erase the panel
+    setColor(lightwhite, "Update");
+    clearScreen(0, 0, 76, 3);//erase the popup
+    clearScreen(0, 2, 76, 18);//erase the panel
 }
 

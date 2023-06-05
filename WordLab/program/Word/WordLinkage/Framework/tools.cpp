@@ -25,7 +25,7 @@ char WLTools(string s) {
             returnKey = WordUpdate(s);
             break;
 		default:
-            errorlog("WLTools(s)", "option error");
+            errorLog("WLTools(s)", "option error");
             returnKey = 0;
             break;
 	}

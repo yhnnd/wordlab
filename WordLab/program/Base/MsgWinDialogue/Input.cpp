@@ -2,18 +2,18 @@ std::string dialog::input(std::string name,bool display,int linemax,int x,int y)
 	if (name.empty()) {
         name = "Unknown";
     }
-//	colorset(lightwhite);
+//	setColor(lightwhite);
     setForegroundColorAndBackgroundColor("wte-", "-blk");
 	for(int ln = 1; ln <= 3; ln++ ) {
 		clearline(x+5,(SayStyle)?y+2+2*ln:y+10-ln,60);
-//		colorset(ln == 3 ? lightblue : blue);
+//		setColor(ln == 3 ? lightblue : blue);
         if (ln == 3) {
             setForegroundColorAndBackgroundColor("blu-", "-blk");
         } else {
             setForegroundColorAndBackgroundColor("#blu-", "-blk");
         }
 		cout<<name<<": ";
-//		colorset(darkwhite);
+//		setColor(darkwhite);
         setForegroundColorAndBackgroundColor("#wte-", "-blk");
 		if (ln == 1) {
             cout<<memoryin[2];
@@ -21,7 +21,7 @@ std::string dialog::input(std::string name,bool display,int linemax,int x,int y)
             cout<<memoryin[1];
         }
 	}
-//	colorreset(lightwhite);
+//	resetColor(lightwhite);
     setForegroundColorAndBackgroundColor("wte-", "-blk");
 	// input
 	char line[linemax];

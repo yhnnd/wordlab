@@ -1,12 +1,15 @@
 //返回 c 中符合 pattern 的字符串的个数
-int bsvMatchCommand(const char *c, const char pattern, int i, ...){
-	if(i<=0) return 0;
+int bsvMatchCommand(const char *c, const char pattern, int i, ...) {
+	if (i <= 0) {
+        return 0;
+    }
 	va_list argv;
 	va_start(argv,i);
-	int n=0,lth=strlen(c);
-	for(n=0;i>0;i--){
-		char *s=va_arg(argv,char *);
-		int pos=strindex(c,s);
+    const int lth = strlen(c);
+    int n = 0;
+	for (; i > 0; i--) {
+		char *s = va_arg(argv, char *);
+		int pos = strindex(c, s);
 		switch (pattern) {
 			case '0': if(pos==0) n++; break;//首对齐(包括首尾皆对齐)
 			case '1': if(pos>=0) n++; break;//无对齐

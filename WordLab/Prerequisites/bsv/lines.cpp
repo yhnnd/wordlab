@@ -1,5 +1,5 @@
 // display a bsv file
-int bsvlines(char **msgs,const int max,const int width,const char *folder,const int x,const int y,void *spptr) {
+int bsvLines(char **msgs,const int max,const int width,const char *folder,const int x,const int y,void *spptr) {
     PKC brcmdbegin = "<";
     PKC brcmdend = ">";
     PKC fieldbegin = "(";
@@ -10,6 +10,9 @@ int bsvlines(char **msgs,const int max,const int width,const char *folder,const 
 	bool enterKeyPressed = false, bsvStylesDisabled = false;
 	int i = 0, maxLabels = 0;
     static int chosenLabel = 0;
+
+    recordColor(colorPrev, "bsvLines");
+
 	for(;;) {
 		// display bsv file
         int currentY = y;
@@ -18,9 +21,9 @@ int bsvlines(char **msgs,const int max,const int width,const char *folder,const 
 //            std::cout << "bsv line: " << clock();
             if (bsvStylesDisabled == true) {
                 setForegroundColorAndBackgroundColor("red-", "-wte");
-                bsvlineDisableColors(msgs[i], width, brcmdbegin, brcmdend, fieldbegin, fieldend, tokens_term);
+                bsvLineDisableColors(msgs[i], width, brcmdbegin, brcmdend, fieldbegin, fieldend, tokens_term);
             } else {
-                bsvline(msgs[i], width, brcmdbegin, brcmdend, fieldbegin, fieldend, tokens_term, (scriptprocessor *) spptr);
+                bsvLine(msgs[i], width, brcmdbegin, brcmdend, fieldbegin, fieldend, tokens_term, (scriptprocessor *) spptr);
             }
 			if (msgs[i][strlen(msgs[i])-1] == '\n') {
                 currentY++;
@@ -42,6 +45,7 @@ int bsvlines(char **msgs,const int max,const int width,const char *folder,const 
             gotoxy(x, currentY++);
             currentLabel = bsvLineLabels(msgs[i], chosenLabel, currentLabel,enterKeyPressed,folder,x,y,width,"wte-gry","wte-blu","<",">","(",")",spptr);
             if (currentLabel < 0) {
+                resetColor(colorPrev, "bsvLines 1");
                 return -1;
             }
             if (msgs[i][strlen(msgs[i])-1]=='\n') {
@@ -51,19 +55,20 @@ int bsvlines(char **msgs,const int max,const int width,const char *folder,const 
 
         enterKeyPressed = 0;
 
-        popup("#setMode('y++')");
-        popup("#offsetY=0;");
-        popup("#enableBorderTop=true;");
-        popup("BSV LINES: label chosen " + toString(chosenLabel), 0);
-        popup("BSV LINES: Press [ENTER] or [W↑] [A←] [S↓] [D→] to switch labels.", 0);
-        popup("#setMode('y=1')", 0);
+        if (y > 3) {
+            popup("#setMode('y++')");
+            popup("#offsetY=0;");
+            popup("#enableBorderTop=true;");
+            popup("BSV LINES: label chosen " + toString(chosenLabel), 0);
+            popup("BSV LINES: Press [ENTER] or [W↑] [A←] [S↓] [D→] to switch labels.", 0);
+            popup("#setMode('y=1')", 0);
+        }
 
         // display bsv file name
-        colorrecord(colorPrev);
-        gotoxy(x, y - 1);
         setForegroundColorAndBackgroundColor("wte-", "-blu");
+        clearline(x, y - 1, width, ' ');
         printf("%s", folder);
-        colorreset(colorPrev);
+        resetColor(colorPrev, "bsvLines 2");
 
 		key = getch();
 		if (key == BIOSKEY) {
@@ -81,7 +86,7 @@ int bsvlines(char **msgs,const int max,const int width,const char *folder,const 
 		if(key == 13) {
             enterKeyPressed = true;
         } else if (key == 8 || key == 127 || key == 27) {
-//			clearscreen(0,0,ScreenX,max+2);
+//			clearScreen(0,0,ScreenX,max+2);
 			return -1;//exit
 		} else if(key=='w'||key=='a') {
             chosenLabel--;

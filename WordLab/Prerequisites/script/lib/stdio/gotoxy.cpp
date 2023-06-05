@@ -1,4 +1,4 @@
-int scriptprocessor::scriptgotoxy(const char *line){
+int scriptprocessor::scriptGotoxy(const char *line){
 	//gotoxy();
 	return 0;
 }

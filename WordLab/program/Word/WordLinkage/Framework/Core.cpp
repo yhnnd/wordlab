@@ -2,10 +2,10 @@ int WLFrameworkCore(const string s) {
 	int n = 0, ReturnLetter = 0;
 	string s2(s);
 
-    colorrecord(colorPrev);
+    recordColor(colorPrev, "WLFrameworkCore");
     setForegroundColorAndBackgroundColor("wte-", "-#gry");
-    clearscreen(0, 3, ScreenX - 1, 8);
-    colorreset(colorPrev);
+    clearScreen(0, 3, ScreenX - 1, 8);
+    resetColor(colorPrev, "WLFrameworkCore");
 
 	WLHistory.RecordSearch(s,0);
 

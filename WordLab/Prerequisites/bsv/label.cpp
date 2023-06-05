@@ -7,6 +7,7 @@ PKC labelcolor,PKC enterColor,
 PKC brcmdbegin,PKC brcmdend,
 PKC fieldbegin,PKC fieldend,
 void *spptr) {
+    const char * functionName = "bsvLineLabels";
 
 	int r=0,r1=0,romit=0,rmsg=0;
 	char msg[16][64];
@@ -28,7 +29,7 @@ void *spptr) {
 			romit++;
 			if (labelfound) {
 //                std::cout << "labelColor = " << labelcolor << " ";
-				colorset(bsvcmdcolor(labelcolor));
+                setColor(getColorByCommand(labelcolor), functionName);
 				labelfield = true;
 			}
 		} else if(what[r-1]!='\\'&&strchr(fieldend,what[r])){
@@ -46,12 +47,12 @@ void *spptr) {
 			romit++;
 		} else if (labelfield && labelchosen == labelnow) {
 //            std::cout << "labelColor = " << labelcolor << " ";
-            colorset(bsvcmdcolor(labelcolor));
+            setColor(getColorByCommand(labelcolor), functionName);
 			std::cout << what[r];
 		} else {
 			movexy(1, 0);//同行的按鈕的位置偏移
 		}
 	}
-	colorreset(lightwhite);
+    setColor(lightwhite, functionName);
 	return labelnow;
 }

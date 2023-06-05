@@ -242,12 +242,12 @@ void sts::WordsOut() {
 
 
 void sts::PrintWordTranslation(const wordGroup currentWordGroup) {
-    colorrecord(colorprev);
+    recordColor(colorprev, "PrintWordTranslation");
     const string foregroundColor = currentWordGroup.defsColor.foregroundColor;
     const string backgroundColor = currentWordGroup.defsColor.backgroundColor;
     setForegroundColorAndBackgroundColor(foregroundColor, backgroundColor);
     printf("%s", currentWordGroup.defZh.c_str());
-    colorreset(colorprev);
+    resetColor(colorprev, "PrintWordTranslation");
     return;
 }
 

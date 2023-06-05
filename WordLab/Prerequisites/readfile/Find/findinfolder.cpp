@@ -6,7 +6,7 @@ int findinfolder(PKC handle,PKC folderpath){
 	fclose(fp);
 	fp = fopen(bufroute,"r");
 	if(fp==NULL){
-		errorlog("findinfolder","cannot open ",bufroute);
+        errorLog("findinfolder", "cannot open ", bufroute);
 		return 0;
 	}
 	for( n = 0; c != EOF; ){

@@ -12,7 +12,7 @@ int addWordScript() {
     }
     // run main.js function init()
     gotoxy(x, y + h + 2);
-    script.scriptlines("init", scripts);
+    script.scriptLines("init", scripts);
     // view main.bsv
 	bsvLabelEnter(AddWordScriptFolder.c_str(), label, x + 1, y + 1, width + 3, "wte-blu", &script);
     const std::string word = script.getDataByName("$word");

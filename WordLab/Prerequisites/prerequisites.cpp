@@ -3,8 +3,8 @@ namespace prerequisites {
     std::string host::datafolder = "";
 //input and output
 
-#include "Colour/all.cpp"
-#include "Console/all.cpp"
+#include "Colour/all_colour.cpp"
+#include "Console/all_console.cpp"
 #include "string/all.cpp"
 #include "error/all_window_text.hpp"
 #include "readfile/all.cpp"

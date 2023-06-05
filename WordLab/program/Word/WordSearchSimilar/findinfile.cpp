@@ -2,7 +2,7 @@ void findinfile(string msg,string filename,string buf) {
 	string msgfile;
 	ifstream fin(filename);
 	if (fin.fail()) {
-		errorlog("find reverse","error opening",filename);
+        errorLog("find reverse", "error opening", filename);
 		return;
 	}
 	while (!fin.eof()) {

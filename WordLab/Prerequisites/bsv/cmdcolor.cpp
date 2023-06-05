@@ -1,4 +1,4 @@
-WORD bsvcmdcolor(const char * msg) {
+WORD getColorByCommand(const char * msg) {
 	bool flag = false;
 	WORD color= 0;
     // foreground light
@@ -140,22 +140,20 @@ WORD bsvcmdcolor(const char * msg) {
 }
 
 
-int colorsetcmd(const std::string msg) {
-    const WORD color = bsvcmdcolor(msg.c_str());
-//    colorset(lightwhite);
-//    printf("msg = %s, color = %d\n", msg.c_str(), color);
-    return colorset(color);
+bool isCommandColorCommand(const std::string cmd) {
+    return getColorByCommand(cmd.c_str()) != 0 || cmd.find("blk-") == 0 || cmd.find("-blk") != std::string::npos;
 }
 
 
-int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd, const std::string backgroundColorCmd) {
-    const WORD foregroundColor = bsvcmdcolor(foregroundColorCmd.c_str());
-    const WORD backgroundColor = bsvcmdcolor(backgroundColorCmd.c_str());
+int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd,
+                                         const std::string backgroundColorCmd,
+                                         const std::string caller) {
+    const WORD foregroundColor = getColorByCommand(foregroundColorCmd.c_str());
+    const WORD backgroundColor = getColorByCommand(backgroundColorCmd.c_str());
     const WORD color = foregroundColor | backgroundColor;
 #if defined(_WIN32)
     return colorset(color);
 #elif defined(__APPLE__)
-    CurrentColorForMacOS = color;
 
     const std::string colorCode = [&] (void) /* lambda */ {
         std::string foregroundColorCode = "";
@@ -191,11 +189,36 @@ int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd, c
         return backgroundColorCode;
     }()/* call */;
 
-    printf("\x1b[%sm", colorCode.c_str());
+    setColorByColorCode(colorCode, caller, "setForegroundColorAndBackgroundColor");
 
     return color;
 #endif
 }
+
+int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd,
+                                         const std::string backgroundColorCmd) {
+    return setForegroundColorAndBackgroundColor(foregroundColorCmd, backgroundColorCmd, "setForegroundColorAndBackgroundColor");
+}
+
+
+int setColorByCommand(const std::string cmd, const std::string caller) {
+    if (cmd.find(";") != std::string::npos) {
+        setColorByColorCode(cmd, caller, "setColorByCommand");
+        return 0;
+    } else {
+        const std::string::size_type delimPos = cmd.find("-");
+        std::string foreground = cmd.substr(0, delimPos);
+        std::string background = cmd.substr(delimPos + 1);
+        if (foreground.empty()) {
+            foreground = "blk";
+        }
+        if (background.empty()) {
+            background = "blk";
+        }
+        return setForegroundColorAndBackgroundColor(foreground + "-", "-" + background, caller);
+    }
+}
+
 /*
 +------------------------+------------+------------+
 |         color          | foreground | background |

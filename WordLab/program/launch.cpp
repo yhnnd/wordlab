@@ -3,15 +3,45 @@
 
 void launchTips(char *msg, const sts::consoleColor colorStart, const sts::consoleColor colorEnd) {
     const char suggests[]=
-            "query(),volume(),checkupdate(),update(),database(),software(),clearcache(),"
-            "addnew(),addword(),addphrase(),script(),sortlib(),"
-            "crossword(),lastlaunch(),searchcompact(),wordlinkage(),translater(),translaterpro(),"
-            "settings.engines(),settings.values(),settings.system(),settings.history(),"
-            "user.login(),list(),help(),settings.version(),"
-            "wordsortcheck(),searchreverse(),searchsimilar(),"
-            "practices(),similar(),tips(),wlscan(),checksafety();";
+            "query(),"
+            "volume(),"
+            "checkupdate(),"
+            "update(),"
+            "database(),"
+            "software(),"
+            "clearcache(),"
+            "addnew(),"
+            "addword(),"
+            "addphrase(),"
+            "script(),"
+            "sortlib(),"
+            "crossword(),"
+            "lastlaunch(),"
+            "searchcompact(),"
+            "wordlinkage(),"
+            "translater(),"
+            "translaterpro(),"
+            "settings.engines(),"
+            "settings.values(),"
+            "settings.system(),"
+            "settings.history(),"
+            "user.login(),"
+            "list(),"
+            "help(),"
+            "settings.version(),"
+            "wordsortcheck(),"
+            "searchreverse(),"
+            "searchsimilar(),"
+            "practices(),"
+            "similar(),"
+            "tips(),"
+            "wlscan(),"
+            "checksafety(),"
+            "printcolortable(),"
+            "performancetest(),"
+            "colorlogs.print();";
 
-    colorrecord(colorprev);
+    recordColor(colorprev, "launchTips");
 
     const auto pos = getxy();
 
@@ -22,7 +52,7 @@ void launchTips(char *msg, const sts::consoleColor colorStart, const sts::consol
     setForegroundColorAndBackgroundColor(colorEnd.foregroundColor, colorEnd.backgroundColor);
     printf("%s=", msg);
 
-    colorreset(colorprev);
+    resetColor(colorprev, "launchTips");
 }
 
 int launchPrintList(vector<string> functionNames) {
@@ -61,7 +91,7 @@ int launch(const std::string msg) {
 		}
 		fin.close();
 	} else {
-		errorlog("launch","cannot open",LaunchFunctionNamesFilename);
+        errorLog("launch", "cannot open", LaunchFunctionNamesFilename);
 		return -2;
 	}
 	if(msg == functionNames[0]) {
@@ -146,8 +176,8 @@ int launch(const std::string msg) {
 		return 14;
 	} else if(msg == functionNames[15]) {
 		char keyword[LINEMAX];
-		popup("Search Compact",0);
-		index(keyword, 10, 9, lightwhite);
+		popup("Search Compact", 0);
+		index(keyword, 10, 9, lightwhite, 0);
 		return 15;
 	} else if(msg == functionNames[16]) {
 		WLFramework();
@@ -198,7 +228,7 @@ int launch(const std::string msg) {
 		return 30;
 	} else if(msg.find(functionNames[31]) == 0) {
         if (msg.find(",") == string::npos || msg.find(")") == string::npos) {
-            errorlog("similar", "error", "parameter unrecognizable");
+            errorLog("similar", "error", "parameter unrecognizable");
         } else {
             string word = msg.substr(msg.find("(") + 1, msg.find(",") - msg.find("(") - 1);
             int amount = toInt(msg.substr(msg.find(",") + 1, msg.find(")") - msg.find(",") - 1));
@@ -221,6 +251,21 @@ int launch(const std::string msg) {
     } else if (msg == functionNames[34]) {
         db_is_secure(true, true);
         return 34;
+    } else if (msg == functionNames[35]) {
+        clearScreen();
+        gotoxy(0, 1);
+        printColorTable();
+        return 35;
+    } else if (msg == functionNames[36]) {
+        clearScreen();
+        gotoxy(0, 1);
+        performanceTest();
+        return 36;
+    } else if (msg == functionNames[37]) {
+        clearScreen();
+        gotoxy(0, 1);
+        colorLogs.printLogs();
+        return 37;
 	} else { //translate msg as a word
 		int i = 0, lth = msg.length();
 		if ((i = Search(msg.c_str(), lth, false)) > 0) {
@@ -233,10 +278,10 @@ int launch(const std::string msg) {
 			<<"}";
 			return 0;
 		} else {
-            bsvline(maths::calculateWithBSVSupported(msg).c_str());
+            bsvLine(maths::calculateWithBSVSupported(msg).c_str());
             return 0;
         }
 	}
-	errorlog("launch","unknown function name",msg);
+    errorLog("launch", "unknown function name", msg);
 	return -1;
 }

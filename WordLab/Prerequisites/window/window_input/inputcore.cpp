@@ -3,9 +3,9 @@ void popupSafe (const char * msg, const char * var1 = NULL, const char * var2 = 
     const int marginTop = 1;
     const char * bar = "+----------------------------------------------------------------------+";
     const int maxWidth = strlen(bar);
-    colorrecord(colorPrev);
+    recordColor(colorPrev, "popupSafe");
     if (strcmp(msg, "#clear") == 0) {
-        colorsetcmd("wte-");
+        setColorByCommand("wte-", "popupSafe");
         for (int r = 0; r < 3; ++ r) {
             gotoxy(indentLeft, marginTop + r);
             for (int i = 0; i < maxWidth + 2; ++i) {
@@ -17,27 +17,27 @@ void popupSafe (const char * msg, const char * var1 = NULL, const char * var2 = 
         snprintf(s, 64, msg, var1, var2, var3);
         // Border Top
         gotoxy(indentLeft, marginTop);
-        colorsetcmd("blu-blu");
+        setColorByCommand("blu-blu", "popupSafe");
         printf(" %s ", bar);
         // Border Left
         gotoxy(indentLeft, marginTop + 1);
         printf(" |");
         // Background
-        colorsetcmd("-wte");
+        setColorByCommand("-wte", "popupSafe");
         printf("%70s", "");
         // Border Right
-        colorsetcmd("blu-blu");
+        setColorByCommand("blu-blu", "popupSafe");
         printf("| ");
         // Content
         gotoxy(indentLeft + 2, marginTop + 1);
-        colorsetcmd("-wte");
+        setColorByCommand("-wte", "popupSafe");
         printf(" %s ", s);
         // Border Bottom
         gotoxy(indentLeft, marginTop + 2);
-        colorsetcmd("blu-blu");
+        setColorByCommand("blu-blu", "popupSafe");
         printf(" %s ", bar);
     }
-    colorreset(colorPrev);
+    resetColor(colorPrev, "popupSafe");
 }
 
 window::INPUT_STATUS window::inputcore(int& x0,int& y0,int& x,int& y) {

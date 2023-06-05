@@ -13,7 +13,7 @@ INPUT:
 		if( y0 < 0 ) y0 = 0;
 		if( x0 != x0prev || y0 != y0prev ) Reader(WINDOW_STATUS::active,x0,y0,0);
 		//status bar
-		colorsetcmd(color[WINDOW_STATUS::active].padding.content);
+        setColorByCommand(color[WINDOW_STATUS::active].padding.content, "Editor");
 		gotoxy(innerLeft(),outerTop()+innerHeight()+1);
 		if(innerWidth()>40) std::cout<<" PageSize="<<text.capacity();
 		if(innerWidth()>50) std::cout<<" TotalLine="<<text.size();
@@ -83,6 +83,6 @@ INPUT:
 			goto INPUT;
 		}
 	}
-	colorsetcmd("wte-");
+    setColorByCommand("wte-", "Editor");
 	return text.size();
 }

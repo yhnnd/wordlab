@@ -120,7 +120,7 @@ std::string get_mac_os_background_color_code(WORD color) {
     }
 }
 
-std::string get_mac_os_color_code(const WORD color) {// MacOS & Linux only
+std::string get_mac_os_color_code(const WORD color, const bool safeMode) {// MacOS & Linux only
     std::string code = "";
     const WORD foreColor = color % 16;
     const WORD backColor = color - foreColor;
@@ -162,13 +162,13 @@ std::string get_mac_os_color_code(const WORD color) {// MacOS & Linux only
             default: return "97;40";
         }
     } else if (foreground_code.length() == 0) {// If foreground(text) color is not set
-        if (color == (backlight|color)) {// If background color is light, set foreground(text) color to black.
+        if (color == (backlight|color) || safeMode == false) {// If background color is light, set foreground(text) color to black.
             code = "30" + background_code;
         } else {// If background color is dark, set foreground(text) color to white.
             code = "97" + background_code;
         }
     } else if (background_code.length() == 0) {// If background color is not set
-        if (color == (light|color)) {// If foreground(text) color is light, set background color to black.
+        if (color == (light|color) || safeMode == false) {// If foreground(text) color is light, set background color to black.
             code = foreground_code + ";40";
         } else {// If foreground(text) color is dark, set background color to white.
             code = foreground_code + ";107";
@@ -177,13 +177,13 @@ std::string get_mac_os_color_code(const WORD color) {// MacOS & Linux only
         code = foreground_code + background_code;
     }
     if (code.find(";") == 0) {// If foreground(text) color is not set
-        if (color == (backlight|color)) {// If background color is light, set foreground(text) color to black.
+        if (color == (backlight|color) || safeMode == false) {// If background color is light, set foreground(text) color to black.
             code = "30" + code;
         } else {// If background color is dark, set foreground(text) color to white.
             code = "97" + code;
         }
     } else if (code.find(";") == std::string::npos) {// If background color is not set
-        if (color == (light|color)) {// If foreground(text) color is light, set background color to black.
+        if (color == (light|color) || safeMode == false) {// If foreground(text) color is light, set background color to black.
             code = code + ";40";
         } else {// If foreground(text) color is dark, set background color to white.
             code = code + ";107";
@@ -193,5 +193,6 @@ std::string get_mac_os_color_code(const WORD color) {// MacOS & Linux only
 }
 #endif
 
+
 // Functions
-#define colorrecord(color) WORD color = colornow()
+#define recordColor(color, functionName) const std::string color = getCurrentColor(functionName)

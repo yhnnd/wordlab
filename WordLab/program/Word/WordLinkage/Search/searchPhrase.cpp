@@ -86,11 +86,11 @@ int WLSearchPhrase(const char *msg) {
 
         const int BeginY = 5;
 
-        colorrecord(colorPrev);
+        recordColor(colorPrev, "WLSearchPhrase");
 
-        clearscreen(0, BeginY, ScreenX, ScreenY - 1 - BeginY);
+        clearScreen(0, BeginY, ScreenX, ScreenY - 1 - BeginY);
         setForegroundColorAndBackgroundColor("wte-", "-#gry");
-        clearscreen(0, 3, ScreenX - 1, 8);
+        clearScreen(0, 3, ScreenX - 1, 8);
 
         gotoxy(0, BeginY);
         setForegroundColorAndBackgroundColor("grn-", "-blk");
@@ -114,7 +114,7 @@ int WLSearchPhrase(const char *msg) {
             printf("%zu\n", result.defsVector.size());
         }
 
-        colorreset(colorPrev);
+        resetColor(colorPrev, "WLSearchPhrase");
 
         return result.lineNo;
     } else if (result.message.empty() == true) {

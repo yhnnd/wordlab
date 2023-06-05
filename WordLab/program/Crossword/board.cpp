@@ -119,7 +119,7 @@ public:
         int x=get<0>(info),y=get<1>(info),zx=get<2>(info),zy=get<3>(info);
         int xpoint=x, ypoint=y;
         this->setpos(&xpoint,&ypoint);
-        colorset(Grid[x][y].color);
+        setColor(Grid[x][y].color, "showUserInput");
         for(int i=0;i<2*zx;i++){
             for(int j=0;j<zy;j++){
                 gotoxy(2*zx*xpoint+i+this->x,zy*ypoint+j+this->y);
@@ -133,7 +133,7 @@ public:
 		int x=get<0>(info),y=get<1>(info),zx=get<2>(info),zy=get<3>(info);
 		int xpoint=x, ypoint=y, h=this->h;
 		this->setpos(&xpoint,&ypoint);
-		colorset(Grid[x][y].color);
+        setColor(Grid[x][y].color, "show");
 		for(int i=0;i<2*zx;i++){
 			for(int j=0;j<zy;j++){
 				gotoxy(2*zx*xpoint+i+this->x,zy*ypoint+j+this->y);

@@ -20,12 +20,12 @@ int bsvLabelEnter(PKC folder, PKC label, int x, const int y, int width, PKC colo
 		// check script file
 		const int max = filelines(route,1);
 		if(max <= 0) {
-			bsverror("<-ylw>( bsv label enter )<-red>( error )<-wte>( \\(",route,"\\) is void");
+			bsvError("<-ylw>( bsv label enter )<-red>( error )<-wte>( \\(",route,"\\) is void");
 			return -1;
 		}
 		// check script processor
-		if(spptr==NULL) {
-			bsverror("<-ylw>( bsv label enter )","<-red>( error )","<-wte>( script unsupported");
+		if(spptr == NULL) {
+			bsvError("<-ylw>( bsv label enter )","<-red>( error )","<-wte>( script unsupported");
 			return -2;
 		}
 		// load script file
@@ -37,7 +37,7 @@ int bsvLabelEnter(PKC folder, PKC label, int x, const int y, int width, PKC colo
         }
 		fin.close();
 		// run script file
-		((scriptprocessor*)spptr)->scriptlines(labelvalue, lines);
+		((scriptprocessor*)spptr)->scriptLines(labelvalue, lines);
 		return bsvLabelEnter(folder,"\"main\"",x,y,width,color,spptr);
 
 	} else { // link to BSV file
@@ -46,7 +46,7 @@ int bsvLabelEnter(PKC folder, PKC label, int x, const int y, int width, PKC colo
 		// check bsv file
 		const int max = filelines(route,1);
 		if (max <= 0) {
-			bsverror("<-ylw>( bsv label enter )<-red>( error )<-wte>( \\(",route,"\\) is void");
+			bsvError("<-ylw>( bsv label enter )<-red>( error )<-wte>( \\(",route,"\\) is void");
 			return -1;
 		}
 		// load bsv file
@@ -57,6 +57,6 @@ int bsvLabelEnter(PKC folder, PKC label, int x, const int y, int width, PKC colo
 		if (loadmsg((char*)msgs,route,max,256,1,1) <= 0) {
             return -1;
         }
-		return bsvlines(ptr,max-1,width,folder,x,y,spptr);
+		return bsvLines(ptr,max-1,width,folder,x,y,spptr);
 	}
 }

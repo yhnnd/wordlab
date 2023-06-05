@@ -14,7 +14,7 @@ int main(int argc,char **argv) {
 			setscreen(ScreenX + 1, 1000);
 			ScriptEditor(argv[2]);
 		} else {
-			errorlog("error command",argv[1],argv[2]);
+			errorLog("error command",argv[1],argv[2]);
 			return 0;
 		}
 	} else {

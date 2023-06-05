@@ -1,6 +1,6 @@
 void messageblock::setBlockColor(const int colortype,const int signal,const bool flag){
 	if(signal) {
-        ColorfulBdim(colortype);//unchosen
+        ColorfulBDim(colortype);//unchosen
     } else if(flag) {
         //chosen print char
 #ifdef _WIN32

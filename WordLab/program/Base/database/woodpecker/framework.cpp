@@ -13,7 +13,7 @@ bool db_is_secure(const bool print_success, const bool print_error){
     error += WoodPeckerCheckSyntax(1,30,256);
     // exception
     if( error < 0 ){
-		errorlog("woodpecker","data file lost");
+        errorLog("woodpecker", "data file lost");
 		return false;
 	}
     // summary

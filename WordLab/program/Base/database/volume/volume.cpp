@@ -6,12 +6,12 @@ int Volume(lang language, int fromlth, int tolth, const std::string bufroute){
 		Library(finEN,lth,lang::EN);
 		Library(finZH,lth,lang::CH);
 	    if(!finEN){
-			errorlog("volume()","unfound English database",toString(lth));
+            errorLog("volume()", "unfound English database", toString(lth));
 			NOL[lang::EN] = -1;
 			break;
 		}// no else
 		if(!finZH){
-			errorlog("volume()","unfound chinese database",toString(lth));
+            errorLog("volume()", "unfound chinese database", toString(lth));
 			NOL[lang::CH] = -2;
 			break;
 		} else {
@@ -38,7 +38,7 @@ int Volume(lang language, int fromlth, int tolth, const std::string bufroute){
             fout << ", " << std::setfill(' ') << std::setw(6) << NOL[lang::CH] << std::endl;
 	    	fout.close();
 	    } else {
-			errorlog("Volume()","cannot write file",bufroute);
+            errorLog("Volume()", "cannot write file", bufroute);
 		}
 	}
 	return NOL[language];

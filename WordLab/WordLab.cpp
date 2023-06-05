@@ -3,7 +3,7 @@
 using namespace prerequisites;
 using namespace std;
 #include "program/all_program.cpp"
-#include "program/performanceTest.cpp"
+
 int main(int argc,char **argv) {
 //    cout << "strcmp(\"mat\", \"may\") = " << strncmp("mat", "may", 3) << endl;
 //    cout << "strcmp(\"may\", \"May\") = " << strncmp("may", "May", 3) << endl;
@@ -28,9 +28,6 @@ int main(int argc,char **argv) {
 //	SetConsoleOutputCP(936);
 
 	{
-        performanceTest();
-
-
         vector<string> words= {
                 "can", "could", "must",
                 "do", "did", "does",

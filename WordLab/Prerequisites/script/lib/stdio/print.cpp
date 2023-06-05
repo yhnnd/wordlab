@@ -1,9 +1,9 @@
 int scriptprocessor::print(const std::string & out){
 	if(_debug){
-		colorrecord(ogcolor);
-		colorset(light|cyan|backblue);
+		recordColor(ogcolor, "print");
+        setColor(lightcyan | backblue, "print");
 		printf(" print ");
-		colorreset(ogcolor);
+		resetColor(ogcolor, "print");
 	}
 	for(int i=0;out[i]!=0;){
 		if(out[i]=='\\'){
@@ -15,8 +15,12 @@ int scriptprocessor::print(const std::string & out){
 			else if(out[i]=='\"') printf("\"");
 			else if(out[i]=='\\') printf("\\");
 			++i;
-		}else printf("%c",out[i++]);
+		} else {
+            printf("%c", out[i++]);
+        }
 	}
-	if(_debug) printf("\n");
+	if (_debug) {
+        printf("\n");
+    }
     return 0;
 }

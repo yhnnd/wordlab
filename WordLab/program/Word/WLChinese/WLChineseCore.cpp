@@ -7,14 +7,9 @@ string WLChineseCore(string line, const int fontcolor) {
             flagdef = true;
         } else if (line[r]=='/') {
 			if ((flagsort=!flagsort)==true) {
-                result_line += "<" + getcolorBcmd(2) + ">(";
+                result_line += "<blk-ylw>(";
             } else {
-				result_line += ")";
-				if (fontcolor == 1) {
-                    result_line += "<clrful->(";
-                } else {
-                    result_line += "<" + getChineseColorCommandByNumber(fontcolor) + ">(";
-                }
+				result_line += ")<" + getChineseColorCommandByNumber(fontcolor) + ">(";
 			}
 		} else if (line[r]=='@') {
 			result_line += line.substr(r,line.substr(r).find(";"));
@@ -30,9 +25,9 @@ endDef:
         }
 	}
 	result_line += "<";
-	result_line += ver>0? getcolorBcmd(3):getcolorBcmd(1);
+	result_line += ver > 0 ? "blk-grn" : "blk-red";
 	result_line += ">(v)<";
-	result_line += ver>0? getcolorBcmd(2):getcolorBcmd(1);
+	result_line += ver > 0 ? "blk-ylw" : "blk-red";
 	result_line += ">(" + toString(ver) + ")";
 	return result_line;
 }

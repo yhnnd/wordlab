@@ -42,6 +42,8 @@
 #include "Help/all_help.cpp"
 #include "Load/all_load.cpp"
 #include "practices.cpp"
+#include "performanceTest.cpp"
+
 #include "launch.cpp"
 #include "MainLoop.cpp"
 #include "molecular.cpp"

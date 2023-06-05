@@ -1,7 +1,7 @@
 int loadmsg(char* msg, const std::string route,int maxlines,int linemax,bool close,bool modify){//modify=1
 	FILE *fp=fopen(route.c_str(),"r");
 	if(fp==NULL){
-		errorlog("loadmsg","cannot open ",route);
+        errorLog("loadmsg", "cannot open ", route);
 		return 0;
 	}
 	return loadmsg(msg,fp,maxlines,linemax,1,modify);
@@ -10,7 +10,7 @@ int loadmsg(char* msg, const std::string route,int maxlines,int linemax,bool clo
 int loadmsg(char** msg, const std::string route,int maxlines,int linemax,bool close,bool modify){//modify=1
 	FILE *fp=fopen(route.c_str(),"r");
 	if(fp==NULL){
-		errorlog("loadmsg","cannot open ", route);
+        errorLog("loadmsg", "cannot open ", route);
 		return 0;
 	}
 	return loadmsg(msg,fp,maxlines,linemax,1,modify);
@@ -38,7 +38,7 @@ std::vector<std::string> loadFile (const std::string route, const std::set<std::
         fin.close();
         return lines;
     } else {
-        errorlog("loadmsg","cannot open ", route);
+        errorLog("loadmsg", "cannot open ", route);
         return {};
     }
 }

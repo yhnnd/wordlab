@@ -82,7 +82,7 @@ void sts::SWS1_5() {
 
                     if (n2 > v1) {
                         if (this->configs.show_debug_message) {
-                            clearscreen(0, 5, ScreenX, 15);
+                            clearScreen(0, 5, ScreenX, 15);
                             gotoxy(0, y += 4);
                             this->printSentence(this->s, max, {"#red-", "-ylw"}, show_word_number);
                             printf("\n");
@@ -147,7 +147,7 @@ void sts::SWS1_5() {
 
                 if (n3 > v1) {
                     if (this->configs.show_debug_message) {
-                        clearscreen(0, 5, ScreenX, 15);
+                        clearScreen(0, 5, ScreenX, 15);
                         gotoxy(0, y += 4);
                         this->printSentence(this->s, max, {"#red-", "-ylw"}, show_word_number);
                         printf("\n");

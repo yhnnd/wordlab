@@ -12,9 +12,9 @@ int load::mainUserInterface(const std::string foldername,int x,int y,int width,i
     }
 	if (num_lines <= 0) {
 		if (num_lines == 0) {
-            errorlog("Menu()","Critical Error: File Lost",foldername);
+            errorLog("Menu()", "Critical Error: File Lost", foldername);
         } else if (num_lines == -1) {
-            errorlog("Menu()","Critical Error: Unknown Language",toString(LANGUAGE));
+            errorLog("Menu()", "Critical Error: Unknown Language", toString(LANGUAGE));
         }
 #if defined(__APPLE__)
         getch();
@@ -22,7 +22,7 @@ int load::mainUserInterface(const std::string foldername,int x,int y,int width,i
 		return num_lines;
 	}
 	for (;;) {
-		colorset(lightwhite);
+        setColor(lightwhite, "mainUserInterface");
 		clearScreen();
 		PrintSoftwareInfo();
 		n = multitask(x, y, width, menu, Times, nprev);

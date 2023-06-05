@@ -4,7 +4,7 @@ void load::PrintSoftwareInfo(){
 	if ( fin ) {
 		std::string s = "";
 		gotoxy(0,0);
-		colorset(lightyellow);
+        setColor(lightyellow, "PrintSoftwareInfo");
 		while(std::getline(fin,s)) {
             std::cout<<s<<std::endl;
         }
@@ -16,9 +16,9 @@ void load::PrintSoftwareInfo(){
 	monitorShow(24, 0);
 	// DB security
 	if (db_is_secure(false,false)) {
-        bsvline("<-grn> (SECURE)");
+        bsvLine("<-grn> (SECURE)");
     } else {
-        bsvline("<-red> (INSECURE)");
+        bsvLine("<-red> (INSECURE)");
     }
 	// User Account
 	User.show(0,5,1);

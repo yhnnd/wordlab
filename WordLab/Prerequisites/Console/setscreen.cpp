@@ -1,4 +1,4 @@
-void setscreen(int w=0,int h=0){
+void setScreen(int w, int h) {
 #if defined(_WIN32)
     char s[8],msg[64]="mode CON: ";
 	if(w>0){

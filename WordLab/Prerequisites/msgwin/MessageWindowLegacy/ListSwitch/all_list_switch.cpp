@@ -23,7 +23,7 @@ void MessageWindow::ListSwitchBlock(int x,int y,int n,int r,int width,int height
 
 void MessageWindow::ListSwitchErase(int x,int y,int n,int width,int height){
     int r;
-    colorset(lightwhite);
+    setColor(lightwhite, "ListSwitchErase");
     for (r = 1; r <= n; r++) {
         ListSwitchBlock(x, y, n, r, width, height, ' ');
     }
@@ -40,7 +40,7 @@ int MessageWindow::ListSwitch(int N,int x,int y,int width){
 
         ColorfulBackground(r);
         printf("\b\b%-2d", r);
-        colorset(lightwhite);
+        setColor(lightwhite, "ListSwitch");
 
         key = getch();
 
@@ -67,7 +67,7 @@ int MessageWindow::ListSwitch(int rprev,int N,int x,int y,const int width) {
     ListSwitchBlock(x, y, N, r, width / N, 1, '*');
     ColorfulBackground(r);
     printf("\b\b%-2d", r);
-    colorset(lightwhite);
+    setColor(lightwhite, "ListSwitch");
 
     key = getch();
 

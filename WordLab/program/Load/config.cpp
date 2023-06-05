@@ -11,13 +11,15 @@ void load::config() {
     int r = 0, flag = 1;
 	for (r = 0, flag = 1; r < max; ++r) {
 		switch(r){
-			case 0:  setscreen(ScreenX,ScreenY); break;
+			case 0:
+                setScreen(ScreenX, ScreenY); break;
 			case 1:  flag *= writeTime(LastLaunchRoute); break;
             case 2:  MessageWindow.init(); break;
 			case 3:  flag *= systemDefaults(SystemDefaultsRoute, load::mode::loadDefaults); break;
 			case 4:  User.initialize(AccountRoute); break;
 			case 5:  if (ML) { MonitorActivate(); } break;
-			default: errorlog("config","error",toString(r)); break;
+			default:
+                errorLog("config", "error", toString(r)); break;
 		}
 		if (flag == 0) {
 			char ch = fatalerror(100);

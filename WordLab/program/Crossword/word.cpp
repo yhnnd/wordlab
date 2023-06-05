@@ -46,8 +46,8 @@ private:
 		in.ignore(1024,'=');
 		in >> r;
 		if (r != n) {
-			errorlog("word.readfromfile","error reading word",toString(n));
-			errorlog("detail","reading file word",toString(r));
+            errorLog("word.readfromfile", "error reading word", toString(n));
+            errorLog("detail", "reading file word", toString(r));
 			return;
 		}
 		in.ignore(1024,'=');
@@ -76,7 +76,7 @@ private:
 		this->set(x,y,zx,zy,xd,yd,word,type,def,defr);
 
 		if(this->Board == nullptr) {
-            errorlog("word.readfromfile","board not set");
+            errorLog("word.readfromfile", "board not set");
         } else {
 			for (int i = 0; i < word.length(); i++) {
                 if (x + xd * i >= this->Board->getWidth()) {
@@ -133,7 +133,7 @@ private:
 	int check(string s){
 		int n_correct=0;
 		if(this->Board==nullptr){
-			errorlog("word.check","invalid board of ",s);
+            errorLog("word.check", "invalid board of ", s);
 			return 0;
 		}else if(s.empty()){
 			for(int r=0;r<this->lth;r++){
@@ -150,15 +150,15 @@ private:
 	void show(int r){
 		this->Board->show({x+xd*r,y+yd*r,zx,zy});
 	}
-	int show(){
+	int show() {
 		if(this->Board==nullptr) {
-            return errorlog("word.show", "invalid board");
+            return errorLog("word.show", "invalid board");
         }
-		colorrecord(colorprev);
+		recordColor(colorprev, "show");
 		for(int r = 0; r < lth; r++) {
             this->show(r);
         }
-		colorreset(colorprev);
+        resetColor(colorprev, "show");
 		return 0;
 	}
 
@@ -178,10 +178,10 @@ private:
 
 	int selected() {
 		if(this->Board==nullptr) {
-            return errorlog("word.selected","invalid board");
+            return errorLog("word.selected", "invalid board");
         }
 
-        colorrecord(colorprev);
+        recordColor(colorprev, "selected");
 
         this->Board->clearPreviousDefinition();
 
@@ -196,10 +196,10 @@ private:
 
         this->Board->getpos(&x, &y, zx, zy);
         gotoxy(x, y + zy);
-        colorset(backlightcyan);
+        setColor(backlightcyan, "selected");
         cout << this->def;
-//        colorreset(lightwhite);
-        colorreset(colorprev);
+//        resetColor(lightwhite);
+        resetColor(colorprev, "selected");
 
         this->Board->prevDefPos = {static_cast<short>(x), static_cast<short>(y + zy)};
 		return 0;

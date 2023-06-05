@@ -1,6 +1,6 @@
 void bar(int n,int TotalDelay) {
     int r;
-    colorrecord(colorprev);
+    recordColor(colorprev, "bar");
 	for (r=1;r<=n;r++) {
 		Colorful(2*r);
 		cout<<"_";
@@ -15,5 +15,5 @@ void bar(int n,int TotalDelay) {
 	for(r=1;r<=n;r++) {
         cout<<"\b";
     }
-	colorreset(colorprev);
+    resetColor(colorprev, "bar");
 }

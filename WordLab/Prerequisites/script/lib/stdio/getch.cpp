@@ -1,10 +1,10 @@
-int scriptprocessor::scriptgetch(const char *line){
+int scriptprocessor::scriptGetch(const char *line){
 	name = getname(line);
 	if(_debug) {
-		colorrecord(ogcolor);
-		colorset(light|green|backcyan);
+		recordColor(ogcolor, "scriptGetch");
+        setColor(lightgreen | backcyan, "scriptGetch");
 		printf(" getch ");
-		colorreset(ogcolor);
+		resetColor(ogcolor, "scriptGetch");
 	}
 
     const char ch = getch();

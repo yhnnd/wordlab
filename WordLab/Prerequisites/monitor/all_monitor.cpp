@@ -13,20 +13,20 @@ int MonitorGetNumber(){
 
 int monitorShow(int x,int y) {
     const int n = MonitorGetNumber();
-    colorrecord(colorPrev);
+    recordColor(colorPrev, "monitorShow");
     if (n >= 2) {
-        colorset(backgreen);
+        setColor(backgreen, "monitorShow");
     } else if (n > 0) {
-        colorset(backyellow);
+        setColor(backyellow, "monitorShow");
     } else {
-        colorset(backred);
+        setColor(backred, "monitorShow");
     }
     std::string s = " ";
     s += toString(n) + " monitor" + (n > 1 ? "s" : "") + " on ";
     gotoxy(x, y);
     puts(s.c_str());
     gotoxy(x + s.length(), y);
-    colorset(colorPrev);
+    resetColor(colorPrev, "monitorShow");
     return n;
 }
 

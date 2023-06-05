@@ -1,4 +1,4 @@
-int errorlog(std::string s1, std::string s2, std::string s3) {
+int errorLog(std::string s1, std::string s2, std::string s3) {
 	static int prevtime = -1000, n = 0;
 	int time=0;
 	if (error_monitor_lock == false) {
@@ -8,26 +8,26 @@ int errorlog(std::string s1, std::string s2, std::string s3) {
         return 0;
     } else {
 		recordxy(pos);
-		colorrecord(color);
+		recordColor(color, "errorLog");
 		if ((time=clock()) - prevtime > 1000) {
-			colorsetcmd("wte-");
-			clearscreen(0,0,ScreenX,n+1);
+            setColorByCommand("wte-", "errorLog");
+			clearScreen(0,0,ScreenX,n+1);
 			n = 0;
 		} else {
             n++;
         }
 		prevtime=time;
 		gotoxy(0,n);
-		colorsetcmd("ylw-");
+        setColorByCommand("ylw-", "errorLog");
 		std::cout<<s1;
-		colorsetcmd("red-");
+        setColorByCommand("red-", "errorLog");
 		std::cout<<" "<<s2;
 		if (!s3.empty()) {
-			colorsetcmd("wte-");
+            setColorByCommand("wte-", "errorLog");
 			std::cout<<" ("<<s3<<")";
 		}
 		resetxy(pos);
-		colorreset(color);
+        resetColor(color, "errorLog");
 		return 0;
 	}
 }

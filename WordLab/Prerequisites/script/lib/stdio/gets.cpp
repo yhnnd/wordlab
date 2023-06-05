@@ -1,10 +1,10 @@
-int scriptprocessor::scriptgets(const char *line){
+int scriptprocessor::scriptGets(const char *line){
 	name = getparam(line);
 	if(_debug){
-		colorrecord(ogcolor);
-		colorset(light|green|backcyan);
+		recordColor(ogcolor, "scriptGets");
+        setColor(lightgreen | backcyan, "scriptGets");
 		printf(" input ");
-		colorreset(ogcolor);
+		resetColor(ogcolor, "scriptGets");
 	}
 	std::cin >> value;
 	dataset.set(name,value);

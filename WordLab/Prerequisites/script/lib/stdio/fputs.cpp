@@ -1,4 +1,4 @@
-int scriptprocessor::scriptfputs(const char *line){// fputs(str,route,mode)
+int scriptprocessor::scriptFputs(const char *line){// fputs(str,route,mode)
 	char param[3][32];// param 1 string, param 2 route, param 3 mode
 	std::string mode;
 	memset(param,0,sizeof(param));

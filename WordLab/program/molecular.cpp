@@ -310,7 +310,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
     const bool phase_4_5_enabled = phasesToggles[4] == '1' || phasesToggles[5] == '1';
 
     if (buffer_dir == nullptr || strlen(buffer_dir) == 0) {
-        errorlog("molecular::generateMolecularDatabase()","invalid bufroute");
+        errorLog("molecular::generateMolecularDatabase()", "invalid bufroute");
         return self;
     }
 
@@ -321,7 +321,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
 
         ofstream fout(buffer_filename, ios::trunc);
         if(!fout) {
-            errorlog("molecular::generateMolecularDatabase()","cannot write file",buffer_filename);
+            errorLog("molecular::generateMolecularDatabase()", "cannot write file", buffer_filename);
             return self;
         }
 
@@ -331,7 +331,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
             ifstream fin;
             Library(fin, lth, language);
             if (!fin) {
-                errorlog("molecular::generateMolecularDatabase()","database not found. lth = ",toString(lth));
+                errorLog("molecular::generateMolecularDatabase()", "database not found. lth = ", toString(lth));
                 return self;
             }
             set<string> dbNames;
@@ -381,7 +381,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
 
         ifstream fin2(buffer_filename, ios::in);
         if (!fin2) {
-            errorlog("molecular::generateMolecularDatabase()","cannot read file",buffer_filename);
+            errorLog("molecular::generateMolecularDatabase()", "cannot read file", buffer_filename);
             return self;
         }
 
@@ -391,7 +391,7 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
                 const auto tempFilenamePhase1 = molecular_db_dir + "phase-1/" + dbName + ".ph-1.tmp";
                 ofstream fout2(tempFilenamePhase1, ios::trunc);
                 if (!fout2) {
-                    errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilenamePhase1);
+                    errorLog("molecular::generateMolecularDatabase()", "cannot open file", tempFilenamePhase1);
                     return self;
                 }
                 // read every line of buffer file 1.
@@ -444,21 +444,21 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
                 const auto tempFilenamePhase1 = molecular_db_dir + "phase-1/" + dbName + ".ph-1.tmp";
                 ifstream fin3(tempFilenamePhase1);
                 if (!fin3) {
-                    errorlog("molecular::generateMolecularDatabase()","cannot open file",tempFilenamePhase1);
+                    errorLog("molecular::generateMolecularDatabase()", "cannot open file", tempFilenamePhase1);
                     return self;
                 }
                 // generate molecular db file with word sorted by Atomics.
                 const auto filenamePhase2Db = molecular_db_dir + "phase-2/" + dbName + ".ph-2.tmp";
                 ofstream foutPhase2Db(filenamePhase2Db, ios::trunc);
                 if (!foutPhase2Db) {
-                    errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Db);
+                    errorLog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Db);
                     return self;
                 }
                 // Minimize molecular db file.
                 const auto filenamePhase3 = molecular_db_dir + "phase-3/" + dbName + ".ph-3.tmp";
                 ofstream foutPhase3Db(filenamePhase3, ios::trunc);
                 if (!foutPhase3Db) {
-                    errorlog("molecular::generateMolecularDatabase()","cannot open file",filenamePhase3);
+                    errorLog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase3);
                     return self;
                 }
                 // Initialize a Map to record all atomics of current molecular db.
@@ -563,21 +563,21 @@ molecular & molecular::generateMolecularDatabase(const char * buffer_dir, const 
 
                 ifstream fin4(filenamePhase2Db);
                 if (!fin4) {
-                    errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Db);
+                    errorLog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Db);
                     return self;
                 }
 
                 const auto filenamePhase2Map = molecular_db_dir + "phase-2/" + dbName + ".ph-2.map";
                 ofstream foutPhase2Map(filenamePhase2Map, ios::trunc);
                 if (!foutPhase2Map) {
-                    errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Map);
+                    errorLog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase2Map);
                     return self;
                 }
 
                 const auto filenamePhase3Map = molecular_db_dir + "phase-3/" + dbName + ".ph-3.map";
                 ofstream foutPhase3Map(filenamePhase3Map, ios::trunc);
                 if (!foutPhase3Map) {
-                    errorlog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase3Map);
+                    errorLog("molecular::generateMolecularDatabase()", "cannot open file", filenamePhase3Map);
                     return self;
                 }
 

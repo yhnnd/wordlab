@@ -1,4 +1,4 @@
-int scriptprocessor::scriptlines(const std::string FunctName, std::vector<std::string> const lines) {
+int scriptprocessor::scriptLines(const std::string FunctName, std::vector<std::string> const lines) {
 	std::cin.clear();
 	std::cin.sync();
 	brlv = 0;
@@ -8,8 +8,8 @@ int scriptprocessor::scriptlines(const std::string FunctName, std::vector<std::s
 	ForLoop.disable();
 	inInitClassFunct.setInScopeFalse();
 	
-	colorrecord(color);
-	colorset(lightwhite);
+	recordColor(color, "scriptLines");
+    setColor(lightwhite, "scriptLines");
 	std::string line,functname;
 	for (int i = 0; i < lines.size(); i++) {
 		line = lines[i];
@@ -18,7 +18,7 @@ int scriptprocessor::scriptlines(const std::string FunctName, std::vector<std::s
 		//scriptline(line.c_str(),functname.c_str());
 		scriptline_div(line, functname);
 	}
-	colorreset(color);
+    resetColor(color, "scriptLines");
     return 0;
 }
 

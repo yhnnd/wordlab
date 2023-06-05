@@ -1,14 +1,7 @@
 void changeColorCore(const int r) {
-    switch (r) {
-        case 7: colorset(lightpurple);	cout<<"7 purple";			break;
-        case 6: colorset(lightblue);	cout<<"6 blue";				break;
-        case 5: colorset(lightred);		cout<<"5 red";				break;
-        case 4: colorset(lightyellow);	cout<<"4 yellow";			break;
-        case 3: colorset(lightwhite);	cout << "3 white";			break;
-        case 2: colorset(lightcyan);	cout<<"2 cyan";				break;
-        case 1: printColorful("1 Colorful");						break;
-        case 0: colorset(lightgreen);	cout<<"0 green";			break;
-        default:						cout<<"error";				break;
+    if (r >= 0 && r < definitionColorSpectrum.size()) {
+        setForegroundColorAndBackgroundColor(definitionColorSpectrum[r] + "-", "-blk");
+        printf("%d %s", r, definitionColorNames[r].c_str());
     }
 }
 
@@ -19,14 +12,14 @@ void changeColor(const int x, const int y, int *ColorNum) {
     for(;;) {
         clearline(x, y);
         for (int r = 0; r <= 7; r++) {
-            colorset(lightwhite);
+            setColor(lightwhite, "changeColor");
             if (n == r) {
                 cout<<"(";
             } else {
                 cout<<" ";
             }
             changeColorCore(r);
-            colorset(lightwhite);
+            setColor(lightwhite, "changeColor");
             if (n == r) {
                 cout<<")";
             } else {
@@ -61,23 +54,9 @@ void setChineseColor(int * ColorFlags) {
 }
 
 
-string getChineseColorCommandByNumber(const int d) {
-    if (d == 0) {
-        return "grn-";//GREEN
-    } else if(d == 1) {
-        return "clrful-";//COLORFUL
-    } else if(d == 2) {
-        return "cyn-";//CYAN(scan Mode)
-    } else if(d == 3) {
-        return "wte-";//WHITE
-    } else if(d == 4) {
-        return "ylw-";//YELLOW
-    } else if(d == 5) {
-        return "red-";//RED
-    } else if(d == 6) {
-        return "blu-";//BLUE
-    } else if(d == 7) {
-        return "pnk-";//PINK
+std::string getChineseColorCommandByNumber(const int d) {
+    if (d >= 0 && d < definitionColorSpectrum.size()) {
+        return definitionColorSpectrum[d] + "-blk";
     }
     return "";
 }

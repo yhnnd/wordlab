@@ -9,7 +9,7 @@ int scriptshell(std::string filename,int print_debug_msg,int data_capacity,COORD
         }
 		std::ifstream fin(filename);
 		// shouldn't be replaced with if(fin.bad())
-		if(!fin.good()) errorlog("script shell","cannot open file",filename);
+		if(!fin.good()) errorLog("script shell", "cannot open file", filename);
 		std::string templine = "";
 		bool firstword = true;
 		while(fin>>tempstr) {// read file
@@ -33,7 +33,7 @@ int scriptshell(std::string filename,int print_debug_msg,int data_capacity,COORD
 		if(fin.is_open()) {
 			while(std::getline(fin,tempstr)) lines.push_back(tempstr);
 		} else {
-			errorlog("script shell","cannot open file",tempstr);
+            errorLog("script shell", "cannot open file", tempstr);
 			return 1;
 		}
 		fin.close();
@@ -65,8 +65,8 @@ int scriptshell(std::string filename,int print_debug_msg,int data_capacity,COORD
 	// initialize script interpreter
 	scriptprocessor script(print_debug_msg,data_capacity,logfolder);
 	for(;;) {
-		colorset(lightwhite);
-		clearscreen(pos.X,pos.Y,w,h,' ');
+        setColor(lightwhite, "scriptshell");
+		clearScreen(pos.X,pos.Y,w,h,' ');
 		gotoxy(pos);
 		//select function name
 		std::vector<std::string>::size_type i=0;
@@ -89,7 +89,7 @@ int scriptshell(std::string filename,int print_debug_msg,int data_capacity,COORD
         }
 		//run script interpreter
 		if(i>=0&&i<n) {
-			script.scriptlines(functname[i],lines);
+			script.scriptLines(functname[i],lines);
 			if(getxy().X != 0) {
                 printf("\n");
             }
@@ -104,7 +104,7 @@ int scriptshell(std::string filename,int print_debug_msg,int data_capacity,COORD
 int scriptshell(int print_debug_msg) {
 	std::string tempstr;
 	for(;;) {
-		colorset(lightwhite);
+        setColor(lightwhite, "scriptshell");
 		clearScreen();
 		std::cout << "input filename or \"new\"" << std::endl << ">>> ";
 		std::cin >> tempstr;

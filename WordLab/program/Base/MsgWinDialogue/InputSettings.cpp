@@ -10,7 +10,7 @@ void dialog::settings(int x,int y) {
 	for(;;) {
 		gotoxy(beginX,y);
 		for(int n = 0; n < buttonMax; ++n ) {
-			colorset( n == buttonSelected ? buttonActiveColor[n] : buttonColor[n] );
+            setColor(n == buttonSelected ? buttonActiveColor[n] : buttonColor[n], "settings");
 			for(int i = 0; i < buttonHeight[n]; ++i) {
 				gotoxy(beginX,getxy().Y+1);
 				std::cout<<(n==buttonSelected?"***":"   ");

@@ -4,7 +4,7 @@ void MessageWindow::Highlight(const char *msg) {
     } else {
         setForegroundColorAndBackgroundColor("wte-", "-blk");
     }
-	bsvlineDisableColors(msg, 0, "<", ">", "(", ")", ",;");
+	bsvLineDisableColors(msg, 0, "<", ">", "(", ")", ",;");
 }
 
 #include "background.cpp"

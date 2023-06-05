@@ -1,12 +1,12 @@
 void Table::table(const char *filename, int x, int y, int width) {
 	const int rowMax = filelines(filename, true);
 	if (rowMax <= 0) {
-		errorlog("table","invalid file ",filename);
+        errorLog("table", "invalid file ", filename);
 		return;
 	}
 	tablerow *item = (tablerow *) calloc (rowMax, sizeof(tablerow));
 	if(item == nullptr){
-		errorlog("table","insufficient memory to allocate");
+        errorLog("table", "insufficient memory to allocate");
 		return;
 	}
 	int Total = MessageWindowLoad(item, filename);

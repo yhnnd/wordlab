@@ -3,7 +3,7 @@ int find(std::string msg,const std::string filename){
 	std::string msgfile;
 	std::ifstream fin(filename);
 	if(!fin.is_open()){
-		errorlog("findinfile","cannot open ",filename);
+        errorLog("findinfile", "cannot open ", filename);
 		return 0;
 	}
 	while(std::getline(fin,msgfile)) if(msg.find(msgfile)!=std::string::npos) n++;

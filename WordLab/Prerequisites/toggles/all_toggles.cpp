@@ -1,16 +1,16 @@
 void toggles::toggle::showToggle(int x, int y, bool lock, bool delay, bool showDigit) {
     recordxy(pos);
-    colorrecord(colorprev);
+    recordColor(colorprev, "toggles::toggle::showToggle");
 
     int r = (delay) ? 0 : 3;
 
     for (; r <= 3; r++) {
         gotoxy(x,y);
-        colorset(backlight|backgreen);
+        setColor(backlightgreen, "toggles::toggle::showToggle");
         std::cout<<"   ";
 
         gotoxy(x + 3,y);
-        colorset(backlight|backred);
+        setColor(backlightred, "toggles::toggle::showToggle");
         std::cout<<"   ";
 
         if (lock) {
@@ -20,15 +20,15 @@ void toggles::toggle::showToggle(int x, int y, bool lock, bool delay, bool showD
         }
 
         if (showDigit) {
-            colorset(backlightwhite);
+            setColor(backlightwhite, "toggles::toggle::showToggle");
         } else {
-            colorset(bothlightwhite);
+            setColor(bothlightwhite, "toggles::toggle::showToggle");
         }
 
         std::cout<<"   ";
     }
     std::cout<<"\b\b" << lock;
-    colorreset(colorprev);
+    resetColor(colorprev, "toggles::toggle::showToggle");
     resetxy(pos);
 }
 

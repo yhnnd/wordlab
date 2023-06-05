@@ -1,5 +1,5 @@
-void messageblock::Fillall(char what[][LINEMAX],int nprev,int n,int max) {
-	colorrecord(colorprev);
+void messageblock::FillAll(char what[][LINEMAX],int nprev,int n,int max) {
+	recordColor(colorprev, "FillAll");
 	for (int r=(nprev<=n)?1:max-1;
 	        ((nprev<=n)&&(r<max))||(!(nprev<=n)&&(r>=1));
 	        r=(nprev<=n)?r+1:r-1) {
@@ -12,5 +12,5 @@ void messageblock::Fillall(char what[][LINEMAX],int nprev,int n,int max) {
         }
 	}
 	printBlockContent(x,y-2,width,what[n]);
-	colorreset(colorprev);
+    resetColor(colorprev, "FillAll");
 }

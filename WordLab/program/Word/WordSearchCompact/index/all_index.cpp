@@ -1,9 +1,8 @@
-
-bool indexerror(){
+bool indexerror() {
     bool flag = false;
     FILE *fp1 = fopen(EnglishRoute,"r"), *fp2 = fopen(ChineseRoute,"r");
-    if (fp1==NULL||fp2==NULL) {
-        cout<<"Index Engine: Data Lost";
+    if (fp1 == NULL || fp2 == NULL) {
+        cout << "Index Engine: Data Lost";
         flag = true;
     }
     fclose(fp1);
@@ -12,32 +11,36 @@ bool indexerror(){
 }
 
 
-void indexCore(const std::string msg, int x, int y, WORD color){
-    recordxy(pos);
-    char wordbase[LINEMAX];
+void indexCore(const std::string msg, int x, int y, WORD color) {
+    recordColor(colorPrev, "indexCore record");
 
-    colorset(color);
-    clearscreen(x, y, 60, 10);
-
-    gotoxy(x , y);
-    printf("%s", msg.c_str());
-
-    if(!indexerror() && IL) {
+    if(!indexerror() && IL == true) {
+        setColor(color, "indexCore set");
+        clearScreen(x, y, 60, 10);
+        char wordbase[LINEMAX];
         Select(msg.c_str(), wordbase, x, y);
     }
-    resetxy(pos);
+
+    setForegroundColorAndBackgroundColor("wte-", "-blk");
+    clearline(x, y, 60);
+    printf("%s", msg.c_str());
+
+    resetColor(colorPrev, "indexCore reset");
 }
 
 
-void index(char *msg, const int x, const int y, WORD color, int BeginPoint = 0) {
-    int r;
+void index(char *msg, const int x, const int y, const WORD color, const int BeginPoint) {
+    int r = BeginPoint;
     char c;
-    for (r=BeginPoint;;) {
+
+    indexCore(msg, x, y, color);
+
+    for (;;) {
         if (r < 0) {
             strclr(msg);
             return;
-        } else if ((c=getch()) == 13 || c == 10) {
-            strclr(msg,strlen(msg));
+        } else if ((c = getch()) == 13 || c == 10) {
+            strclr(msg, strlen(msg));
             return;
         } else if (c == 8 || c == 127 || c == 27) {
             if (r > 0) {
@@ -47,7 +50,7 @@ void index(char *msg, const int x, const int y, WORD color, int BeginPoint = 0) 
                 return;
             }
         } else {
-            msg[r++]=c;
+            msg[r++] = c;
         }
         strclr(msg,r);
         indexCore(msg, x, y, color);

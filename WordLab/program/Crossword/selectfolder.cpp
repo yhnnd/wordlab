@@ -11,7 +11,7 @@ string CrosswordSelectFolder(const string folder) {
 	fclose(fp);
 	// read filenames from temp file
 	if (l <= 0) {
-		errorlog("CrosswordSelectFolder()","no folder in",folder);
+        errorLog("CrosswordSelectFolder()", "no folder in", folder);
 		return "";
 	} else {
 		string line;
@@ -40,7 +40,7 @@ string CrosswordSelectFolder(const string folder) {
 string selectOneFromManyOptions (const vector<string> lines, const char * message) {
 	const int x = 2, y = 1;
     gotoxy(x, y + lines.size() + 3);
-	bsvline(message);
+	bsvLine(message);
     vector<string> menu;
     char s[128];
     for (const auto & line: lines) {

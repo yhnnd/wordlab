@@ -4,9 +4,9 @@ void window::refresh(int x0,int y0,int x,int y){
 	gotoxy(innerLeft(),innerTop()+(y-y0));
 	// SET LINE COLOR
 	if(text.iscmd&&text.iscmd[y]){
-		colorsetcmd(color[WINDOW_STATUS::active].error.content);//cmd
+        setColorByCommand(color[WINDOW_STATUS::active].error.content, "refresh");// cmd
 	} else {
-		colorsetcmd(color[WINDOW_STATUS::active].text[y%2].content);//text
+        setColorByCommand(color[WINDOW_STATUS::active].text[y % 2].content, "refresh");// text
 	}
 	// PRINT LINE
 	for(int i=0;i<innerWidth();++i){
@@ -15,9 +15,9 @@ void window::refresh(int x0,int y0,int x,int y){
 	}
 	// SET BACKGROUND COLOR
 	if(text.iscmd and text.iscmd[y]){
-		colorsetcmd(color[WINDOW_STATUS::active].error.background);//error
+        setColorByCommand(color[WINDOW_STATUS::active].error.background, "refresh");// error
 	} else {
-		colorsetcmd(color[WINDOW_STATUS::active].text[y%2].background);//text
+        setColorByCommand(color[WINDOW_STATUS::active].text[y % 2].background, "refresh");// text
 	}
 	// PRINT BACKGROUND
 	std::cout<<std::setw(innerWidth()-(text.length(y)-x0))<<"";

@@ -1,8 +1,8 @@
 void sts::banner() {
     int x = 0;
-    colorset(lightwhite);
+    setColor(lightwhite, "banner");
     clearScreen();
-    colorset(lightgreen);
+    setColor(lightgreen, "banner");
     gotoxy(x,0);
     cout<<"+----------------------------------+";
     gotoxy(x,1);
@@ -39,7 +39,7 @@ void sts::printSentence(const word * words, const int numOfWords, const struct c
 
     string stopName = "";
 
-    colorrecord(colorPrev);
+    recordColor(colorPrev, "printSentence");
 
     for (int i = 0; i < numOfWords; ++i) {
         if (showStops) {
@@ -108,7 +108,7 @@ void sts::printSentence(const word * words, const int numOfWords, const struct c
 
 //    printf("            punct is = %d '%c'", this->punct, this->punct);
 
-    colorreset(colorPrev);
+    resetColor(colorPrev, "printSentence");
 }
 
 
@@ -124,10 +124,10 @@ int sts::FrameworkCore(int x, int y, const int width, const int height) {
     }
 
     {
-        colorrecord(colorPrev);
+        recordColor(colorPrev, "FrameworkCore");
         setForegroundColorAndBackgroundColor("wte-", "-#gry");
-        clearscreen(0, 6, width, height);
-        colorreset(colorPrev);
+        clearScreen(0, 6, width, height);
+        resetColor(colorPrev, "FrameworkCore");
     }
 
     gotoxy(x, y + 1);
@@ -213,7 +213,7 @@ char sts::Input(const COORD inputPos, const COORD indexPos, const COORD translat
     auto applyInput = [&] (const char mode, const char inputChar) {
         strclr(s[rwin].txt, r);
 
-        colorrecord( colorPrev );
+        recordColor(colorPrev, "Input");
 
         gotoxy(indicatorPos);
         if (mode == 'i') {
@@ -234,7 +234,7 @@ char sts::Input(const COORD inputPos, const COORD indexPos, const COORD translat
 
         // Print Input Sentence.
         gotoxy(inputPos);
-//        colorset(lightgreen);
+//        setColor(lightgreen);
         setForegroundColorAndBackgroundColor("grn-", "-blk");
         clearline(inputPos.X, inputPos.Y, ScreenX - inputPos.X - 1);
         this->printSentence(this->s, this->rwin + 1, {"grn-", "-blk"}, is_inputting);
@@ -243,7 +243,7 @@ char sts::Input(const COORD inputPos, const COORD indexPos, const COORD translat
         setForegroundColorAndBackgroundColor("#wte-", "-#wte");
         printf(" ");
 
-        colorreset(colorPrev);
+        resetColor(colorPrev, "Input");
     };
 
     char c = 0;
@@ -298,7 +298,7 @@ void sts::Framework() {
     _Ask = false;
     for(;;) {
         reset(false);
-        colorset(lightwhite);
+        setColor(lightwhite, "sts::Framework");
         clearScreen();
         banner();
         for (rwin = 0; ; rwin++) {
@@ -424,7 +424,7 @@ void sts::FrameworkDebug() {
         _Ask = this->configs.rearrange_words_order.manually_change_words_order_ask;
         _Show = this->configs.rearrange_words_order.manually_change_words_order_show;
 
-        colorset(lightwhite);
+        setColor(lightwhite, "FrameworkDebug");
         clearScreen();
 
         banner();

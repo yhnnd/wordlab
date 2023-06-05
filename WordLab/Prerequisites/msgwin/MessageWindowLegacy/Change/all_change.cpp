@@ -1,5 +1,5 @@
 void MessageWindow::SelectFrame(int x, int y, int width, const char *msg, const int lineMax, const int lineCharMax) {
-    colorrecord(colorprev);
+    recordColor(colorprev, "SelectFrame");
 
     Frame(0, x, y, width, msg, lineMax, lineCharMax);
 
@@ -11,9 +11,9 @@ void MessageWindow::SelectFrame(int x, int y, int width, const char *msg, const 
             Colorful(strsum(msg + lineNo * lineCharMax));
         }
         const char * line = msg + lineNo * lineCharMax;
-        bsvlineDisableColors(line, std::min(width - 1, lineCharMax));
+        bsvLineDisableColors(line, std::min(width - 1, lineCharMax));
     }
-    colorreset(colorprev);
+    resetColor(colorprev, "SelectFrame");
 }
 
 

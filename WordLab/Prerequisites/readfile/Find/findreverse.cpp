@@ -2,7 +2,7 @@ int findreverse(const char *msg,FILE *fp,bool close){
 	int line,n,r;
 	char c,msgfile[100];
 	if(fp==NULL){
-		errorlog("find Reverse","error open file");
+        errorLog("find Reverse", "error open file");
 		return 0;
 		}
 	for(line=1,n=0,r=0;(c=fgetc(fp))!=EOF;){
@@ -19,7 +19,10 @@ int findreverse(const char *msg,FILE *fp,bool close){
 int findreverse(const char *msg,const char *route){
 	int n=0;
 	FILE *fpr=fopen(route,"r");
-	if(fpr==NULL) errorlog("find Reverse","error open ",route);
-	else n=findreverse(msg,fpr,1);
+	if(fpr==NULL) {
+        errorLog("find Reverse", "error open ", route);
+    } else {
+        n = findreverse(msg,fpr,1);
+    }
 	return n;
 }

@@ -1,8 +1,8 @@
 // "pointer"
 int MessageWindow::Pointer(const int x, const int y, const int max, const int n, const int nprev, const bool flag0 = true, const bool flag1 = true) {
-    colorrecord(colorprev);
+    recordColor(colorprev, "Pointer");
     if (nprev>=0&&nprev<max) {
-        colorset(bothdarkwhite);
+        setColor(bothdarkwhite, "Pointer");
         gotoxy(x,y+nprev);
 #ifdef __APPLE__
         movexy(1, 0);
@@ -10,7 +10,7 @@ int MessageWindow::Pointer(const int x, const int y, const int max, const int n,
         std::cout<<"   ";
     }
     if (flag1==true) {
-        colorset(bothlightgreen);
+        setColor(bothlightgreen, "Pointer");
         gotoxy(x,y+max-2);
 #ifdef __APPLE__
         movexy(1, 0);
@@ -18,7 +18,7 @@ int MessageWindow::Pointer(const int x, const int y, const int max, const int n,
         std::cout<<"-1 ";
     }
     if (flag0==true) {
-        colorset(bothlightred);
+        setColor(bothlightred, "Pointer");
         gotoxy(x,y+max-1);
 #ifdef __APPLE__
         movexy(1, 0);
@@ -26,21 +26,21 @@ int MessageWindow::Pointer(const int x, const int y, const int max, const int n,
         std::cout<<" 0 ";
     }
     if (n>=0&&n<max) {
-        colorset(bothlightyellow);
+        setColor(bothlightyellow, "Pointer");
         gotoxy(x,y+n);
 #ifdef __APPLE__
         movexy(1, 0);
 #endif
         std::cout<<"-->";
     }
-    colorreset(colorprev);
+    resetColor(colorprev, "Pointer");
     return getch();
 }
 
 
 // "Roller"
 void MsgWinSwiShwChsCore(int radius,int x,int y,int width,const char *what){
-    colorrecord(colorprev);
+    recordColor(colorprev, "MsgWinSwiShwChsCore");
     switch(abs(radius)) {
         case  0:
             setForegroundColorAndBackgroundColor("wte-", "-blu");
@@ -56,8 +56,8 @@ void MsgWinSwiShwChsCore(int radius,int x,int y,int width,const char *what){
             break;
     }
     clearline(x, y, width);
-    bsvlineDisableColors(what, width, "<", ">", "(", ")", ",;");
-    colorreset(colorprev);
+    bsvLineDisableColors(what, width, "<", ">", "(", ")", ",;");
+    resetColor(colorprev, "MsgWinSwiShwChsCore");
 }
 
 void MsgWinSwiShowChoosed(int radius,int x,int y,int width,int n,const char *what,int max,int w){
@@ -76,7 +76,7 @@ int MessageWindow::SearchCore(int showpos,int x,int y,int width,const char *msg,
         return -1;
     }
 
-    colorrecord(colorprev);
+    recordColor(colorprev, "SearchCore");
 
     gotoxy(x + 5 + bsvmaxlth(msg+showpos*w,"</",">/","()",",;"), y + 1 + showpos);
     printf("%s", keyword);
@@ -85,11 +85,11 @@ int MessageWindow::SearchCore(int showpos,int x,int y,int width,const char *msg,
     for (r = 0; r < max; r++) {
         if (strindex(msg+r*w, keyword) != -1) {
             gotoxy(x + 5, y + 1 + r);
-            bsvlineDisableColors(msg+r*w,width,"</","/>","(",")",",;");
+            bsvLineDisableColors(msg+r*w,width,"</","/>","(",")",",;");
             n = (n > 0) ? n: r;
         }
     }
-    colorreset(colorprev);
+    resetColor(colorprev, "SearchCore");
     return n;
 }
 

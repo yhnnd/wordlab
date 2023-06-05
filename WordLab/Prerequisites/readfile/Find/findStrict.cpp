@@ -3,7 +3,7 @@ int line,n,r;
 char c,msgfile[100];
 FILE*fp=fopen(filename,"r");
 if(fp==NULL){
-	errorlog("findstrict","cannot open ",filename);
+    errorLog("findstrict", "cannot open ", filename);
 	return -1;
 	}
 for(line=1,n=0,r=0,rewind(fp),strclr(msgfile);;){

@@ -1,8 +1,8 @@
 int queryErrorPrint(string msg){
 	gotoxy(1, getxy().Y);
-	bsvline(msg.c_str(),prerequisites::ScreenX-3);
+	bsvLine(msg.c_str(),prerequisites::ScreenX-3);
 	gotoxy(1, getxy().Y + 1);
-	colorreset(lightwhite);
+	setColor(lightwhite, "queryErrorPrint");
     return 0;
 }
 int queryerror(const char **labels){

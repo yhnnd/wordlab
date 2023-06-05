@@ -1,35 +1,34 @@
-bool colorset(WORD wAttributes) {
 #if defined(_WIN32)
-	CurrentColorForWIN32 = wAttributes;
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+bool setColor(const WORD wAttributes, const char * caller) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	if( enableColor == false ) {
         return SetConsoleTextAttribute(hConsole,15);//white
     }
 	return SetConsoleTextAttribute(hConsole, wAttributes);
+}
+
 #elif defined(__APPLE__)
-    https://stackoverflow.com/questions/33309136/change-color-in-os-x-console-output/33311700
-    if (enableColor == false) {
-        printf("\x1b[%sm", "97;40");
-    } else {
-        CurrentColorForMacOS = wAttributes;
-        const std::string color = get_mac_os_color_code(wAttributes);
-        printf("\x1b[%sm", color.c_str());
+
+// https://stackoverflow.com/questions/33309136/change-color-in-os-x-console-output/33311700
+
+bool setColorByColorCode (const std::string colorCode, const std::string caller, const std::string proxy) {
+    const std::string code = enableColor ? colorCode : "97;40";
+    printf("\x1b[%sm", code.c_str());
+    if (enableColor == true) {
+        colorLogs.push(proxy, caller.c_str(), colorCode.c_str());
     }
-#endif
-    return 0;
+    return enableColor;
 }
 
-bool colorreset(WORD color) {
-	return colorset(color);
+bool setColor (const WORD wAttributes, const char * caller, const bool enableSafeMode) {
+        const std::string colorCode = get_mac_os_color_code(wAttributes, enableSafeMode);
+        return setColorByColorCode(colorCode, caller, "setColor");
 }
 
-WORD getcolor() {
-#if defined(_WIN32)
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_SCREEN_BUFFER_INFO Info;
-    GetConsoleScreenBufferInfo(h, &Info);
-    return Info.wAttributes;
-#elif defined(__APPLE__)
-    return CurrentColorForMacOS;
 #endif
+
+
+bool resetColor (const std::string cmd, const char * caller) {
+	return setColorByCommand(cmd, caller);
 }

@@ -16,9 +16,6 @@ https://nuwen.net/mingw.html
 
 #include <conio.h>
 #include <windows.h>
-int clearScreen(void) {
-    return system("cls");
-}
 
 #elifdef __APPLE__
 //#include <curses.h>
@@ -26,11 +23,6 @@ int clearScreen(void) {
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
-
-int clearScreen(void) {
-    printf("\x1b[%sm\n", "97;40");
-    return system("clear");
-}
 
 int kbhit(void) {
     struct termios oldt, newt;
@@ -143,16 +135,6 @@ typedef const char * PKC;//pointer to const char
 
 namespace prerequisites
 {
-bool enableColor = 1;
-WORD CurrentColorForWIN32 = lightwhite;
-WORD CurrentColorForMacOS = lightwhite;
-inline WORD colornow() {
-#ifdef __APPLE__
-    return CurrentColorForMacOS;
-#elifdef _WIN32
-    return CurrentColorForWIN32;
-#endif
-}
 int ScreenX = 100, ScreenY = 30;
 
 bool _Show = true;
@@ -161,7 +143,6 @@ bool _AskOnce = false;
 bool _AutoOnce = false;
 bool _ReverseColor = false;
 
-int bsv_cmd_msg_lth_max = 64;
 PKC MsgWinNewDefaultsRoute=_data_dir"settings/msgwin/MsgBlkDefaults.dat";
 PKC ReportFileRoute=_data_dir"logs/errors/general.bsv";
 
@@ -170,18 +151,74 @@ class host{
 	static std::string datafolder;
 };
 //color
-WORD getcolor();
-bool colorset(WORD wAttributes);
-bool colorreset(WORD color);
+bool enableColor = true;
+struct {
+    struct colorLog {
+        std::string action = "";
+        std::string caller = "";
+        std::string color = "";
+        inline void print() const {
+            std::vector<std::string> colors;
+            if (this->action == "getCurrentColor") {
+                colors = {"30;107", "30;103", "30;107"};
+            } else {
+                colors = {"97;40", "93;40", "97;40"};
+            }
+            printf("\x1b[%sm%32s \x1b[%sm%32s \x1b[%sm%16s\x1b[97;40m\n",
+                   colors[0].c_str(),
+                   this->action.substr(0, 32).c_str(),
+                   colors[1].c_str(),
+                   ("\"" + this->caller.substr(0, 30) + "\"").c_str(),
+                   colors[2].c_str(),
+                   this->color.substr(0, 16).c_str()
+            );
+        }
+    } current;
+    std::vector<struct colorLog> _logs;
+    inline void push(const std::string action, const char * caller, const char * color) {
+        struct colorLog log = {action, caller, color};
+        if (action == "getCurrentColor") {
+            log.color = current.color;
+        } else {
+            current = log;
+        }
+        this->_logs.push_back(log);
+    }
+    inline std::vector<colorLog> get() {
+        return this->_logs;
+    }
+    inline void printLogs() {
+        const std::vector<struct colorLog> logs = this->get();
+        const size_t max = 128;
+        size_t i = 0;
+        if (logs.size() > max) {
+            i = logs.size() - max;
+        }
+        for (; i < logs.size(); ++i) {
+            logs[i].print();
+        }
+    }
+} colorLogs;
+
+inline std::string getCurrentColor (const std::string caller) {
+    colorLogs.push("getCurrentColor", caller.c_str(), "");
+    return colorLogs.current.color;
+}
+
+int setForegroundColorAndBackgroundColor(const std::string foreground, const std::string background, const std::string caller);
+int setForegroundColorAndBackgroundColor(const std::string foreground, const std::string background);
+
+bool setColorByColorCode(const std::string colorCode, const std::string caller, const std::string proxy);
+bool setColor (const WORD wAttributes, const char * caller, const bool enableSafeMode = false);
+bool resetColor(const std::string color, const char * caller);
 void Colorful(int t);
-void Colorfuldim(int t);
+void ColorfulDim(int t);
 void ColorfulAll(int t);
 void ColorfulAllDim(int t);
 void ColorfulBackground(int t);
-void ColorfulBdim(int t);
-void printColorful(const char *msg);
+void ColorfulBDim(int t);
 //cursor
-void setscreen(int w,int h);
+void setScreen(int w, int h);
 COORD currentCursorPosition = {0, 0};
 COORD getxy();
 void gotoxy(const int x, const int y);
@@ -190,7 +227,8 @@ void movexy(const int offsetX,const int offsetY);
 void clearline(const int x, const int y,const int n, const char c = ' ');
 void clearline(const int x, const int y);
 void clearline(const int n);
-void clearscreen(const int x,const int y,const int width,const int height,const char fill=' ');
+int clearScreen();
+void clearScreen(const int x,const int y,const int width,const int height,const char fill=' ');
 //string
 int bitsof(int val);
 char* strclr(char *s,int i=0);
@@ -208,7 +246,7 @@ bool match(std::string line,std::string pattern);
 std::string strfilter(std::string line,std::string pattern,std::string replacewith);
 std::vector<std::string> split(const std::string &s, const std::string &seperator);
 //error
-int errorlog(std::string s1,std::string s2,std::string s3="");
+int errorLog(std::string s1, std::string s2, std::string s3= "");
 //read file
 int loadmsg(char *msg,FILE *fp,int maxlines,int linemax,bool close,bool modify);
 int loadmsg(char *msg,std::string route,int maxlines,int linemax,bool close,bool modify=1);
@@ -367,12 +405,12 @@ private:
 	void consolelog(const std::string &, const std::string & ="", const std::string & ="", const std::string & ="");
 	void consolelogerror(const std::string &,const std::string & ="",const std::string & ="",const std::string & ="");
 	//functions
-	int scriptgotoxy(PKC line);
-	int scriptgetch(PKC line);
-	int scriptfgets(PKC line);
-	int scriptgetsvoid(PKC line);
-	int scriptgets(PKC line);
-	int scriptfputs(PKC line);
+	int scriptGotoxy(PKC line);
+	int scriptGetch(PKC line);
+	int scriptFgets(PKC line);
+	int scriptGetsVoid(PKC line);
+	int scriptGets(PKC line);
+	int scriptFputs(PKC line);
 	int print(const std::string & out);
 	int prints(PKC line);
 	int remove(PKC line);
@@ -396,7 +434,7 @@ private:
 	public:
 		scriptprocessor(bool debug,int datamax,std::string logfolder="logs\\");
 		int scriptline_div(std::string line,std::string functname);
-		int scriptlines(const std::string FunctName,const std::vector<std::string> lines);
+		int scriptLines(const std::string FunctName,const std::vector<std::string> lines);
         int printAllScriptLines();
         std::string getDataByName(const std::string &);
 };
@@ -405,15 +443,16 @@ int scriptshell(int print_debug_msg);
 std::string scriptVersion();
 //bsv
 int bsvMatchCommand(const char * c,const char pattern, int i,...);
-WORD bsvcmdcolor(const char * msg);
-int colorsetcmd(const std::string msg);
+WORD getColorByCommand(const char * msg);
+bool isCommandColorCommand(const std::string);
+int setColorByCommand(const std::string msg, const std::string caller);
 int bsvmaxlth(PKC msg,PKC br1,PKC br2,PKC omit,PKC term);
-void bsvline(PKC what, int width = 0, PKC brcmdbegin="<", PKC brcmdend=">", PKC fieldbegin="(", PKC fieldend=")", PKC tokens_term=";", scriptprocessor *spptr = nullptr);
-void bsvlineDisableColors(PKC what,int width,PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",PKC tokens_term=";");
-int bsverror(PKC s1,PKC s2,PKC s3);
+void bsvLine(PKC what, int width = 0, PKC brcmdbegin="<", PKC brcmdend=">", PKC fieldbegin="(", PKC fieldend=")", PKC tokens_term=";", scriptprocessor *spptr = nullptr);
+void bsvLineDisableColors(PKC what,int width,PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",PKC tokens_term=";");
+int bsvError(PKC s1,PKC s2,PKC s3);
 int bsvLabelEnter(PKC folder,PKC label,int x,int y,int width,PKC color="wte-blu",void *spptr = nullptr);
 int bsvLineLabels(PKC what,const int labelchosen,int labelnow,const bool enter,PKC folder,const int x,const int y,const int width=0,PKC labelcolor="wte-gry",PKC entercolor="wte-blu",PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",void *spptr= nullptr);
-int bsvlines(char **msgs,const int max,int width,PKC folder,int x,int y,void *spptr=NULL);
+int bsvLines(char **msgs,const int max,int width,PKC folder,int x,int y,void *spptr=NULL);
 
 //input
 int listen(char *msg,int index,bool display,std::initializer_list<char> term,int max);
@@ -532,7 +571,7 @@ class messageblock: public MessageWindow{
 	//adjust
 	int adjustset(int);
 	void adjusttitle(int,bool);
-	void adjustshowall(int);
+	void adjustShowAll(int);
 	void Adjust();
 	//block
 	void printBlocks(bool *,int i,PKC,PKC,int max,int x,int y,int width);
@@ -540,7 +579,7 @@ class messageblock: public MessageWindow{
 	void setBlockColor(int,int,bool);
 	COORD getBlockPos(int);
 	void Fill(PKC,COORD,int,int);
-	void Fillall(char (*)[LINEMAX],int,int,int);
+	void FillAll(char (*)[LINEMAX],int,int,int);
 	//search
 	int SearchCore(const char(*)[LINEMAX],int,char*);
 	int Search(char(*)[LINEMAX],int);

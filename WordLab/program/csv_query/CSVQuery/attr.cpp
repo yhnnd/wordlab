@@ -1,4 +1,4 @@
-	class{
+	class {
 		public:
 		string name;
 		bool req;
@@ -20,17 +20,19 @@
 			}
 		}value;
 		int toString(int n) {
-			if(n<0) return n;
+			if (n < 0) {
+                return n;
+            }
 			gotoxy(1, getxy().Y);
-			colorrecord(colorprev);
-			colorset(backlightwhite);
+			recordColor(colorPrev, "toString");
+			setColor(backlightwhite, "toString");
 			cout<<"attr["<<n<<"]=";
 			cout<<"{name:"<<this->name<<",";
 			cout<<"req:"<<req<<",";
 			cout<<"self:"<<this->value.self<<",";
 			cout<<"from:"<<this->value.from<<",";
 			cout<<"to:"<<this->value.to<<"}"<<endl;
-			colorreset(colorprev);
+			resetColor(colorPrev, "toString");
 			return n;
 		}
 		int clear(){

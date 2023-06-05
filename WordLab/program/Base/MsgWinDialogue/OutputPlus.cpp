@@ -2,7 +2,7 @@ void dialog::output(const string msg,WORD color,int x,int y,bool EnableBSV) {
 	static bool times = false;
     static string title = "";
 	char blank[MAXLINES][LINEMAX] = {" "," "," "," "," "," "," "," "," "," "," "};
-	colorrecord(colorprev);
+	recordColor(colorprev, "output");
 	if (msg=="reset") {
 		times = false;
 		MessageWindow.Frame(-1,x,y,60,&blank[0][0],0,LINEMAX);
@@ -27,5 +27,5 @@ void dialog::output(const string msg,WORD color,int x,int y,bool EnableBSV) {
 	output(msg,times,color,"",x,y,EnableBSV);
 	times = true;
 	end:
-	colorreset(colorprev);
+    resetColor(colorprev, "output");
 }

@@ -1,6 +1,9 @@
 #include "WordSearchCompact/all.cpp"
 #include "WordSearchSimilar/all.cpp"
 
+const std::vector<std::string> definitionColorSpectrum = {"grn", "gry", "cyn", "wte", "ylw", "red", "blu", "pnk"};
+const std::vector<std::string> definitionColorNames = {"green", "gray", "cyan", "white", "yellow", "red", "blue", "purple"};
+
 void changeColorCore(int r);
 void changeColor(int x, int y, int *ColorNum);
 void setChineseColor(int * ColorFlags);

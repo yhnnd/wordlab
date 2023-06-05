@@ -6,5 +6,5 @@ void WLSearchCore(int lth, int NOL, string s, int k, string colorcmdlabel="<grn-
 	WLHistory.RecordAnswer(s.substr(0,lth),1);
 //	cout<<search_result.c_str()<<endl;
 //    gotoxy(0, 4);
-	bsvline(search_result.c_str());
+	bsvLine(search_result.c_str());
 }

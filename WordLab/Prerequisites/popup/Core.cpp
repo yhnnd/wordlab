@@ -2,7 +2,7 @@
 char popupcore(const std::string msg, const int life, const int x, const int y, const int width, popupConfigs& configs) {
 	char key = 0;
 	// record previous status
-	colorrecord(colorprev);
+	recordColor(colorprev, "popupcore");
 	recordxy(pos);
 	// display message
 
@@ -14,7 +14,7 @@ char popupcore(const std::string msg, const int life, const int x, const int y, 
     }
 	MessageWindow.Line(x,y,width,msg.c_str(),0);
 	MessageWindow.Edge(x,y+1,width);
-	colorset(lightwhite);
+    setColor(lightwhite, "popupcore");
 	// wait for response
 	if (life > 0) {
 #ifdef _WIN32
@@ -43,7 +43,7 @@ char popupcore(const std::string msg, const int life, const int x, const int y, 
     }
 	// reset
 	resetxy(pos);
-	colorreset(colorprev);
+    resetColor(colorprev, "popupcore");
 	// write history
 	if (configs.RecordEnabled) {
 #ifndef _data_dir

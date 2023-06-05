@@ -37,7 +37,7 @@ class crossword{
 		in.close();
 		if(this->max<=0) {
 			ErrorOpeningFolder:
-			errorlog("crossword()","error opening folder",foldername);
+            errorLog("crossword()", "error opening folder", foldername);
 			this->w=this->h=this->available=0;
 		}else{
 			//allocate memory
@@ -55,7 +55,7 @@ class crossword{
                     this->check(i,"");
                 }
 			}else{
-				errorlog("crossword","error opening folder",foldername);
+                errorLog("crossword", "error opening folder", foldername);
 				this->max=this->available=0;
 			}
 		}
@@ -71,14 +71,14 @@ class crossword{
 	string word,string type,string def,string defreverse="") {
 		int r=0,lth=word.length();
 		if(word.empty()){
-			return errorlog("words.setword","cannot set empty word",toString(n));
+			return errorLog("words.setword", "cannot set empty word", toString(n));
 		}else if(!Word[n].writable()){
 			string msg="cannot rewrite ";
 			msg+=Word[n].getword();
 			msg+="(";
 			msg+=toString(n);
 			msg+=") with";
-			return errorlog("words.setword",msg,word);
+			return errorLog("words.setword", msg, word);
 		}
 		for(r=0;r<lth;r++) {
             if(this->Board.writable(x+xd*r,y+yd*r,word[r])==0) {
@@ -93,10 +93,10 @@ class crossword{
 			if(n<max) {
                 return Word[n].set(x,y,zx,zy,xd,yd,word,type,def,defreverse);
             } else {
-                return errorlog("words.setword has no space for",word,toString(n));
+                return errorLog("words.setword has no space for", word, toString(n));
             }
 		} else {
-            return errorlog("words.setword board not available for",word,toString(r));
+            return errorLog("words.setword board not available for", word, toString(r));
         }
 	}
 	int check(int n, string s) {
@@ -212,7 +212,7 @@ class crossword{
 		Board.setrotate(Board.getrotate()+t);
 		swap(this->w, this->h);
 		int l = ::max(this->w,this->h);
-		clearscreen(this->x,this->y,2 * zx * l, zy * l + 1);
+        clearScreen(this->x, this->y, 2 * zx * l, zy * l + 1);
 
         this->Board.resetPreviousDefinition();
         return 0;
@@ -234,9 +234,9 @@ class crossword{
         }
         int m = ::max(w, h) + 1, xt = x + 2 * zx * m + 1, yt = y + zy * m / 2;
 //        setForegroundColorAndBackgroundColor("wte-", "-#blu");
-        clearscreen(x + 2 * zx * (m - 1), y, 12, zy * (m - 1));
+        clearScreen(x + 2 * zx * (m - 1), y, 12, zy * (m - 1));
 //        setForegroundColorAndBackgroundColor("wte-", "-blk");
-		clearscreen(xt - 1, yt - 1, 5, 3);
+        clearScreen(xt - 1, yt - 1, 5, 3);
 		gotoxy(xt,yt);
 		cout<<"top";
 		switch(this->Board.getrotate()%4){
@@ -250,9 +250,9 @@ class crossword{
 	}
 	int show() {
 		if(!available) {
-            errorlog("crossword.show()","cannot open",foldername);
+            errorLog("crossword.show()", "cannot open", foldername);
         }
-		colorrecord(colorprev);
+		recordColor(colorprev, "show");
 		int r=0,i=0;
 		for(r = 0; r < w; r++) {
 			gotoxy(x + 2 * zx * r, y - 1);
@@ -272,7 +272,7 @@ class crossword{
 		for (r = 0; r < max; r++) {
             Word[r].show();
         }
-		colorreset(colorprev);
+        resetColor(colorprev, "show");
 		return available;
 	}
 	int savewordto(string filename,string time){

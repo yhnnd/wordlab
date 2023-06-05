@@ -12,7 +12,7 @@ int csvqueryshell() {
 #else
 		gotoxy(1, 1);
 #endif
-		colorset(backdarkwhite);
+        setColor(backdarkwhite, "csvqueryshell");
 		cout<<">>> ";
 #ifdef __APPLE__
         gotoxy(6, 1);
@@ -40,7 +40,7 @@ int csvqueryshell() {
 		csvsql.exec();
 	}
 end:
-	colorreset(lightwhite);
-	clearscreen(0,0,ScreenX,12);
+    setColor(lightwhite, "csvqueryshell");
+    clearScreen(0, 0, ScreenX, 12);
 	return 0;
 }

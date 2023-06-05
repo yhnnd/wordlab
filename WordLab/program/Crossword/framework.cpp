@@ -1,12 +1,12 @@
-int CrosswordFramework(){
+int CrosswordFramework() {
 	clearScreen();
-	colorset(lightwhite);
+    setColor(lightwhite, "CrosswordFramework");
 
 	string folder = CrosswordDataFolder;
 	string folder2 = CrosswordSelectFolder(folder);
 
 	if (folder2.empty()) {
-        return errorlog("CrosswordFramework()","no game folder in",folder);
+        return errorLog("CrosswordFramework()", "no game folder in", folder);
     }
 
 	int w=12, h=8;
@@ -19,7 +19,7 @@ int CrosswordFramework(){
 		in.ignore(1024,'=');
 		in>>h;
 	} else {
-        return errorlog("CrosswordFramework()","no board data file in",folder2);
+        return errorLog("CrosswordFramework()", "no board data file in", folder2);
     }
 
 	in.close();
@@ -30,7 +30,7 @@ int CrosswordFramework(){
 	crossword Crossword(folder2,LoadPrev,4,4,2,w,h);
 
 	if(!Crossword.Available()) {
-        return errorlog("CrosswordFramework()","no game data in",folder2);
+        return errorLog("CrosswordFramework()", "no game data in", folder2);
     }
 
 	//Crossword.check({"pineapple","elbow","apples","pear","bowl","ear","horse","arrow","sow"});

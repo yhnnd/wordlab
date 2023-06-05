@@ -7,7 +7,7 @@ void Table::Title(int x,int y,int width,int Total) {
             "Control Panel"
     };
 //	loadmsg((char*)TableTitle,TableTitleRoute,4,LINEMAX,1,1);
-	colorset(backlightwhite);
+    setColor(backlightwhite, "Table::Title");
 	clearline(x,y+0,width+2*margin);
 	std::cout<<TableTitle[0];
 
@@ -20,13 +20,13 @@ void Table::Title(int x,int y,int width,int Total) {
 
 	Frame(0, x, y + 2, width, Total + 2, 0);
 
-	colorset(backdarkwhite);
+    setColor(backdarkwhite, "Table::Title");
 	gotoxy(x+6,y+1+Total+2);
 	std::cout<<TableTitle[2];
 	gotoxy(x+6,y+1+Total+3);
 	std::cout<<TableTitle[3];
 	gotoxy(x+6,y+Total+5);
-    colorset(lightwhite | backlight | backblue);
+    setColor(lightwhite | backlightblue, "Table::Title");
 	std::cout<<"row=["<<18<<"] ";
 	std::cout<<"col=["<<4<<"] ";
 	std::cout<<"col-volume=["<<64<<"]";

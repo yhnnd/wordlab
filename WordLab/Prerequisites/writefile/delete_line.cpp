@@ -4,11 +4,11 @@ int DeleteLine(const std::string route,const int n,bool LastLineNoReturn){
 	std::ifstream fin(route);
 	std::ofstream fbuf(bufname,std::ios::trunc);
 	if(fin.fail()){
-		errorlog("deleteline","cannot open",route);
+        errorLog("deleteline", "cannot open", route);
 		return -1;
 	}
 	if(fbuf.fail()){
-		errorlog("deleteline","cannot open buf file",bufname);
+        errorLog("deleteline", "cannot open buf file", bufname);
 		return -2;
 	}
 	int NOL=0;

@@ -11,14 +11,14 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 	std::string temp, Error_Msg = "";
 	for(;;) {
 		// Display table
-		colorset(lightwhite);
+        setColor(lightwhite, "_table::editor");
 		this->printtable(x,y);
 		// Display Error Message
-		errorlog("#time=reset();","","");
+        errorLog("#time=reset();", "", "");
 		if (Error_Msg.size()) {
-            errorlog("table","error",Error_Msg);
+            errorLog("table", "error", Error_Msg);
         } else if(Void_Option) {
-            errorlog("table","error","invalid option");
+            errorLog("table", "error", "invalid option");
         }
 		// Clear Error Status
 		Void_Option = 0;
@@ -30,12 +30,12 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
                     // beginning
                     if (r < row_max - 1) {
                         ++r;
-                        errorlog("#time=reset();","","");
-                        errorlog("table","info 1-AutoDown","row "+toString(r)+" col "+toString(c));
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "info 1-AutoDown", "row " + toString(r) + " col " + toString(c));
                     } else if(r > 0) {
                         --r;
-                        errorlog("#time=reset();","","");
-                        errorlog("table","info 1-AutoUp","row "+toString(r)+" col "+toString(c));
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "info 1-AutoUp", "row " + toString(r) + " col " + toString(c));
                     }
                     r_prev = r;
                     c_prev = c;
@@ -48,7 +48,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
             }
             if (this->iserror(r_prev, c_prev) == false) {
                 gotoxy(deltaX, y + r_prev);
-                colorreset(lightwhite);
+                setColor(lightwhite, "_table::editor");
 #ifdef __APPLE__
                 printf("%c", ' ');
 #endif
@@ -69,12 +69,12 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
                 WindowY = ScreenY - 3;
             }
             if (this->iserror(r, c) == false) {
-                colorsetcmd("-wte");
+                setColorByCommand("-wte", "_table::editor");
 #ifdef __APPLE__
                 printf("%c", ' ');
 #endif
                 std::cout << std::setw(this->getwidth(r, c)) << (this->getdata(r, c));
-                colorreset(lightwhite);
+                setColor(lightwhite, "_table::editor");
                 // record previous selected label
                 r_prev = r;
                 c_prev = c;
@@ -100,13 +100,13 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 							r-=2;
 							c = this->getrow(r).getnumofcol()-1;
 						} else {
-							errorlog("#time=reset();","","");
-							errorlog("table","warning 2-UpNarrow","cannot go up");
+                            errorLog("#time=reset();", "", "");
+                            errorLog("table", "warning 2-UpNarrow", "cannot go up");
 						}
 					} else if (r > 0) {
 						--r;
-						errorlog("#time=reset();","","");
-						errorlog("table","info 2-Up","row "+toString(r)+" col "+toString(c));
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "info 2-Up", "row " + toString(r) + " col " + toString(c));
 					}
 				} else if (key == DOWN || key2 == 's') {
 					if(c>=this->getrow(r+1).getnumofcol()) {
@@ -116,31 +116,31 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 							r+=2;
 							c = this->getrow(r).getnumofcol()-1;
 						} else {
-							errorlog("#time=reset();","","");
-							errorlog("table","warning 2-DownNarrow","cannot go down");
+                            errorLog("#time=reset();", "", "");
+                            errorLog("table", "warning 2-DownNarrow", "cannot go down");
 						}
 					} else if(r<row_max-1) {
 						++r;
-						errorlog("#time=reset();","","");
-						errorlog("table","info 2-Down","row "+toString(r)+" col "+toString(c));
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "info 2-Down", "row " + toString(r) + " col " + toString(c));
 					}
 				} else if (key == RIGHT || key2 == 'd') {
 					if(this->iserror(r, c + 1)) {
-						errorlog("#time=reset();","","");
-						errorlog("table","warning 2-RightError","cannot access item on the right");
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "warning 2-RightError", "cannot access item on the right");
 					} else if (c < this->getrow(r).getnumofcol() - 1) {
 						++c;
-						errorlog("#time=reset();","","");
-						errorlog("table","info 2-Right","row "+toString(r)+" col "+toString(c));
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "info 2-Right", "row " + toString(r) + " col " + toString(c));
 					}
 				} else if (key == LEFT || key2 == 'a') {
 					if(this->iserror(r, c - 1)) {
-						errorlog("#time=reset();","","");
-						errorlog("table","warning 2-LeftError","cannot access item on the left");
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "warning 2-LeftError", "cannot access item on the left");
 					} else if(c > 0) {
 						--c;
-						errorlog("#time=reset();","","");
-						errorlog("table","info 2-Left","row "+toString(r)+" col "+toString(c));
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "info 2-Left", "row " + toString(r) + " col " + toString(c));
 					}
 				}
 			} else if (key == 13 || key == 10) {
@@ -155,24 +155,24 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
                     if (r < row_max - 1) {
                         ++r;
                     } else if (r > 0) {
-                        errorlog("#time=reset();","","");
-                        errorlog("table","warning 1-DownLimit","cannot go down");
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "warning 1-DownLimit", "cannot go down");
                         --r;
                     } else {
-                        errorlog("#time=reset();","","");
-                        errorlog("table","warning 1-DownError","cannot go up and down");
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "warning 1-DownError", "cannot go up and down");
                         break;
                     }
                 } else if(key == UP || key2 == 'w') {
                     if (r > 0) {
                         --r;
                     } else if (r < row_max - 1) {
-                        errorlog("#time=reset();","","");
-                        errorlog("table","warning 1-UpLimit","cannot go up");
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "warning 1-UpLimit", "cannot go up");
                         ++r;
                     } else {
-                        errorlog("#time=reset();","","");
-                        errorlog("table","warning 1-UpError","cannot go up and down");
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "warning 1-UpError", "cannot go up and down");
                         break;
                     }
                 }
@@ -181,7 +181,7 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 		// Select table Item completed
 		gotoxy(WindowX, WindowY);
         CurrentWindowY = WindowY;
-		colorsetcmd("-ylw");
+        setColorByCommand("-ylw", "_table::editor");
 		if(this->iserror(r,c)) { // invalid label
 			Error_Msg = this->geterror(r,c);
 		} else { // valid label
@@ -195,10 +195,10 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 				if(!this->getReadOnly(r,c)) { // data is not read only
                     gotoxy(WindowX, ++CurrentWindowY);
 					std::cout<<"select item by number:";
-					colorsetcmd("-gry");
+                    setColorByCommand("-gry", "_table::editor");
 					std::cin >> temp;
 					i = toInt(temp);
-					colorsetcmd("-ylw");
+                    setColorByCommand("-ylw", "_table::editor");
 				}
 			} else { // label is text
 				gotoxy(WindowX, ++CurrentWindowY);
@@ -209,12 +209,12 @@ void _table::editor(int x,int y,void save_table(_table &),void save_data(_table 
 				std::cout<<"input new "<<(i==1?(this->isTag(r,c)?"label":"text"):"data")<<":";
 				std::cin.clear();
 				std::cin.sync();
-				colorsetcmd("-gry");
+                setColorByCommand("-gry", "_table::editor");
 				getline(std::cin,temp);
 				if (i == 1) {
 					if(this->isTag(r,c)&&temp.empty()) {
-						errorlog("#time=reset();","","");
-						errorlog("table","warning","empty label not allowed");
+                        errorLog("#time=reset();", "", "");
+                        errorLog("table", "warning", "empty label not allowed");
 					} else {
                         this->getlabel(r,c) = temp;
                     }

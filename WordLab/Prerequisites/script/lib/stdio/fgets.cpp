@@ -1,4 +1,4 @@
-int scriptprocessor::scriptfgets(const char *line) {
+int scriptprocessor::scriptFgets(const char *line) {
 	name = getname(line);
 	value = getparam(line);
 	if(value[0]=='\"') removebrackets(value,"\"","\"");

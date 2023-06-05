@@ -6,14 +6,14 @@ void window::ScrollBar(WINDOW_STATUS CurrentStatus,int y0){
 	int ScrollBarLength = innerHeight() < text.size() ? (innerHeight() * innerHeight() / text.size()) : innerHeight();
 	if( ScrollBarWidth <= 0 || ScrollBarLength <= 0 || ScrollBarLength >= innerHeight() ) return;
 	//SET PADDING RIGHT COLOR
-	colorsetcmd(color[WINDOW_STATUS::active].padding.background);
+    setColorByCommand(color[WINDOW_STATUS::active].padding.background, "ScrollBar");
 	//CLEAR PADDING RIGHT
 	for(int y = 0; y < innerHeight(); ++y){
 		gotoxy(width - innerRight(),innerTop() + y);
 		std::cout<<std::setw(ScrollBarWidth)<<"";
 	}
 	//SET SCROLLBAR COLOR
-	colorsetcmd(color[WINDOW_STATUS::inactive].padding.background);
+    setColorByCommand(color[WINDOW_STATUS::inactive].padding.background, "ScrollBar");
 	//SET SCROLLBAR POSITION
 	int ScrollBarY = y0 * innerHeight() / text.size();
 	//PRINT SCROLLBAR

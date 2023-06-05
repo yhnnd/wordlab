@@ -20,8 +20,11 @@ int Performance(COORD pos= {6,0},int w=64,int h=11,int rift=1,int colwidth=6) {
 			goto begin;
 		}
 	}
-	if(lth==31) Dialog.output("completed",lightgreen,xA,yA);
-	else Dialog.output("aborted",lightred,xA,yA);
+	if (lth==31) {
+        Dialog.output("completed",lightgreen,xA,yA);
+    } else {
+		Dialog.output("aborted",lightred,xA,yA);
+	}
 	getch();
 	Dialog.output("reset",lightgreen,xA,yA,0);
 	Dialog.output("reset",lightgreen,xB,yB,0);

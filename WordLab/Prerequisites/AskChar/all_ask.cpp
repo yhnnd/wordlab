@@ -17,10 +17,9 @@ void AskCharRenew(std::string s, std::string cache[]) {
 }
 
 void AskCharShow(std::string cache[]) {
-    int setForegroundColorAndBackgroundColor(const std::string, const std::string);
-    int r,rl;
+    int r, rl;
     recordxy(pos);
-    colorrecord(colorprev);
+    recordColor(colorprev, "AskCharShow");
     if(_ReverseColor) {
         setForegroundColorAndBackgroundColor("blk-", "-#wte");
     } else {
@@ -39,7 +38,7 @@ void AskCharShow(std::string cache[]) {
             std::cout << cache[r][rl];
         }
     }
-    colorreset(colorprev);
+    resetColor(colorprev, "AskCharShow");
     resetxy(pos);
 }
 

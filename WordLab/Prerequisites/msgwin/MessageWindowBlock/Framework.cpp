@@ -1,13 +1,13 @@
 int messageblock::Switcher(char what[][LINEMAX],bool LoadDefaultSettings) {
 	char key;
-	colorrecord(colorprev);
+	recordColor(colorprev, "Switcher");
 	//set window default
 	max = MaxLength(&what[0][0],LINEMAX);
 	if (npl <= 0) {
         npl = setnpl();
     }
 	if (filelines(MsgWinNewDefaultsRoute,1) <= 0) {
-		errorlog("message block","default file lost");
+        errorLog("message block", "default file lost");
 		return 0;
 	}
 	if (LoadDefaultSettings) {
@@ -19,7 +19,7 @@ int messageblock::Switcher(char what[][LINEMAX],bool LoadDefaultSettings) {
 	xcleft=cleftindex;
 	ycleft=cleftindex;
 	for(n=1,nbefore=1;;) {
-	    Fillall(what,nbefore,n,max);
+	    FillAll(what,nbefore,n,max);
 	    nbefore = n;
 	    key = getch();
 		if(key == BIOSKEY){
@@ -52,7 +52,7 @@ int messageblock::Switcher(char what[][LINEMAX],bool LoadDefaultSettings) {
         } else if (key == 's' || key == 'S') {
             n += npl;
         } else if (key == 8 || key == 127 || key == 27 || key == 'r' || key == 'R') {
-			colorreset(colorprev);
+            resetColor(colorprev, "Switcher");
 			return -1;
 		} else if (key == 'i' || key == 'I') {
 		    Adjust();
@@ -60,7 +60,7 @@ int messageblock::Switcher(char what[][LINEMAX],bool LoadDefaultSettings) {
 		} else if (key == 'e' || key == 'E') {
 		    n = Search(what, n);
 			if (n>0) {
-				colorreset(colorprev);
+                resetColor(colorprev, "Switcher");
 				return n;
 			}
 		} else if (key == 'n' || key == 'N') {
@@ -72,6 +72,6 @@ int messageblock::Switcher(char what[][LINEMAX],bool LoadDefaultSettings) {
 		}
 	    roll(n,n,1,max-1);
 	}
-	colorreset(colorprev);
+    resetColor(colorprev, "Switcher");
 	return -1;
 }

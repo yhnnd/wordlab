@@ -1,6 +1,6 @@
 void tablerow::printRow(const int x, const int y, const uint colMax) {
 
-    WORD prevColor = colornow();
+    recordColor(prevColor, "printRow");
 
     const uint columnMax = std::min(tableRowConfigs.colMax, colMax);
 
@@ -24,7 +24,7 @@ void tablerow::printRow(const int x, const int y, const uint colMax) {
         if (c < cols.size()) {
             setForegroundColorAndBackgroundColor("blk-", "-#gry");
             printf(" ");
-            colorset(prevColor);
+            setColorByCommand(prevColor, "printRow");
             printf("%s", cols[c].substr(0, colWidth * 2).c_str());
         }
 	}
@@ -37,7 +37,7 @@ void tablerow::printRow(const int x, const int y, const uint colMax) {
         printf(" ");
         setForegroundColorAndBackgroundColor("#blu-", "-gry");
         printf("$");
-        colorset(prevColor);
+        setColorByCommand(prevColor, "printRow");
         printf("%s", vars[c].substr(1).c_str());
     }
 }

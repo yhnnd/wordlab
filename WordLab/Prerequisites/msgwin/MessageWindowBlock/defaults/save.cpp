@@ -7,7 +7,8 @@ void messageblock::defaultssave(){
 		    case 4: defaults[max].npl=npl;                break;
 		    case 5: defaults[max].width=width;            break;
 		    case 6: defaults[max].height=height;          break;
-		    default:errorlog("message block","error saving defaults");break;
+		    default:
+                errorLog("message block", "error saving defaults");break;
 	    }
 	defaultssavefile(MsgWinNewDefaultsRoute);
 }

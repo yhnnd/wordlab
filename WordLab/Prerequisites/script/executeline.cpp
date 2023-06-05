@@ -3,17 +3,17 @@ void scriptprocessor :: executeline(const char *line) {
 	consolelogline(line);
 	if(find(line,"function ")>=0) {
 	} else if(find(line,"gotoxy(")>=0) {
-		scriptgotoxy(line);
+		scriptGotoxy(line);
 	} else if(find(line,"getch()")>=0) {
-		scriptgetch(line);//getch()
+		scriptGetch(line);//getch()
 	} else if(find(line,"fgets(")>=0) {
-		scriptfgets(line);//fgets(route)
+		scriptFgets(line);//fgets(route)
 	} else if(find(line,"gets()")>=0) {
-		scriptgetsvoid(line);//name=gets()
+		scriptGetsVoid(line);//name=gets()
 	} else if(find(line,"gets(")>=0) {
-		scriptgets(line);//gets(name)
+		scriptGets(line);//gets(name)
 	} else if(find(line,"fputs(")>=0) {
-		scriptfputs(line);
+		scriptFputs(line);
 	} else if(find(line,"var ")>=0) {
 		var(line);
 	} else if(find(line,"print(")>=0) {

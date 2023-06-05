@@ -54,7 +54,10 @@ bool for_expr2_is_false( int it_begin, std::string op, int it_end ) {
 }
 
 void scriptprocessor::langForExecute(std::vector<ForBlock> & forblocks) {
-	if(_debug) std::cout<<"<lang><for><execute>"<<std::endl;
+    const char * functionName = "langForExecute";
+	if(_debug) {
+        std::cout<<"<lang><for><execute>"<<std::endl;
+    }
 	int for_nested_level = forblocks.size();
 	std::string it_begin_name[for_nested_level], operator2[for_nested_level], it_end_name[for_nested_level];
 	int it_begin_value[for_nested_level], it_end_value[for_nested_level];
@@ -102,16 +105,16 @@ void scriptprocessor::langForExecute(std::vector<ForBlock> & forblocks) {
 			auto &op = operator2[n];
 			if(_debug) {
 				std::cout<<"<lang><for><execute> ";
-				colorset(backlightwhite);
+                setColor(backlightwhite, functionName);
 				std::cout<<"expr2["<<n<<"] = '"<<it_begin<<op<<it_end<<"'";
 				if(for_expr2_is_false(it_begin,op,it_end)) {
-					colorreset(backlightred);
+					setColor(backlightred, functionName);
 					std::cout<<" false ";
 				} else {
-					colorreset(backlightgreen);
+					setColor(backlightgreen, functionName);
 					std::cout<<" true ";
 				}
-				colorreset(lightwhite);
+				setColor(lightwhite, functionName);
 				std::cout<<std::endl;
 			}
 			// check if( expr2 )

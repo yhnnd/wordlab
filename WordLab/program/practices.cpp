@@ -130,15 +130,15 @@ void practices() {
                 for (int i=0; i<4; ++i) {
                     lth += rand()%LthDiffer;
                     int num = rand() % Volume(lang::EN,lth,lth,"");
-                    word[i]=GetWord(lth,num);
-                    trans[i]=Chinese(lth,num);
+                    word[i] = GetWord(lth,num);
+                    trans[i] = Chinese(lth,num);
                 }
                 key = 1 + rand() % 4;
                 // display question
                 popup(string("<-#ylw>(word ")+word[key-1],0);
                 popup("<-wte>(possible translations",0);
-                for(int i=0;i<4;++i){
-                    popup(string("<-gry>(")+toString(char('A'+i))+" "+trans[i],0);
+                for (int i = 0; i < 4; ++i) {
+                    popup(string("<blk-gry>(")+toString(char('A'+i))+" "+trans[i],0);
                 }
                 popup("<-wte>(you have 30 seconds before you decide",0);
                 // answer question

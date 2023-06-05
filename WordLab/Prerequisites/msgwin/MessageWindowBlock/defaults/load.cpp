@@ -8,6 +8,6 @@ void messageblock::defaultsload(){
 		    case 4: npl=defaults[max].npl;                break;
 		    case 5: width=defaults[max].width;            break;
 		    case 6: height=defaults[max].height;          break;
-		    default:errorlog("message block","error loading defaults");break;
+		    default:errorLog("message block", "error loading defaults");break;
 	    }
 }

@@ -17,10 +17,9 @@ int WLFramework(void) {
 	for (;;) {
         // INPUT DATA
 		if (FirstLetter != 13 && FirstLetter != 10) {
-			memset(s,0,sizeof(s));
+			memset(s, 0, sizeof(s));
 			if (isalpha(FirstLetter)) {
                 s[0] = FirstLetter;
-                indexCore(s, 10, 9, lightgreen);
                 index(s, 10, 9, lightgreen, 1);
             } else {
                 index(s, 10, 9, lightgreen, 0);
@@ -48,11 +47,13 @@ int WLFramework(void) {
             return -1;
         } else {
 			const int BeginY = 5;
-			clearscreen(0,BeginY,ScreenX,ScreenY-1-BeginY);
+            clearScreen(0, BeginY, ScreenX, ScreenY - 1 - BeginY);
 			gotoxy(0, BeginY);
 			FirstLetter = WLFrameworkCore(s);
-            gotoxy(0, BeginY + 3);
-			FirstLetter = WLDictionary(s);
+            if (FirstLetter == 0) {
+                gotoxy(0, BeginY + 3);
+                FirstLetter = WLDictionary(s);
+            }
 			if (FirstLetter == 8/* backspace */ || FirstLetter ==127/* delete */ || FirstLetter == 27/* escape */) {
                 return -1;
             }

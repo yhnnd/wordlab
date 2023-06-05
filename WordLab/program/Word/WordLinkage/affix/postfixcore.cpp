@@ -11,12 +11,12 @@ int postfixcore(int lth, string &word, std::vector<std::vector<std::string>> aff
 					if (lth > 0) {
 						word.erase(lth);// exprimt'l
 						postfixcore(lth, word, affix);
-						colorset(lightyellow);
+                        setColor(lightyellow, "postfixcore");
 						cout<<" + ";
 					}
-					colorset(lightcyan);
+                    setColor(lightcyan, "postfixcore");
 					printf("%s", affixList[i].c_str());
-					colorreset(lightwhite);
+                    setColor(lightwhite, "postfixcore");
 					return lth;
 				}
 			}

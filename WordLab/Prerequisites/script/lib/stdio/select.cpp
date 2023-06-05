@@ -2,8 +2,8 @@ int scriptprocessor::selectshow(const std::string & prev,const std::string & cur
 	int l1 = prev.length(), l2 = curr.length();
 	std::string s;
 	recordxy(ogpos);
-	colorrecord(ogcolor);
-	colorset(color);
+	recordColor(ogcolor, "selectshow");
+    setColor(color, "selectshow");
 	if(dir>0) {
 		s = prev + curr;
 		for(int i = 0; i <= l1; i++ ) {
@@ -29,7 +29,7 @@ int scriptprocessor::selectshow(const std::string & prev,const std::string & cur
 		clearline(width);
 		printf("%s",curr.c_str());
 	}
-	colorreset(ogcolor);
+	resetColor(ogcolor, "selectshow");
     return 0;
 }
 int scriptprocessor::select(const std::string & line) {

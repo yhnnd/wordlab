@@ -1,51 +1,35 @@
 // copy this "<", ">", "(", ")", ";"
-void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fieldend,PKC tokens_term, scriptprocessor *spptr) {
-
-	int r = 0, r1 = 0, romit = 0, rmsg = 0;
-	char msg[stroccurtimes(what,"<")][bsv_cmd_msg_lth_max];
-	WORD color, colorold, color_colorful_foreground;
-	color = colorold = color_colorful_foreground = colornow();
-	bool ColorChange = false, ColorfulForeground = false;
+void bsvLine(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fieldend,PKC tokens_term, scriptprocessor *spptr) {
+	int r = 0, rOmit = 0;
+    struct command {
+        std::string text = "";
+        bool isColorCommand = false;
+    };
+	std::vector<struct command> messages;
+    messages.push_back({getCurrentColor("bsvLine"), true});
 
 	for (r=0; what[r] != '\n' && strchr(tokens_term, what[r]) == NULL && what[r] != 0; r++) {
-		if(what[r-1]!='\\'&&strchr(brcmdbegin,what[r])) {
-			for (r++,r1=0; what[r-1]=='\\'||!strchr(brcmdend,what[r]); r++,r1++) {
-                msg[rmsg][r1]=what[r];
+		if (what[r-1] != '\\' && strchr(brcmdbegin, what[r])) {
+            std::string commandText = "";
+			for (r++; what[r - 1] == '\\' || !strchr(brcmdend, what[r]); r++) {
+                commandText += what[r];
             }
-			strclr(msg[rmsg],r1);
-			if((color = bsvcmdcolor(msg[rmsg])) != 0) {
-                ColorChange = true;
-            } else if(strindex(msg[rmsg],"clrful-") >= 0) {
-				ColorfulForeground = true;
-				color_colorful_foreground = colornow();
+            messages.push_back({commandText, isCommandColorCommand(commandText)});
+			rOmit += commandText.length() + 2;
+		} else if(what[r-1] != '\\' && strchr(fieldbegin, what[r])) {
+			rOmit++;
+			if (messages.back().isColorCommand) {
+				setColorByCommand(messages.back().text, "bsvLine colorSet 23 " + messages.back().text);
 			}
-			romit += r1 + 2;
-			rmsg++;
-		} else if(what[r-1]!='\\'&&strchr(fieldbegin,what[r])) {
-			romit++;
-			if(ColorChange) {
-				colorold = colornow();
-				colorset(color);
-			} else if (ColorfulForeground) {
-				colorold = colornow();
+		} else if(what[r-1]!='\\' && strchr(fieldend, what[r])) {
+			rOmit++;
+            messages.pop_back();
+			if (messages.back().isColorCommand) {
+				setColorByCommand(messages.back().text, "bsvLine colorSet 29 " + messages.back().text);
 			}
-		} else if(what[r-1]!='\\'&&strchr(fieldend,what[r])) {
-			romit++;
-			if(ColorChange) {
-				ColorChange = false;
-				colorset(colorold);
-			} else if (ColorfulForeground) {
-				ColorfulForeground = false;
-				colorset(colorold);
-			}
-		} else if(what[r]=='\\' && strchr("()<>", what[r+1])) {
-			romit++;
+		} else if (what[r] == '\\' && strchr("()<>", what[r+1])) {
+			rOmit++;
 		} else {
-			if(ColorfulForeground) {
-				color_colorful_foreground = (color_colorful_foreground + 1) % 16;
-				color_colorful_foreground = color_colorful_foreground < 9 ? 9 : color_colorful_foreground;
-				colorset(color_colorful_foreground);
-			}
             char * ptrBegin = (char *) (what + r);
             char * ptrEnd = nullptr;
             if (what[r] == '$' && spptr != nullptr && (ptrEnd = strpbrk(ptrBegin, " );")) != nullptr) {
@@ -53,25 +37,27 @@ void bsvline(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC f
                 r += varNameLth;
                 const std::string varName = std::string(ptrBegin, varNameLth);
                 const std::string varValue = spptr->getDataByName(varName);
-                romit += varNameLth + 1;
-                romit -= varValue.length();
+                rOmit += varNameLth + 1;
+                rOmit -= varValue.length();
                 printf("%s", varValue.c_str());
             } else {
                 printf("%c", what[r]);
             }
 		}
 	}
-	for (r -= romit; r <= width; r++) {
+	for (r -= rOmit; r <= width; r++) {
         printf("%c", ' ');
     }
-	colorreset(colorold);
+    if (messages.size() && messages.back().isColorCommand) {
+        setColorByCommand(messages.back().text, "bsvLine colorReset " + messages.back().text);
+    }
 }
-// Update: Add Support For Colorful label <clrful->
+
 
 
 
 //copy this "<", ">", "(", ")", ";"
-void bsvlineDisableColors(PKC what, const int width, PKC brcmdbegin, PKC brcmdend, PKC fieldbegin, PKC fieldend, PKC tokens_term) {
+void bsvLineDisableColors(PKC what, const int width, PKC brcmdbegin, PKC brcmdend, PKC fieldbegin, PKC fieldend, PKC tokens_term) {
 
     int r = 0, r1 = 0, romit = 0;
 
