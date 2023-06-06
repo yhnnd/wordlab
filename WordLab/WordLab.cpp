@@ -28,18 +28,28 @@ int main(int argc,char **argv) {
 //	SetConsoleOutputCP(936);
 
 	{
-        vector<string> words= {
-                "can", "could", "must",
-                "do", "did", "does",
-                "be", "is", "are", "was", "were",
-                "for", "by",
-                "who", "what", "when", "how",
-//            "apple", "retain", "harm", "abandon", "joke", "ok",
-//            "though", "if",
-//            "your", "dad", "father", "grand",
-        };
+        {
+            const std::string s1 = "...1.2..3..", s2 = "...1.2..3..", delim = ".";
+            printf(R"(split("%s", "%s") =)", s1.c_str(), delim.c_str());
+            const auto vs = split(s1, delim);
+            for (const auto & v : vs) {
+                printf(" \"%s\"", v.c_str());
+            }
+            printf("\nreplace(\"%s\", \"%s\", \"+\") = \"%s\"\n", s2.c_str(), delim.c_str(), replace(s2, delim, "+").c_str());
+        }
 
         {
+            const vector<string> words= {
+                    "can", "could", "must",
+                    "do", "did", "does",
+                    "be", "is", "are", "was", "were",
+                    "for", "by",
+                    "who", "what", "when", "how",
+//                    "apple", "retain", "harm", "abandon", "joke", "ok",
+//                    "though", "if",
+//                    "your", "dad", "father", "grand",
+            };
+
             for (int i = 0; i < words.size(); ++i) {
                 const char * word = words[i].c_str();
                 const string sort = "\"" + sortOfWord(word) + "\"";

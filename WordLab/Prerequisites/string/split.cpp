@@ -40,7 +40,7 @@ std::vector<std::string> split(const std::string &line, const std::string &separ
 	return result;
 }
 
-std::string join(const std::vector<std::string> src, const char * c) {
+std::string join(const std::vector<std::string> src, const std::string joinWith) {
     using namespace std;
     std::string res = "";
     if(src.size() == 0) {
@@ -51,12 +51,19 @@ std::string join(const std::vector<std::string> src, const char * c) {
     res += *it;
 
     for (it++; it!=src.end(); it++) {
-        res += c;
+        res += joinWith;
         res += *it;
     }
     return res;
 }
 
-std::string replace(const std::string src, const std::string separators, const char * replaceWith) {
-    return join(split(src, separators), replaceWith);
+std::string replace(const std::string src, const std::string subStr, const std::string replaceWith) {
+    std::string s = src;
+    size_t pos = 0;
+    while ((pos = s.find(subStr, pos)) != std::string::npos) {
+        s.erase(pos, subStr.length());
+        s.insert(pos, replaceWith);
+        pos += replaceWith.length();
+    }
+    return s;
 }

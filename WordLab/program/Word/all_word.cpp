@@ -32,8 +32,8 @@ struct phraseSearchResult {
     std::string message = "";
 };
 
-struct phraseSearchResult getPhraseDefinitions(int phraseLth, std::vector<std::string> phrase);
-struct phraseSearchResult getPhraseDefinitions(std::string msg);
+struct phraseSearchResult getPhraseDefinitions(int phraseLth, std::vector<std::string> phrase, bool ignoreCase);
+struct phraseSearchResult getPhraseDefinitions(std::string msg, bool ignoreCase);
 
 #include "WLChinese/definitionColor.cpp"
 #include "WLChinese/WLChineseCore.cpp"

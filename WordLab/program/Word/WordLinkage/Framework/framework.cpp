@@ -47,7 +47,7 @@ int WLFramework(void) {
             inputText.erase(tokenPosition, 1);// remove '#'
 			FirstLetter = WLTools(inputText);
 		} else if (inputText.find(" ") != std::string::npos) {
-			if (!WLSearchPhrase(inputText) && CL) {
+			if (!WLSearchPhrase(inputText, true) && CL) {
                 FirstLetter = AddNew(inputText);
             }
 		} else if (inputText.empty() == true || inputText.length() > 30) {

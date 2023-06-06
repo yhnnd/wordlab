@@ -1,4 +1,3 @@
-#define KEY_ENTER           13
 #define KEY_CARRIAGE_RETURN 13
 #define KEY_NEW_LINE        10
 #define KEY_ESC             27

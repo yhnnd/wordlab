@@ -1,4 +1,4 @@
-struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::vector<std::string> phrase) {
+struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::vector<std::string> phrase, const bool ignoreCase) {
 
     const std::string route = PhraseRouteA + toString(phraseLth) + PhraseRouteB;
     ifstream fin(route);
@@ -6,9 +6,8 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
     struct phraseSearchResult result;
 
     if (fin) {
-        result.phrase = phrase;
-        result.phraseLth = phraseLth;
-        result.phrase = phrase;
+        result.phraseLth = 0;
+        result.phrase = {};
         result.lineNo = 0;
 
         const std::string searchKey = "," + join(phrase, ",") + ",";
@@ -16,13 +15,25 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
 //        printf ("phraseLth = %d, phrase = \"%s\"\n", phraseLth, searchKey.c_str());
 //        getch();
 
+        const auto isMatchedIgnoreCase = [] (const std::string line, const std::string searchKey) {
+            const std::string src = line.substr(0, searchKey.length());
+            if (strnicmp(src.c_str(), searchKey.c_str(), searchKey.length()) == 0) {
+                const char key = popup("do you mean \"", trim(replace(src, ",", " ")), "\" ?", 3000);
+                return key == KEY_NEW_LINE || key == KEY_CARRIAGE_RETURN;
+            } else {
+                return false;
+            }
+        };
+
         std::string line = "";
 
         while (std::getline(fin, line)) {
             ++ result.lineNo;
-            if (line.find(searchKey) == 0) {
+            if (line.find(searchKey) == 0 || isMatchedIgnoreCase(line, searchKey) == true) {
                 fin.close();
                 result.status = phraseSearchResultStatus::succeeded;
+                result.phraseLth = phraseLth;
+                result.phrase = split(line.substr(0, searchKey.length()), ",");
                 result.defsLine = line;
                 result.defs = line.erase(line.find_last_not_of(";") + 1).substr(searchKey.length());
                 result.defsVector = split(result.defs, ",");
@@ -35,7 +46,7 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
                         result.message = target;
 //                        printf("target = \"%s\"\n", target.c_str());
 //                        getch();
-                        const struct phraseSearchResult targetResult = getPhraseDefinitions(target);
+                        const struct phraseSearchResult targetResult = getPhraseDefinitions(target, false);
                         result.defsLine = targetResult.defsLine;
                         result.defs = targetResult.defs;
                         result.defsVector = targetResult.defsVector;
@@ -62,13 +73,13 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
 }
 
 
-struct phraseSearchResult getPhraseDefinitions(const std::string msg) {
+struct phraseSearchResult getPhraseDefinitions(const std::string msg, const bool ignoreCase) {
     if (msg.find(" ") != std::string::npos) {
         std::vector<std::string> phrase = split(msg, " ");
-        return getPhraseDefinitions(phrase.size(), phrase);
+        return getPhraseDefinitions(phrase.size(), phrase, ignoreCase);
     } else if (msg.find(",") != std::string::npos) {
         std::vector<std::string> phrase = split(msg, ",");
-        return getPhraseDefinitions(phrase.size(), phrase);
+        return getPhraseDefinitions(phrase.size(), phrase, ignoreCase);
     } else {
         struct phraseSearchResult result;
         result.status = phraseSearchResultStatus::failed;
@@ -78,9 +89,9 @@ struct phraseSearchResult getPhraseDefinitions(const std::string msg) {
 }
 
 
-int WLSearchPhrase(const std::string msg) {
+int WLSearchPhrase(const std::string msg, const bool ignoreCase) {
 
-    const struct phraseSearchResult result = getPhraseDefinitions(msg);
+    const struct phraseSearchResult result = getPhraseDefinitions(msg, ignoreCase);
 
     if (result.status == phraseSearchResultStatus::succeeded) {
 
@@ -94,7 +105,7 @@ int WLSearchPhrase(const std::string msg) {
 
         gotoxy(0, BeginY);
         setForegroundColorAndBackgroundColor("grn-", "-blk");
-        printf(" %d / %d \"%s\"", result.phraseLth, result.lineNo, msg.c_str());
+        printf(" %d / %d \"%s\"", result.phraseLth, result.lineNo, join(result.phrase, " ").c_str());
 
         if (result.message.empty() == false) {
             setForegroundColorAndBackgroundColor("#red-", "-ylw");

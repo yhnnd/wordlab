@@ -243,8 +243,12 @@ template <typename T> std::string toString(const T & object);
 template <typename T> int toInt(const T& object);
 bool strHasSubseq(std::string line,std::string pattern);
 bool match(std::string line,std::string pattern);
-std::string strfilter(std::string line,std::string pattern,std::string replacewith);
+std::string strFilter(std::string line, std::string pattern, std::string replaceWith);
 std::vector<std::string> split(const std::string &s, const std::string &seperator);
+std::string join(std::vector<std::string> src, std::string joinWith);
+std::string replace(std::string src, std::string, std::string replaceWith);
+std::string trim(std::string s, std::string whitespace = " ");
+
 //error
 int errorLog(std::string s1, std::string s2, std::string s3= "");
 //read file

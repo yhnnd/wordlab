@@ -1,4 +1,4 @@
-std::string trim(std::string s, const std::string whitespace = " ") {
+std::string trim(std::string s, const std::string whitespace) {
 	if (s.empty()) {
         return s;
     }

@@ -82,7 +82,7 @@ int sts::Translation(int lth, int LineNumber, char * result, const size_t size) 
                         const std::string indicator_phrase = "PHRASE ";
                         if (result_msg.find(indicator_phrase) == 0) {
                             const std::string target_phrase = result_msg.substr(indicator_phrase.length());
-                            phraseSearchResult phResult = getPhraseDefinitions(target_phrase);
+                            phraseSearchResult phResult = getPhraseDefinitions(target_phrase, false);
                             if (phResult.status == phraseSearchResultStatus::succeeded) {
                                 const std::string phraseDefinition = phResult.defsVector[0];
                                 strncpy(result, phraseDefinition.c_str(), phraseDefinition.length());

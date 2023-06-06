@@ -17,7 +17,7 @@ START:
 
 			if (fontcolor == 2) {
                 return line.substr(0, lth);// Interface for scan(A) engine
-            } else if (line.find("/redirected./") != string::npos) {//Addon that support redirect definition
+            } else if (line.find("/redirected./") != string::npos) {// Addon that support redirect definition
 				++redirect_times;
 				lth = number = 0;
 				const std::string redirect_result_msg = ChineseRedirect(line, lth, number);
@@ -26,7 +26,7 @@ START:
                     goto START;
                 } else if (redirect_result_msg.find(indicator_phrase) == 0) {
                     const std::string phrase = redirect_result_msg.substr(indicator_phrase.length());
-                    const struct phraseSearchResult phResult = getPhraseDefinitions(phrase);
+                    const struct phraseSearchResult phResult = getPhraseDefinitions(phrase, false);
                     if (phResult.status == phraseSearchResultStatus::succeeded) {
                         const std::string phraseDefinition = phResult.defsVector[0];
                         return "<ylw-#red>( REDIRECT Ph )<#red-ylw>( " + phrase + " ) " + phraseDefinition;
