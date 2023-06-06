@@ -1,6 +1,6 @@
 int WLFramework(void) {
-	int lth = 0;
-    char s[32] = "", FirstLetter = 0;
+    char FirstLetter = 0;
+    std::string inputText = "", prevInputText = "";
 	if (VL and db_is_secure(false, true) == false) {
         getch();
     }
@@ -17,42 +17,49 @@ int WLFramework(void) {
 	for (;;) {
         // INPUT DATA
 		if (FirstLetter != 13 && FirstLetter != 10) {
-			memset(s, 0, sizeof(s));
+            char * inputChars = (char *) calloc(64, sizeof(char));
 			if (isalpha(FirstLetter)) {
-                s[0] = FirstLetter;
-                index(s, 10, 9, lightgreen, 1);
+                inputChars[0] = FirstLetter;
+                index(inputChars, 10, 9, lightgreen, 1);
             } else {
-                index(s, 10, 9, lightgreen, 0);
+                index(inputChars, 10, 9, lightgreen, 0);
             }
 
 			FirstLetter = 0;
 
-            strcpy(s, trim(s).c_str());
-			lth = strlen(s);
+            inputText = trim(inputChars).c_str();
+            free(inputChars);
+
+            if (inputText == "#") {
+                // Restore Previous Input Text
+                inputText = prevInputText;
+            } else if (inputText == "##") {
+                // Options for Previous Input Text
+                inputText = prevInputText + "#";
+            } else {
+                // Record Input Text
+                prevInputText = inputText;
+            }
 		}
 		// PROCESS DATA
-		char * ptr_token = strstr(s, "#");
-		if (ptr_token != nullptr) {
-			(*ptr_token) = 0;// remove #
-			if (*(ptr_token + 1) != '\0') {
-                strcpy(ptr_token, ptr_token + 1);
+		const std::string::size_type tokenPosition = inputText.find("#");
+        if (tokenPosition != std::string::npos) {
+            inputText.erase(tokenPosition, 1);// remove '#'
+			FirstLetter = WLTools(inputText);
+		} else if (inputText.find(" ") != std::string::npos) {
+			if (!WLSearchPhrase(inputText) && CL) {
+                FirstLetter = AddNew(inputText);
             }
-			// re-order the word after removing #
-			FirstLetter = WLTools(s);
-		} else if (strindex(s, " ") >= 0) {
-			if (!WLSearchPhrase(s) && CL) {
-                FirstLetter = AddNew(s);
-            }
-		} else if (lth <= 0 || lth > 30) {
+		} else if (inputText.empty() == true || inputText.length() > 30) {
             return -1;
         } else {
 			const int BeginY = 5;
             clearScreen(0, BeginY, ScreenX, ScreenY - 1 - BeginY);
 			gotoxy(0, BeginY);
-			FirstLetter = WLFrameworkCore(s);
+			FirstLetter = WLFrameworkCore(inputText);
             if (FirstLetter == 0) {
                 gotoxy(0, BeginY + 3);
-                FirstLetter = WLDictionary(s);
+                FirstLetter = WLDictionary(inputText);
             }
 			if (FirstLetter == 8/* backspace */ || FirstLetter ==127/* delete */ || FirstLetter == 27/* escape */) {
                 return -1;

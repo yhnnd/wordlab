@@ -78,7 +78,7 @@ struct phraseSearchResult getPhraseDefinitions(const std::string msg) {
 }
 
 
-int WLSearchPhrase(const char *msg) {
+int WLSearchPhrase(const std::string msg) {
 
     const struct phraseSearchResult result = getPhraseDefinitions(msg);
 
@@ -94,7 +94,7 @@ int WLSearchPhrase(const char *msg) {
 
         gotoxy(0, BeginY);
         setForegroundColorAndBackgroundColor("grn-", "-blk");
-        printf(" %d / %d \"%s\"", result.phraseLth, result.lineNo, msg);
+        printf(" %d / %d \"%s\"", result.phraseLth, result.lineNo, msg.c_str());
 
         if (result.message.empty() == false) {
             setForegroundColorAndBackgroundColor("#red-", "-ylw");

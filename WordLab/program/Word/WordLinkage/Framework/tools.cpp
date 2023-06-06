@@ -1,4 +1,4 @@
-char WLTools(string s) {
+char WLTools(const std::string s) {
     popup("#setMode('y++');");
     popup("#enableBorderTop=true;");
     popup("#offsetY=0;");

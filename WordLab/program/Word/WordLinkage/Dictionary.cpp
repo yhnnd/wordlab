@@ -1,4 +1,4 @@
-char WLDictionary(string keyword) {
+char WLDictionary(const std::string keyword) {
 	char ReturnLetter = 0;
 	string DictionaryPageFileName(string(_data_dir)+"lang/structureddictionary/"+keyword+".sdv");
 	ifstream fin(DictionaryPageFileName);
