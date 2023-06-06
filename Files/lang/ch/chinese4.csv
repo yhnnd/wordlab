@@ -1,7 +1,7 @@
 abet ,/v./@幫助;
 able ,/aux./@能;,/adv./@有能力;
 ache ,/v./@疼;,/n./@疼痛;
-acid ,/n./@酸;
+acid ,/n./@酸;,/adj./@酸的;,/adj./@有酸味的;,/adj./@酸性的;,/adj./@尖酸的;
 acme ,/n./@頂點;,/n./@極點;
 acre ,/n./@英畝;
 aeon ,/n./@永世;,/n./@萬古;,/n./@極長時期;,/n./@十億年;
@@ -476,6 +476,7 @@ hurt ,/v./@傷害;
 hush ,/vt./@使沉默;,/vt./@使安靜;,/n./@靜寂;,/n./@沉默;
 hymn ,/n./@讚美詩;,/n./@聖歌;
 hype ,/v./@大肆宣傳;,/n./@不实宣传;,/n./@宣传骗局;,/vt./@夸张地宣传;
+hypo ,/redirected./@target="hypodermic";
 i've ,/v./@我已;
 icon ,/n./@圖標;
 idea ,/n./@想法;
