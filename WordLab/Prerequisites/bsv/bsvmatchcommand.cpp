@@ -1,5 +1,5 @@
 //返回 c 中符合 pattern 的字符串的个数
-int bsvMatchCommand(const char *c, const char pattern, int i, ...) {
+int prerequisites::bsvMatchCommand(const char *c, const char pattern, int i, ...) {
 	if (i <= 0) {
         return 0;
     }

@@ -1,5 +1,5 @@
 // display a bsv file
-int bsvLines(char **msgs,const int max,const int width,const char *folder,const int x,const int y,void *spptr) {
+int prerequisites::bsvLines(char **msgs,const int max,const int width,const char *folder,const int x,const int y,void *spptr) {
     PKC brcmdbegin = "<";
     PKC brcmdend = ">";
     PKC fieldbegin = "(";

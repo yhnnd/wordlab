@@ -25,10 +25,11 @@ std::string getCurrentTime() {
 #include "maths/all_maths.cpp"
 #include "dataContainer/all.cpp"// requires table
 #include "script/script_editor.cpp"
-#include "script/all.cpp"//requires Maths & dataContainer
-#include "bsv/all_bsv.cpp"//requires script
-#include "input.cpp"
+#include "script/all_script.cpp"//requires Maths & dataContainer
 }
+
+#include "input.cpp"
+#include "bsv/all_bsv.cpp"//requires script
 
 int launch(std::string);
 

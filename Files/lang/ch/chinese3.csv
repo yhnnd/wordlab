@@ -1,5 +1,6 @@
 act ,/v./@演;,/n./@動作;,/n./@行爲;
 add ,/v./@加;,/v./@增添;,/v./@补充;
+ado ,/n./@紛擾;,/n./@忙亂;,/n./@麻煩;,/n./@騷擾;
 age ,/n./@年齡;
 ago ,/adj./@以前;
 aid ,/n./@援助;
@@ -196,6 +197,7 @@ May ,/n./@五月;
 mea ,/pron./@我;
 men ,/n./@男人;
 met ,/v./@遇見;
+mic ,/redirected./@target="microphone";
 mid ,/n./@中;
 mix ,/v./@混合;
 mob ,/n./@暴民;

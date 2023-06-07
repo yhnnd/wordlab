@@ -8,7 +8,7 @@ void MessageWindow::Highlight(const char *msg) {
 }
 
 #include "background.cpp"
-#include "bsvmaxlths.cpp"
+#include "bsvLinesGetMaxPlainTextCharLengthOfSingleLine.cpp"
 #include "bsvviewer.cpp"
 #include "Frame/all_frame.cpp"
 #include "Crash/all_crash.cpp"

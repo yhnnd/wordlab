@@ -1,6 +1,5 @@
 #include "bsvmatchcommand.cpp"
 #include "cmdcolor.cpp"
-#include "maxlth.cpp"
 #include "error.cpp"//error log
 #include "line.cpp"//single bsv line
 #include "labelenter.cpp"//open a label-linked file

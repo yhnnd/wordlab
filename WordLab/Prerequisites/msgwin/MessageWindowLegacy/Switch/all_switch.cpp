@@ -78,7 +78,7 @@ int MessageWindow::SearchCore(int showpos,int x,int y,int width,const char *msg,
 
     recordColor(colorprev, "SearchCore");
 
-    gotoxy(x + 5 + bsvmaxlth(msg+showpos*w,"</",">/","()",",;"), y + 1 + showpos);
+    gotoxy(x + 5 + bsvLineGetPlainText(msg + showpos * w, "<", ">", "(", ")", ";").length(), y + 1 + showpos);
     printf("%s", keyword);
 
     int r, n = -1;

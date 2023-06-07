@@ -1,4 +1,4 @@
-WORD getColorByCommand(const char * msg) {
+WORD prerequisites::getColorByCommand(const char * msg) {
 	bool flag = false;
 	WORD color= 0;
     // foreground light
@@ -140,12 +140,12 @@ WORD getColorByCommand(const char * msg) {
 }
 
 
-bool isCommandColorCommand(const std::string cmd) {
+bool prerequisites::isCommandColorCommand(const std::string cmd) {
     return getColorByCommand(cmd.c_str()) != 0 || cmd.find("blk-") == 0 || cmd.find("-blk") != std::string::npos;
 }
 
 
-int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd,
+int prerequisites::setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd,
                                          const std::string backgroundColorCmd,
                                          const std::string caller) {
     const WORD foregroundColor = getColorByCommand(foregroundColorCmd.c_str());
@@ -195,13 +195,13 @@ int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd,
 #endif
 }
 
-int setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd,
+int prerequisites::setForegroundColorAndBackgroundColor(const std::string foregroundColorCmd,
                                          const std::string backgroundColorCmd) {
     return setForegroundColorAndBackgroundColor(foregroundColorCmd, backgroundColorCmd, "setForegroundColorAndBackgroundColor");
 }
 
 
-int setColorByCommand(const std::string cmd, const std::string caller) {
+int prerequisites::setColorByCommand(const std::string cmd, const std::string caller) {
     if (cmd.find(";") != std::string::npos) {
         setColorByColorCode(cmd, caller, "setColorByCommand");
         return 0;

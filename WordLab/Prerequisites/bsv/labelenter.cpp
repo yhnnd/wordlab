@@ -1,4 +1,4 @@
-int bsvLabelEnter(PKC folder, PKC label, int x, const int y, int width, PKC color, void *spptr) {
+int prerequisites::bsvLabelEnter(PKC folder, PKC label, int x, const int y, int width, PKC color, void *spptr) {
 
 	char route[128], labelname[32], labelvalue[32];
 	int i = 0, r = 0;

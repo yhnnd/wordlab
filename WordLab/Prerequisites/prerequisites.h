@@ -450,9 +450,10 @@ int bsvMatchCommand(const char * c,const char pattern, int i,...);
 WORD getColorByCommand(const char * msg);
 bool isCommandColorCommand(const std::string);
 int setColorByCommand(const std::string msg, const std::string caller);
-int bsvmaxlth(PKC msg,PKC br1,PKC br2,PKC omit,PKC term);
+
 void bsvLine(PKC what, int width = 0, PKC brcmdbegin="<", PKC brcmdend=">", PKC fieldbegin="(", PKC fieldend=")", PKC tokens_term=";", scriptprocessor *spptr = nullptr);
-void bsvLineDisableColors(PKC what,int width,PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",PKC tokens_term=";");
+void bsvLineDisableColors(PKC what, int width, PKC brcmdbegin="<", PKC brcmdend=">", PKC fieldbegin="(", PKC fieldend=")", PKC tokens_term=";");
+std::string bsvLineGetPlainText(PKC what, PKC brcmdbegin="<", PKC brcmdend=">", PKC fieldbegin="(", PKC fieldend=")", PKC tokens_term=";");
 int bsvError(PKC s1,PKC s2,PKC s3);
 int bsvLabelEnter(PKC folder,PKC label,int x,int y,int width,PKC color="wte-blu",void *spptr = nullptr);
 int bsvLineLabels(PKC what,const int labelchosen,int labelnow,const bool enter,PKC folder,const int x,const int y,const int width=0,PKC labelcolor="wte-gry",PKC entercolor="wte-blu",PKC brcmdbegin="<",PKC brcmdend=">",PKC fieldbegin="(",PKC fieldend=")",void *spptr= nullptr);

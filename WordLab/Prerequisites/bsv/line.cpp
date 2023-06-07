@@ -1,5 +1,5 @@
 // copy this "<", ">", "(", ")", ";"
-void bsvLine(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fieldend,PKC tokens_term, scriptprocessor *spptr) {
+void prerequisites::bsvLine(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC fieldend,PKC tokens_term, prerequisites::scriptprocessor *spptr) {
 	int r = 0, rOmit = 0;
     struct command {
         std::string text = "";
@@ -56,8 +56,8 @@ void bsvLine(PKC what,int width,PKC brcmdbegin,PKC brcmdend,PKC fieldbegin,PKC f
 
 
 
-//copy this "<", ">", "(", ")", ";"
-void bsvLineDisableColors(PKC what, const int width, PKC brcmdbegin, PKC brcmdend, PKC fieldbegin, PKC fieldend, PKC tokens_term) {
+// copy this "<", ">", "(", ")", ";"
+void prerequisites::bsvLineDisableColors(PKC what, const int width, PKC brcmdbegin, PKC brcmdend, PKC fieldbegin, PKC fieldend, PKC tokens_term) {
 
     int r = 0, r1 = 0, romit = 0;
 
@@ -84,4 +84,28 @@ void bsvLineDisableColors(PKC what, const int width, PKC brcmdbegin, PKC brcmden
             printf("%c", ' ');
         }
     }
+}
+
+// copy this "<", ">", "(", ")", ";"
+std::string prerequisites::bsvLineGetPlainText(PKC what, PKC brcmdbegin, PKC brcmdend, PKC fieldbegin, PKC fieldend, PKC tokens_term) {
+
+    int r = 0, r1 = 0, rOmit = 0;
+    std::string plainText = "";
+
+    for (r = 0; what[r] != '\n' && what[r] != 0 && strchr(tokens_term, what[r]) == nullptr; r++) {
+        if(what[r-1]!='\\'&&strchr(brcmdbegin,what[r])) {
+            for (r++, r1=0; what[r - 1] == '\\' || !strchr(brcmdend,what[r]); r++, r1++) {
+            }
+            rOmit += r1 + 2;
+        } else if(what[r-1]!='\\'&&strchr(fieldbegin,what[r])) {
+            rOmit++;
+        } else if(what[r-1]!='\\'&&strchr(fieldend,what[r])) {
+            rOmit++;
+        } else if(what[r]=='\\'&&strchr("()<>",what[r+1])) {
+            rOmit++;
+        } else {
+            plainText.push_back(what[r]);
+        }
+    }
+    return plainText;
 }

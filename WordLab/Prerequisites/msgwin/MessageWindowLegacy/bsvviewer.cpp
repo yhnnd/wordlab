@@ -11,16 +11,16 @@ int MessageWindow::bsvviewer(const char *route,bool _Animation,int x,int y,int w
 	}
 
 	char msgs[height][linemax];
-	loadmsg((char*)msgs,route,height,linemax,1,1);
+	loadmsg((char*)msgs, route, height, linemax, 1, 1);
 	if (height == 1) {
 		alert("<-wte>(no data in file",0,20,5,36,4,10);
 		return 0;
 	}
-	strcpy(msgs[height-1],"exit");
+	strcpy(msgs[height - 1], "exit");
 
-	width = bsvmaxlths(msgs,"<",">","()",";");
-	if (w>0&&width>w) {
-        width=w;
+	width = bsvLinesGetMaxPlainTextCharLengthOfSingleLine(msgs, height, "<", ">", "(", ")", ";");
+	if (w > 0 && width > w) {
+        width = w;
     }
 
 	bool background = SetBackground(true), monochrome = SetMonochrome(true);

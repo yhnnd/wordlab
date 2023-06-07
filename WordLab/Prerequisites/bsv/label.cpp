@@ -1,7 +1,6 @@
-//copy this "</","/>","(",")"
+//copy this "<", ">", "(", ")"
 
-
-int bsvLineLabels(PKC what,const int labelchosen,int labelnow,const bool enterKeyIsPressed,PKC folder,
+int prerequisites::bsvLineLabels(PKC what,const int labelchosen,int labelnow,const bool enterKeyIsPressed,PKC folder,
 const int x,const int y,const int width,
 PKC labelcolor,PKC enterColor,
 PKC brcmdbegin,PKC brcmdend,

@@ -1,7 +1,7 @@
 //copy this: 0,20,5,36,4,10
 int MessageWindow::alert(const char *s,int n,int x,int y,int width,int p,int h){
 	int linesize = width + strlen(s);
-	int leftborder = (width-bsvmaxlth(s,"<",">","()",",;")) / 2;
+	int leftborder = (width - bsvLineGetPlainText(s, "<", ">", "(", ")", ";").length()) / 2;
 	char msg[h][linesize];
 	memset(msg,0,sizeof(msg));
 	for(int r = 0; r < h; r++){// set each line

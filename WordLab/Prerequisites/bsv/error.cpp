@@ -1,4 +1,4 @@
-int bsvError(const char *s1,const char *s2,const char *s3){
+int prerequisites::bsvError(const char *s1,const char *s2,const char *s3){
 	char msg[strlen(s1)+strlen(s2)+strlen(s3)-2];
 	strcpy(msg,s1);
 	strcat(msg,s2);

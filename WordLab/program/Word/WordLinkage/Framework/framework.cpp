@@ -38,13 +38,13 @@ int WLFramework(void) {
                 inputText = prevInputText + "#";
             } else {
                 // Record Input Text
-                prevInputText = inputText;
+                prevInputText = replace(inputText, "#", "");
             }
 		}
 		// PROCESS DATA
 		const std::string::size_type tokenPosition = inputText.find("#");
         if (tokenPosition != std::string::npos) {
-            inputText.erase(tokenPosition, 1);// remove '#'
+            inputText = replace(inputText, "#", "");// remove '#'
 			FirstLetter = WLTools(inputText);
 		} else if (inputText.find(" ") != std::string::npos) {
 			if (!WLSearchPhrase(inputText, true) && CL) {

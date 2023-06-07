@@ -6,7 +6,7 @@ char WordDelete(const string word) {
 		Dialog.output("Can not find \"" + word + "\".");
 		goto end;
 	}
-	Dialog.output("Delete " + word + "?");
+	Dialog.output("Delete \"" + word + "\" ?");
     ch = getch();
 	if (ch == 13 || ch == 10) {
 		if(!User.login()) {
