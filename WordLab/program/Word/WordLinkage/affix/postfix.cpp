@@ -5,7 +5,7 @@ int postfix(int lth,string word) {
 		{"ant","ary","age","ate","ble","ect","ent","ess","est","ful","gue","ice","ise","ist","ive","ize","ion","ity","ism","ing","ory","ous","ply","ury","yze","yse","#"},
 		{"able","ible","tual","icit","ment","ness","less","some","ster","tain","tion","ture","#"},
 		{"cient","ation","istic","stant","spect","#"},
-		{"stance","#"},
+		{"phobia", "stance", "#"},
 		{"#"},
 		{"#"},
 		{"ification","#"}
