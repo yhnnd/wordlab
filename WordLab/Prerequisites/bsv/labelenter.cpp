@@ -18,7 +18,7 @@ int prerequisites::bsvLabelEnter(PKC folder, PKC label, int x, const int y, int 
 	if (strcmp(labelname,"button") == 0) { // open a Script file
 		strcat(route,"main.js");
 		// check script file
-		const int max = filelines(route,1);
+		const int max = fileLines(route, 1);
 		if(max <= 0) {
 			bsvError("<-ylw>( bsv label enter )<-red>( error )<-wte>( \\(",route,"\\) is void");
 			return -1;
@@ -44,7 +44,7 @@ int prerequisites::bsvLabelEnter(PKC folder, PKC label, int x, const int y, int 
 		strcat(route, labelvalue);
 		strcat(route,".bsv");
 		// check bsv file
-		const int max = filelines(route,1);
+		const int max = fileLines(route, 1);
 		if (max <= 0) {
 			bsvError("<-ylw>( bsv label enter )<-red>( error )<-wte>( \\(",route,"\\) is void");
 			return -1;

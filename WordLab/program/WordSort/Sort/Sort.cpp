@@ -7,7 +7,7 @@ std::map<int, std::string> WordSort(const char *s, const set<int> preferredSortS
 
 	FILE *fp = Library(lth,EN,"r");
 
-	int NOL = filelines(fp,false);
+	int NOL = fileLines(fp, false);
 
 	for (k = 1; k <= NOL; k++) {
 

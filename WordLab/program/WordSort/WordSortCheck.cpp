@@ -1,5 +1,5 @@
 void WordSortCheck(){
-	int max=filelines(SpecialWordsRoute,true);
+	int max= fileLines(SpecialWordsRoute, true);
 	if(max<=0){
 		popup("cannot find <red>(",SpecialWordsRoute,")",-1);
 		return;

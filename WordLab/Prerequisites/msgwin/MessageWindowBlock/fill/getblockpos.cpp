@@ -1,14 +1,14 @@
-COORD messageblock::getBlockPos(int r){
-	COORD bpos;
-	if(r<=npl){
-		bpos.X=x+(r-1)*(bw+xcleft);
-		bpos.Y=y;
-	}else if(r%npl){
-		bpos.X=x+(r%npl-1)*(bw+xcleft);
-		bpos.Y=y+(r/npl)*(bh+ycleft);
+COORD messageBlocks::getBlockPos (int r) {
+	COORD blockPos;
+	if (r <= numPerLine) {
+        blockPos.X = x + (r - 1) * (blockWidth + xCleft);
+        blockPos.Y = y;
+	}else if (r % numPerLine) {
+        blockPos.X = x + (r % numPerLine - 1) * (blockWidth + xCleft);
+        blockPos.Y = y + (r / numPerLine) * (blockHeight + yCleft);
 	}else{
-		bpos.X=x+(npl-1)*(bw+xcleft);
-		bpos.Y=y+(r/npl-1)*(bh+ycleft);
+        blockPos.X = x + (numPerLine - 1) * (blockWidth + xCleft);
+        blockPos.Y = y + (r / numPerLine - 1) * (blockHeight + yCleft);
 	}
-	return bpos;
+	return blockPos;
 }

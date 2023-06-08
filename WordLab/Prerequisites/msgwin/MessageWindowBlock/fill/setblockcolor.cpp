@@ -1,4 +1,4 @@
-void messageblock::setBlockColor(const int colortype,const int signal,const bool flag){
+void messageBlocks::setBlockColor(const int colortype, const int signal, const bool flag){
 	if(signal) {
         ColorfulBDim(colortype);//unchosen
     } else if(flag) {

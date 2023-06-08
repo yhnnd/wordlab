@@ -1,4 +1,4 @@
-void messageblock::adjustShowAll(int r){
+void messageBlocks::adjustShowAll(int r){
 
 	recordColor(colorprev, "adjustShowAll");
 
@@ -12,11 +12,11 @@ void messageblock::adjustShowAll(int r){
             setColor(backdarkwhite, "adjustShowAll");
 			std::cout<<"   ";
 		}
-		for (int r=0;r<=aww;r++) {
+		for (int r=0; r <= adjustWindowWidth; r++) {
             std::cout<<" ";
         }
 		gotoxy(x+4,y+1+n);
-		adjusttitle(n,1);
+        adjustTitle(n, 1);
     }
     resetColor(colorprev, "adjustShowAll");
 }

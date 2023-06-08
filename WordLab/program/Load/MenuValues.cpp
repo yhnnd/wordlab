@@ -1,6 +1,6 @@
 void load::Values() {
 	const int x = 12, y = 9, width = 36;
-	const int total = filelines(SetValuesRoute"en.csv",true) - 2;
+	const int total = fileLines(SetValuesRoute"en.csv", true) - 2;
 	if (total <= 0) {
         popup("<Critical Error> SetValues menu file lost",-1);
         return;

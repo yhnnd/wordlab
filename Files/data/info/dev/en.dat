@@ -16,7 +16,7 @@ launch:       developer zone
 findinfile:   find msg in a file
 findstrict:   find msg in a file strictly
 findinfolder: find msg in files in a folder
-folderdir:    get all filenames in a folder
+folderDir:    get all filenames in a folder
 libra:        english library
 trans:        chinese library
 contri:       library contributer

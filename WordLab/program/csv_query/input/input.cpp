@@ -26,14 +26,14 @@ int csvQueryInput(char *query,const int beginPoint,int lthmax,const vector<sts::
         if (i > 0) {
             terms.push_back(' ');
         }
-		if (inputcore(msg, 0, true, terms, suggests, true, {static_cast<short>(inputPos.X + strlen(query)), inputPos.Y}) == -1) {
+		if (inputCore(msg, 0, true, terms, suggests, true, {static_cast<short>(inputPos.X + strlen(query)), inputPos.Y}) == -1) {
 			if (i == 0 && msg[0] == '\0' && query[0] == '\0') {
                 return 0;
             } else {
                 setForegroundColorAndBackgroundColor("blk-", "-red");
                 cout<<"\b \b";
                 setForegroundColorAndBackgroundColor("blu-", "-gry");
-                if (inputcore(query, strlen(query), true, {13, 10}, suggests, true, inputPos) == -1) {
+                if (inputCore(query, strlen(query), true, {13, 10}, suggests, true, inputPos) == -1) {
                     strcat(query," ");
                     return 0;
                 }

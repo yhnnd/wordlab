@@ -1,4 +1,4 @@
-int inputcore(char *msg,int BEGIN,bool DISPLAY,const vector<char> terms,const char *suggests,bool AllowNull,const COORD SuggestsWindowPos) {
+int inputCore(char *msg, int BEGIN, bool DISPLAY, const vector<char> terms, const char *suggests, bool AllowNull, const COORD SuggestsWindowPos) {
 	int r;
 	char c;
 

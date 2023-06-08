@@ -18,7 +18,7 @@ public:
     void Engines();
     void Values();
     int mainUserInterface(const std::string foldername,int x,int y,int width,int Times,int nprev);
-    string lastlaunch();
+    string lastLaunch();
     void UpdateCheck(string msg);
     int UpdateDatabase(string route);
     void UpdateSoftware(string route);

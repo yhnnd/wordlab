@@ -92,7 +92,7 @@ void sts::fileIn(char msg[][LINEMAX],const char *route) {
 
 
 bool sts::WordCutter(char *word) {
-    int nAffix = 0, trimLth = 0, wordLth = strlen(word), max = filelines(AffixCutRoute,true);
+    int nAffix = 0, trimLth = 0, wordLth = strlen(word), max = fileLines(AffixCutRoute, true);
     char AffixTexts[max][LINEMAX], AffixDefs[max][LINEMAX];
     fileIn(AffixTexts, AffixCutRoute);
     fileIn(AffixDefs, AffixAddRoute);

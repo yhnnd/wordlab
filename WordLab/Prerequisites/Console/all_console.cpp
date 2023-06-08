@@ -5,5 +5,5 @@
 #include "clearline.cpp"
 #include "clearScreen.cpp"
 
-#define recordxy(pos) COORD pos = getxy()
+#define recordxy(pos) const COORD pos = getxy()
 #define resetxy(pos) gotoxy(pos.X, pos.Y)

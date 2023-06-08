@@ -1,18 +1,18 @@
-int MonitorActivate(){
+int prerequisites::MonitorActivate(){
     error_monitor_lock = buffer_monitor_lock = 1;
     return 0;
 }
-int MonitorDisable(){
+int prerequisites::MonitorDisable(){
     error_monitor_lock = buffer_monitor_lock = 0;
     return 0;
 }
-int MonitorGetNumber(){
+int prerequisites::MonitorGetNumber(){
     return error_monitor_lock + buffer_monitor_lock;
     return 0;
 }
 
-int monitorShow(int x,int y) {
-    const int n = MonitorGetNumber();
+int prerequisites::monitorShow(int x,int y) {
+    const int n = prerequisites::MonitorGetNumber();
     recordColor(colorPrev, "monitorShow");
     if (n >= 2) {
         setColor(backgreen, "monitorShow");
@@ -30,23 +30,26 @@ int monitorShow(int x,int y) {
     return n;
 }
 
-void monitorSet(bool *lock) {
-    int x=0,y=1,width=ScreenX-10-x;
+void prerequisites::monitorSet(bool *lock) {
+    const int x = 0, y = 1, width = ScreenX - 10 - x;
+
     if (deny(*lock, *lock)) {
         MonitorActivate();
     } else {
         MonitorDisable();
     }
-    progressbar Bar(1,0);
-    for(int i=0;i<=width;i++,Sleep(1000/width)) {
-        Bar.show(x+4,0,0,i,width);
+
+    progressBar Bar(1, 0, 1);
+    for (int i = 0; i <= width; i++, Sleep(1000 / width)) {
+        Bar.show(x + 4, y, 0, i, width);
     }
+
     popup (
         "<-wte>(monitor  ",
         (*lock)?"<grn-wte>(ON )":"<red-wte>(OFF)",
         "  ",
         "<grn-wte> (enabled) ",toString(MonitorGetNumber()),
-        "<red-wte> (disabled) ",toString(2-MonitorGetNumber()),
+        "<red-wte> (disabled) ",toString(2 - MonitorGetNumber()),
         0);
 }
 

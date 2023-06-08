@@ -1,5 +1,5 @@
-//Attention: noKbhit should differ from Kbhit
-char wait(const int Life, const int Interval, const bool Getch, const char noKbhit, const int Kbhit) {
+// Attention: noKbhit should differ from Kbhit
+char prerequisites::wait(const int Life, const int Interval, const bool Getch, const char noKbhit, const int Kbhit) {
 #ifdef __APPLE__
     if (Life < 0 || Getch == true) {
         fflush(stdin);

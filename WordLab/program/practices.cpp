@@ -71,7 +71,7 @@ void practices() {
                 "                                                <wte->("
             };
             popup("#time=reset();");
-            popup(set_mode_y_is_constant);
+            popup(setModeYIsConstant);
             popup("<-ylw>(step 1 of 3)<-grn>( set word.Length.Base )",0);
             key = MessageWindow.Confirm(5,15,5,52,&msgs1[0][0],9,128);
             fout<<"LengthBase = "<<(key>0&&key<5?key+2:5)<<";"<<endl;
@@ -121,7 +121,7 @@ void practices() {
                 popup("#time=reset();");
                 popup("#enableBorderTop=true;");
                 popup("#offsetY=1;", 0);
-                popup("#setMode('y++')", 0);
+                popup(setModeYAutoIncrement, 0);
                 popup("<-wte>(choose the appropriate translation of ",0);
                 // generate some word and some trans
                 time_t currtime;
@@ -166,7 +166,7 @@ void practices() {
                 // display result
                 popup("#time=clock();", 0);
                 popup("#offsetY=12;", 0);
-                popup("#setMode('y++')", 0);
+                popup(setModeYAutoIncrement, 0);
                 popup("<wte-blu>( result", 0);
                 popup(string(key == answer ? "<-grn>(" : "<-red>(") + "you've chose the "
                     + (key == answer ? "correct" : "wrong") + " answer", 0);
@@ -234,7 +234,7 @@ void practices() {
         }
     }// main loop
     popup("#record=reset();");
-    popup(set_mode_y_is_constant);
+    popup(setModeYIsConstant);
     popup("#offsetY=1;", 0);
     popup("#enableBorderTop=true;");
 }

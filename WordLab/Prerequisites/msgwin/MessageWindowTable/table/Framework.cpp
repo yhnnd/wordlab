@@ -1,5 +1,5 @@
 void Table::table(const char *filename, int x, int y, int width) {
-	const int rowMax = filelines(filename, true);
+	const int rowMax = fileLines(filename, true);
 	if (rowMax <= 0) {
         errorLog("table", "invalid file ", filename);
 		return;

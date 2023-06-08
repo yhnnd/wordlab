@@ -99,7 +99,7 @@ int multitask(const int x, const int y, const int width, char Menu[][LINEMAX], c
         }
 		a =  MessageWindow.Switch (x,y,width,&Menu[0][0],0,LINEMAX,n);
 	} else if(version==NEW) {
-        a = MessageBlock.Switcher(Menu);
+        a = MessageBlocks.Switcher(Menu);
     }
 #elif defined(__APPLE__)
     const int maxlength = MaxLength(&Menu[0][0],LINEMAX);
@@ -111,7 +111,7 @@ int multitask(const int x, const int y, const int width, char Menu[][LINEMAX], c
         }
         a =  MessageWindow.Switch (x,y,width,&Menu[0][0],0,LINEMAX,n);
     } else if (gui.version == versions::NEW) {
-        a = MessageBlock.Switcher(Menu);
+        a = MessageBlocks.Switcher(Menu);
     } else if (gui.version == versions::COMPACT) {
         const COORD pos = {static_cast<short>(x), static_cast<short>(y)};
         a = chooseFromMenu(pos, width, getVectorOfString(&Menu[0][0], maxlength, LINEMAX));

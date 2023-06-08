@@ -1,3 +1,3 @@
-int WLSearchSimilarSpelling(const string s, const int max) {
+int WLSearchSimilarSpelling(const std::string s, const int max) {
 	return 0;
 }

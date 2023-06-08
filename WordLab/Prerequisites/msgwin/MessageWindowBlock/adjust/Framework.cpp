@@ -1,11 +1,11 @@
-void messageblock::Adjust() {
+void messageBlocks::Adjust() {
 	int r = 1, T = 0, key;
 	recordColor(colorprev, "Adjust");
 	for (;;T = true) {
 	    if (T == 0) {
-            Show(x,y,aww,awh,awh);
+            Show(x, y, adjustWindowWidth, adjustWindowHeight, adjustWindowHeight);
         } else {
-            Frame(0,x,y,aww,awh,awh);
+            Frame(0, x, y, adjustWindowWidth, adjustWindowHeight, adjustWindowHeight);
         }
 		gotoxy(x+1,y+1);
         setColor(backdarkwhite, "Adjust");
@@ -28,19 +28,19 @@ void messageblock::Adjust() {
             }
 		}
 		if (r == 7) {
-            if (Report(x,y,aww,awh,ReportFileRoute)) {
+            if (Report(x, y, adjustWindowWidth, adjustWindowHeight, ReportFileRoute)) {
                 break;
             }
         } else {
 		    gotoxy(x+4,y+1+r);
-			adjusttitle(r,0);
+            adjustTitle(r, 0);
 			if (adjustset(r)) {
                 break;
             }
 		}
 	}
 	end:
-	defaultssave();
-	Erase(x,y,aww,awh);
+    defaultsSave();
+	Erase(x, y, adjustWindowWidth, adjustWindowHeight);
     resetColor(colorprev, "Adjust");
 }

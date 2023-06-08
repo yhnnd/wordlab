@@ -19,7 +19,7 @@ int WLSearch(string keyword, bool ignoreCase, bool printResult, char mode, bool 
     int Left = 0;// left boundary
     int Right = 0;// right boundary
     int number = 0;// result number
-    int Max = filelines(fp, 0);// number of words
+    int Max = fileLines(fp, 0);// number of words
     int compareResult = 0;// compare result
 
 	for(Left = 1, Right = Max; (Left < Right && (Left == 1 || Right == Max)) || (Left < Right - 1 && Left > 1 && Right < Max); ) {

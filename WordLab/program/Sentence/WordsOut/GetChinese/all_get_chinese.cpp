@@ -3,7 +3,7 @@ int sts::getChineseOfWord(const char *s, char * def, const size_t size) {
 	char c[32] = "";
 	int r, k, km, number = 0, lth = strlen(s);
 	FILE * fp = Library(lth, EN, "r");
-	int NOL = filelines(fp, false);
+	int NOL = fileLines(fp, false);
 	for (k = 1; k <= NOL; k++) {
 		fseek(fp, (k - 1) * (lth + 1), 0);
 		fread(&c, lth, 1, fp);
@@ -37,7 +37,7 @@ int sts::getChineseOfWord_S(const char *s, char * def, const size_t size, const 
 	char c[32] = "";
 	int r, k, km, number = 0, lth = strlen(s);
 	FILE * fp = Library(lth, EN, "r");
-	int NOL = filelines(fp, false);
+	int NOL = fileLines(fp, false);
 	for(k = 1; k <= NOL; k++) {
 		fseek(fp, (k - 1) * (lth + 1), 0);
 		fread(&c, lth, 1, fp);

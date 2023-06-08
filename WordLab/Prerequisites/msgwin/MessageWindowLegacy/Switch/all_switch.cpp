@@ -61,55 +61,56 @@ void MsgWinSwiShwChsCore(int radius,int x,int y,int width,const char *what){
 }
 
 void MsgWinSwiShowChoosed(int radius,int x,int y,int width,int n,const char *what,int max,int w){
-    for(int r=-radius;r<=radius;r++){
+    for(int r =-radius; r <= radius; r++) {
         MsgWinSwiShwChsCore(r,x,y+r,width,what+((n+r+max)%max)*w);
     }
 }
 
 
 // "Search"
-int MessageWindow::SearchCore(int showpos,int x,int y,int width,const char *msg,int max,int w,char *keyword) {
-
-    Frame(0, x, y, width, msg, max);
-
-    if (keyword[0] == '\0') {
-        return -1;
-    }
+int MessageWindow::SearchCore(int showPos, int x, int y, int width, const char *msg, int max, int w, const std::string keyword) {
 
     recordColor(colorprev, "SearchCore");
 
-    gotoxy(x + 5 + bsvLineGetPlainText(msg + showpos * w, "<", ">", "(", ")", ";").length(), y + 1 + showpos);
-    printf("%s", keyword);
+    Frame(0, x, y, width, msg, max);
+
+    if (keyword == "") {
+        return -1;
+    }
 
     int r, n = -1;
     for (r = 0; r < max; r++) {
-        if (strindex(msg+r*w, keyword) != -1) {
+        if (strindex(msg + r * w, keyword.c_str()) != -1) {
             gotoxy(x + 5, y + 1 + r);
-            bsvLineDisableColors(msg+r*w,width,"</","/>","(",")",",;");
+            bsvLineDisableColors(msg + r * w, width, "</", ">/", "(", ")", ",;");
             n = (n > 0) ? n: r;
         }
     }
+
+    gotoxy(x + 5 + bsvLineGetPlainText(msg + showPos * w, "</", ">/", "(", ")", ",;").length(), y + 1 + showPos);
+    printf(" ");
+    setForegroundColorAndBackgroundColor("ylw-", "-blk", "SearchCore");
+    printf("%s", keyword.c_str());
+
     resetColor(colorprev, "SearchCore");
     return n;
 }
 
 
-int MessageWindow::Search(int showpos,int x,int y,int width,const char *msg,int max,int w) {
-    char keyword[w], c;
-    int r, n= -1;
-    strclr(keyword);
-    for (r=0; (c = getch()) != 13 && c != 10;) {
+int MessageWindow::Search(const int showPos, const int x, const int y, const int width, const char *msg, const int max, const int w) {
+    char c;
+    std::string keyword = "";
+    int n = -1;
+    while ((c = getch()) != 13 && c != 10) {
         if (c == 8 || c == 127) {
-            keyword[r] = 0;
-            keyword[--r] = 0;
+            if (keyword.length() == 0) {
+                return -2;
+            }
+            keyword.pop_back();
         } else {
-            keyword[r++] = c;
-            keyword[r+1] = 0;
+            keyword.push_back(c);
         }
-        if (r < 0) {
-            return -2;
-        }
-        n = SearchCore(showpos,x,y,width,msg,max,w,keyword);
+        n = SearchCore(showPos, x, y, width, msg, max, w, keyword);
     }
     return n;
 }

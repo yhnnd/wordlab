@@ -11,7 +11,7 @@ struct history {
 
 void history::writer(PKC route, PKC title, const std::string msg, const int n) {
     status(title, ": Checking (", msg, ");");
-    if (findreverse(msg.c_str(),route)) {
+    if (findReverse(msg.c_str(), route)) {
         return;
     }
     status(title, ": Recording (", msg, ");");

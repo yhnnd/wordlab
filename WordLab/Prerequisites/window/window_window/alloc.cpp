@@ -1,6 +1,6 @@
 void window::alloc(){
-	text._RowMax = filelines(title) + 32;
-	text._ColMax = filelinesize(title) + 32;
+	text._RowMax = fileLines(title) + 32;
+	text._ColMax = fileLineSize(title) + 32;
 	text._alloc();
 }
 void window::alloc(int PageSize,int LineSize){

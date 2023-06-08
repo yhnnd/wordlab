@@ -36,9 +36,9 @@ class account {
 	}
 	account & show(int x,int y,int margin) {
 		if(IsLogin) {
-            msgbox(Person.getname().c_str(),x,y,margin,"-wte","-cyn");
+			messageBox(Person.getname().c_str(), x, y, margin, "-wte", "-cyn");
         } else {
-            msgbox("log in",x,y,margin,"-cyn","-blu");
+			messageBox("log in", x, y, margin, "-cyn", "-blu");
         }
 		return * this;
 	}

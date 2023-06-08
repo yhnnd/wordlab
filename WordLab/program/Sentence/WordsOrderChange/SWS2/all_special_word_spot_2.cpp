@@ -76,7 +76,7 @@ void sts::SWS2_FindNoun(int prepnumber) {
 
 //介词翻譯位置可能不正确
 void sts::SpecialWordSpot2Preposition() {
-    const int specialmax = filelines(SpecialWordsRoute,true);
+    const int specialmax = fileLines(SpecialWordsRoute, true);
     if( specialmax <= 0 ) {
         popup("cannot find <red>(",SpecialWordsRoute,")",0);
         return;

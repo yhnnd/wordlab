@@ -1,5 +1,5 @@
 int DeleteLine(const std::string route,const int n,bool LastLineNoReturn){
-	bool DELETE_LAST_LINE=(n==filelines(route,1));
+	bool DELETE_LAST_LINE=(n == fileLines(route, 1));
 	std::string bufname="buf.txt";
 	std::ifstream fin(route);
 	std::ofstream fbuf(bufname,std::ios::trunc);

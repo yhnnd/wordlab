@@ -56,12 +56,12 @@ int prerequisites::bsvLines(char **msgs,const int max,const int width,const char
         enterKeyPressed = 0;
 
         if (y > 3) {
-            popup("#setMode('y++')");
+            popup(setModeYAutoIncrement);
             popup("#offsetY=0;");
             popup("#enableBorderTop=true;");
             popup("BSV LINES: label chosen " + toString(chosenLabel), 0);
             popup("BSV LINES: Press [ENTER] or [W↑] [A←] [S↓] [D→] to switch labels.", 0);
-            popup("#setMode('y=1')", 0);
+            popup(setModeYIsConstant, 0);
         }
 
         // display bsv file name

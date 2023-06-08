@@ -11,7 +11,7 @@ int Search(const char *s, int lth, const bool ignoreCase) {
         return -1;//Xprmt'l updated on 2017.03.14
     }
 
-	int k = 0, kprev[36], kn = 0, a = 0, z = 0, number = 0, n = filelines(fp, 0), flag = 0;
+	int k = 0, kprev[36], kn = 0, a = 0, z = 0, number = 0, n = fileLines(fp, 0), flag = 0;
 
 	for (a = 1, z = n; (a < z && (a == 1 || z == n)) || (a < z - 1 && a > 1 && z < n); ) {
         if (flag > 0) {

@@ -23,11 +23,11 @@ int addWordScript() {
             getline(fin, line_of_defs);
             fin.close();
             if (line_of_defs.empty() == false) {
-                popup("#setMode('y++');");
+                popup(setModeYAutoIncrement);
                 popup("#offsetY=0;");
                 popup("<wte-gry>(<#blu-ylw>(word):<blk-wte>(" + word + ")", 0);
                 popup("<wte-gry>(<#blu-ylw>(def):<blk-wte>(" + replace(line_of_defs, ",;", ") <blk-wte>(") + ")", 0);
-                popup(set_mode_y_is_constant);
+                popup(setModeYIsConstant);
                 popup("#offsetY=0;");
                 if (MessageWindow.alert("<-wte>(add this defs?", 2, 20, 5, 36, 4, 10) == 1) {
                     // add def to library

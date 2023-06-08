@@ -10,7 +10,7 @@ int sortlib(const int beginLth, const int endLth, const string admin, const stri
             return sortLibError(-7, admin);
         }
 		// read
-		if ((maxLines = filelines(LibraryRoute(wordLth, EN), 1)) <= 0) {
+		if ((maxLines = fileLines(LibraryRoute(wordLth, EN), 1)) <= 0) {
             return sortLibError(-1);
         }
 		if ((s_en = (char **)malloc(sizeof(char*) * maxLines)) == NULL) {

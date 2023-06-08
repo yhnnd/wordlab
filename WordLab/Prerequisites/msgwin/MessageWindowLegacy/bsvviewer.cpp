@@ -1,6 +1,6 @@
 int MessageWindow::bsvviewer(const char *route,bool _Animation,int x,int y,int w,int h,bool select) {
 	int n = 0, width;
-	int height = filelines(route,1);
+	int height = fileLines(route, 1);
 	const int linemax = 200;
 	if (h>0&&height>h) {
         height = h;

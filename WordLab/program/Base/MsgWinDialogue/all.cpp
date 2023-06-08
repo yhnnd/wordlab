@@ -13,8 +13,8 @@ class dialog {
 		}
 		//OUTPUT
 		void output(const string msg,WORD color=lightgreen,int x=6,int y=4,bool EnableBSV=false);
-		int outputfile(const char *filename,int n,WORD color=lightgreen);
-		void outputrand(const char *filename,WORD color=lightgreen);
+		int outputFile(const char * filename, int n, WORD color = lightgreen);
+		void outputRandom(const char * filename, WORD color = lightgreen);
 		std::string input(std::string name="",bool display=true,int linemax=LINEMAX,int x=6,int y=4);
 		//INPUT
 		std::string & getMessage(int n = 0) {

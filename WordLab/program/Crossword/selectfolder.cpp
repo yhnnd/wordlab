@@ -5,9 +5,9 @@ string CrosswordSelectFolder(const string folder) {
 #ifdef _WIN32
 	folderdir((folder + "puzzle").c_str(), fp);
 #elifdef __APPLE__
-    folderdir(folder.c_str(), fp);
+    folderDir(folder.c_str(), fp);
 #endif
-	int l = filelines(fp,0,1);
+	int l = fileLines(fp, 0, 1);
 	fclose(fp);
 	// read filenames from temp file
 	if (l <= 0) {

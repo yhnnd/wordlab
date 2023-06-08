@@ -1,52 +1,16 @@
 // updated on 2017.03.09
 // updated on 2023.04.29
 
-void launchTips(char *msg, const sts::consoleColor colorStart, const sts::consoleColor colorEnd) {
-    const char suggests[]=
-            "query(),"
-            "volume(),"
-            "checkupdate(),"
-            "update(),"
-            "database(),"
-            "software(),"
-            "clearcache(),"
-            "addnew(),"
-            "addword(),"
-            "addphrase(),"
-            "script(),"
-            "sortlib(),"
-            "crossword(),"
-            "lastlaunch(),"
-            "searchcompact(),"
-            "wordlinkage(),"
-            "translater(),"
-            "translaterpro(),"
-            "settings.engines(),"
-            "settings.values(),"
-            "settings.system(),"
-            "settings.history(),"
-            "user.login(),"
-            "list(),"
-            "help(),"
-            "settings.version(),"
-            "wordsortcheck(),"
-            "searchreverse(),"
-            "searchsimilar(),"
-            "practices(),"
-            "similar(),"
-            "tips(),"
-            "wlscan(),"
-            "checksafety(),"
-            "printcolortable(),"
-            "performancetest(),"
-            "colorlogs.print();";
+void launchTips(char *msg, const std::vector<std::string> functionNames, const const sts::consoleColor colorStart, const sts::consoleColor colorEnd) {
+
+    const std::string suggestions = join(functionNames, ",") + ";";
 
     recordColor(colorprev, "launchTips");
 
     const auto pos = getxy();
 
     setForegroundColorAndBackgroundColor(colorStart.foregroundColor, colorStart.backgroundColor);
-    inputcore(msg,0,true,{13,10,KEY_ESC,'='},suggests,true, pos);
+    inputCore(msg, 0, true, {13, 10, KEY_ESC, '='}, suggestions.c_str(), true, pos);
 
     gotoxy(pos);
     setForegroundColorAndBackgroundColor(colorEnd.foregroundColor, colorEnd.backgroundColor);
@@ -87,14 +51,17 @@ int launch(const std::string msg) {
 	if(fin.is_open()) {
 		string line;
 		while(!fin.eof()) {
-			if(getline(fin,line)&&line.size()) functionNames.push_back(line);
+			if (getline(fin,line)&&line.size()) {
+                functionNames.push_back(line);
+            }
 		}
 		fin.close();
 	} else {
         errorLog("launch", "cannot open", LaunchFunctionNamesFilename);
 		return -2;
 	}
-	if(msg == functionNames[0]) {
+
+	if (msg == functionNames[0]) {
         launchPrintList(functionNames);
 		return 0;
 	} else if(msg == functionNames[1]) {
@@ -172,7 +139,7 @@ int launch(const std::string msg) {
 		CrosswordFramework();
 		return 13;
 	} else if(msg == functionNames[14]) {
-		cout<<Load.lastlaunch();
+		printf("\"%s\"", Load.lastLaunch().c_str());
 		return 14;
 	} else if(msg == functionNames[15]) {
 		char keyword[LINEMAX];
@@ -237,7 +204,7 @@ int launch(const std::string msg) {
         return 31;
     } else if (msg == functionNames[32]) {
         char command[256];
-        launchTips(command, {"wte-", "-blk"}, {"wte-", "-#gry"});
+        launchTips(command, functionNames, {"wte-", "-blk"}, {"wte-", "-#gry"});
         if (command[0]) {
             return launch(command);
         }

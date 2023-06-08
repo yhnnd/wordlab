@@ -131,7 +131,7 @@ int WLSearchPhrase(const std::string msg, const bool ignoreCase) {
     } else if (result.message.empty() == true) {
         return 0;
     } else {
-        popup(set_mode_y_is_constant);
+        popup(setModeYIsConstant);
         popup("#offsetY=0;");
         popup(result.message, 0);
         return -1;

@@ -256,14 +256,14 @@ int loadmsg(char *msg,FILE *fp,int maxlines,int linemax,bool close,bool modify);
 int loadmsg(char *msg,std::string route,int maxlines,int linemax,bool close,bool modify=1);
 int loadmsg(char **msg,std::string route,int maxlines,int linemax,bool close,bool modify=1);
 std::vector<std::string> loadFile(std::string route, std::set<std::string> terms);
-int filelines(FILE *fp,bool close,bool debug=1);
-int filelines(const std::string route,bool debug=1);
-void folderdir(const char path[],FILE *fp,int level=0);
-int find(std::string msg,const std::string filename);
-int findStrict(const char *msg,const char *filename);
-int findinfolder(char *handle,const char folderpath[]);
-int findreverse(const char *msg,FILE *fp,bool close=1);
-int findreverse(const char *msg,const char *route);
+int fileLines(FILE * fp, bool close, bool debug = 1);
+int fileLines(std::string route, bool debug = 1);
+void folderDir(const char path[], FILE *fp, int level = 0);
+int find(std::string msg, std::string filename);
+int findStrict(const char *msg, const char *filename);
+int findInFolder(char *handle, const char folderpath[]);
+int findReverse(const char *msg, FILE *fp, bool close = 1);
+int findReverse(const char *msg, const char *route);
 //write file
 template <typename string>
 int writefile(string msg,string filedir);
@@ -485,7 +485,7 @@ class MessageWindow {
 	void LineColorful(int);
 	int Line(int,int,int,const char *,int);
 	int line(int,int,int);
-	int SearchCore(int,int,int,int,const char *,int,int,char *);
+	int SearchCore(int,int,int,int,const char *,int,int,const std::string);
 	int Search(int,int,int,int,const char *,int,int);
 	int Pointer(const int, const int, const int, const int, const int, const bool, const bool);
 	void SwitchLoop(int,int,int,const char *,int,int,int*);
@@ -561,21 +561,23 @@ class Table:MessageWindow {
 } Table;
 
 // message window blocks
-class messageblock: public MessageWindow{
-	struct{int x,y,cleftindex,npl,width,height;}defaults[MAXLINES];
-	int x,y,cleftindex,npl,width,height;
-	int bw,bh,xcleft,ycleft;
-	int n,nbefore,max;
-	int aww,awh;//adjust window width/height
+class messageBlocks: public MessageWindow {
+	struct {
+        int x, y, cleftIndex, numPerLine, width, height;
+    } defaults[MAXLINES];
+	int x, y, cleftIndex, numPerLine, width, height;
+	int max;
+    int blockWidth, blockHeight, xCleft, yCleft;
+	int adjustWindowWidth, adjustWindowHeight;
 	public:
 	//defaults
-	void defaultssavefile(const char*);
-	void defaultsloadfile(const char*);
-	void defaultssave();
-	void defaultsload();
+	void saveDefaultsToFile(const char *);
+	void loadDefaultsFromFile(const char *);
+	void defaultsSave();
+	void defaultsLoad();
 	//adjust
 	int adjustset(int);
-	void adjusttitle(int,bool);
+	void adjustTitle(int, bool);
 	void adjustShowAll(int);
 	void Adjust();
 	//block
@@ -584,34 +586,33 @@ class messageblock: public MessageWindow{
 	void setBlockColor(int,int,bool);
 	COORD getBlockPos(int);
 	void Fill(PKC,COORD,int,int);
-	void FillAll(char (*)[LINEMAX],int,int,int);
+	void FillAll(const char [][LINEMAX], int, int, int);
 	//search
-	int SearchCore(const char(*)[LINEMAX],int,char*);
-	int Search(char(*)[LINEMAX],int);
-	int Switcher(char(*)[LINEMAX],bool = true);
+	int SearchCore(const char [][LINEMAX], int, const std::string);
+	int Search(const char [][LINEMAX], int);
+	int Switcher(const char [][LINEMAX], bool = true);
 	//set
 	int setnpl();
 	int set(int,int,int,int,int,int);
-	messageblock();
-}MessageBlock;
-void msgbox(PKC msg,int x=0,int y=0,int margin=0,PKC colorback="",PKC colorfont="");
+	messageBlocks();
+} MessageBlocks;
+void messageBox(PKC msg, int x= 0, int y= 0, int margin= 0, PKC colorback= "", PKC colorfont= "");
 //progress bar
-class progressbar{
+class progressBar {
 	char key;
 	int *nprev;
-	void setthread(int n);
+	void setThread(int n);
 	bool _AllowInterrupt;
-	void setinterrupt(bool n);
+	void setInterrupt(bool n);
 	bool _AskBeforeQuit;
 	void line(int,int,int,int,char,WORD);
 	public:
-	void init(int,bool,bool);
 	int  show(int,int,int,int,int,WORD back=bothgreen,WORD fore=bothlightgreen);
-	progressbar(int threadmax,bool interrupt,bool ask=1);
+	progressBar(int threadMax, bool interrupt, bool ask/* 1 */);
 };
-char fatalerror(int delayperiod);
-int confirmationbar(int x,int y,int width,int delay);
-//popup
+char fatalError(int delayperiod);
+int confirmationBar(int x, int y, int width, int delay);
+// popup
 struct popupConfigs {
     bool RecordEnabled = true;
     bool RecordPrev = true;
@@ -621,8 +622,12 @@ struct popupConfigs {
     int OffsetY = 1;
     int PrevTime = -1000;
 };
-char popupcore(const std::string msg, const int life, const int x,const int y,const int width, popupConfigs &);
+char popupCore(const std::string msg, const int life, const int x, const int y, const int width, popupConfigs &);
 char popup(const std::string msg, const int life = 0);
+template <typename... Args>
+char popup(std::string msg, std::string s, const Args& ...);
+const char * setModeYIsConstant = "#setMode('y=1');";
+const char * setModeYAutoIncrement = "#setMode('y++');";
 
 // monitor
 bool error_monitor_lock = 0;

@@ -4,14 +4,16 @@
 #include "search/all.cpp"
 #include "setnpl.cpp"
 #include "Framework.cpp"
-int messageblock::set(int x,int y,int width,int height,int cleftindex,int npl){
+int messageBlocks::set(const int x, const int y, const int width, const int height, const int cleftIndex, const int numPerLine) {
 	this->x = x;
 	this->y = y;
 	this->width = width;
 	this->height = height;
-	this->cleftindex = cleftindex;
-	this->npl = npl;
+	this->cleftIndex = cleftIndex;
+	this->numPerLine = numPerLine;
     return 0;
 }
-messageblock::messageblock():x(0),y(0),cleftindex(0),npl(0),aww(20),awh(8){
+
+messageBlocks::messageBlocks(): x(0), y(0), cleftIndex(0), numPerLine(0), adjustWindowWidth(20), adjustWindowHeight(8) {
+
 }

@@ -38,7 +38,7 @@ int scriptprocessor::select(const std::string & line) {
 	std::string value = getparam(line);
 	if(value[0]=='\"') removebrackets(value,"\"","\"");
 	std::string filename = value;
-	int i = 0, iprev = 0, max = filelines(filename,1);
+	int i = 0, iprev = 0, max = fileLines(filename, 1);
 	if(max<=0) {
 		printf("select: fopen(%s) is null\n",filename.c_str());
 		if(_debug) getch();
