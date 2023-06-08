@@ -1,1 +1,3 @@
-V=i C=nc(1) C=ts(2) 
+V=e C=pr(1) 
+V=i C=nc(2) C=ts(3) 
+V=o C=cm(4) 

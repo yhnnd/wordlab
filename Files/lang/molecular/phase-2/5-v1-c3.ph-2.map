@@ -1,1 +1,2 @@
-V=e C=lts(1) 
+V=e C=lts(1) C=ns(2) 
+V=o C=hyp(3) 
