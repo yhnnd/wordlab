@@ -233,7 +233,32 @@ int launch(const std::string msg) {
         gotoxy(0, 1);
         colorLogs.printLogs();
         return 37;
-	} else { //translate msg as a word
+    } else if (msg == functionNames[38]) {
+        clearScreen();
+        gotoxy(0, 1);
+        molecular Molecular;
+        Molecular.generateMolecularDatabase(_data_dir, "111111");
+        printf("\nMolecular database generated. Press any key to continue.\n");
+//        getch();
+        return 38;
+    } else if (msg.find(functionNames[39]) == 0) {
+        const auto beginPos = msg.find("("), endPos = msg.find(")", beginPos + 1);
+        if (beginPos == std::string::npos || endPos == std::string::npos) {
+            printf("parameter required");
+        } else {
+            const std::string parameter = trim(msg.substr(beginPos + 1, endPos - beginPos - 1), "\"");
+            if (parameter.empty()) {
+                printf("parameter required");
+            } else {
+                molecular Molecular;
+                Molecular.setWord(parameter.c_str());
+                char definition[32];
+                Molecular.getWordDefinitions(definition, sizeof(definition));
+                printf("%-32s", (std::string("\"") + definition + "\"").c_str());
+            }
+        }
+        return 39;
+	} else { // translate msg as a word
 		int i = 0, lth = msg.length();
 		if ((i = Search(msg.c_str(), lth, false)) > 0) {
 			cout<<"{"
