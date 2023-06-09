@@ -348,6 +348,7 @@ depot ,/n./@倉庫;,/n./@停車場;,/n./@航空站;,/v./@儲藏;
 depth ,/n./@深度;
 deque ,/n./@雙端隊列;
 deter ,/v./@制止;
+detox ,/n.//redirected./@target="detoxification";,/v.//redirected./@target="detoxify";
 devil ,/n./@魔鬼;
 diary ,/n./@日記;
 dingy ,/adj./@骯髒的;,/adj./@昏暗的;
