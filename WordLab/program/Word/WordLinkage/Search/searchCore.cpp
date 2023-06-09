@@ -7,12 +7,12 @@ void WLSearchCore(int lth, int NOL, const std::string s, const int index, const 
     const std::string searchResult = WLChinese(lth, index, definitionsColors[0]);
 
     if (bsvLineGetPlainText(searchResult.c_str()).length() > prerequisites::ScreenX) {
-        const int maxDefsPerLine = 12;
+        const int maxDefsPerLine = 6;
         std::vector<std::string> resultLines = {};
         std::string tempLine = "", resultLine = "";
         for (int i = 0, nDefs = 0; i < searchResult.length(); ++i) {
             tempLine.append(1, searchResult[i]);
-            if ((i > 0 && searchResult.substr(i, 2) == ")<") || i == searchResult.length() - 1) {
+            if ((i > 0 && searchResult.substr(i, 2) == ")<" && tempLine.find("@") != std::string::npos) || i == searchResult.length() - 1) {
                 ++ nDefs;
                 resultLine += tempLine;
                 tempLine = "";
