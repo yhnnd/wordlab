@@ -2,13 +2,17 @@ int MessageWindow::ConfirmSwitch(int n,int x,int y,int width,int height) {
 	if (n < 0) {
         n = 0;
     }
-	int rY, rX, blockwidth=(n>0)?(n==1?(--width/n):(width/n)):0, r=(n>0?1:0);
-	time_t tolerance=30000, timeA = clock();
-	char key;
-	for(;;) {
-		ListSwitchErase(x,y,n,blockwidth,height);
+
+	const int blockWidth = (n > 0) ? (n == 1 ? (--width / n) : (width / n)) : 0;
+
+    int r = (n > 0 ? 1 : 0);
+
+	const time_t tolerance = 30000, timeA = clock();
+
+	for (;;) {
+		ListSwitchErase(x, y, n, blockWidth, height);
 		ColorfulAll(r);
-		ListSwitchBlock(x,y,n,r,blockwidth,height,'*');
+		ListSwitchBlock(x, y, n, r, blockWidth, height, '*');
 
         if (n > 5) {
             ColorfulBackground(r);
@@ -27,7 +31,12 @@ int MessageWindow::ConfirmSwitch(int n,int x,int y,int width,int height) {
 			Sleep(10);
 		}
 #endif
-		key = getch();
+        ::fflush(stdin);
+        std::cin.clear();
+        std::cin.sync();
+
+		const char key = getch();
+
         if (key == 13 || key == 10) {
             break;
         } else if(key=='0'||key==27||key==8||key==127||key=='r') {
@@ -40,7 +49,7 @@ int MessageWindow::ConfirmSwitch(int n,int x,int y,int width,int height) {
         } else if(key=='S'||key=='s'||key=='D'||key=='d') {
             r++;
         }
-		roll(r,r,(n>0?1:0),n);
+		roll(r, r, (n > 0 ? 1 : 0), n);
 	}
 	end:
     setColor(lightwhite, "ConfirmSwitch");

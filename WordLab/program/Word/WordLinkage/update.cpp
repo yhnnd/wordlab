@@ -1,4 +1,4 @@
-char WordUpdate(const string word){
+char WordUpdate(const string word) {
 	const int lth = word.length(), n = Search(word.c_str(), lth, false);
 	if (n <= 0) {
 		popup(word, " was not in the database. please add it first", -1);
@@ -51,13 +51,17 @@ char WordUpdate(const string word){
     if (ch == 13 || ch == 10) {
 		string trans_new = AddWordGetTranslation(word);//exprimt'l
 		if(trans_new.length()>5/*/n./{};*/){
-			Dialog.output("add \""+trans_new+"\" ?");
+			Dialog.output("add \"" + trans_new + "\" ?");
             const char ch = getch();
 			if (ch == 13 || ch == 10) {
 				fout << trans_new;
     			flog << trans_new << "\n" << endl;//write log file 2
-			}else Dialog.output("cancelled");
-		}else Dialog.output("cancelled");
+			} else {
+                Dialog.output("cancelled");
+            }
+		} else {
+            Dialog.output("cancelled");
+        }
 	}
     fout.close();//close db-zh
     flog.close();//close log file

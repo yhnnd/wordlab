@@ -1,4 +1,4 @@
-void dialog::output(const string msg,WORD color,int x,int y,bool EnableBSV) {
+void dialog::output(const string msg, const WORD color, const int x, const int y, const bool EnableBSV) {
 	static bool times = false;
     static string title = "";
 	char blank[MAXLINES][LINEMAX] = {" "," "," "," "," "," "," "," "," "," "," "};

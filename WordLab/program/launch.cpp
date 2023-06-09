@@ -1,7 +1,7 @@
 // updated on 2017.03.09
 // updated on 2023.04.29
 
-void launchTips(char *msg, const std::vector<std::string> functionNames, const const sts::consoleColor colorStart, const sts::consoleColor colorEnd) {
+void launchTips(char *msg, const std::vector<std::string> functionNames, const sts::consoleColor colorStart, const sts::consoleColor colorEnd) {
 
     const std::string suggestions = join(functionNames, ",") + ";";
 

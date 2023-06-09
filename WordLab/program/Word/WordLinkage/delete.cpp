@@ -13,7 +13,7 @@ char WordDelete(const string word) {
             return 0;
         }
 		char route[64];
-		bool flagEN=0,flagCH=0;
+		bool flagEN = 0, flagCH = 0;
 		if (DeleteLine(LibraryRoute(lth,EN),n,1)==0) {
             flagEN = 1;
         }
@@ -36,4 +36,31 @@ char WordDelete(const string word) {
 	const char returnKey = getch();
 	Dialog.output("reset");
     return returnKey;
+}
+
+
+
+
+char deletePhrase(const std::string s) {
+    const struct phraseSearchResult result = getPhraseDefinitions(s, false);
+
+    if (result.status == phraseSearchResultStatus::succeeded) {
+        if (result.phraseLth > 0 && result.lineNo > 0) {
+            const std::string filename = PhraseRouteA + toString(result.phraseLth) + PhraseRouteB;
+            if (DeleteLine(filename, result.lineNo, false) < 0) {
+                popup("Failed to delete phrase \"", s, "\".", 0);
+            } else {
+                popup("Phrase \"", s, "\" has been deleted.", 0);
+            }
+        }
+    } else {
+        popup(setModeYIsConstant, 0);
+        popup("#offsetY=1;", 0);
+        popup("Phrase \"", s, "\" not in database.", 0);
+    }
+    {
+        const char returnKey = getch();
+        Dialog.output("reset");
+        return returnKey;
+    }
 }

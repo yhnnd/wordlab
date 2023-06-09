@@ -3,7 +3,7 @@ void AddPhrase(const string s) {
         return;
     }
 	Dialog.output("start");
-	Dialog.output("add phrase \"" + s + "\"?");
+	Dialog.output("add phrase \"" + s + "\" ?");
     const char ch = getch();
 	if (ch != 13 && ch != 10) {
 		popup("cancelled", -1);

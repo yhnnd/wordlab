@@ -39,7 +39,9 @@ int main(int argc,char **argv) {
 			std::string s = "";
 			gotoxy(0,0);
 			colorset(lightyellow);
-			while(std::getline(fin,s)) std::cout<<s<<std::endl;
+			while(std::getline(fin, s)) {
+                std::cout<<s<<std::endl;
+            }
 			fin.close();
 		}
 		VersionTable.printtable(26,0);

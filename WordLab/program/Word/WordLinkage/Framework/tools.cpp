@@ -19,7 +19,11 @@ char WLTools(const std::string s) {
             returnKey = AddWord(s, AddWordMode::Redirect);
             break;
 		case 'd':
-            returnKey = WordDelete(s);
+            if (split(s, " ").size() == 1) {
+                returnKey = WordDelete(s);
+            } else {
+                returnKey = deletePhrase(s);
+            }
             break;
 		case 'u':
             returnKey = WordUpdate(s);

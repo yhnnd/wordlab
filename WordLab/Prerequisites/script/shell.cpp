@@ -30,8 +30,10 @@ int scriptshell(std::string filename,int print_debug_msg,int data_capacity,COORD
 		fin.close();
 	} else { //open file
 		std::ifstream fin(filename);
-		if(fin.is_open()) {
-			while(std::getline(fin,tempstr)) lines.push_back(tempstr);
+		if (fin.is_open()) {
+			while (std::getline(fin,tempstr)) {
+                lines.push_back(tempstr);
+            }
 		} else {
             errorLog("script shell", "cannot open file", tempstr);
 			return 1;
