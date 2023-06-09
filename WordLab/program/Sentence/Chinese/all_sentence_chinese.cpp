@@ -64,9 +64,11 @@ int sts::Translation(int lth, int LineNumber, char * result, const size_t size) 
             if (NOL == LineNumber) { // LINE FOUND
                 if (line.find("/redirected./") != string::npos) { // LINE REDIRECTED
 
-                    const std::string result_msg = ChineseRedirect(line, lth, LineNumber);
+                    const std::string result_msg = ChineseRedirect(line.substr(0, lth), line.substr(lth), lth, LineNumber);
 
-                    if (result_msg.empty() == true) {
+                    const std::string indicatorTargetIsWord = "WORD ";
+
+                    if (result_msg.find(indicatorTargetIsWord) == 0) {
                         // Result Message is Empty.
                         if (lth > 0 && LineNumber > 0) {
                             return Translation(lth, LineNumber, result, size);

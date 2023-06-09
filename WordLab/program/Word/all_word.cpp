@@ -10,7 +10,7 @@ void setChineseColor(int * ColorFlags);
 string getChineseColorCommandByNumber(const int d);
 
 string WLChineseCore(string line, const int fontcolor);
-string WLChinese(int lth, int number, const int fontcolor);
+string WLChinese(int lth, int number, const int fontColor);
 
 static bool VL = 0, AL = 0, BL = 0, CL = 0, CType = 0, DL = 0, EL = 1, SL = 0, ML = 0;
 static int  definitionsColors[2] = {0, 0};
