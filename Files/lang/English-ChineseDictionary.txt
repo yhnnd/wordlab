@@ -1265,7 +1265,7 @@ coffin  /n./棺材
 coherence  /n./凝聚性
 coherent  /adj./有条理的;粘着的
 cohesion  /n./凝聚力;团结
-cohesive  /adj./有粘性的
+cohesive  /adj./有黏著力的
 coil  /v./卷曲/n./一卷;线圈
 coin  /n./硬币;创造新词
 coinage  /v./重合;一致
