@@ -1,4 +1,4 @@
-void WLscancore(int lth,int NOL,FILE *fp1){
+void WLScanCore(int lth, int NOL, FILE *fp1){
 	const int bits = toString(NOL).length(), vol = 25;
 	char word[NOL][lth+1];
 	for(int i = 0; i < NOL; i++){
@@ -15,8 +15,10 @@ void WLscancore(int lth,int NOL,FILE *fp1){
         cout << endl;
 		for( int i = (page - 1) * vol; i < NOL and i < page * vol; ++i ) {
 			int lineNumber = Search(word[i], lth, false);
-	    	cout<<setw(bits)<< i + 1 <<" "<<word[i]<<" "<<WLChinese(lth,lineNumber,2);
-			cout<<" "<<setw(bits)<<lineNumber<<" "<<Chinese(lth,lineNumber)<<endl;
+	    	cout<<setw(bits)<< i + 1 <<" "<<word[i] << " " << WLChinese(lth,lineNumber,2);
+            const auto & definitionsVector = getWordDefinitions(lth, lineNumber);
+            const std::string definitionText = definitionsVector.size() ? definitionsVector[0].text : "";
+			cout << " " << setw(bits) << lineNumber << " " << definitionText << endl;
 		}
 		if (pagemax > pagemin) {
             gotoxy(0, vol + 1);

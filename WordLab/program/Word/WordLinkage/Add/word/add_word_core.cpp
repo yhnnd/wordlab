@@ -35,12 +35,12 @@ int addWordAndDefs(const string word, const int lth, const string defs) {
     }
 }
 
-void AddWordCore(const string word, ofstream &foutEN, ofstream &foutCH, ofstream &flog, const AddWordMode mode) {
+void addWordCore(const string word, ofstream &foutEN, ofstream &foutCH, ofstream &flog, const enum AddMode mode) {
     string line_of_defs = "";
-    if (mode == AddWordMode::Add) {
+    if (mode == AddMode::AddWord) {
         // start entering definition
         line_of_defs = AddWordGetTranslation(word);
-    } else if (mode == AddWordMode::Redirect) {
+    } else if (mode == AddMode::RedirectWord) {
         Dialog.output("input target:");
         string target = "";
         ::fflush(stdin);

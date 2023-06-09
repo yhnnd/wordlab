@@ -1,4 +1,4 @@
-char AddWord(const string word, const AddWordMode mode) {
+char addWord(const string word, const enum AddMode mode) {
 	int lth = word.length();
 	if (word.length() == 0) {
 		return 0;
@@ -15,7 +15,7 @@ char AddWord(const string word, const AddWordMode mode) {
 	flog.open(AddWordLog, std::ios::app);// Open Log File Stream
 	if (AddIsSecure(foutEN,foutCH)) {
         // INPUT DEFINITIONS AND SAVE THEM TO DATABASE
-        AddWordCore(word, foutEN, foutCH, flog, mode);
+        addWordCore(word, foutEN, foutCH, flog, mode);
 		foutEN.close();// Close word English database
 		foutCH.close();// Close word chinese database
 		flog.close();// Close Log File Stream

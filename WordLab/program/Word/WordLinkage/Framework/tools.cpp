@@ -13,10 +13,14 @@ char WLTools(const std::string s) {
 
 	switch (choice) {
 		case 'a':
-            returnKey = AddWord(s, AddWordMode::Add);
+            returnKey = addWord(s, AddMode::AddWord);
             break;
         case 'r':
-            returnKey = AddWord(s, AddWordMode::Redirect);
+            if (split(s, " ").size() == 1) {
+                returnKey = addWord(s, AddMode::RedirectWord);
+            } else {
+                returnKey = addPhrase(s, AddMode::RedirectPhrase);
+            }
             break;
 		case 'd':
             if (split(s, " ").size() == 1) {

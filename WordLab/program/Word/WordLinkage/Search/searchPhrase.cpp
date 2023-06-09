@@ -34,9 +34,9 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
                 result.status = phraseSearchResultStatus::succeeded;
                 result.phraseLth = phraseLth;
                 result.phrase = split(line.substr(0, searchKey.length()), ",");
-                result.defsLine = line;
-                result.defs = line.erase(line.find_last_not_of(";") + 1).substr(searchKey.length());
-                result.defsVector = split(result.defs, ",");
+                result.phraseDefinitionsLineInDb = line;
+                result.phraseDefinitionsLineWithoutKeyword = line.erase(line.find_last_not_of(";") + 1).substr(searchKey.length());
+                result.defsVector = split(result.phraseDefinitionsLineWithoutKeyword, ",");
                 if (result.defsVector.size() && result.defsVector[0].find("/redirected./") != std::string::npos) {
                     const std::string defItem = result.defsVector[0];
                     const std::string beginTerm = "@target=\"";
@@ -46,10 +46,23 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
                         result.message = target;
 //                        printf("target = \"%s\"\n", target.c_str());
 //                        getch();
-                        const struct phraseSearchResult targetResult = getPhraseDefinitions(target, false);
-                        result.defsLine = targetResult.defsLine;
-                        result.defs = targetResult.defs;
-                        result.defsVector = targetResult.defsVector;
+                        if (target.find(" ") == std::string::npos) {
+                            const int index = Search(target.c_str(), target.length(), false);
+                            if (index > 0) {
+                                const auto definitions = getWordDefinitions(target.length(), index);
+                                result.defsVector.clear();
+                                for (const auto & item: definitions) {
+                                    result.defsVector.push_back(item.text);
+                                }
+                            }
+                        } else {
+                            const struct phraseSearchResult targetResult = getPhraseDefinitions(target, false);
+                            if (targetResult.status == phraseSearchResultStatus::succeeded) {
+                                result.phraseDefinitionsLineInDb = targetResult.phraseDefinitionsLineInDb;
+                                result.phraseDefinitionsLineWithoutKeyword = targetResult.phraseDefinitionsLineWithoutKeyword;
+                                result.defsVector = targetResult.defsVector;
+                            }
+                        }
                         return result;
                     } else {
                         result.status = phraseSearchResultStatus::failed;

@@ -17,7 +17,7 @@ int WLscan(){
 		} else {
 	        FILE *fp1 = Library(lth,EN,"r");
 	        NOL[EN] = Volume(EN,lth,lth,"");
-	        WLscancore(lth,NOL[EN],fp1);
+            WLScanCore(lth, NOL[EN], fp1);
 	        fclose(fp1);
 	    }
 	}

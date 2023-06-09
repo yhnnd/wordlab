@@ -99,15 +99,15 @@ int launch(const std::string msg) {
 	} else if(msg == functionNames[9]) {
 		addWordScript();
 		return 9;
-	} else if(msg == functionNames[10]) {
-		auto words=[] {
+	} else if (msg == functionNames[10]) {
+		const auto words = [] {
 			char s[64];
-			cout<<"enter:";
-			listen(s,0,1,{EOF,0,13},64);
+			cout << "enter:";
+			listen(s, 0, 1, {EOF, 0, 13}, 64);
 			string s2(s);
 			return s2;
 		};
-		AddPhrase(words());
+        addPhrase(words(), AddMode::AddPhrase);
 		return 10;
 	} else if(msg == functionNames[11]) {
 		scriptshell(false);
@@ -261,12 +261,13 @@ int launch(const std::string msg) {
 	} else { // translate msg as a word
 		int i = 0, lth = msg.length();
 		if ((i = Search(msg.c_str(), lth, false)) > 0) {
+            const auto definitions = getWordDefinitions(lth, i);
 			cout<<"{"
 			<<"\"db-"<<lth<<"-"<<i<<'\"'
 			<<','
 			<<'\"'<< sortOfWord(msg.c_str()) <<'\"'
 			<<','
-			<<'\"'<<Chinese(lth,i)<<'\"'
+			<<'\"' << (definitions.size() ? definitions[0].text : "") << '\"'
 			<<"}";
 			return 0;
 		} else {

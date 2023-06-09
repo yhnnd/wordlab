@@ -14,7 +14,7 @@
 // version 0.1.0
 // updated engines:
 // chinese(CH),scan(A),SearchWord(B),SearchWordFuzzy(B-S),SearchPhrase(B-P),
-// AddWord(C),AddPhrase(C-P),affix(D),Similar(E),History(H)
+// addWord(C),addPhrase(C-P),affix(D),Similar(E),History(H)
 //------------------------------------------------------------
 // version 0.1.1 2016.11.19
 // added engine: Delete(F)
@@ -26,14 +26,14 @@
 // added engine: Update(U)
 //------------------------------------------------------------
 // version 0.2.1 2017.03.11
-// updated engines: chinese(CH),SearchWord(B),AddWord(C),affix(D)
+// updated engines: chinese(CH),SearchWord(B),addWord(C),affix(D)
 // updating details: improved by changing codes from C to C++
 // modified engines: scan(A),SearchWordFuzzy(B-S)
 //------------------------------------------------------------
 // version 0.2.2 2017.03.13
-// updated engines: AddWord(C)
-// updating details: improved by separating AddWord into GET and WRITE
-// comment: from now on the database will not be damaged by AddWord
+// updated engines: addWord(C)
+// updating details: improved by separating addWord into GET and WRITE
+// comment: from now on the database will not be damaged by addWord
 //------------------------------------------------------------
 // version 0.2.3 2017.03.17
 // added engine: Dictionary(G)

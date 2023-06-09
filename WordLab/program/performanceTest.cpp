@@ -65,7 +65,10 @@ int performanceTest (void) {
                     k = Search(word, 0, false);
                 }
                 if (k > 0) {
-                    chinese = Chinese(lth, k);
+                    const auto wordDefinitions = getWordDefinitions(lth, k);
+                    if (wordDefinitions.size()) {
+                        chinese = wordDefinitions[0].text;
+                    }
                 }
             }
             t2 = clock();

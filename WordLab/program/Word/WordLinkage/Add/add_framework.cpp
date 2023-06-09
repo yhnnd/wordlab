@@ -33,11 +33,11 @@ char AddNew(const string s) {
 	if (s.find(" ") != std::string::npos) {
 //        printf("\nadd new phrase\n");
 		popup("Add Phrase", 0);
-		AddPhrase(s);
+        addPhrase(s, AddMode::AddPhrase);
 	} else {
 //        printf("\nadd new word\n");
 		popup("Add word <ylw->(", s, 0);
-		AddWord(s, AddWordMode::Add);
+        addWord(s, AddMode::AddWord);
 	}
 	end:
 	const char key = getch();

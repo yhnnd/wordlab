@@ -131,7 +131,10 @@ void practices() {
                     lth += rand()%LthDiffer;
                     int num = rand() % Volume(lang::EN,lth,lth,"");
                     word[i] = GetWord(lth,num);
-                    trans[i] = Chinese(lth,num);
+                    const auto wordDefinitions = getWordDefinitions(lth, num);
+                    if (wordDefinitions.size()) {
+                        trans[i] = wordDefinitions[0].text;
+                    }
                 }
                 key = 1 + rand() % 4;
                 // display question

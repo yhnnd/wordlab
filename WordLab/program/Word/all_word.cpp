@@ -24,8 +24,8 @@ struct phraseSearchResult {
     std::vector<std::string> phrase{};
     uint phraseLth = 0;
     uint lineNo = 0;
-    std::string defsLine = "";
-    std::string defs = "";
+    std::string phraseDefinitionsLineInDb = "";
+    std::string phraseDefinitionsLineWithoutKeyword = "";
     std::vector<std::string> defsVector{};
 
     enum phraseSearchResultStatus status = phraseSearchResultStatus::failed;
