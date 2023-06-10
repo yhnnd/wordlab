@@ -48,13 +48,25 @@ std::string WLChinese(int lth, int number, const int fontColor) {
                     const std::vector<std::string> definitionsVector = split(trim(line.substr(lth), " "), ",");
 
                     std::string returnLine = "";
+                    std::vector<std::string> stashedNonRedirectDefinitions = {};
+                    std::vector<std::string> stashedRedirectDefinitions = {};
 
+                    // Separate redirect and non-redirect definitions.
                     for (const std::string definitionItem: definitionsVector) {
                         if (definitionItem.find("/redirected./") != string::npos) {
-                            returnLine += getRedirectDefinition(redirectFromKeyword, definitionItem, fontColor);
+                            stashedRedirectDefinitions.push_back(definitionItem);
                         } else {
-                            returnLine += WLChineseCore(definitionItem, fontColor);
+                            stashedNonRedirectDefinitions.push_back("," + definitionItem);
                         }
+                    }
+
+                    // render non-redirect definitions first.
+                    if (stashedNonRedirectDefinitions.size()) {
+                        returnLine += WLChineseCore(join(stashedNonRedirectDefinitions, ""), fontColor);
+                    }
+                    // render redirect definitions.
+                    for (const std::string redirectingDefinitionItem: stashedRedirectDefinitions) {
+                        returnLine += getRedirectDefinition(redirectFromKeyword, redirectingDefinitionItem, fontColor);
                     }
                     return returnLine;
                 } else {// PLAIN DEFINITION
