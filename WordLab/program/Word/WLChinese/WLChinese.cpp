@@ -12,7 +12,7 @@ std::string getRedirectDefinition(const std::string redirectFromKeyword, const s
         const std::string targetPhrase = redirect_result_msg.substr(indicatorTargetIsPhrase.length());
         const struct phraseSearchResult phResult = getPhraseDefinitions(targetPhrase, false);
         if (phResult.status == phraseSearchResultStatus::succeeded) {
-            const std::string phraseDefinition = phResult.defsVector[0];
+            const std::string phraseDefinition = "\"" + join(phResult.defsVector, "\" \"") + "\"";
             return "<ylw-#red>( REDIRECT Ph )<#red-ylw>( " + targetPhrase + " ) " + phraseDefinition;
         } else {
             return "<#red-ylw>( REDIRECT Ph )<ylw-#red>( " + targetPhrase + " ) " + phResult.message;
