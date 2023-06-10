@@ -41,9 +41,8 @@ std::vector<std::string> split(const std::string &line, const std::string &separ
 }
 
 std::string join(const std::vector<std::string> src, const std::string joinWith) {
-    using namespace std;
     std::string res = "";
-    if(src.size() == 0) {
+    if (src.size() == 0) {
         return res;
     }
 

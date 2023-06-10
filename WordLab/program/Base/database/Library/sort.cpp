@@ -1,4 +1,7 @@
 int sortlib(const int beginLth, const int endLth, const string admin, const string password) {
+
+    const int lineCharMaxEn = 32, lineCharMaxZh = 512;
+
 	int wordLth = 0, maxLines = 0;
 	char **s_en = nullptr, **s_ch = nullptr;
 	if (beginLth > endLth) {
@@ -17,7 +20,7 @@ int sortlib(const int beginLth, const int endLth, const string admin, const stri
             return sortLibError(-2);
         }
 		for (int r=0; r < maxLines; r++) {
-            if ((s_en[r] = (char *)malloc(sizeof(char) * 32)) == NULL) {
+            if ((s_en[r] = (char *)malloc(sizeof(char) * lineCharMaxEn)) == NULL) {
                 return sortLibError(-2);
             }
         }
@@ -25,22 +28,22 @@ int sortlib(const int beginLth, const int endLth, const string admin, const stri
             return sortLibError(-2);
         }
 		for (int r = 0; r < maxLines; r++) {
-            if ((s_ch[r] = (char *)malloc(sizeof(char) * 256)) == NULL) {
+            if ((s_ch[r] = (char *)malloc(sizeof(char) * lineCharMaxZh)) == NULL) {
                 return sortLibError(-2);
             }
         }
-		if (loadmsg(s_en, LibraryRoute(wordLth, EN), maxLines, 32, 1, 0) <= 0) {
+		if (loadmsg(s_en, LibraryRoute(wordLth, EN), maxLines, lineCharMaxEn, 1, 0) <= 0) {
             return sortLibError(-3);
         }
-		if (loadmsg(s_ch, LibraryRoute(wordLth, CH), maxLines, 256, 1, 0) <= 0) {
+		if (loadmsg(s_ch, LibraryRoute(wordLth, CH), maxLines, lineCharMaxZh, 1, 0) <= 0) {
             return sortLibError(-3);
         }
 		// sort
 		for (int r = 0; r < maxLines - 1; r++) {
 			for (int j = r + 1; j < maxLines; j++) {
 				if (compare(s_en[r], s_en[j], wordLth) > 0) {
-                    strswap(s_en[r], s_en[j], 32);
-                    strswap(s_ch[r], s_ch[j], 256);
+                    strswap(s_en[r], s_en[j], lineCharMaxEn);
+                    strswap(s_ch[r], s_ch[j], lineCharMaxZh);
 				}
 			}
 		}

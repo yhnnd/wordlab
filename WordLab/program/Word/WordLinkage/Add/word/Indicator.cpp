@@ -24,7 +24,7 @@ void AddWordPrintErrorMessage(int r,const string s=""){
 	    case  6:  Dialog.output("WORD SORT EDITING CANCELLED",lightred); break;
 	    case  7:  popup("<ylw->(",s,") IS IN THE DATABASE ALREADY",0); break;
 		case  8:  Dialog.output("WORD ADDITION CANCELLED BECAUSE OF NO DEFINITION",lightred); break;
-		case  9:  Dialog.output("WORD DEFINITION ITEM "+s+" DESERTED",lightred); break;
+		case  9:  Dialog.output("WORD DEFINITION ITEM " + s + " DESERTED",lightred); break;
 		default:  Dialog.output("UNKNOWN ERROR "+toString(r),lightred); break;
 	}
 }

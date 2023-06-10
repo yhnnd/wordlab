@@ -16,11 +16,11 @@ FILE * Library(int lth,lang LANG,const string mode,const string admin="",const s
 	return fp;
 }
 
-void Library(ifstream& fin,int lth,lang language){
+void Library(ifstream& fin, const int lth, const lang language) {
 	fin.open(LibraryRoute(lth,language));
 }
 
 // added on 2017.03.09
-void Library(ofstream & fout,int lth,lang language){
+void Library(ofstream & fout, const int lth, const lang language) {
 	fout.open(LibraryRoute(lth,language),ios::app);
 }

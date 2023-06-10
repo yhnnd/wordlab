@@ -18,12 +18,15 @@ int WLFramework(void) {
         // INPUT DATA
 		if (FirstLetter != 13 && FirstLetter != 10) {
             char * inputChars = (char *) calloc(64, sizeof(char));
-			if (isalpha(FirstLetter)) {
-                inputChars[0] = FirstLetter;
-                index(inputChars, 10, 9, lightgreen, 1);
-            } else {
-                index(inputChars, 10, 9, lightgreen, 0);
+			if (isalpha(FirstLetter) == false) {
+                ::fflush(stdin);
+                cin.clear();
+                cin.sync();
+                FirstLetter = getch();
             }
+
+            inputChars[0] = FirstLetter;
+            index(inputChars, 10, 9, lightgreen, 1);
 
 			FirstLetter = 0;
 

@@ -4,20 +4,25 @@ char WordUpdate(const string word) {
 		popup(word, " was not in the database. please add it first", -1);
 		return 0;
 	}
-	char trans[256], route[64];
-	FILE *fp = Library(lth,CH,"r");
+
+	ifstream fin;
+    Library(fin, lth, lang::CH);
+
+    std::string line = "";
 	for (int i = 1; i <= n; i++) {
-        fgets(trans, 256, fp);
+        std::getline(fin, line);
     }
-	fclose(fp);
-	const int i = strindex(trans, "\n");
-	if (i >= 0) {
-        trans[i] = 0;
-    }
+	fin.close();
+
+    line = trim(line, "\n");
+    char trans[line.length() + 1 + 256];
+    memset(trans, 0, sizeof (trans));
+    strncpy(trans, line.c_str(), line.length());
+
 	Dialog.output("start");
 	for(;;){
-		Dialog.output(trans,light|yellow);//print definition
-	    listen(trans,strlen(trans),1,{13,0,EOF},256);//edit definition
+		Dialog.output(trans,light|yellow);// print definition
+	    listen(trans, strlen(trans), 1, {13, 0, EOF}, sizeof (trans));// edit definition
 	    Dialog.output(string("use (")+trans+")?",lightyellow);
         const char ch = getch();
 	    if (ch == 13 || ch == 10) {
@@ -35,13 +40,13 @@ char WordUpdate(const string word) {
 	//add word to English database
     ofstream fout, flog;
 	Library(fout,lth,EN);
-	fout<<endl<<word;
+	fout << endl << word;
     fout.close();//close db-en
     //add word and definition to chinese database
-    Library(fout,lth,CH);
-    fout<<endl<<trans;
+    Library(fout, lth, CH);
+    fout << endl << trans;
     //write log file 1
-    flog.open(UpdateWordLog,std::ios::app);
+    flog.open(UpdateWordLog, std::ios::app);
     flog<<"<time>"<<getCurrentTime()<<endl;
     flog<<"<word>"<<word<<endl;
     flog<<"<defs>"<<trans;//will be followed by new definitions

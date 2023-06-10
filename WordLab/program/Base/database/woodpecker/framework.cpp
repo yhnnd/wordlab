@@ -1,4 +1,4 @@
-bool db_is_secure(const bool print_success, const bool print_error){
+bool db_is_secure(const bool print_success, const bool print_error) {
 	int lth = 0, nol[2] = {0,0}, error = 0;
 	// check if db-en-lth.nol equals db-zh-lth.nol
 	status("db error locater is running");
@@ -10,7 +10,7 @@ bool db_is_secure(const bool print_success, const bool print_error){
 	// check db-en/zh accordance and db-zh's syntax
 	status("db woodpecker is running");
     error += WoodPeckerCheckCongruence(1,30);
-    error += WoodPeckerCheckSyntax(1,30,256);
+    error += WoodPeckerCheckSyntax(1, 30);
     // exception
     if( error < 0 ){
         errorLog("woodpecker", "data file lost");
@@ -23,7 +23,7 @@ bool db_is_secure(const bool print_success, const bool print_error){
         }
 		return true;
 	} else {
-		if(print_error){
+		if (print_error) {
 			popup(string("<-red>( database damaged )<-ylw>( lth\\(")+toString(lth)
 			+"\\) line\\("+toString(nol[lang::EN])+"\\) error\\("+toString(error)+"\\)",0);
 		}
