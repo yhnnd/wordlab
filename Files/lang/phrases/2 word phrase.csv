@@ -165,6 +165,6 @@
 ,power,train,/redirected./@target="powertrain";
 ,automatic,pilot,自動駕駛儀,自動駕駛系統,自動駕駛;
 ,sink,in,滲入,被理解,被理會,被领会;
-,ink,cartridge,墨盒;
+,ink,cartridge,墨盒,墨水囊;
 ,pen,cartridge,筆芯;
 ,disk,cartridge,磁盤盒;
