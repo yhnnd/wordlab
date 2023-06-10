@@ -25,8 +25,14 @@ int WLFramework(void) {
                 FirstLetter = getch();
             }
 
-            inputChars[0] = FirstLetter;
-            index(inputChars, 10, 9, lightgreen, 1);
+            if (isalpha(FirstLetter)) {
+                inputChars[0] = FirstLetter;
+                index(inputChars, 10, 9, lightgreen, 1);
+            } else if (FirstLetter == KEY_DELETE || FirstLetter == MAC_OS_KEY_DELETE) {
+                return -1;
+            } else {
+                index(inputChars, 10, 9, lightgreen, 0);
+            }
 
 			FirstLetter = 0;
 
