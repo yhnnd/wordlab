@@ -55,7 +55,7 @@ void WLSearchCore(int lth, int NOL, const std::string s, const int index, const 
             bsvLine((" " + trim(resultLines[i], " ")).c_str());
         }
     } else {
-        bsvLine(searchResult.c_str());
+        bsvLine((" " + trim(searchResult, " ")).c_str());
     }
 
     WLHistory.RecordAnswer(s.substr(0, lth), 1);
