@@ -22,13 +22,14 @@ int WLFramework(void) {
 	clearScreen();
     setForegroundColorAndBackgroundColor("wte-", "-blk");
 
+    ::fflush(stdin);
+    cin.clear();
+    cin.sync();
+
 	for (;;) {
         // INPUT DATA
-		if (FirstLetter != 13 && FirstLetter != 10) {
 
-            ::fflush(stdin);
-            cin.clear();
-            cin.sync();
+		if (FirstLetter != 13 && FirstLetter != 10) {
 
 			if (isCharLegal(FirstLetter) == false) {
                 FirstLetter = getch();
