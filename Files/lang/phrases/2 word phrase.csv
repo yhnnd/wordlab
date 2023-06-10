@@ -162,3 +162,5 @@
 ,demo,reel,/redirected./@target="showreel";
 ,sizzle,reel,/redirected./@target="showreel";
 ,work,reel,/redirected./@target="showreel";
+,power,train,/redirected./@target="powertrain";
+,automatic,pilot,自動駕駛儀,自動駕駛系統,自動駕駛;
