@@ -1,9 +1,17 @@
 int WLFramework(void) {
+
+    const auto isCharLegal = [] (const char c) {
+        return isprint(c);
+    };
+
     char FirstLetter = 0;
+
     std::string inputText = "", prevInputText = "";
+
 	if (VL and db_is_secure(false, true) == false) {
         getch();
     }
+
 	if (CType == 0) {
         const char ch = popup("<-wte>(Add word Engine Authorization Was Set Off. Reset now?", -1);
 		if (ch == KEY_CARRIAGE_RETURN || ch == KEY_NEW_LINE) {
@@ -17,19 +25,22 @@ int WLFramework(void) {
 	for (;;) {
         // INPUT DATA
 		if (FirstLetter != 13 && FirstLetter != 10) {
-            char * inputChars = (char *) calloc(64, sizeof(char));
-			if (isalpha(FirstLetter) == false) {
-                ::fflush(stdin);
-                cin.clear();
-                cin.sync();
+
+            ::fflush(stdin);
+            cin.clear();
+            cin.sync();
+
+			if (isCharLegal(FirstLetter) == false) {
                 FirstLetter = getch();
             }
 
-            if (isalpha(FirstLetter)) {
+            char * inputChars = (char *) calloc(64, sizeof(char));
+
+            if (FirstLetter == KEY_DELETE || FirstLetter == MAC_OS_KEY_DELETE) {
+                return -1;
+            } else if (isCharLegal(FirstLetter)) {
                 inputChars[0] = FirstLetter;
                 index(inputChars, 10, 9, lightgreen, 1);
-            } else if (FirstLetter == KEY_DELETE || FirstLetter == MAC_OS_KEY_DELETE) {
-                return -1;
             } else {
                 index(inputChars, 10, 9, lightgreen, 0);
             }

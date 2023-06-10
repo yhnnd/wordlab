@@ -39,6 +39,12 @@ int main(int argc,char **argv) {
         }
 
         {
+            printf("\nisprint('#') = %d, isprint(' ') = %d", isprint('#'), isprint(' '));
+            printf("\nisgraph('#') = %d, isgraph(' ') = %d", isgraph('#'), isgraph(' '));
+            printf("\nispunct('#') = %d, ispunct(' ') = %d\n", ispunct('#'), ispunct(' '));
+        }
+
+        {
             const vector<string> words= {
                     "can", "could", "must",
                     "do", "did", "does",
@@ -54,7 +60,7 @@ int main(int argc,char **argv) {
                 const char * word = words[i].c_str();
                 const string sort = "\"" + sortOfWord(word) + "\"";
                 const string sortId = printableSortIdsOfWord(word);
-                printf("sort of word %-16s is \x1b[40;94m%-32s\x1b[;m \x1b[40;93m %s\x1b[40;97m\n",
+                printf("\nsort of word %-16s is \x1b[40;94m%-32s\x1b[;m \x1b[40;93m %s\x1b[40;97m",
                        ("\"" + string(word) + "\"").c_str(),
                        sort.c_str(),
                        sortId.c_str());
