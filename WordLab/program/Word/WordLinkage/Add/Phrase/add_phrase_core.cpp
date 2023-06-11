@@ -7,21 +7,21 @@ std::string addPhraseInputNormalDefinitions() {
         for (;;) {
             Dialog.output("input definition:");
 
-            {
-                std::string def = "";
+            std::string def = "";
 
-                ::fflush(stdin);
-                std::getline(cin, def);
+            ::fflush(stdin);
+            std::getline(cin, def);
 
-                defs += def;
-            }
+            defs += def;
 
             const int choice = MessageWindow.Confirm(2, x, y, width, msgs);
 
             if (choice != 1) {
                 break;// break inner loop
             } else {
-                defs += ",";
+                if (def.empty() == false) {
+                    defs += ",";
+                }
                 Dialog.output("\"" + defs + "\"");
             }
         }
@@ -95,7 +95,7 @@ std::string addPhraseInputRedirectTarget () {
 
 int addPhraseCore(const string msg, const enum AddMode mode) {
 
-    const auto inputDefinitions = [&mode] () -> std::string {
+    const std::string definitions = [&mode] () -> std::string {
         if (mode == AddMode::AddPhrase) {
             return addPhraseInputNormalDefinitions();
         } else if (mode == AddMode::RedirectPhrase) {
@@ -103,9 +103,7 @@ int addPhraseCore(const string msg, const enum AddMode mode) {
         } else {
             return "";
         }
-    };
-
-    const std::string definitions = inputDefinitions();
+    }();
 
     if (definitions.empty()) {
         Dialog.output("add phrase cancelled");
