@@ -1,6 +1,17 @@
-#include "History/all_history.cpp"  // H engine
-#include "scan/framework.cpp"       // A engine
-#include "Search/all_search.cpp"    // B engine
+// H engine
+#include "History/all_history.cpp"
+
+// A engine
+#include "scan/Core.cpp"
+#include "scan/framework.cpp"
+
+// B engine
+#include "Search/searchCore.cpp"
+#include "Search/search.cpp"
+#include "Search/searchFuzzy.cpp"
+#include "Search/searchPhrase.cpp"
+
+
 #include "Add/all_add.cpp"          // C engine
 #include "add_word_script.cpp"      // C-NEW engine
 #include "affix/all.cpp"            // D engine
@@ -9,7 +20,10 @@
 #include "sdv_to_bsv.cpp"           // G engine Core
 #include "Dictionary.cpp"           // G engine
 #include "update.cpp"               // U engine
-#include "Framework/all.cpp"
+
+#include "Framework/tools.cpp"
+#include "Framework/Core.cpp"
+#include "Framework/framework.cpp"
 //------------------------------------------------------------
 // version 0.1.0
 // updated engines:

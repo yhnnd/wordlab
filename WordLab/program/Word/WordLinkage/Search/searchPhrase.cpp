@@ -37,41 +37,89 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
                 result.phraseDefinitionsLineInDb = line;
                 result.phraseDefinitionsLineWithoutKeyword = line.erase(line.find_last_not_of(";") + 1).substr(searchKey.length());
                 result.defsVector = split(result.phraseDefinitionsLineWithoutKeyword, ",");
-                if (result.defsVector.size() && result.defsVector[0].find("/redirected./") != std::string::npos) {
-                    const std::string defItem = result.defsVector[0];
-                    const std::string beginTerm = "@target=\"";
-                    const std::string::size_type beginPos = defItem.find(beginTerm);
-                    if (beginPos != std::string::npos) {
-                        const std::string target = trim(defItem.substr(beginPos + beginTerm.length()), "\"");
-                        result.message = target;
-//                        printf("target = \"%s\"\n", target.c_str());
-//                        getch();
-                        if (target.find(" ") == std::string::npos) {
-                            const int index = Search(target.c_str(), target.length(), false);
-                            if (index > 0) {
-                                const auto definitions = getWordDefinitions(target.length(), index);
-                                result.defsVector.clear();
-                                for (const auto & item: definitions) {
-                                    result.defsVector.push_back(item.text);
+
+                if (result.defsVector.size()) {
+
+                    std::vector<bool> definitionsIsRedirect;
+                    struct phraseSearchResult resultOfTargetWord, resultOfTargetPhrase;
+
+                    for (int i = 0; i < result.defsVector.size(); ++i) {
+                        const std::string defItem = result.defsVector[i];
+                        if (defItem.find("/redirected./") != std::string::npos) {
+                            // definition item is redirect definition.
+                            definitionsIsRedirect.push_back(true);
+
+                            const std::string beginTerm = "@target=\"";
+                            const std::string::size_type beginPos = defItem.find(beginTerm);
+                            if (beginPos != std::string::npos) {
+                                const std::string target = trim(defItem.substr(beginPos + beginTerm.length()), "\"");
+//                                printf("target = \"%s\"\n", target.c_str());
+//                                getch();
+                                if (target.find(" ") == std::string::npos) {
+                                    // target is of type word
+                                    const int index = Search(target.c_str(), target.length(), false);
+                                    if (index > 0) {
+                                        // target word is valid
+                                        const auto definitions = getWordDefinitions(target.length(), index);
+                                        if (definitions.size()) {
+                                            // stash target word definitions.
+                                            resultOfTargetWord.defsVector.push_back("[" + target + "]");
+                                            for (const auto & item: definitions) {
+                                                resultOfTargetWord.defsVector.push_back(item.text);
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    // target is of type phrase
+                                    const struct phraseSearchResult tempResult = getPhraseDefinitions(target, false);
+                                    if (tempResult.status == phraseSearchResultStatus::succeeded) {
+                                        // target phrase is valid
+                                        // stash target phrase definitions.
+                                        resultOfTargetPhrase.defsVector.push_back("[" + target + "]");
+                                        for (const std::string & definitionItem: tempResult.defsVector) {
+                                            resultOfTargetPhrase.defsVector.push_back(definitionItem);
+                                        }
+                                    }
                                 }
+                            } else {
+                                result.status = phraseSearchResultStatus::failed;
+                                result.message = "invalid definition \"" + defItem + "\"";
                             }
                         } else {
-                            const struct phraseSearchResult targetResult = getPhraseDefinitions(target, false);
-                            if (targetResult.status == phraseSearchResultStatus::succeeded) {
-                                result.phraseDefinitionsLineInDb = targetResult.phraseDefinitionsLineInDb;
-                                result.phraseDefinitionsLineWithoutKeyword = targetResult.phraseDefinitionsLineWithoutKeyword;
-                                result.defsVector = targetResult.defsVector;
-                            }
+                            // definition item is not redirect definition.
+                            definitionsIsRedirect.push_back(false);
                         }
-                        return result;
-                    } else {
-                        result.status = phraseSearchResultStatus::failed;
-                        result.message = "invalid definition \"" + defItem + "\"";
-                        return result;
                     }
-                } else {
-                    return result;
+
+//                    printf("definitionsIsRedirect.size() = %zu\n", definitionsIsRedirect.size());
+//                    printf("resultOfTargetWord.defsVector.size() = %zu\n", resultOfTargetWord.defsVector.size());
+//                    printf("resultOfTargetPhrase.defsVector.size() = %zu\n", resultOfTargetPhrase.defsVector.size());
+//                    getch();
+
+                    // remove all redirect definitions
+                    for (int i = 0, numOfRemoved = 0; i < definitionsIsRedirect.size(); ++i) {
+                        if (definitionsIsRedirect[i] == true) {
+                            result.defsVector.erase(result.defsVector.begin() + i - numOfRemoved);
+                            ++numOfRemoved;
+                        }
+                    }
+
+                    // append target word definitions
+                    if (resultOfTargetWord.defsVector.size()) {
+                        for (const std::string item: resultOfTargetWord.defsVector) {
+                            result.defsVector.push_back(item);
+                        }
+                    }
+
+                    // append target phrase definitions
+                    if (resultOfTargetPhrase.defsVector.size()) {
+                        for (const std::string item: resultOfTargetPhrase.defsVector) {
+                            result.defsVector.push_back(item);
+                        }
+                    }
+
                 }
+                return result;
             }
         }
 
@@ -126,10 +174,18 @@ int WLSearchPhrase(const std::string msg, const bool ignoreCase) {
         }
 
         if (result.defsVector.size()) {
-            setForegroundColorAndBackgroundColor("ylw-", "-blk");
 
-            for (const std::string & defItem: result.defsVector) {
-                printf(" \"%s\"", defItem.c_str());
+
+            for (std::string defItem: result.defsVector) {
+                if (defItem.find("[") == 0 && defItem.find("]") == defItem.length() - 1) {
+                    // indicator of redirect target.
+                    defItem.erase(0, 1);// remove "["
+                    defItem.pop_back();// remove "]"
+                    bsvLine(("<wte-blk>( )<#red-ylw>( " + defItem + " )").c_str());
+                } else {
+                    setForegroundColorAndBackgroundColor("ylw-", "-blk");
+                    printf(" \"%s\"", defItem.c_str());
+                }
             }
 
             setForegroundColorAndBackgroundColor("blk-", "-grn");

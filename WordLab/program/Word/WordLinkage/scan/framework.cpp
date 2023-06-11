@@ -1,5 +1,4 @@
-#include "Core.cpp"
-int WLscan(){
+int WLScan() {
 	int lth,NOL[2];
 	for(;;) {
 	    if (db_is_secure(false,false) == false) {

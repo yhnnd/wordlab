@@ -210,7 +210,7 @@ int launch(const std::string msg) {
         }
     } else if (msg == functionNames[33]) {
         if (AL) {
-            WLscan();
+            WLScan();
         } else {
             popup("permission denied", 0);
         }

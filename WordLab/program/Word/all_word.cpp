@@ -38,5 +38,6 @@ struct phraseSearchResult getPhraseDefinitions(std::string msg, bool ignoreCase)
 #include "WLChinese/definitionColor.cpp"
 #include "WLChinese/WLChineseCore.cpp"
 #include "WLChinese/WLChinese.cpp"
+
 #include "WordLinkage/all_word_linkage.cpp"
 //contains Delete() Insert() Update()

@@ -9,7 +9,7 @@
 
 
 
-//has chinese Engine inside with Redirect And SelectDef
+// has chinese Engine inside with Redirect And SelectDef
 // Words Insert
 #include "Sentence/WordsInsert/all_word_insert.cpp"
 // Words Order Change
