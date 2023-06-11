@@ -97,29 +97,22 @@ int addPhraseCore(const string msg, const enum AddMode mode) {
         return 0;
     }
 
-	std::string s = "," + msg + "," + definitions + ";";
+    const std::vector<std::string> phraseToAdd = split(msg, " ");
 
-    int numOfWords = 1;
+	const std::string line = "," + join(phraseToAdd, ",") + "," + definitions + ";";
 
-	for(auto p = s.begin(); p != s.end(); p++) {
-		if (*p == ' ') {
-			numOfWords++;
-			*p = ',';
-		}
-	}
-
-	Dialog.output("add \"" + s + "\" to library?");
+	Dialog.output("add \"" + line + "\" to library?");
 
     ::fflush(stdin);
     const char ch = getch();
 
 	if (ch == 13 || ch == 10) {
-		const std::string route = PhraseRouteA + toString(numOfWords) + PhraseRouteB;
+		const std::string route = PhraseRouteA + toString(phraseToAdd.size()) + PhraseRouteB;
 		ofstream fout(route, ios::app);
 		if (fout.is_open()) {
-			fout << s << endl;
+			fout << line << endl;
 			fout.close();
-			Dialog.output("Phrase \"" + s + "\" Added.");
+			Dialog.output("Phrase \"" + line + "\" Added.");
 		} else {
             Dialog.output("cannot open file " + route);
         }

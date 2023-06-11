@@ -100,11 +100,11 @@ int launch(const std::string msg) {
 		addWordScript();
 		return 9;
 	} else if (msg == functionNames[10]) {
-		const auto words = [] {
+		const auto words = [] () -> std::string {
 			char s[64];
 			cout << "enter:";
 			listen(s, 0, 1, {EOF, 0, 13}, 64);
-			string s2(s);
+			std::string s2(s);
 			return s2;
 		};
         addPhrase(words(), AddMode::AddPhrase);

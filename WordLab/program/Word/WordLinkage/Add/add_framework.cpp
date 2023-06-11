@@ -32,7 +32,7 @@ char AddNew(const string s) {
     }
 	if (s.find(" ") != std::string::npos) {
 //        printf("\nadd new phrase\n");
-		popup("Add Phrase", 0);
+		popup("Add Phrase \"" + s + "\"", 0);
         addPhrase(s, AddMode::AddPhrase);
 	} else {
 //        printf("\nadd new word\n");
