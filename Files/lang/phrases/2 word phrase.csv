@@ -170,3 +170,5 @@
 ,disk,cartridge,磁盤盒;
 ,lab,rat,實驗用鼠,實驗對象;
 ,crystal,meth,冰毒,/redirected./@target="methamphetamine";
+,methylated,spirit,含甲醇酒精,甲基化酒精;
+,methylated,spirits,/redirected./@target="methylated spirit";

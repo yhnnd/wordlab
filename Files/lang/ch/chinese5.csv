@@ -171,7 +171,7 @@ brace ,/n./@大括號;,/n./@支架;,/n./@牙箍;,/n./@梏具;,/vi./@俯身抱头
 brain ,/n./@頭腦;
 brake ,/n./@刹车;,/n./@制动;,/vi./@刹车;
 brand ,/n./@品牌;,/n./@商標;,/v./@烙;
-brass ,/adj./@黃銅的;,/n./@黃銅;
+brass ,/adj./@黃銅的;,/n./@黃銅;,/adj./@黃銅色的;,/n./@黃銅色;,/n./@黃銅製品;,/n./@銅管樂器;,/n./@厚臉皮;,/n./@厚顏無恥;
 brave ,/adj./@勇敢的;
 bravo ,/n./@喝彩;
 brawl ,/n./@爭吵;,/n./@打架;,/vi./@斗殴;,/vi./@争吵;
@@ -751,6 +751,7 @@ meson ,/n./@介子;
 metal ,/n./@金屬;,/adj./@金屬制的;
 meter ,/n./@量器;,/n./@儀表;
 meth- ,/pref./@甲基的;
+meths ,/redirected./@target="methylated spirits";
 metre ,/n./@米;
 metro ,/n./@地鐵;,/adj./@大城市的;
 micra ,/redirected./@target="micron";
