@@ -73,10 +73,17 @@ void WLSearchCore(int lth, int NOL, const std::string s, const int index, const 
                                 /* definitionsInOneLine length exceeds maximum length. */
                                 && definition.find("(v)<") == std::string::npos
                                 /* "verified mark" "(v)" must be at the end of a line and must not be in the beginning of a line */
-                        )
-                        || definitionsInOneLine.size() == maxDefsPerLine
-                        || (definitionsInOneLine.size() && definitionsInOneLine.back().find("(v)<") != std::string::npos)
-                        || (
+                        ) || (
+                                definitionsInOneLine.size() == maxDefsPerLine
+                                &&
+                                /* make sure the "verified mark" not being positioned at the beginning of the line */
+                                definition.find("(v)<") == std::string::npos
+                                /* current definition item is not a "verified mark" "(v)" */
+                        ) || (
+                                definitionsInOneLine.size()
+                                &&
+                                definitionsInOneLine.back().find("(v)<") != std::string::npos
+                        ) || (
                                 definitionsInOneLine.size() > 1
                                 /* there are more than one items in stashed line */
                                 &&
