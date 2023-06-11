@@ -28,13 +28,20 @@ std::string addPhraseInputNormalDefinitions() {
         Dialog.output("use definitions \"" + defs + "\" ?");
 
         ::fflush(stdin);
+        cin.clear();
+        cin.sync();
         const char ch1 = getch();
 
         if (ch1 == 13 || ch1 == 10) {
             break;// break outer loop
         } else {
             Dialog.output("input definitions anew ?");
+
+            ::fflush(stdin);
+            cin.clear();
+            cin.sync();
             const char ch2 = getch();
+
             if (ch2 == 13 || ch2 == 10) {
                 continue;
             } else {
@@ -59,6 +66,8 @@ std::string addPhraseInputRedirectTarget () {
         Dialog.output("use target \"" + target + "\" ?");
 
         ::fflush(stdin);
+        cin.clear();
+        cin.sync();
         const char ch3 = getch();
 
         if (ch3 == 13 || ch3 == 10) {
@@ -66,7 +75,12 @@ std::string addPhraseInputRedirectTarget () {
             break;
         } else {
             Dialog.output("input target anew ?");
+
+            ::fflush(stdin);
+            cin.clear();
+            cin.sync();
             const char ch4 = getch();
+
             if (ch4 == 13 || ch4 == 10) {
                 continue;
             } else {
@@ -94,6 +108,7 @@ int addPhraseCore(const string msg, const enum AddMode mode) {
     const std::string definitions = inputDefinitions();
 
     if (definitions.empty()) {
+        Dialog.output("add phrase cancelled");
         return 0;
     }
 
