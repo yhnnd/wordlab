@@ -6,7 +6,7 @@ void WLSearchCore(int lth, int NOL, const std::string s, const int index, const 
 
     const std::string searchResult = WLChinese(lth, index, definitionsColors[0]);
 
-    if (bsvLineGetPlainText(searchResult.c_str()).length() > prerequisites::ScreenX) {
+//    if (bsvLineGetPlainText(searchResult.c_str()).length() > prerequisites::ScreenX) {
 
         std::vector<std::string> definitionsVector;
         std::string tempLine = "";
@@ -21,8 +21,22 @@ void WLSearchCore(int lth, int NOL, const std::string s, const int index, const 
                             /* space between redirect target and definitions after it */
                             ||
                             searchResult.substr(i).find("\"<") == 0
-                            /* the end of a word definition that redirect to a phrase */
+                            /* the end of a phrase definitions (redirected from a word definition) */
+                            ||
+                            searchResult.substr(i).find("\" \"") == 0
+                            /* the end of a phrase definition item */
                             || (
+                                    tempLine.find(">( REDIRECT ") != std::string::npos
+                                    &&
+                                    tempLine.find(")<") != std::string::npos
+                                    && (
+                                            searchResult.substr(i).find(")<") == 0
+                                            /* end of a redirect indicator */
+                                            ||
+                                            searchResult.substr(i).find(") \"") == 0
+                                            /* end of a redirect indicator */
+                                    )
+                            ) || (
                                     searchResult.substr(i, 2) == ")<"
                                     && (
                                             tempLine.find(colorCommand) != std::string::npos
@@ -31,6 +45,13 @@ void WLSearchCore(int lth, int NOL, const std::string s, const int index, const 
                             )
                     )
             ) || i == searchResult.length() - 1) {
+                if (trim(tempLine).find("\"[") == 0 && tempLine.find("]\"") == tempLine.length() - 2) {
+                    /* definition item is of type "phrase definition redirect target indicator" */
+                    tempLine = trim(trim(tempLine, " "), "\"");
+                    tempLine.erase(0, 1);
+                    tempLine.pop_back();
+                    tempLine = "<wte-blk>( )<#red-ylw>( " + tempLine + " )";
+                }
 //                tempLine = "[" + toString(definitionsVector.size()) + "]" + tempLine;
                 definitionsVector.push_back(tempLine);
 //                printf("%s\n", tempLine.c_str());
@@ -55,6 +76,16 @@ void WLSearchCore(int lth, int NOL, const std::string s, const int index, const 
                         )
                         || definitionsInOneLine.size() == maxDefsPerLine
                         || (definitionsInOneLine.size() && definitionsInOneLine.back().find("(v)<") != std::string::npos)
+                        || (
+                                definitionsInOneLine.size() > 1
+                                /* there are more than one items in stashed line */
+                                &&
+                                definitionsInOneLine[0].find(">( REDIRECT ") != std::string::npos
+                                /* in which the first item is a redirect indicator */
+                                &&
+                                definition.find(">( REDIRECT ") != std::string::npos
+                                /* current definition item is a redirect indicator */
+                        )
                 ) {
                     resultLines.push_back(join(definitionsInOneLine, ""));
                     definitionsInOneLine.clear();
@@ -76,9 +107,9 @@ void WLSearchCore(int lth, int NOL, const std::string s, const int index, const 
             }
             bsvLine((" " + trim(resultLines[i], " ")).c_str());
         }
-    } else {
-        bsvLine((" " + trim(searchResult, " ")).c_str());
-    }
+//    } else {
+//        bsvLine((" " + trim(searchResult, " ")).c_str());
+//    }
 
     WLHistory.RecordAnswer(s.substr(0, lth), 1);
 }

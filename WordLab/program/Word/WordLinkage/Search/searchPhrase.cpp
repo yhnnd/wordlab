@@ -62,8 +62,9 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
                                         // target word is valid
                                         const auto definitions = getWordDefinitions(target.length(), index);
                                         if (definitions.size()) {
-                                            // stash target word definitions.
+                                            // stash redirect target word. Search "phrase definition redirect target indicator".
                                             resultOfTargetWord.defsVector.push_back("[" + target + "]");
+                                            // stash target word definitions.
                                             for (const auto & item: definitions) {
                                                 resultOfTargetWord.defsVector.push_back(item.text);
                                             }
@@ -74,8 +75,9 @@ struct phraseSearchResult getPhraseDefinitions(const int phraseLth, const std::v
                                     const struct phraseSearchResult tempResult = getPhraseDefinitions(target, false);
                                     if (tempResult.status == phraseSearchResultStatus::succeeded) {
                                         // target phrase is valid
-                                        // stash target phrase definitions.
+                                        // stash redirect target phrase. Search "phrase definition redirect target indicator".
                                         resultOfTargetPhrase.defsVector.push_back("[" + target + "]");
+                                        // stash target phrase definitions.
                                         for (const std::string & definitionItem: tempResult.defsVector) {
                                             resultOfTargetPhrase.defsVector.push_back(definitionItem);
                                         }
