@@ -7,32 +7,38 @@ std::string addPhraseInputNormalDefinitions() {
         for (;;) {
             Dialog.output("input definition:");
 
-            std::string def = "";
+            {
+                std::string def = "";
 
-            ::fflush(stdin);
-            std::getline(cin, def);
+                ::fflush(stdin);
+                std::getline(cin, def);
 
-            defs += def;
+                if (defs != "" && def != "") {
+                    defs += ",";
+                }
+
+                defs += def;
+            }
 
             const int choice = MessageWindow.Confirm(2, x, y, width, msgs);
 
             if (choice != 1) {
                 break;// break inner loop
             } else {
-                if (def.empty() == false) {
-                    defs += ",";
-                }
                 Dialog.output("\"" + defs + "\"");
             }
         }
-        Dialog.output("use definitions \"" + defs + "\" ?");
 
-        ::fflush(stdin);
-        cin.clear();
-        cin.sync();
-        const char ch1 = getch();
+        if (defs.empty() == false && [&defs] () -> bool {
+            Dialog.output("use definitions \"" + defs + "\" ?");
 
-        if (ch1 == 13 || ch1 == 10) {
+            ::fflush(stdin);
+            cin.clear();
+            cin.sync();
+            const char ch1 = getch();
+
+            return (ch1 == 13 || ch1 == 10);
+        }()) {
             break;// break outer loop
         } else {
             Dialog.output("input definitions anew ?");
@@ -49,6 +55,7 @@ std::string addPhraseInputNormalDefinitions() {
                 break;
             }
         }
+
     }
     return defs;
 }
