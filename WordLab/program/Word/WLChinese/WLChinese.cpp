@@ -11,25 +11,25 @@ std::string getRedirectDefinition(const std::string redirectFromKeyword, const s
         if (beginPos != std::string::npos && endPos != std::string::npos) {
             targetSort = line.substr(beginPos + 1, endPos - beginPos - 1);
         }
-        return targetSort;
+        return targetSort + (targetSort.empty() ? "" : " ");
     }();
 
     if (lth > 0 && number > 0 && redirect_result_msg.find(indicatorTargetIsWord) == 0) {
         // target is of type word.
         const std::string targetWord = redirect_result_msg.substr(indicatorTargetIsWord.length());
-        return "<ylw-#red>( REDIRECT " + targetSort + " )<#red-ylw>( " + targetWord + " )" + WLChinese(lth, number, fontColor);
+        return "<ylw-#red>( REDIRECT " + targetSort + ")<#red-ylw>( " + targetWord + " )" + WLChinese(lth, number, fontColor);
     } else if (redirect_result_msg.find(indicatorTargetIsPhrase) == 0) {
         // target is of type phrase.
         const std::string targetPhrase = redirect_result_msg.substr(indicatorTargetIsPhrase.length());
         const struct phraseSearchResult phResult = getPhraseDefinitions(targetPhrase, false);
         if (phResult.status == phraseSearchResultStatus::succeeded) {
             const std::string phraseDefinition = "\"" + join(phResult.defsVector, "\" \"") + "\"";
-            return "<ylw-#red>( REDIRECT Ph " + targetSort + " )<#red-ylw>( " + targetPhrase + " ) " + phraseDefinition;
+            return "<ylw-#red>( REDIRECT Ph " + targetSort + ")<#red-ylw>( " + targetPhrase + " ) " + phraseDefinition;
         } else {
-            return "<#red-ylw>( REDIRECT Ph " + targetSort + " )<ylw-#red>( " + targetPhrase + " ) " + phResult.message;
+            return "<#red-ylw>( REDIRECT Ph " + targetSort + ")<ylw-#red>( " + targetPhrase + " ) " + phResult.message;
         }
     } else {
-        return "<#red-ylw>( REDIRECT " + targetSort + " )<ylw-#red>( " + redirect_result_msg + " )";
+        return "<#red-ylw>( REDIRECT " + targetSort + ")<ylw-#red>( " + redirect_result_msg + " )";
     }
 }
 
