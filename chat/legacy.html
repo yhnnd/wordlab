@@ -166,7 +166,7 @@
 
 
         function getSuggestions(word) {
-            let url = "http://localhost:8080/suggestions?word=" + word
+            let url = "suggestions?word=" + word
             const xhr = new XMLHttpRequest();
             xhr.addEventListener("load", function() {
                 eval(xhr.responseText)
@@ -225,7 +225,7 @@
         }
 
         function searchWord(word) {
-            let url = "http://localhost:8080/translate?word=" + word;
+            let url = "translate?word=" + word;
             const xhr = new XMLHttpRequest();
             xhr.addEventListener("load", function() {
                 eval(xhr.responseText)
