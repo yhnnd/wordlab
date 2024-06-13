@@ -96,11 +96,20 @@ func (c *Client) readPump() {
 			// Broadcast the message with username prefixed.
 			c.hub.broadcast <- []byte(c.username + ": " + subStr)
 		} else if strings.HasPrefix(string(message), "search=") == true {
-			result := c.wlsearch(subStr)
-			if result.Found {
-				c.send <- []byte("search result: " + strconv.Itoa(result.Index) + " " + result.Message)
+			if strings.Contains(subStr, " ") == true {
+				result := c.wlsearchphrase(subStr)
+				if result.Found {
+					c.send <- []byte("search phrase result: " + strconv.Itoa(result.Index) + " " + result.Message)
+				} else {
+					c.send <- []byte("search phrase: no result")
+				}
 			} else {
-				c.send <- []byte("search: no result")
+				result := c.wlsearch(subStr)
+				if result.Found {
+					c.send <- []byte("search result: " + strconv.Itoa(result.Index) + " " + result.Message)
+				} else {
+					c.send <- []byte("search: no result")
+				}
 			}
 		} else if strings.HasPrefix(string(message), "addword=") == true {
 			c.send <- []byte("calling c.addword(\"" + subStr + "\")")

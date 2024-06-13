@@ -40,7 +40,7 @@ func (this *LegacySuggestions) handleSuggests(w http.ResponseWriter, r *http.Req
 		var keyword string = r.Form["word"][0]
 		var lth float64 = float64(len(keyword))
 		set := make(map[string]bool)
-		allWords, err := ioutil.ReadFile(rootdir + "/words.txt")
+		allWords, err := ioutil.ReadFile(rootdir + "/EnglishVocabulary.txt")
 		if err != nil {
 			panic(err)
 		}
