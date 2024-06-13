@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	rootdir = "../WordLabGo/files/lang-utf8"
+	rootdir = "../Files/lang"
 )
 
 type TypeDef struct {
