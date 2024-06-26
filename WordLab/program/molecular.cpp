@@ -140,7 +140,7 @@ std::string molecular::getWordDefinitionsByWordIndexInMolecularAtomicsDb(const u
     const auto filenamePhase5Db = molecular_db_dir + "phase-5/" + dbName + ".ph-5.zh.csv";
     ifstream finPhase5Db(filenamePhase5Db);
     if (!finPhase5Db) {
-        return 0;
+        return "";
     }
 
     std::string defLine = "", def = "";

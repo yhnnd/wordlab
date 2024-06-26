@@ -195,7 +195,7 @@ inline double maths::calc(const std::string expression) {
         }
         if (bracketLevel == 0) {
             {
-                volatile unsigned short operatorLth = 1;
+                unsigned short operatorLth = 1;
                 for (;; ++operatorLth) {
                     const volatile char cPrev = expression[i + operatorLth - 1];
                     const volatile char c = expression[i + operatorLth];

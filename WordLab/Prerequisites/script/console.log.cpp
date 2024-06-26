@@ -2,9 +2,7 @@
 // Below codes were remedy on 26 June 2024.
 
 void scriptprocessor::consolelogline(const char *line) {
-	std::printf("\r");
-	std::printf(line);
-	std::printf("\n");
+	std::printf("\r%s\n", line);
 }
 
 void scriptprocessor::consolelog(const std::string & s, const std::string & v1, const std::string & v2, const std::string & v3) {

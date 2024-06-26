@@ -21,6 +21,7 @@ WordLab/WordLab
 *.ini
 *.out
 *.exe
+.vscode
 
 # Trash files
 .DS_Store
