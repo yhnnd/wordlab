@@ -233,7 +233,7 @@ int launch(const std::string msg) {
         gotoxy(0, 1);
         colorLogs.printLogs();
         return 37;
-    } else if (msg == functionNames[38]) {
+    } else if (msg == functionNames[38]) { // molecular.gen()
         clearScreen();
         gotoxy(0, 1);
         molecular Molecular;
@@ -241,7 +241,7 @@ int launch(const std::string msg) {
         printf("\nMolecular database generated. Press any key to continue.\n");
 //        getch();
         return 38;
-    } else if (msg.find(functionNames[39]) == 0) {
+    } else if (msg.find(functionNames[39]) == 0) { // molecular.search(
         const auto beginPos = msg.find("("), endPos = msg.find(")", beginPos + 1);
         if (beginPos == std::string::npos || endPos == std::string::npos) {
             printf("parameter required");
