@@ -2,7 +2,7 @@
 *.csv.update.tmp
 *.csv.rollback.tmp
 Files/buf*.tmp
-Files/lang/molecular/*.tmp
+Files/lang/molecular/*/*.tmp
 *.log
 buf.bsv
 buf.csv
