@@ -2,7 +2,6 @@
 #include "lib/all.cpp"
 #include "var/all.cpp"
 #include "parse/all.cpp"
-#include "console.log/all.cpp"
 #include "get_left_value_name.cpp"
 #include "get_right_value_value.cpp"
 #include "executeline.cpp"
