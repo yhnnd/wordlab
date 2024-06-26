@@ -1,6 +1,6 @@
 void scriptprocessor::varCallClassFunct(const std::string & classname,const std::string & name,const std::string & classMemberValues){
 	consolelog("constructing object(%s) <%s=%s>",classname,name,classMemberValues);
-	//ÕÒµ½ dataset ÖĞ ÒÔ classname. ¿ªÍ·µÄÊı¾İ
-	//È»ºó°ÑÄÇĞ©Êı¾İ¸´ÖÆ ÒÔ name Ìæ»» classname
+	//æ‰¾åˆ° dataset ä¸­ ä»¥ classname. å¼€å¤´çš„æ•°æ®
+	//ç„¶åæŠŠé‚£äº›æ•°æ®å¤åˆ¶ ä»¥ name æ›¿æ¢ classname
 	dataset.duplicate(name,classname); 
 }

@@ -2,6 +2,11 @@
 #include "lib/all.cpp"
 #include "var/all.cpp"
 #include "parse/all.cpp"
+/** Former code is
+#include "console.log/all.cpp"
+but console.log folder is lost.
+*/
+#include "console.log.cpp"
 #include "get_left_value_name.cpp"
 #include "get_right_value_value.cpp"
 #include "executeline.cpp"

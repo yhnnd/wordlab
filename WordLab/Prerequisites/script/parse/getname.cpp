@@ -1,4 +1,4 @@
-// 获取 "var name = value" 中的 name
+// 鑾峰彇 "var name = value" 涓殑 name
 std::string scriptprocessor::getname(const std::string & line){
 	std::string key = "var";
 	int r = 0, begin = line.find(key);

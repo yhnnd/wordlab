@@ -19,6 +19,7 @@ WordLab/WordLab
 
 # Windows Icon files
 *.ini
+*.out
 *.exe
 
 # Trash files

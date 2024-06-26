@@ -1,4 +1,4 @@
-// 获取 "function(param)" 中的 param
+// 鑾峰彇 "function(param)" 涓殑 param
 std::string scriptprocessor::getparam(const std::string & line) {
 	bool inString = 0, inChar = 0;
 	std::string param = "";
