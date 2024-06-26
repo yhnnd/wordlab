@@ -265,8 +265,26 @@
                     for (var i = 0; i < messages.length; i++) {
                         var item = document.createElement("div");
                         item.innerText = messages[i];
+                        if (messages[i].startsWith("search result: ")) {
+                            // If the message is a search result, append a button [update] after the message.
+                            let upbtn = document.createElement("button");
+                            upbtn.innerText = "update";
+                            upbtn.classList = "border border-green-500 hover:bg-green-500 px-3 rounded self-center ml-3";
+                            const defLine = messages[i].substr("search result: ".length);
+                            const slices = defLine.split(" ");
+                            slices.shift(); // index
+                            const defWord = slices.shift();
+                            const defBody = slices.join(" ");
+                            upbtn.setAttribute("onclick", "update(\"" + defWord + "\", \"" + defBody + "\")");
+                            item.append(upbtn);
+                        }
                         appendLog(item);
                     }
+                };
+                window.update = function (defWord, defBody) {
+                    document.getElementById("openmodal").click();
+                    wordtoadd.value = defWord;
+                    defstoadd.value = defBody;
                 };
             } else {
                 var item = document.createElement("div");
@@ -307,7 +325,7 @@
                         <div class="flex w-full self-start justify-center">
                             <input type="text" id="word" placeholder="word" class="w-2/3 sm:w-1/2 xl:w-1/3 outline outline-blue-500 self-center ml-32" />
                             <button id="searchword" class="text-white bg-blue-800 hover:bg-blue-500 px-6 py-1 rounded self-center ml-3">Search</button>
-                            <button class="text-white bg-green-600 hover:bg-green-500 px-6 py-1 rounded self-center ml-3" @click="modal = 'addword'">Add</button>
+                            <button id="openmodal" class="text-white bg-green-600 hover:bg-green-500 px-6 py-1 rounded self-center ml-3" @click="modal = 'addword'">Add</button>
                         </div>
                     </div>
                 </div>
