@@ -3,31 +3,38 @@
 using namespace prerequisites;
 using namespace std;
 #include "program/all_program.cpp"
+#include <cassert>
 
 int main(int argc,char **argv) {
-//    cout << "strcmp(\"mat\", \"may\") = " << strncmp("mat", "may", 3) << endl;
-//    cout << "strcmp(\"may\", \"May\") = " << strncmp("may", "May", 3) << endl;
-//    cout << "compare(\"mat\", \"may\") = " << compare("mat", "may", 3) << endl;
-//    cout << "compare(\"may\", \"May\") = " << compare("may", "May", 3) << endl;
-//    getch();
-//    gotoxy(1,2);
-//    getxy();
-//    printf("   ");
-//    getxy();
-//    gotoxy(20, 4);
-//    getxy();
-//    string a = "ABC";
-//    string b = nullptr;
-//    string c = a + b;
-//    ABOVE CODES WILL CAUSE RUNTIME ERROR
-//    int a = toInt ("abc");
-//    cout << a;
-//    a IS GOING TO BE 0
+    {
+        cout << "strcmp(\"mat\", \"may\") = " << strncmp("mat", "may", 3) << endl;
+        cout << "strcmp(\"may\", \"May\") = " << strncmp("may", "May", 3) << endl;
+        cout << "compare(\"mat\", \"may\") = " << compare("mat", "may", 3) << endl;
+        cout << "compare(\"may\", \"May\") = " << compare("may", "May", 3) << endl;
+    }
+
+    {
+        gotoxy(1, 2);
+        COORD cursorPos = getxy();
+        assert(cursorPos.X == 1 && cursorPos.Y == 2);
+
+        printf("   ");
+        cursorPos = getxy(); // Cursor Position not changed.
+        assert(cursorPos.X == 1 && cursorPos.Y == 2);
+
+        gotoxy(20, 4);
+        cursorPos = getxy();
+        assert(cursorPos.X == 20 && cursorPos.Y == 4);
+
+        int a = toInt ("abc");
+        assert(a == 0);
+    }
 
 	prerequisites::host::datafolder = _data_dir;
 //	SetConsoleOutputCP(936);
 
 	{
+        clearScreen();
         {
             const std::string s1 = "...1.2..3..", s2 = "...1.2..3..", delim = ".";
             printf(R"(split("%s", "%s") =)", s1.c_str(), delim.c_str());
