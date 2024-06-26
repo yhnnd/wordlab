@@ -53,6 +53,6 @@
 // added engine: Dictionary(G)
 // comment: from now on the database will be more than chinese translations of the word
 //------------------------------------------------------------
-string SoftwareVersion(){
+string SoftwareVersion() {
 	return "0.2.3";
 }

@@ -15,6 +15,6 @@ int compare(const char * word1, const char * word2, const size_t wordLth) {
 #include "woodpecker/all.cpp"
 #include "database_chinese/all_database_chinese.cpp"
 
-string DatabaseVersion(){
-	return "1.1.1";
+string DatabaseVersion() {
+	return "20240626";
 }

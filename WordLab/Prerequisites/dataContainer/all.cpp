@@ -5,6 +5,6 @@
 #include "show.cpp"
 #include "update.cpp"
 #include "duplicate.cpp"
-std::string dataContainerVersion(){
+std::string dataContainerVersion() {
 	return "1.1.0";
 }
