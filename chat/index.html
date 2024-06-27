@@ -50,12 +50,12 @@
             const deftext = document.getElementById("deftext");
 
             function appendLog(item) {
-                log.appendChild(item);
-                log.scrollTop = log.scrollHeight;
                 // If modal is hidden, it should have a style of "display: none;".
-                // If modal is shown, it should not have a style.
-                let modal_addword_style = modal_addword.getAttribute("style");
-                if (modal_addword_style == null) {
+                // If modal is shown, it should not have a style, and its style.display should be "".
+                if (modal_addword.style.display === "none") {
+                    log.appendChild(item);
+                    log.scrollTop = log.scrollHeight;
+                } else {
                     modal_addword_log.appendChild(item);
                     modal_addword_log.scrollTop = modal_addword_log.scrollHeight;
                 }
