@@ -144,6 +144,7 @@
                         return false;
                     }
                     conn.send("search=" + word.value);
+                    word.setAttribute("previous-value", word.value);
                     word.value = "";
                 }
             });
@@ -287,9 +288,10 @@
                             }
                         } else if (messages[i] === "search: no result") {
                             const addBtn = document.createElement("button");
-                            addBtn.innerHTML = "add <b>" + word.value + "</b>";
+                            const wordValue = word.value || word.getAttribute("previous-value");
+                            addBtn.innerHTML = "add <b>" + wordValue + "</b>";
                             addBtn.classList = "border border-blue-500 hover:bg-blue-500 px-3 rounded self-center ml-3";
-                            addBtn.setAttribute("onclick", "openAddModal(\"" + word.value + "\")");
+                            addBtn.setAttribute("onclick", "openAddModal(\"" + wordValue + "\")");
                             item.append(addBtn);
                         }
                         appendLog(item);
