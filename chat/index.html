@@ -9,6 +9,10 @@
     <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
     <script type="text/javascript">
         window.onload = function () {
+            if (window.location.port !== "8081") {
+                window.open("http://" + window.location.hostname + ":8081/", "_self");
+                return;
+            }
             var conn;
             const username = document.getElementById("username");
             const setusername = document.getElementById("setusername");
